@@ -96,7 +96,7 @@
 							</div>
 							<div class="minicart-block">
 								<div class="minicart-contain">
-									<a href="javascript:void(0)" class="link-to"> <span
+									<a href="customerCart.htm" class="link-to"> <span
 										class="icon-qty-combine"> <i
 											class="icon-cart-mini biolife-icon"></i> <span class="qty">8</span>
 									</span> <span class="title">Giỏ hàng -</span> <span class="sub-total">0.00</span>
