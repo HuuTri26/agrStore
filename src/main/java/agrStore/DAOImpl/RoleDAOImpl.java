@@ -1,6 +1,5 @@
 package agrStore.DAOImpl;
 
-
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -10,23 +9,23 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import agrStore.DAO.AccountDAO;
-import agrStore.entity.AccountEntity;
+import agrStore.DAO.RoleDAO;
+import agrStore.entity.RoleEntity;
 
 @Transactional
 @Repository
-public class AccountDAOImpl implements AccountDAO {
+public class RoleDAOImpl implements RoleDAO{
 	
 	@Autowired
 	SessionFactory factory;
 
 	@Override
-	public void addAccount(AccountEntity acc) {
+	public void addRole(RoleEntity role) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		
 		try {
-			session.save(acc);
+			session.save(role);
 			t.commit();
 		}catch (Exception e) {
 			t.rollback();
@@ -38,10 +37,10 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public void updateAccount(AccountEntity acc) {
+	public void updateRole(RoleEntity role) {
 		Session session = factory.getCurrentSession();
 	    try {
-	        session.update(acc);
+	        session.update(role);
 	    } catch (Exception e) {
 	        System.out.println("Error: " + e.toString() + "\nStacktrace:");
 	        e.printStackTrace();
@@ -50,19 +49,16 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public AccountEntity getAccountByGmail(String gmail) {
-		AccountEntity account = null;
+	public RoleEntity getRoleById(Integer id) {
+		RoleEntity role = null;
+		
 		Session session = factory.getCurrentSession();
-		String hql = "FROM AccountEntity WHERE gmail = :gmail";
-		try {
-			Query query = session.createQuery(hql);
-			query.setParameter("gmail", gmail);
-			
-			account = (AccountEntity) query.uniqueResult();
-		}catch (Exception e) {
-			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
-		}
-		return account;
+		String hql = "FROM RoleEntity WHERE id = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		role = (RoleEntity) query.uniqueResult();
+		
+		return role;
 	}
 
 }

@@ -88,68 +88,80 @@
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
 
-							<form action="#" name="frm-login" method="post">
+							<form action="userSignUp.htm" name="frm-login" method="post">
 								<div class="col-lg-6 ">
 									<p class="form-row">
-										<label for="fid-name">Email:<span class="requite">*</span></label>
-										<input required type="email" id="fid-name" name="name"
-											value="" class="txt-input">
+										<label for="fid-name">Gmail:<span class="requite">*</span></label>
+										<input type="text" id="fid-name" name="gmail"
+											value="${account.gmail }" class="txt-input"
+											readonly="readonly">
 									</p>
 									<p class="form-row">
-										<label for="fid-pass">Password:<span class="requite">*</span></label>
-										<input required type="email" id="fid-pass" name="password"
-											value="" class="txt-input">
+										<label for="fid-pass">Mật khẩu:<span class="requite">*</span></label>
+										<input type="password" id="fid-pass" name="password" value=""
+											class="txt-input"> ${passErr }
 									</p>
 									<p class="form-row">
-										<label for="fid-pass">Re- Password:<span
-											class="requite">*</span></label> <input required type="email"
-											id="fid-pass" name="password" value="" class="txt-input">
+										<label for="fid-pass">Nhập lại mật khẩu:<span
+											class="requite">*</span></label> <input type="password" id="fid-pass"
+											name="re-enter-password" value="" class="txt-input">
+										${rePassErr }
 									</p>
 									<p class="form-row">
-										<label for="fid-name">Name:<span class="requite">*</span></label>
-										<input required type="text" id="fid-name" name="name" value=""
-											class="txt-input">
+										<label for="fid-name">Họ và tên:<span class="requite">*</span></label>
+										<input required type="text" id="fid-name" name="full-name"
+											value="" class="txt-input"> ${nameErr }
 									</p>
 									<p class="form-row">
-										<label for="fid-pass">Phone number:<span
+										<label for="fid-pass">Số điện thoại:<span
 											class="requite">*</span></label> <input required type="text"
-											id="fid-pass" name="password" value="" class="txt-input">
+											id="fid-pass" name="phone-number" value="" class="txt-input">
+										${phoneErr }
 									</p>
 								</div>
 								<div class="col-lg-6 ">
 
 									<p class="form-row">
-										<label for="fid-pass">Dia chi<span class="requite">*</span></label>
+										<label for="fid-pass">Địa chỉ<span class="requite">*</span></label>
 									<div class="address-form">
 										<label for="province">Tỉnh/Thành phố:</label> <select
-											id="province" class="form-select">
+											id="province" name="provinceId" class="form-select"
+											onchange="this.form.submit()">
 											<option value="">Chọn Tỉnh/Thành phố</option>
-											<option value="HCM">TP. Hồ Chí Minh</option>
-											<option value="HN">Hà Nội</option>
-											<option value="DN">Đà Nẵng</option>
-											<!-- Thêm các tỉnh/thành phố khác -->
-										</select> <label for="district">Quận/Huyện:</label> <select
-											id="district" class="form-select">
+											<c:forEach var="province" items="${provinces}">
+												<option value="${province.id}"
+													${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
+											</c:forEach>
+										</select> <input type="text" id="provinceText" readonly
+											value="${selectedProvince.name}"
+											placeholder="Tỉnh/Thành phố đã chọn" /> <label
+											for="district">Quận/Huyện:</label> <select id="district"
+											name="districtId" class="form-select"
+											onchange="this.form.submit()">
 											<option value="">Chọn Quận/Huyện</option>
-											<option value="Q1">Quận 1</option>
-											<option value="Q2">Quận 2</option>
-											<option value="Q3">Quận 3</option>
-											<!-- Thêm các quận/huyện khác -->
-										</select> <label for="ward">Xã/Phường:</label> <select id="ward"
-											class="form-select">
+											<c:forEach var="district" items="${districts}">
+												<option value="${district.id}"
+													${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
+											</c:forEach>
+										</select> <input type="text" id="districtText" readonly
+											value="${selectedDistrict.name}"
+											placeholder="Quận/Huyện đã chọn" /> <label for="ward">Xã/Phường:</label>
+										<select id="ward" name="wardId" class="form-select"
+											onchange="this.form.submit()">
 											<option value="">Chọn Xã/Phường</option>
-											<option value="P1">Phường 1</option>
-											<option value="P2">Phường 2</option>
-											<option value="P3">Phường 3</option>
-											<!-- Thêm các xã/phường khác -->
-										</select>
-										<!-- <label for="street">Đường:</label> <input type="text"
-											id="street" class="form-control" placeholder="Nhập tên đường" /> -->
+											<c:forEach var="ward" items="${wards}">
+												<option value="${ward.id}"
+													>${ward.name}</option>
+											</c:forEach>
+										</select> <input type="text" id="wardText" readonly
+											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
+
 									</div>
+
 									</p>
 
 									<p class="form-row wrap-btn">
-										<button class="btn btn-submit btn-bold" type="submit">Sign
+										<button class="btn btn-submit btn-bold" name="sign-up">Sign
 											up</button>
 
 									</p>
@@ -162,6 +174,27 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- <script>
+		function fillProvinceText() {
+			var provinceSelect = document.getElementById("province");
+			var provinceText = provinceSelect.options[provinceSelect.selectedIndex].text;
+			document.getElementById("provinceText").value = provinceText;
+		}
+
+		function fillDistrictText() {
+			var districtSelect = document.getElementById("district");
+			var districtText = districtSelect.options[districtSelect.selectedIndex].text;
+			document.getElementById("districtText").value = districtText;
+		}
+
+		function fillWardText() {
+			var wardSelect = document.getElementById("ward");
+			var wardText = wardSelect.options[wardSelect.selectedIndex].text;
+			document.getElementById("wardText").value = wardText;
+		}
+	</script> -->
+
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>
 
