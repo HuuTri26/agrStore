@@ -8,28 +8,30 @@
 .height-100 {
 	height: 100vh;
 }
+
 #otp {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: nowrap;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: nowrap;
 }
 
 #otp input {
-  all: unset; /* Loại bỏ toàn bộ style mặc định của input */
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  text-align: center;
-  color: black;
-  background-color: white;
-  font-size: 20px;
-  border: 1px solid #ccc; /* Thêm lại viền */
-  padding: 5px;
-  box-sizing: border-box;
+	all: unset; /* Loại bỏ toàn bộ style mặc định của input */
+	width: 40px;
+	height: 40px;
+	margin: 5px;
+	text-align: center;
+	color: black;
+	background-color: white;
+	font-size: 20px;
+	border: 1px solid #ccc; /* Thêm lại viền */
+	padding: 5px;
+	box-sizing: border-box;
 }
+
 .card {
-	width:200vh;
+	width: 200vh;
 	border: none;
 	height: 100vh;
 	box-shadow: 0px 5px 20px 0px #d2dae3;
@@ -37,7 +39,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction:column;
+	flex-direction: column;
 }
 
 .card h6 {
@@ -49,7 +51,6 @@
 	width: 40px;
 	height: 40px;
 } */
-
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
 	{
 	-webkit-appearance: none;
@@ -105,21 +106,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	<!-- HEADER -->
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
-			<div class="container">
-				<div class="top-bar left">
-					<ul class="horizontal-menu">
-						<li><a href="#" class="biolife-logo"><img
-								src="<c:url value='/assets/assets/images/organic-2.png'/>"
-								alt="biolife logo" width="135" height="34"></a></li>
-					</ul>
-				</div>
-				<div class="top-bar right">
-					<ul class="horizontal-menu">
-						<li><a href="userLogin.htm" class="login-link"><i
-								class="biolife-icon icon-login"></i>Đăng nhập/Đăng Ký</a></li>
-					</ul>
-				</div>
-			</div>
+			<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
 		</div>
 	</header>
 	<!--Hero Section-->
@@ -133,8 +120,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 			<ul>
 				<li class="nav-item"><a href="#" class="permal-link">Trang
 						chủ</a></li>
-				<li class="nav-item"><span class="current-page">OTP
-						Sign up</span></li>
+				<li class="nav-item"><span class="current-page">OTP Sign
+						up</span></li>
 			</ul>
 		</nav>
 	</div>
@@ -143,42 +130,41 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	<!-- Main content -->
 
 
-						<div
-							class="container height-100 d-flex justify-content-center align-items-center">
-							<div class="position-relative">
-								<div class="card p-2 text-center">
-									<h6>
-										Nhập mã OTP gửi đến mail của bạn <br> để xác thực gmail
+	<div
+		class="container height-100 d-flex justify-content-center align-items-center">
+		<div class="position-relative">
+			<div class="card p-2 text-center">
+				<h6>
+					Nhập mã OTP gửi đến mail của bạn <br> để xác thực gmail
 
-									</h6>
-									<div>
-										<span>code được gửi đén mail: </span> <small>...@gmail.com</small>
-									</div>
-									<div id="otp"
-										class="inputs d-flex flex-row justify-content-center mt-2">
-										<input class="m-2 text-center form-control rounded"
-											type="text" id="first" maxlength="1" /> <input
-											class="m-2 text-center form-control rounded" type="text"
-											id="second" maxlength="1" /> <input
-											class="m-2 text-center form-control rounded" type="text"
-											id="third" maxlength="1" /> <input
-											class="m-2 text-center form-control rounded" type="text"
-											id="fourth" maxlength="1" /> <input
-											class="m-2 text-center form-control rounded" type="text"
-											id="fifth" maxlength="1" /> <input
-											class="m-2 text-center form-control rounded" type="text"
-											id="sixth" maxlength="1" />
-									</div>
-									<div class="mt-4">
-										<a href="userSignUp.htm">
-											<button class="btn btn-danger px-4 validate">Xác
-												thực</button>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-		
+				</h6>
+				<div>
+					<span>code được gửi đén mail: </span> <small>...@gmail.com</small>
+				</div>
+				<div id="otp"
+					class="inputs d-flex flex-row justify-content-center mt-2">
+					<input class="m-2 text-center form-control rounded" type="text"
+						id="first" maxlength="1" /> <input
+						class="m-2 text-center form-control rounded" type="text"
+						id="second" maxlength="1" /> <input
+						class="m-2 text-center form-control rounded" type="text"
+						id="third" maxlength="1" /> <input
+						class="m-2 text-center form-control rounded" type="text"
+						id="fourth" maxlength="1" /> <input
+						class="m-2 text-center form-control rounded" type="text"
+						id="fifth" maxlength="1" /> <input
+						class="m-2 text-center form-control rounded" type="text"
+						id="sixth" maxlength="1" />
+				</div>
+				<div class="mt-4">
+					<a href="userSignUp.htm">
+						<button class="btn btn-danger px-4 validate">Xác thực</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>

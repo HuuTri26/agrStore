@@ -23,7 +23,7 @@
 	<!-- HEADER -->
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
-			<div class="container">
+			<%-- <div class="container">
 				<div class="top-bar left">
 					<ul class="horizontal-menu">
 						<li><a href="#"><i class="fa fa-envelope"
@@ -32,11 +32,22 @@
 				</div>
 				<div class="top-bar right">
 					<ul class="horizontal-menu">
-						<li><a href="userLogin.htm" class="login-link"><i
-								class="biolife-icon icon-login"></i>Đăng nhập/Đăng Ký</a></li>
+						<li><c:choose>
+								<c:when test="${not empty sessionScope.loggedInUser}">
+									<a href="#" class="login-link"> <i
+										class="biolife-icon icon-login"></i>${sessionScope.loggedInUser.gmail}
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a href="userLogin.htm" class="login-link"> <i
+										class="biolife-icon icon-login"></i>Đăng nhập/Đăng Ký
+									</a>
+								</c:otherwise>
+							</c:choose></li>
 					</ul>
 				</div>
-			</div>
+			</div> --%>
+			<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
 		</div>
 		<div class="header-middle biolife-sticky-object ">
 			<div class="container">

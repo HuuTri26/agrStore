@@ -39,7 +39,7 @@ public class userController {
 
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public String userLogin(ModelMap model, HttpServletRequest request,
-			@ModelAttribute("account") AccountEntity account, BindingResult errors) {
+			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session) {
 
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 		if (account.getGmail().isEmpty()) {
@@ -71,6 +71,7 @@ public class userController {
 
 		if (isValid) {
 			System.out.println("==> Login successfully! End login session");
+			session.setAttribute("loggedInUser", account_t);
 			return "redirect:/index.htm";
 		} else {
 			System.out.println("==> Login failed!");
@@ -125,11 +126,10 @@ public class userController {
 			// Lưu tài khoản user vào session để xử lý cho 2 action method kế tiếp
 			session.setAttribute("account_t", account_t);
 			System.out.println("==> Create session's attributes for 'otp' and 'account_t'");
-			mailer.sendMailAsync("AgrStore", account.getGmail(), "OTP Forgot Password", 
-								"Mã OTP của bạn là: " + otp);
-			
+			mailer.sendMailAsync("AgrStore", account.getGmail(), "OTP Forgot Password", "Mã OTP của bạn là: " + otp);
+
 			return "customer/forgotPassword/userForgotPasswordGetOTP";
-		}else {
+		} else {
 			return "customer/forgotPassword/userForgotPasswordGmail";
 		}
 	}
@@ -137,25 +137,25 @@ public class userController {
 	@RequestMapping(value = "/getOTPForgotPassword", params = "verify", method = RequestMethod.GET)
 	public String getOTPForgotPassword(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		
-		//Lấy các ký tự ở từng ô mà người dùng nhập
+
+		// Lấy các ký tự ở từng ô mà người dùng nhập
 		String a = request.getParameter("a");
 		String b = request.getParameter("b");
 		String c = request.getParameter("c");
 		String d = request.getParameter("d");
 		String e = request.getParameter("e");
 		String f = request.getParameter("f");
-		
+
 		String otpInput = a + b + c + d + e + f;
-		System.out.println("==> OTP input: "+ otpInput);
-		
-		//Lấy OTP đã được lưu từ session
+		System.out.println("==> OTP input: " + otpInput);
+
+		// Lấy OTP đã được lưu từ session
 		String otp = (String) session.getAttribute("otp");
-		
-		if(otp.equals(otpInput)) {
+
+		if (otp.equals(otpInput)) {
 			System.out.println("==> Verify OTP successfully!");
 			return "customer/forgotPassword/changeForgotPassword";
-		}else {
+		} else {
 			model.addAttribute("message", "Mã OTP bạn vừa nhập không đúng, vui lòng nhập lại!");
 			System.out.println("==> Failed to verify OTP!");
 			return "customer/forgotPassword/userForgotPasswordGetOTP";
@@ -164,47 +164,47 @@ public class userController {
 
 	@RequestMapping(value = "/changeForgotPassword", method = RequestMethod.GET)
 	public String changeForgotPassword(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
-		
+
 		Boolean isValid = Boolean.TRUE;
 		HttpSession session = request.getSession();
-		
-		//Lấy account được lưu từ session
+
+		// Lấy account được lưu từ session
 		AccountEntity account_t = (AccountEntity) session.getAttribute("account_t");
-		
-		//Lấy new-pass và re-enter-new-pass vừa nhập của user
+
+		// Lấy new-pass và re-enter-new-pass vừa nhập của user
 		String newPass = request.getParameter("new-pass");
 		String reEnterPass = request.getParameter("re-enter-new-pass");
-		
+
 		if (newPass.isEmpty()) {
 			model.addAttribute("message1", "Vui lòng nhập mật khẩu mới!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: New password field empty!");
-		}else if (reEnterPass.isEmpty()) {
+		} else if (reEnterPass.isEmpty()) {
 			model.addAttribute("message2", "Vui lòng nhập lại mật khẩu mới!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Re enter new password field empty!");
-		}else if (!newPass.equals(reEnterPass)) {
+		} else if (!newPass.equals(reEnterPass)) {
 			model.addAttribute("message2", "Mật khẩu vừa nhập không trùng khớp, vui lòng nhập lại!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Re enter new password doesn't match!");
 		}
-		
+
 		if (isValid) {
 			account_t.setPassword(accountUltility.getHashPassword(newPass));
 			accountService.updateAccount(account_t);
 			System.out.println("==> User's password updated successfully!");
-			
-			//Giải phóng dữ liệu của session
+
+			// Giải phóng dữ liệu của session
 			request.getSession().invalidate();
 			System.out.println("==> Invalidate session's data");
-			
-			//Giải phóng dữ liệu của model attributes
+
+			// Giải phóng dữ liệu của model attributes
 			sessionStatus.setComplete();
 			System.out.println("==> Clear model attributes");
-			
+
 			System.out.println("==> End forgot password session");
 			return "redirect:/";
-		}else {
+		} else {
 			System.out.println("Error: User's password updated failed!");
 			return "customer/forgotPassword/changeForgotPassword";
 		}
@@ -226,5 +226,11 @@ public class userController {
 	public String userSignUp(HttpServletRequest request) {
 
 		return "customer/login/userSignUp";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("loggedInUser");
+		return "redirect:/index.htm";
 	}
 }
