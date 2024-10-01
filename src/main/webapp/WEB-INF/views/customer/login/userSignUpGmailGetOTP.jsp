@@ -130,40 +130,48 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	<!-- Main content -->
 
 
-	<div
-		class="container height-100 d-flex justify-content-center align-items-center">
-		<div class="position-relative">
-			<div class="card p-2 text-center">
-				<h6>
-					Nhập mã OTP gửi đến mail của bạn <br> để xác thực gmail
+	<form class="vefify-form" action="getOTPSignUp.htm"
+		method="get">
 
-				</h6>
-				<div>
-					<span>code được gửi đén mail: </span> <small>...@gmail.com</small>
-				</div>
-				<div id="otp"
-					class="inputs d-flex flex-row justify-content-center mt-2">
-					<input class="m-2 text-center form-control rounded" type="text"
-						id="first" maxlength="1" /> <input
-						class="m-2 text-center form-control rounded" type="text"
-						id="second" maxlength="1" /> <input
-						class="m-2 text-center form-control rounded" type="text"
-						id="third" maxlength="1" /> <input
-						class="m-2 text-center form-control rounded" type="text"
-						id="fourth" maxlength="1" /> <input
-						class="m-2 text-center form-control rounded" type="text"
-						id="fifth" maxlength="1" /> <input
-						class="m-2 text-center form-control rounded" type="text"
-						id="sixth" maxlength="1" />
-				</div>
-				<div class="mt-4">
-					<a href="userSignUp.htm">
-						<button class="btn btn-danger px-4 validate">Xác thực</button>
-					</a>
+		<div
+			class="container height-100 d-flex justify-content-center align-items-center">
+			<div class="position-relative">
+				<div class="card p-2 text-center">
+					<h6>
+						Nhập mã OTP <br> để xác thực
+
+					</h6>
+					<h1>${message }</h1>
+					<div>
+						<span>kiểm tra OTP được gửi đến mail: </span> <small>${account.gmail }</small>
+					</div>
+					<div id="otp"
+						class="inputs d-flex flex-row justify-content-center mt-2">
+						<input class="m-2 text-center form-control rounded" type="text"
+							name="a" id="first" maxlength="1" /> <input
+							class="m-2 text-center form-control rounded" type="text" name="b"
+							id="second" maxlength="1" /> <input
+							class="m-2 text-center form-control rounded" type="text" name="c"
+							id="third" maxlength="1" /> <input
+							class="m-2 text-center form-control rounded" type="text" name="d"
+							id="fourth" maxlength="1" /> <input
+							class="m-2 text-center form-control rounded" type="text" name="e"
+							id="fifth" maxlength="1" /> <input
+							class="m-2 text-center form-control rounded" type="text" name="f"
+							id="sixth" maxlength="1" />
+					</div>
+					<div class="mt-4">
+						<button class="btn btn-danger px-4 validate" name="verify">Xác
+							thực</button>
+						<button class="btn btn-danger px-4 validate" name="send-again">Gửi
+							lại mã</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+
+	</form>
+
 
 
 	<!-- FOOTER -->

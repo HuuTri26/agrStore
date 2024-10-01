@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <%@include file="/WEB-INF/views/include/customer/header.jsp"%>
@@ -48,16 +49,18 @@
 					<!--Form Sign In-->
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
-							<form action="#" name="frm-login" method="post">
+
+							<form:form action="userSignUpGmail.htm" name="frm-login"
+								method="post" modelAttribute="account">
 								<p class="form-row">
-									<label for="fid-name">Email to sign up:<span
-										class="requite">*</span></label> <input required="required" required
-										type="email" id="fid-name" name="name" value=""
-										class="txt-input">
+									<label for="fid-name">Nhập Gmail sử dụng để đăng ký cho tài khoản của bạn:<span
+										class="requite">*</span></label>
+									<form:input path="gmail" id="fid-name" name="name"
+										placeHolder="expamle@gmail.com" class="txt-input" />
+									<form:errors path="gmail"/>
 								</p>
-								<a href="getOTPSignUp.htm"> Confirm <!-- <button class="btn btn-submit btn-bold" type="submit">Confirm</button> -->
-								</a>
-							</form>
+								<button class="btn btn-submit btn-bold" type="submit">Xác nhận</button>
+							</form:form>
 						</div>
 					</div>
 

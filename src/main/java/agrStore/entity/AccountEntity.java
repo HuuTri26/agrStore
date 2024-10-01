@@ -4,9 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "Account")
 public class AccountEntity {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountId")
 	private Integer id;
 	
@@ -49,11 +55,15 @@ public class AccountEntity {
 	private Date updateAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "RoleId")
+	@JoinColumn(name = "roleId")
 	private RoleEntity role;
 	
+	@OneToOne()
+	@JoinColumn(name = "addressId")
+	private AddressEntity address;
+
 	public AccountEntity(Integer id, Boolean status, String avatar, String gmail, String fullName, String phoneNumber,
-			String password, Date createAt, Date updateAt, RoleEntity role) {
+			String password, Date createAt, Date updateAt, RoleEntity role, AddressEntity address) {
 		super();
 		this.id = id;
 		this.status = status;
@@ -65,6 +75,7 @@ public class AccountEntity {
 		this.createAt = createAt;
 		this.updateAt = updateAt;
 		this.role = role;
+		this.address = address;
 	}
 
 	public AccountEntity() {
@@ -134,6 +145,14 @@ public class AccountEntity {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
+	@PrePersist
+	protected void onCreate() {
+		this.createAt = new Date();
+		if (this.updateAt == null) {
+			this.updateAt = new Date();
+		}
+	}
 
 	public Date getUpdateAt() {
 		return updateAt;
@@ -141,6 +160,11 @@ public class AccountEntity {
 
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+	
+	@PreUpdate
+	protected void onUpdate() {
+		this.updateAt = new Date();
 	}
 
 	public RoleEntity getRole() {
@@ -150,8 +174,13 @@ public class AccountEntity {
 	public void setRole(RoleEntity role) {
 		this.role = role;
 	}
-	
-	
-	
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
 	
 }
