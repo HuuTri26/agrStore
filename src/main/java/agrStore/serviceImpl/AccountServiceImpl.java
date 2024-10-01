@@ -1,4 +1,4 @@
-package argStore.serviceImpl;
+package agrStore.serviceImpl;
 
 import javax.transaction.Transactional;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import agrStore.DAO.AccountDAO;
 import agrStore.entity.AccountEntity;
-import argStore.service.AccountService;
+import agrStore.service.AccountService;
 
 @Transactional
 @Service

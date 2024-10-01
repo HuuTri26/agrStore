@@ -1,4 +1,4 @@
-package argStore.service;
+package agrStore.service;
 
 import javax.transaction.Transactional;
 
