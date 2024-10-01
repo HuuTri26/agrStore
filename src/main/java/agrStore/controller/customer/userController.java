@@ -69,7 +69,7 @@ public class userController {
 
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public String userLogin(ModelMap model, HttpServletRequest request,
-			@ModelAttribute("account") AccountEntity account, BindingResult errors) {
+			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session) {
 
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 		if (account.getGmail().isEmpty()) {
@@ -101,6 +101,7 @@ public class userController {
 
 		if (isValid) {
 			System.out.println("==> Login successfully! End login session");
+			session.setAttribute("loggedInUser", account_t);
 			return "redirect:/index.htm";
 		} else {
 			System.out.println("==> Login failed!");
@@ -477,6 +478,14 @@ public class userController {
 		}
 
 		return "customer/login/userSignUp";
+	}
+
+
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("loggedInUser");
+		return "redirect:/index.htm";
 	}
 
 }
