@@ -5,17 +5,17 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Province")
 public class ProvinceEntity {
 	@Id
-	@Column(name = "roleId")
+	@GeneratedValue
+	@Column(name = "provinceId")
 	private Integer id;
 	
 	@Column(name = "provinceName")
@@ -24,18 +24,17 @@ public class ProvinceEntity {
 	@OneToMany(mappedBy = "province", fetch = FetchType.LAZY)
 	private List<DistrictEntity> districts;
 	
-	@OneToOne()
-	@JoinColumn(name = "AddressId")
-	private AddressEntity address;
+	@OneToMany(mappedBy = "province", fetch = FetchType.LAZY)
+	private List<AddressEntity> addresses;
 	
-	public ProvinceEntity(Integer id, String name, List<DistrictEntity> districts, AddressEntity address) {
+	public ProvinceEntity(Integer id, String name, List<DistrictEntity> districts, List<AddressEntity> addresses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.districts = districts;
-		this.address = address;
+		this.addresses = addresses;
 	}
-	
+
 	public ProvinceEntity() {
 		super();
 	}
@@ -64,12 +63,12 @@ public class ProvinceEntity {
 		this.districts = districts;
 	}
 
-	public AddressEntity getAddress() {
-		return address;
+	public List<AddressEntity> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(AddressEntity address) {
-		this.address = address;
+	public void setAddresses(List<AddressEntity> addresses) {
+		this.addresses = addresses;
 	}
 	
 }

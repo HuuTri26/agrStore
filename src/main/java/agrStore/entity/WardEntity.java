@@ -1,17 +1,22 @@
 package agrStore.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Ward")
 public class WardEntity {
 	@Id
+	@GeneratedValue
 	@Column(name = "wardId")
 	private Integer id;
 	
@@ -19,21 +24,20 @@ public class WardEntity {
 	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name = "DistrictId")
+	@JoinColumn(name = "districtId")
 	private DistrictEntity district;
 	
-	@OneToOne()
-	@JoinColumn(name = "AddressId")
-	private AddressEntity address;
-
-	public WardEntity(Integer id, String name, DistrictEntity district, AddressEntity address) {
+	@OneToMany(mappedBy = "ward", fetch = FetchType.LAZY)
+	private List<AddressEntity> addresses;
+	
+	public WardEntity(Integer id, String name, DistrictEntity district, List<AddressEntity> addresses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.district = district;
-		this.address = address;
+		this.addresses = addresses;
 	}
-	
+
 	public WardEntity() {
 		super();
 	}
@@ -62,12 +66,12 @@ public class WardEntity {
 		this.district = district;
 	}
 
-	public AddressEntity getAddress() {
-		return address;
+	public List<AddressEntity> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(AddressEntity address) {
-		this.address = address;
+	public void setAddresses(List<AddressEntity> addresses) {
+		this.addresses = addresses;
 	}
 	
 }

@@ -5,17 +5,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "District")
 public class DistrictEntity {
 	@Id
+	@GeneratedValue
 	@Column(name = "districtId")
 	private Integer id;
 	
@@ -23,26 +24,25 @@ public class DistrictEntity {
 	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name = "ProvinceId")
+	@JoinColumn(name = "provinceId")
 	private ProvinceEntity province;
 	
 	@OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
 	private List<WardEntity> wards;
 	
-	@OneToOne
-	@JoinColumn(name = "AddressId")
-	private AddressEntity address;
+	@OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
+	private List<AddressEntity> addresses;
 	
 	public DistrictEntity(Integer id, String name, ProvinceEntity province, List<WardEntity> wards,
-			AddressEntity address) {
+			List<AddressEntity> addresses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.province = province;
 		this.wards = wards;
-		this.address = address;
+		this.addresses = addresses;
 	}
-	
+
 	public DistrictEntity() {
 		super();
 	}
@@ -79,12 +79,12 @@ public class DistrictEntity {
 		this.wards = wards;
 	}
 
-	public AddressEntity getAddress() {
-		return address;
+	public List<AddressEntity> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(AddressEntity address) {
-		this.address = address;
+	public void setAddresses(List<AddressEntity> addresses) {
+		this.addresses = addresses;
 	}
 	
 }
