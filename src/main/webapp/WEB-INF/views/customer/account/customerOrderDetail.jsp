@@ -65,13 +65,12 @@
 									<div class="col-xl-8">
 										<div class="dashboard__details-card">
 											<div class="dashboard__details-card-item">
-												<h5 class="dashboard__details-card-title">Địa chỉ khách
+												<h5 class="dashboard__details-card-title">Thông tin khách
 													hàng</h5>
 												<!-- billing Address -->
 												<div class="dashboard__details-card-item__inner">
-													<h2 class="font-body--lg-400 name">Dainne Russeell</h2>
-													<p class="font-body--md-400">4140 Parker Rd. Allentown,
-														New Mexico 31134</p>
+													<h2 class="font-body--lg-400 name">Tri</h2>
+													<p class="font-body--md-400">TPHCM</p>
 												</div>
 												<div class="dashboard__details-card-item__inner">
 													<div
@@ -79,43 +78,34 @@
                                 dashboard__details-card-item__inner-contact
                               ">
 														<h5 class="title">Email</h5>
-														<p class="font-body--md-400">dainne.ressell@gmail.com
-														</p>
+														<p class="font-body--md-400">huutri@gmail.com</p>
 													</div>
 													<div
 														class="
                                 dashboard__details-card-item__inner-contact
                               ">
 														<h5 class="title">Phone</h5>
-														<p class="font-body--md-400">(671) 555-0110</p>
+														<p class="font-body--md-400">555-0110</p>
 													</div>
 												</div>
 											</div>
 											<div class="dashboard__details-card-item">
-												<h5 class="dashboard__details-card-title">Shipping
-													Address</h5>
+												<h5 class="dashboard__details-card-title">Địa chỉ giao
+													hang</h5>
 												<!-- Shipping Address -->
 												<div class="dashboard__details-card-item__inner">
-													<h2 class="font-body--lg-400 name">Dainne Russeell</h2>
-													<p class="font-body--md-400">4140 Parker Rd. Allentown,
-														New Mexico 31134</p>
+													<h2 class="font-body--lg-400 name">TP HCM</h2>
+													<p class="font-body--md-400">Quận Thủ Đức</p>
 												</div>
 												<div class="dashboard__details-card-item__inner">
 													<div
 														class="
                                 dashboard__details-card-item__inner-contact
                               ">
-														<h5 class="title">Email</h5>
-														<p class="font-body--md-400">dainne.ressell@gmail.com
-														</p>
+														<h5 class="title">Thành phố Thủ đức</h5>
+														<p class="font-body--md-400">Hiệp phú</p>
 													</div>
-													<div
-														class="
-                                dashboard__details-card-item__inner-contact
-                              ">
-														<h5 class="title">Phone</h5>
-														<p class="font-body--md-400">(671) 555-0110</p>
-													</div>
+													
 												</div>
 											</div>
 										</div>
@@ -125,7 +115,7 @@
 											<div class="dashboard__totalpayment-card-header">
 												<div class="dashboard__totalpayment-card-header-item">
 													<h5 class="title">Order id:</h5>
-													<p class="details order-id">#4152</p>
+													<p class="details order-id">1</p>
 												</div>
 												<div class="dashboard__totalpayment-card-header-item">
 													<h5 class="title">Payment Method:</h5>
@@ -136,12 +126,12 @@
 											<div class="dashboard__totalpayment-card-body">
 												<div class="dashboard__totalpayment-card-body-item">
 													<h5 class="font-body--md-400">Subtotal:</h5>
-													<p class="font-body--md-500">$365.00</p>
+													<p class="font-body--md-500">365.00</p>
 												</div>
-												<div class="dashboard__totalpayment-card-body-item">
+												<!-- <div class="dashboard__totalpayment-card-body-item">
 													<h5 class="font-body--md-400">Discount:</h5>
 													<p class="font-body--md-500">20%</p>
-												</div>
+												</div> -->
 												<div class="dashboard__totalpayment-card-body-item">
 													<h5 class="font-body--md-400">Shipping:</h5>
 													<p class="font-body--md-500">Free</p>
@@ -178,25 +168,25 @@
                         </svg>
 										</span>
 									</div>
-									<h2 class="font-body--md-400">Order received</h2>
+									<h2 class="font-body--md-400">Trạng thái order</h2>
 								</div>
 								<div class="progress__bar-item">
 									<div class="progress__bar-item-ball">
 										<p class="font-body--md-400 count-number">02</p>
 									</div>
-									<h2 class="font-body--md-400">Processing</h2>
+									<h2 class="font-body--md-400">Đang chờ</h2>
 								</div>
 								<div class="progress__bar-item">
 									<div class="progress__bar-item-ball">
 										<p class="font-body--md-400 count-number">03</p>
 									</div>
-									<h2 class="font-body--md-400">one the way</h2>
+									<h2 class="font-body--md-400">Đã xác nhận</h2>
 								</div>
 								<div class="progress__bar-item">
 									<div class="progress__bar-item-ball">
 										<p class="font-body--md-400 count-number">04</p>
 									</div>
-									<h2 class="font-body--md-400">Delivered</h2>
+									<h2 class="font-body--md-400">Hoàn thành</h2>
 								</div>
 							</div>
 
@@ -244,7 +234,10 @@
                               order-date
                               align-middle
                             ">
-													$14.00</td>
+													<fmt:formatNumber value="85000"
+														pattern="#,###.## VND;VND -#,###.##" type="currency"
+														currencySymbol="VND" />
+												</td>
 												<!-- quantity -->
 												<td
 													class="
@@ -262,7 +255,11 @@
                               align-middle
                             "
 													style="text-align: left">
-													<p class="font-body--md-500">$70.00</p>
+													<p class="font-body--md-500">
+														<fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />
+													</p>
 												</td>
 											</tr>
 											<tr>
@@ -289,7 +286,10 @@
                               order-date
                               align-middle
                             ">
-													$14.00</td>
+													<fmt:formatNumber value="85000"
+														pattern="#,###.## VND;VND -#,###.##" type="currency"
+														currencySymbol="VND" />
+												</td>
 												<!-- quantity -->
 												<td
 													class="
@@ -307,7 +307,11 @@
                               align-middle
                             "
 													style="text-align: left">
-													<p class="font-body--md-500">$28.00</p>
+													<p class="font-body--md-500">
+														<fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />
+													</p>
 												</td>
 											</tr>
 											<tr>
@@ -334,7 +338,10 @@
                               order-date
                               align-middle
                             ">
-													$26.00</td>
+													<fmt:formatNumber value="85000"
+														pattern="#,###.## VND;VND -#,###.##" type="currency"
+														currencySymbol="VND" />
+												</td>
 												<!-- quantity -->
 												<td
 													class="
@@ -352,7 +359,11 @@
                               align-middle
                             "
 													style="text-align: left">
-													<p class="font-body--md-500">$267.00</p>
+													<p class="font-body--md-500">
+														<fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />
+													</p>
 												</td>
 											</tr>
 										</tbody>
@@ -374,7 +385,6 @@
 	<script
 		src="<c:url value='/assets/cart/main/src/lib/js/bootstrap.bundle.min.js'/>"></script>
 	<script src="<c:url value='/assets/cart/main/src/js/main.js'/>"></script>
-	f
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>
 
 	<!--Footer For Mobile-->

@@ -93,7 +93,10 @@
                               order-total
                             ">
 													<p class="order-total-price">
-														$135.00 <span class="quantity"> (5 Products)</span>
+														<fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />
+														<span class="quantity"> (5 Products)</span>
 													</p>
 												</td>
 												<!-- Status -->
@@ -109,7 +112,7 @@
                               dashboard__order-history-table-item
                               order-details
                             ">
-													<a href="customerOrderDetail.htm"> View Details</a>
+													<a href="customerOrderDetail.htm"> Xem chi tiết</a>
 												</td>
 											</tr>
 
@@ -131,7 +134,10 @@
                               order-total
                             ">
 													<p class="order-total-price">
-														$250.00 <span class="quantity"> (4 Products)</span>
+														<fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />
+														<span class="quantity"> (4 Products)</span>
 													</p>
 												</td>
 												<!-- Status -->
@@ -147,7 +153,7 @@
                               dashboard__order-history-table-item
                               order-details
                             ">
-													<a href="customerOrderDetail.htm"> View Details</a>
+													<a href="customerOrderDetail.htm"> Xem chi tiết</a>
 												</td>
 											</tr>
 										</tbody>

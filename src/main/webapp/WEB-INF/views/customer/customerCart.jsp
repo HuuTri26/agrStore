@@ -94,9 +94,7 @@
 	</div>
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
-			<div class="container">
 				<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
-			</div>
 		</div>
 	</header>
 	<%-- <!-- HEADER -->

@@ -17,8 +17,7 @@
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 5;
 	border-radius: 10px;
-	  right: 0; /* Thay đổi này sẽ căn chỉnh dropdown về bên trái */
-	
+	right: 0; /* Thay đổi này sẽ căn chỉnh dropdown về bên trái */
 }
 
 .dropdown:hover .dropdown-content {
@@ -29,7 +28,7 @@
 }
 
 .dropdown-content a {
-	 color : black;
+	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
@@ -64,9 +63,10 @@
 								class="biolife-icon icon-login"></i>${sessionScope.loggedInUser.gmail}
 							</a>
 							<div class="dropdown-content">
-								<a href="customerProfile.htm">Profile</a> <a href="#">Edit Profile</a> <a href="customerChangePassword.htm">Change
-									Password</a> <a href="customerOrderList.htm">Order List</a> <a href="logout.htm">Log
-									Out</a>
+								<a href="customerProfile.htm">Profile</a> <a
+									href="customerChangePassword.htm">Change Password</a> <a
+									href="customerOrderList.htm">Order List</a> <a
+									href="logout.htm">Log Out</a>
 							</div>
 						</div>
 					</c:when>
