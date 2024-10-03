@@ -92,7 +92,12 @@
 			</div>
 		</div>
 	</div>
-	<!-- HEADER -->
+	<header id="header" class="header-area style-01 layout-03">
+		<div class="header-top bg-main hidden-xs">
+				<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
+		</div>
+	</header>
+	<%-- <!-- HEADER -->
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
 			<div class="container">
@@ -111,7 +116,7 @@
 				</div>
 			</div>
 		</div>
-	</header>
+	</header> --%>
 	<!--Hero Section-->
 	<div class="hero-section hero-background">
 		<h1 class="page-title">argStore</h1>
@@ -360,7 +365,7 @@
 									<p class="desc">Based on 56789</p>
 								</div> -->
 								<div class="btn-checkout">
-									<a href="#" class="btn checkout">Mua</a>
+									<a href="customerCheckout.htm" class="btn checkout">Mua</a>
 								</div>
 								<div class="biolife-progress-bar">
 									<table>

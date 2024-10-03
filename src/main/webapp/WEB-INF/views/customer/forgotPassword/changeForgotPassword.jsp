@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <%@include file="/WEB-INF/views/include/customer/header.jsp"%>
@@ -17,21 +18,7 @@
 	<!-- HEADER -->
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
-			<div class="container">
-				<div class="top-bar left">
-					<ul class="horizontal-menu">
-						<li><a href="#" class="biolife-logo"><img
-								src="<c:url value='/assets/assets/images/organic-2.png'/>"
-								alt="biolife logo" width="135" height="34"></a></li>
-					</ul>
-				</div>
-				<div class="top-bar right">
-					<ul class="horizontal-menu">
-						<li><a href="userLogin.htm" class="login-link"><i
-								class="biolife-icon icon-login"></i>Đăng nhập/Đăng Ký</a></li>
-					</ul>
-				</div>
-			</div>
+			<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
 		</div>
 	</header>
 	<!--Hero Section-->
@@ -43,8 +30,10 @@
 	<div class="container">
 		<nav class="biolife-nav">
 			<ul>
-				<li class="nav-item"><a href="#" class="permal-link">Trang chủ</a></li>
-				<li class="nav-item"><span class="current-page">CHange Fogot Password</span></li>
+				<li class="nav-item"><a href="#" class="permal-link">Trang
+						chủ</a></li>
+				<li class="nav-item"><span class="current-page">CHange
+						Fogot Password</span></li>
 			</ul>
 		</nav>
 	</div>
@@ -60,25 +49,28 @@
 					<!--Form Sign In-->
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
-							<form action="#" name="frm-login" method="post">
+							<form action="changeForgotPassword.htm" name="frm-login"
+								method="get">
 								<p class="form-row">
-									<label for="fid-name">New Password:<span
-										class="requite">*</span></label> <input required type="password" id="fid-name"
-										name="name" value="" class="txt-input">
+									<label for="fid-name">Mật khẩu mới:<span
+										class="requite">*</span></label> <input type="password" id="fid-name"
+										name="new-pass" value="" class="txt-input"> ${message1 }
 								</p>
 								<p class="form-row">
-									<label for="fid-name">Re input new Password:<span
-										class="requite">*</span></label> <input required type="password" id="fid-name"
-										name="name" value="" class="txt-input">
+									<label for="fid-name">Nhập lại mật khẩu mới:<span
+										class="requite">*</span></label> <input type="password" id="fid-name"
+										name="re-enter-new-pass" value="" class="txt-input">
+									${message2 }
 								</p>
-								<a href="userLogin.htm"><p class="form-row wrap-btn">
-									<button class="btn btn-submit btn-bold" type="submit">Confirm</button>
-								</p></a>
+								<a href="userLogin.htm">
+									<button class="btn btn-submit btn-bold" type="submit">Xác
+										nhận</button>
+								</a>
 							</form>
 						</div>
 					</div>
-               
-					
+
+
 				</div>
 			</div>
 		</div>
