@@ -3,7 +3,9 @@ package agrStore.controller.customer;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
@@ -72,41 +74,41 @@ public class userController {
 			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session) {
 
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
-		if (account.getGmail().isEmpty()) {
-			errors.rejectValue("gmail", "account", "Xin vui lòng nhập username(gmail) của bạn!");
-			System.out.println("Error: Username field empty!");
-			return "customer/login/userLogin";
-		} else if (account.getPassword().isEmpty()) {
-			errors.rejectValue("password", "account", "Xin vui lòng nhập password!");
-			System.out.println("Error: Password field empty!");
-			return "customer/login/userLogin";
-		}
+				if (account.getGmail().isEmpty()) {
+					errors.rejectValue("gmail", "account", "Xin vui lòng nhập username(gmail) của bạn!");
+					System.out.println("Error: Username field empty!");
+					return "customer/login/userLogin";
+				} else if (account.getPassword().isEmpty()) {
+					errors.rejectValue("password", "account", "Xin vui lòng nhập password!");
+					System.out.println("Error: Password field empty!");
+					return "customer/login/userLogin";
+				}
 
-		// Kiểm tra username, password, và trạng thái tài khoản
-		Boolean isValid = Boolean.TRUE;
-		AccountEntity account_t = accountService.getAccountByGmail(account.getGmail());
-		if (account_t == null) {
-			errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: This user's account doesn't exist!");
-		} else if (!account_t.getPassword().equals(accountUltility.getHashPassword(account.getPassword()))) {
-			errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Wrong password!");
-		} else if (!account_t.getStatus()) {
-			errors.rejectValue("gmail", "account", "Tài khoản của bạn đã bị khóa!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: This user's account is out of order!");
-		}
+				// Kiểm tra username, password, và trạng thái tài khoản
+				Boolean isValid = Boolean.TRUE;
+				AccountEntity account_t = accountService.getAccountByGmail(account.getGmail());
+				if (account_t == null) {
+					errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
+					isValid = Boolean.FALSE;
+					System.out.println("Error: This user's account doesn't exist!");
+				} else if (!account_t.getPassword().equals(accountUltility.getHashPassword(account.getPassword()))) {
+					errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
+					isValid = Boolean.FALSE;
+					System.out.println("Error: Wrong password!");
+				} else if (!account_t.getStatus()) {
+					errors.rejectValue("gmail", "account", "Tài khoản của bạn đã bị khóa!");
+					isValid = Boolean.FALSE;
+					System.out.println("Error: This user's account is out of order!");
+				}
 
-		if (isValid) {
-			System.out.println("==> Login successfully! End login session");
-			session.setAttribute("loggedInUser", account_t);
-			return "redirect:/index.htm";
-		} else {
-			System.out.println("==> Login failed!");
-			return "customer/login/userLogin";
-		}
+				if (isValid) {
+					System.out.println("==> Login successfully! End login session");
+					session.setAttribute("loggedInUser", account_t);
+					return "redirect:/index.htm";
+				} else {
+					System.out.println("==> Login failed!");
+					return "customer/login/userLogin";
+				}
 	}
 
 	@RequestMapping("/forgotPass")
@@ -474,6 +476,9 @@ public class userController {
 					System.out.println("End sign up session");
 				}
 
+			} else {
+				// Thêm thông báo chi tiết khi không tìm thấy RoleEntity
+			    System.out.println("Error: Role 3 not found in the database. User account cannot be created!");
 			}
 		}
 
