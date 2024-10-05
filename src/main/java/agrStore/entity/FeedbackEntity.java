@@ -1,6 +1,7 @@
 package agrStore.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,13 +37,13 @@ public class FeedbackEntity {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "createAt")
-	private LocalDateTime createAt;
+	private Date createAt;
 
 	public FeedbackEntity() {
 		super();
 	}
 
-	public FeedbackEntity(Integer feedbackId, String comment, int star, LocalDateTime createAt) {
+	public FeedbackEntity(Integer feedbackId, String comment, int star, Date createAt) {
 		super();
 		this.feedbackId = feedbackId;
 		this.comment = comment;
@@ -82,11 +83,11 @@ public class FeedbackEntity {
 		this.star = star;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Date getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
 	
