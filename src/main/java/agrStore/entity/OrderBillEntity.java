@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "OrderBill")
@@ -25,8 +29,8 @@ public class OrderBillEntity {
 	private Integer orderBillId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "accountId")
-	private AccountEntity account;
+	@JoinColumn(name = "adminId")
+	private AdminEntity admin;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customerId")
@@ -35,6 +39,8 @@ public class OrderBillEntity {
 	@Column(name = "statusOrder")
 	private int statusOrder;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="orderTime")
     private LocalDateTime orderTime;
 	
@@ -68,13 +74,13 @@ public class OrderBillEntity {
 	public void setOrderBillId(Integer orderBillId) {
 		this.orderBillId = orderBillId;
 	}
-
-	public AccountEntity getAccount() {
-		return account;
+	
+	public AdminEntity getAdmin() {
+		return admin;
 	}
 
-	public void setAccount(AccountEntity account) {
-		this.account = account;
+	public void setAdmin(AdminEntity admin) {
+		this.admin = admin;
 	}
 
 	public int getStatusOrder() {

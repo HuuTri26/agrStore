@@ -66,16 +66,22 @@ public class AccountEntity {
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
 
-	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	private List<OrderBillEntity> orderBillList;
+//	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+//			CascadeType.REFRESH }, fetch = FetchType.LAZY)
+//	private List<OrderBillEntity> orderBillList;
 	
-	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	private List<ImportBillEntity> importBillList;
+//	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+//			CascadeType.REFRESH }, fetch = FetchType.LAZY)
+//	private List<ImportBillEntity> importBillList;
 	
 	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
 	private CustomerEntity customer;
+	
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+	private AdminEntity admin;
+	
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+	private StaffEntity staff;
 
 	public AccountEntity(Integer id, Boolean status, String avatar, String gmail, String fullName, String phoneNumber,
 			String password, Date createAt, Date updateAt, RoleEntity role, AddressEntity address) {
@@ -196,22 +202,6 @@ public class AccountEntity {
 
 	public void setAddress(AddressEntity address) {
 		this.address = address;
-	}
-
-	public List<OrderBillEntity> getOrderBillList() {
-		return orderBillList;
-	}
-
-	public void setOrderBillList(List<OrderBillEntity> orderBillList) {
-		this.orderBillList = orderBillList;
-	}
-
-	public List<ImportBillEntity> getImportBillList() {
-		return importBillList;
-	}
-
-	public void setImportBillList(List<ImportBillEntity> importBillList) {
-		this.importBillList = importBillList;
 	}
 
 	public CustomerEntity getCustomer() {

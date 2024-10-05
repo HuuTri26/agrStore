@@ -29,8 +29,8 @@ public class ImportBillEntity {
 	private Integer importBillId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "accountId")
-	private AccountEntity account;
+	@JoinColumn(name = "adminId")
+	private AdminEntity admin;
 
 	@Column(name = "totalPrice")
 	private Float totalPrice;
@@ -63,12 +63,12 @@ public class ImportBillEntity {
 		this.importBillId = importBillId;
 	}
 
-	public AccountEntity getAccount() {
-		return account;
+	public AdminEntity getAdmin() {
+		return admin;
 	}
 
-	public void setAccount(AccountEntity account) {
-		this.account = account;
+	public void setAdmin(AdminEntity admin) {
+		this.admin = admin;
 	}
 
 	public Float getTotalPrice() {
