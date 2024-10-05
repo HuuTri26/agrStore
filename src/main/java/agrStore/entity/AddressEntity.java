@@ -33,6 +33,9 @@ public class AddressEntity {
 	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
 	private AccountEntity account;
 	
+	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+	private CustomerEntity customer;
+	
 	public AddressEntity(Integer id, ProvinceEntity province, DistrictEntity district, WardEntity ward,
 			AccountEntity account) {
 		super();
@@ -86,5 +89,15 @@ public class AddressEntity {
 	public void setAccount(AccountEntity account) {
 		this.account = account;
 	}
+
+	public CustomerEntity getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerEntity customer) {
+		this.customer = customer;
+	}
+	
+	
 	
 }
