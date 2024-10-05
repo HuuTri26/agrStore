@@ -1,6 +1,7 @@
 package agrStore.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class CouponEntity {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "applyTime")
-	private LocalDateTime applyTime;
+	private Date applyTime;
 	
 	@Column(name = "discount")
 	private float discount;
@@ -43,7 +44,7 @@ public class CouponEntity {
 		super();
 	}
 
-	public CouponEntity(Integer couponId, String couponName, LocalDateTime applyTime, float discount, float maxValue,
+	public CouponEntity(Integer couponId, String couponName, Date applyTime, float discount, float maxValue,
 			boolean status) {
 		super();
 		this.couponId = couponId;
@@ -70,11 +71,11 @@ public class CouponEntity {
 		this.couponName = couponName;
 	}
 
-	public LocalDateTime getApplyTime() {
+	public Date getApplyTime() {
 		return applyTime;
 	}
 
-	public void setApplyTime(LocalDateTime applyTime) {
+	public void setApplyTime(Date applyTime) {
 		this.applyTime = applyTime;
 	}
 

@@ -1,6 +1,7 @@
 package agrStore.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,7 +43,7 @@ public class OrderBillEntity {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="orderTime")
-    private LocalDateTime orderTime;
+    private Date orderTime;
 	
 	@Column(name = "orderPrice")
 	private int orderPrice;
@@ -59,7 +60,7 @@ public class OrderBillEntity {
 		super();
 	}
 
-	public OrderBillEntity(Integer orderBillId, int statusOrder, LocalDateTime orderTime, int orderPrice) {
+	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int orderPrice) {
 		super();
 		this.orderBillId = orderBillId;
 		this.statusOrder = statusOrder;
@@ -91,11 +92,11 @@ public class OrderBillEntity {
 		this.statusOrder = statusOrder;
 	}
 
-	public LocalDateTime getOrderTime() {
+	public Date getOrderTime() {
 		return orderTime;
 	}
 
-	public void setOrderTime(LocalDateTime orderTime) {
+	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
 	}
 

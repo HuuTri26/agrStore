@@ -1,6 +1,7 @@
 package agrStore.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,7 +39,7 @@ public class ImportBillEntity {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "createAt")
-	private LocalDateTime createAt;
+	private Date createAt;
 
 	@OneToMany(mappedBy = "importBill", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH }, fetch = FetchType.LAZY)
@@ -48,7 +49,7 @@ public class ImportBillEntity {
 		super();
 	}
 
-	public ImportBillEntity(Integer importBillId, Float totalPrice, LocalDateTime createAt) {
+	public ImportBillEntity(Integer importBillId, Float totalPrice, Date createAt) {
 		super();
 		this.importBillId = importBillId;
 		this.totalPrice = totalPrice;
@@ -79,11 +80,11 @@ public class ImportBillEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Date getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
 
