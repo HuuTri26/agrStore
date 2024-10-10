@@ -13,13 +13,13 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
-//		System.out.println(uri);
+		System.out.println("==> Interceptor check: "+uri);
 		// Không kiểm tra khi truy cập đến các trang sau
 		if (	   uri.contains("index.htm")
 				|| uri.contains("userLogin.htm") 
 				|| uri.contains("userSignUp.htm")
 				|| uri.contains("userSignUpGmail.htm")
-				|| uri.contains("userSignUpGmailGetOTP.htm")
+				|| uri.contains("getOTPSignUp.htm")
 				|| uri.contains("changeForgotPassword.htm")
 				|| uri.contains("userForgotPasswordGetOTP.htm")
 				|| uri.contains("userForgotPasswordGmail.htm")) {
@@ -28,7 +28,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
 		
 		if (loggedInUser == null || loggedInUser.getRole().getId() != 3) {
-			System.out.println("==> Running interceptor!");
+			System.out.println("==> No permission, user intercepted!");
 			response.sendRedirect(request.getContextPath() + "/userLogin.htm");
 		}
 
