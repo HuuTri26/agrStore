@@ -27,8 +27,7 @@ public class CustomerEntity {
 	@JoinColumn(name = "accountId")
 	private AccountEntity account;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cartId")
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
 	private CartEntity cart;
 
 	@OneToMany(mappedBy = "customer", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,

@@ -23,7 +23,7 @@ public class CartEntity {
 	@Column(name = "cartId")
 	private Integer cartId;
 
-	@OneToOne(mappedBy = "cart")
+	@OneToOne
 	@JoinColumn(name = "customerId")
 	private CustomerEntity customer;
 
@@ -38,5 +38,4 @@ public class CartEntity {
 		super();
 	}
 
-	
 }

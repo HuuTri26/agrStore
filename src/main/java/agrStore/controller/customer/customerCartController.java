@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class customerCartController {
+public class CustomerCartController {
 	@RequestMapping("/customerCart")
 	public String customerCartShow(HttpServletRequest request, HttpSession session,
 			@CookieValue(value = "userEmail", defaultValue = "", required = false) String userEmail) {

@@ -36,7 +36,7 @@ import agrStore.service.RoleService;
 import agrStore.service.WardService;
 
 @Controller
-public class userController {
+public class UserController {
 
 	@Autowired
 	AccountUltility accountUltility;

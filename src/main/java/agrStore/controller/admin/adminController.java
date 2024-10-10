@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class adminController {
+public class AdminController {
 	@RequestMapping("/adminDashboard")
 	public String adminDashboard(HttpServletRequest request, HttpSession session,
 			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
