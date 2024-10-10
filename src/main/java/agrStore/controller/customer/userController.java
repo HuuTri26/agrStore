@@ -1,5 +1,6 @@
 package agrStore.controller.customer;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import agrStore.entity.DistrictEntity;
 import agrStore.entity.ProvinceEntity;
 import agrStore.entity.RoleEntity;
 import agrStore.entity.WardEntity;
+import agrStore.recaptcha.RecaptchaVerification;
 import agrStore.utility.AccountUltility;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
@@ -62,6 +64,7 @@ public class userController {
 	@Autowired
 	AddressService addressService;
 
+	
 	@RequestMapping("/userLogin")
 	public String showUserLoginForm(Model model) {
 		model.addAttribute("account", new AccountEntity());
@@ -71,8 +74,38 @@ public class userController {
 
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public String userLogin(ModelMap model, HttpServletRequest request,
-			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session) {
-
+			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session) throws IOException {
+		
+		//Lấy phản hồi của Google reCaptcha
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		
+		//Lấy các mã captcha khi tạo ra cái ảnh
+		String captcha = session.getAttribute("captchaSecurity").toString();
+		
+		//Lấy captcha do người dùng nhập
+		String captchaInput = request.getParameter("captcha-input");
+		
+		System.out.println("==> Captcha code use for this sesion: "+ captcha);
+		
+		//Xác minh ReCaptcha của Google
+		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
+		
+		//Xác minh Captcha bằng hình ảnh
+		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
+		
+		if (!isVerify || !isMatch) {
+	        // Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
+	        if (!isVerify) {
+	            System.out.println("Error: Google ReCaptcha verification failed!");
+	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+	        }
+	        if (!isMatch) {
+	            System.out.println("Error: Wrong image captcha code!");
+	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+	        }
+	        return "customer/login/userLogin";
+	    }
+		
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 				if (account.getGmail().isEmpty()) {
 					errors.rejectValue("gmail", "account", "Xin vui lòng nhập username(gmail) của bạn!");
@@ -115,14 +148,47 @@ public class userController {
 	public String showforgotPassForm(Model model) {
 		model.addAttribute("account", new AccountEntity());
 		System.out.println("==> Begin forgot password session");
-
+		
 		return "customer/forgotPassword/userForgotPasswordGmail";
 	}
+	
 
 	@RequestMapping(value = "/forgotPass", method = RequestMethod.POST)
-	public String sendForgoPasstOTPToGmail(HttpServletRequest request, @ModelAttribute("account") AccountEntity account,
-			BindingResult errors) {
+	public String sendForgoPasstOTPToGmail(ModelMap model, HttpServletRequest request, @ModelAttribute("account") AccountEntity account,
+			BindingResult errors, HttpSession session) throws IOException {
 
+		
+		// Lấy phản hồi của Google reCaptcha
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+
+		// Lấy các mã captcha khi tạo ra cái ảnh
+		String captcha = session.getAttribute("captchaSecurity").toString();
+
+		// Lấy captcha do người dùng nhập
+		String captchaInput = request.getParameter("captcha-input");
+
+		System.out.println("==> Captcha code use for this sesion: " + captcha);
+
+		// Xác minh ReCaptcha của Google
+		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
+
+		// Xác minh Captcha bằng hình ảnh
+		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
+
+		if (!isVerify || !isMatch) {
+			// Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
+			if (!isVerify) {
+				System.out.println("Error: Google ReCaptcha verification failed!");
+				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+			}
+			if (!isMatch) {
+				System.out.println("Error: Wrong image captcha code!");
+				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+			}
+			return "customer/forgotPassword/userForgotPasswordGmail";
+		}
+		
+		
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 		if (account.getGmail().isEmpty()) {
 			errors.rejectValue("gmail", "account", "Vui lòng nhập gmail mà bạn thiết lập làm tài khoản!");
@@ -150,7 +216,7 @@ public class userController {
 		}
 
 		if (isValid) {
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			String otp = accountUltility.generateOTP().toUpperCase();
 			System.out.println("==> OTP for this forgot password session is: " + otp);
 			// Lưu OTP vừa tạo vào session để xử lý cho action method tiếp theo
@@ -251,9 +317,41 @@ public class userController {
 	}
 
 	@RequestMapping(value = "/userSignUpGmail", method = RequestMethod.POST)
-	public String sendSignUpOTPToGmail(HttpServletRequest request, @ModelAttribute("account") AccountEntity account,
-			BindingResult errors) {
+	public String sendSignUpOTPToGmail(ModelMap model, HttpServletRequest request, @ModelAttribute("account") AccountEntity account,
+			BindingResult errors, HttpSession session) throws IOException {
 
+		
+		// Lấy phản hồi của Google reCaptcha
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+
+		// Lấy các mã captcha khi tạo ra cái ảnh
+		String captcha = session.getAttribute("captchaSecurity").toString();
+
+		// Lấy captcha do người dùng nhập
+		String captchaInput = request.getParameter("captcha-input");
+
+		System.out.println("==> Captcha code use for this sesion: " + captcha);
+
+		// Xác minh ReCaptcha của Google
+		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
+
+		// Xác minh Captcha bằng hình ảnh
+		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
+
+		if (!isVerify || !isMatch) {
+			// Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
+			if (!isVerify) {
+				System.out.println("Error: Google ReCaptcha verification failed!");
+				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+			}
+			if (!isMatch) {
+				System.out.println("Error: Wrong image captcha code!");
+				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+			}
+			return "customer/login/userSignUpGmail";
+		}
+		
+		
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 		if (account.getGmail().isEmpty()) {
 			errors.rejectValue("gmail", "account", "Vui lòng nhập gmail mà bạn thiết lập làm tài khoản!");
@@ -276,7 +374,7 @@ public class userController {
 		}
 
 		if (isValid) {
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			String otp = accountUltility.generateOTP().toUpperCase();
 			System.out.println("==> OTP for this sign up session is: " + otp);
 			// Lưu OTP vừa tạo vào session để xử lý cho action method tiếp theo
@@ -293,7 +391,7 @@ public class userController {
 
 	}
 
-	@RequestMapping(value = "/getOTPSignUp", params = "verify", method = RequestMethod.GET)
+	
 	public String usergetOTPSignUp(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 
@@ -420,7 +518,7 @@ public class userController {
 			model.addAttribute("phoneErr", "Vui lòng nhập số điện thoại của bạn!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Phone number field empty!");
-		}else if(!accountUltility.isValidPhoneNumber(phoneNumber)) {
+		} else if (!accountUltility.isValidPhoneNumber(phoneNumber)) {
 			model.addAttribute("phoneErr", "Số điện thoại bạn nhập không hợp lệ, vui lòng nhập lại!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Phone number invalid!");
@@ -459,16 +557,16 @@ public class userController {
 
 					accountService.addAccount(account);
 					System.out.println("==> User's account created successfully!");
-					
+
 					return "redirect:/";
 				} catch (Exception e) {
 					System.out.println("Error: User's account created failed!");
 				} finally {
-					
+
 					// Giải phóng dữ liệu của session
 					request.getSession().invalidate();
 					System.out.println("==> Invalidate session's data");
-					
+
 					// Giải phóng dữ liệu của model attributes
 					sessionStatus.setComplete();
 					System.out.println("==> Clear model attributes");
@@ -485,11 +583,17 @@ public class userController {
 		return "customer/login/userSignUp";
 	}
 
-
-
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.removeAttribute("loggedInUser");
+	public String logout(HttpServletRequest request, SessionStatus sessionStatus) {
+		// Giải phóng dữ liệu của session
+		request.getSession().invalidate();
+		System.out.println("==> Invalidate session's data");
+
+		// Giải phóng dữ liệu của model attributes
+		sessionStatus.setComplete();
+		System.out.println("==> Clear model attributes");
+
+		System.out.println("==> Log out");
 		return "redirect:/index.htm";
 	}
 

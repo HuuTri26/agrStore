@@ -16,6 +16,10 @@
 			</div>
 		</div>
 	</div>
+	
+	<script src="https://www.google.com/recaptcha/enterprise.js" async
+		defer></script>
+	
 	<!-- HEADER -->
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
@@ -61,8 +65,23 @@
 										placeHolder="example123@gmail.com" class="txt-input" />
 									<form:errors path="gmail" />
 								</p>
-								<<button class="btn btn-submit btn-bold" type="submit">Xác
+								
+								<div class="g-recaptcha"
+									data-sitekey="6LcQQlcqAAAAAMtzgq3PIXZrcABfkUJbqMCUhY_E"
+									data-callback="onRecaptchaSuccess"></div>
+									
+								<div id="captcha-container" style="display: none;">
+									<img src="${pageContext.request.contextPath}/captcha/index.htm"
+										id="captcha-img"> <input name="captcha-input"
+										type="text" placeholder="Nhập mã captcha">
+								</div>
+
+								<label>${reCaptcha }</label>
+								
+								<p class="form-row wrap-btn">
+									<button class="btn btn-submit btn-bold" type="submit">Xác
 									nhận</button>
+								</p>
 							</form:form>
 						</div>
 					</div>
@@ -72,6 +91,22 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+<head>
+<!-- Replace the variables below. -->
+<script>
+    // Hàm được gọi khi reCAPTCHA thành công
+    function onRecaptchaSuccess() {
+        // Hiển thị ảnh CAPTCHA khi reCAPTCHA được xác nhận
+        document.getElementById('captcha-container').style.display = 'block';
+    }
+</script>
+
+<!-- Your code -->
+</head>
+	
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>
 

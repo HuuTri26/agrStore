@@ -136,8 +136,7 @@
 											onchange="this.form.submit()">
 											<option value="">Chọn Xã/Phường</option>
 											<c:forEach var="ward" items="${wards}">
-												<option value="${ward.id}"
-													>${ward.name}</option>
+												<option value="${ward.id}">${ward.name}</option>
 											</c:forEach>
 										</select> <input type="text" id="wardText" readonly
 											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
@@ -192,4 +191,5 @@
 	<!-- Scroll Top Button and JS -->
 	<%@include file="/WEB-INF/views/include/customer/js.jsp"%>
 </body>
+
 </html>
