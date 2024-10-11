@@ -65,6 +65,17 @@ public class AccountEntity {
 	@OneToOne()
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
+	
+	/*
+	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private
+	 * CustomerEntity customer;
+	 * 
+	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private StaffEntity
+	 * staff;
+	 * 
+	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private AdminEntity
+	 * admin;
+	 */
 
 //	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 //			CascadeType.REFRESH }, fetch = FetchType.LAZY)
@@ -97,6 +108,9 @@ public class AccountEntity {
 		this.updateAt = updateAt;
 		this.role = role;
 		this.address = address;
+		/*
+		 * this.customer = customer; this.staff = staff; this.admin = admin;
+		 */
 	}
 
 	public AccountEntity() {
@@ -204,13 +218,21 @@ public class AccountEntity {
 		this.address = address;
 	}
 
-	public CustomerEntity getCustomer() {
-		return customer;
-	}
 
-	public void setCustomer(CustomerEntity customer) {
-		this.customer = customer;
-	}
+	/*
+	 * public CustomerEntity getCustomer() { return customer; }
+	 * 
+	 * public void setCustomer(CustomerEntity customer) { this.customer = customer;
+	 * }
+	 * 
+	 * public StaffEntity getStaff() { return staff; }
+	 * 
+	 * public void setStaff(StaffEntity staff) { this.staff = staff; }
+	 * 
+	 * public AdminEntity getAdmin() { return admin; }
+	 * 
+	 * public void setAdmin(AdminEntity admin) { this.admin = admin; }
+	 */
 	
 	
 

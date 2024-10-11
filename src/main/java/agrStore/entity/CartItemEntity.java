@@ -2,7 +2,7 @@ package agrStore.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,47 +13,45 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CartItem")
 public class CartItemEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cartItemId")
-	private Integer cartItemId;
+	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name = "quantity")
+	private Integer quantity;
+	
+	@ManyToOne
 	@JoinColumn(name = "cartId")
 	private CartEntity cart;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "productId")
-	private ProductEntity product;
-	
-	@Column(name = "quantity")
-	private int quantity;
 
 	public CartItemEntity() {
 		super();
 	}
 
-	public CartItemEntity(Integer cartItemId, int quantity) {
+	public CartItemEntity(Integer id, Integer quantity, CartEntity cart) {
 		super();
-		this.cartItemId = cartItemId;
+		this.id = id;
 		this.quantity = quantity;
-	}
-
-	public CartItemEntity(Integer cartItemId, CartEntity cart, ProductEntity product, int quantity) {
-		super();
-		this.cartItemId = cartItemId;
 		this.cart = cart;
-		this.product = product;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-
-	public Integer getCartItemId() {
-		return cartItemId;
-	}
-
-	public void setCartItemId(Integer cartItemId) {
-		this.cartItemId = cartItemId;
 	}
 
 	public CartEntity getCart() {
@@ -63,23 +61,5 @@ public class CartItemEntity {
 	public void setCart(CartEntity cart) {
 		this.cart = cart;
 	}
-
-	public ProductEntity getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductEntity product) {
-		this.product = product;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	
-	
 
 }
