@@ -24,9 +24,6 @@ public class CartEntity {
 	@Column(name = "productQuantity")
 	private Integer productQuantity;
 	
-	@OneToOne
-	@JoinColumn(name = "customerId")
-	private CustomerEntity customer;
 	
 	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
 	private List<CartItemEntity> cartItems;
@@ -35,11 +32,10 @@ public class CartEntity {
 		super();
 	}
 
-	public CartEntity(Integer id, Integer productQuantity, CustomerEntity customer, List<CartItemEntity> cartItems) {
+	public CartEntity(Integer id, Integer productQuantity, List<CartItemEntity> cartItems) {
 		super();
 		this.id = id;
 		this.productQuantity = productQuantity;
-		this.customer = customer;
 		this.cartItems = cartItems;
 	}
 
@@ -59,13 +55,6 @@ public class CartEntity {
 		this.productQuantity = productQuantity;
 	}
 
-	public CustomerEntity getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(CustomerEntity customer) {
-		this.customer = customer;
-	}
 
 	public List<CartItemEntity> getCartItems() {
 		return cartItems;
