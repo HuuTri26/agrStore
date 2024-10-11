@@ -13,6 +13,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
+
 		System.out.println("==> Interceptor check: "+uri);
 		// Không kiểm tra khi truy cập đến các trang sau
 		if (	   uri.contains("index.htm")
@@ -31,6 +32,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 			System.out.println("==> No permission, user intercepted!");
 			response.sendRedirect(request.getContextPath() + "/userLogin.htm");
 		}
+
 
 		return true;
 	}
