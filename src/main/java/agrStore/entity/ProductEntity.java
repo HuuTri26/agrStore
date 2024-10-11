@@ -1,7 +1,9 @@
 package agrStore.entity;
 
+
 import java.util.Date;
 import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,11 +23,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "Product")
 public class ProductEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "productId")
 	private Integer id;
 	
+
 	@Column(name = "productName")
 	private String productName;
 
@@ -59,4 +64,5 @@ public class ProductEntity {
 	
 //	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 //	private List<CartItemEntity> cartItems;
+
 }

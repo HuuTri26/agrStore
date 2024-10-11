@@ -1,7 +1,9 @@
 package agrStore.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -26,39 +29,39 @@ public class AccountEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountId")
 	private Integer id;
-	
+
 	@Column(name = "status")
 	private Boolean status;
-	
+
 	@Column(name = "avatar")
 	private String avatar;
-	
+
 	@Column(name = "gmail")
 	private String gmail;
-	
+
 	@Column(name = "fullName")
 	private String fullName;
-	
+
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "createAt")
 	private Date createAt;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "updateAt")
 	private Date updateAt;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private RoleEntity role;
-	
+
 	@OneToOne()
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
@@ -73,6 +76,23 @@ public class AccountEntity {
 	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private AdminEntity
 	 * admin;
 	 */
+
+//	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+//			CascadeType.REFRESH }, fetch = FetchType.LAZY)
+//	private List<OrderBillEntity> orderBillList;
+	
+//	@OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+//			CascadeType.REFRESH }, fetch = FetchType.LAZY)
+//	private List<ImportBillEntity> importBillList;
+	
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+	private CustomerEntity customer;
+	
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+	private AdminEntity admin;
+	
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+	private StaffEntity staff;
 
 	public AccountEntity(Integer id, Boolean status, String avatar, String gmail, String fullName, String phoneNumber,
 			String password, Date createAt, Date updateAt, RoleEntity role, AddressEntity address) {
@@ -96,7 +116,7 @@ public class AccountEntity {
 	public AccountEntity() {
 		super();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -160,7 +180,7 @@ public class AccountEntity {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
+
 	@PrePersist
 	protected void onCreate() {
 		this.createAt = new Date();
@@ -176,7 +196,7 @@ public class AccountEntity {
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	
+
 	@PreUpdate
 	protected void onUpdate() {
 		this.updateAt = new Date();
@@ -198,6 +218,7 @@ public class AccountEntity {
 		this.address = address;
 	}
 
+
 	/*
 	 * public CustomerEntity getCustomer() { return customer; }
 	 * 
@@ -213,4 +234,6 @@ public class AccountEntity {
 	 * public void setAdmin(AdminEntity admin) { this.admin = admin; }
 	 */
 	
+	
+
 }
