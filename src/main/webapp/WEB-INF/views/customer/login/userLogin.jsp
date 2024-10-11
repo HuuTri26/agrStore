@@ -109,9 +109,9 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
 <head>
+
 <!-- Replace the variables below. -->
 <script>
     // Hàm được gọi khi reCAPTCHA thành công

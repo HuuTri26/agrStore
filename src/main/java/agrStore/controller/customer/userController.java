@@ -75,36 +75,38 @@ public class userController {
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public String userLogin(ModelMap model, HttpServletRequest request,
 			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session) throws IOException {
+		//Bỏ comment tất cả đoạn này để chạy đc reCaptcha
 		
 		//Lấy phản hồi của Google reCaptcha
-		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+//		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 		
 		//Lấy các mã captcha khi tạo ra cái ảnh
-		String captcha = session.getAttribute("captchaSecurity").toString();
+//		String captcha = session.getAttribute("captchaSecurity").toString();
 		
 		//Lấy captcha do người dùng nhập
-		String captchaInput = request.getParameter("captcha-input");
+//		String captchaInput = request.getParameter("captcha-input");
 		
-		System.out.println("==> Captcha code use for this sesion: "+ captcha);
+//		System.out.println("==> Captcha code use for this sesion: "+ captcha);
 		
 		//Xác minh ReCaptcha của Google
-		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
+//		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
 		
 		//Xác minh Captcha bằng hình ảnh
-		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
+//		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
 		
-		if (!isVerify || !isMatch) {
-	        // Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
-	        if (!isVerify) {
-	            System.out.println("Error: Google ReCaptcha verification failed!");
-	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
-	        }
-	        if (!isMatch) {
-	            System.out.println("Error: Wrong image captcha code!");
-	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
-	        }
-	        return "customer/login/userLogin";
-	    }
+//		if (!isVerify || !isMatch) {
+//	        // Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
+//	        if (!isVerify) {
+//	            System.out.println("Error: Google ReCaptcha verification failed!");
+//	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+//	        }
+//	        if (!isMatch) {
+//	            System.out.println("Error: Wrong image captcha code!");
+//	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+//	        }
+//	        return "customer/login/userLogin";
+//	    }
+
 		
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 				if (account.getGmail().isEmpty()) {
