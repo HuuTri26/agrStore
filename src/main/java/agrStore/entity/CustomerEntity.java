@@ -1,5 +1,8 @@
 package agrStore.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,41 +10,49 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Customer")
 public class CustomerEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customerId")
-	private Integer id;
-	
+	private Integer customerId;
+
 	@OneToOne()
 	@JoinColumn(name = "accountId")
 	private AccountEntity account;
-	
-	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
 	private CartEntity cart;
-	
+
+	@OneToMany(mappedBy = "customer", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	private List<OrderBillEntity> orderBillList;
+
 	public CustomerEntity() {
 		super();
 	}
 
-	public CustomerEntity(Integer id, AccountEntity account, CartEntity cart) {
+	public CustomerEntity(Integer customerId, AccountEntity account, CartEntity cart,
+			List<OrderBillEntity> orderBillList) {
 		super();
-		this.id = id;
+		this.customerId = customerId;
 		this.account = account;
 		this.cart = cart;
+		this.orderBillList = orderBillList;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 
 	public AccountEntity getAccount() {
@@ -59,5 +70,13 @@ public class CustomerEntity {
 	public void setCart(CartEntity cart) {
 		this.cart = cart;
 	}
-	
+
+	public List<OrderBillEntity> getOrderBillList() {
+		return orderBillList;
+	}
+
+	public void setOrderBillList(List<OrderBillEntity> orderBillList) {
+		this.orderBillList = orderBillList;
+	}
+
 }

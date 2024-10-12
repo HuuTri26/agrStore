@@ -2,6 +2,7 @@ package agrStore.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CartItem")
 public class CartItemEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cartItemId")
@@ -24,6 +26,7 @@ public class CartItemEntity {
 	@JoinColumn(name = "cartId")
 	private CartEntity cart;
 	
+
 	public CartItemEntity() {
 		super();
 	}
@@ -58,5 +61,5 @@ public class CartItemEntity {
 	public void setCart(CartEntity cart) {
 		this.cart = cart;
 	}
-	
+
 }

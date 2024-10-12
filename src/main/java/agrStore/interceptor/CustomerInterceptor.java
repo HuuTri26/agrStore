@@ -1,3 +1,4 @@
+
 package agrStore.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 				|| uri.contains("getOTPSignUp.htm")
 				|| uri.contains("changeForgotPassword.htm")
 				|| uri.contains("userForgotPasswordGetOTP.htm")
-				|| uri.contains("userForgotPasswordGmail.htm")) {
+				|| uri.contains("userForgotPasswordGmail.htm") || uri.contains("logout.htm")) {
 			return true;
 		}
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
@@ -50,3 +51,4 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 	}
 
 }
+
