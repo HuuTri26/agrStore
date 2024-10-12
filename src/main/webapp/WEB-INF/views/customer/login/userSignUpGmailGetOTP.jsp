@@ -131,7 +131,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 
 	<form class="vefify-form" action="getOTPSignUp.htm"
-		method="get">
+		method="post">
 
 		<div
 			class="container height-100 d-flex justify-content-center align-items-center">

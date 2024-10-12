@@ -14,3 +14,4 @@
 <script src="<c:url value='/assets/assets/js/slick.min.js'/>"></script>
 <script src="<c:url value='/assets/assets/js/biolife.framework.js'/>"></script>
 <script src="<c:url value='/assets/assets/js/functions.js'/>"></script>
+<script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
