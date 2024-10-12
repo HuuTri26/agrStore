@@ -30,17 +30,12 @@ public class DistrictEntity {
 	@OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
 	private List<WardEntity> wards;
 	
-	@OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
-	private List<AddressEntity> addresses;
-	
-	public DistrictEntity(Integer id, String name, ProvinceEntity province, List<WardEntity> wards,
-			List<AddressEntity> addresses) {
+	public DistrictEntity(Integer id, String name, ProvinceEntity province, List<WardEntity> wards) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.province = province;
 		this.wards = wards;
-		this.addresses = addresses;
 	}
 
 	public DistrictEntity() {
@@ -77,14 +72,6 @@ public class DistrictEntity {
 
 	public void setWards(List<WardEntity> wards) {
 		this.wards = wards;
-	}
-
-	public List<AddressEntity> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<AddressEntity> addresses) {
-		this.addresses = addresses;
 	}
 	
 }

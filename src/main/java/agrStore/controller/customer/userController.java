@@ -388,7 +388,8 @@ public class userController {
 		}
 
 	}
-
+	
+	@RequestMapping(value = "/getOTPSignUp", params = "verify", method = RequestMethod.POST)
 	public String usergetOTPSignUp(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 
@@ -484,8 +485,6 @@ public class userController {
 
 		// Lấy các dữ liệu được trong session
 		AccountEntity account = (AccountEntity) session.getAttribute("account");
-		ProvinceEntity selectedProvince = (ProvinceEntity) session.getAttribute("selectedProvince");
-		DistrictEntity selectedDistrict = (DistrictEntity) session.getAttribute("selectedDistrict");
 		WardEntity selectedWard = (WardEntity) session.getAttribute("selectedWard");
 
 		// Lấy các field thông tin đăng ký
@@ -526,8 +525,6 @@ public class userController {
 			System.out.println("==> Create new address for user's account");
 			AddressEntity address = new AddressEntity();
 			try {
-				address.setProvince(selectedProvince);
-				address.setDistrict(selectedDistrict);
 				address.setWard(selectedWard);
 
 				addressService.addAddress(address);

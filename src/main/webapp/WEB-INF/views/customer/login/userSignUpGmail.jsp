@@ -16,10 +16,6 @@
 		</div>
 	</div>
 
-
-	<script src="https://www.google.com/recaptcha/enterprise.js" async
-		defer></script>
-
 	<!-- HEADER -->
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">

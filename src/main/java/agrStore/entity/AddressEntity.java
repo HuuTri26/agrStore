@@ -19,26 +19,16 @@ public class AddressEntity {
 	private Integer id;
 	
 	@ManyToOne()
-	@JoinColumn(name = "provinceId")
-	private ProvinceEntity province;
-	
-	@ManyToOne()
-	@JoinColumn(name = "districtId")
-	private DistrictEntity district;
-	
-	@ManyToOne()
 	@JoinColumn(name = "wardId")
 	private WardEntity ward;
 	
 	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
 	private AccountEntity account;
 	
-	public AddressEntity(Integer id, ProvinceEntity province, DistrictEntity district, WardEntity ward,
+	public AddressEntity(Integer id, WardEntity ward,
 			AccountEntity account) {
 		super();
 		this.id = id;
-		this.province = province;
-		this.district = district;
 		this.ward = ward;
 		this.account = account;
 	}
@@ -53,22 +43,6 @@ public class AddressEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public ProvinceEntity getProvince() {
-		return province;
-	}
-
-	public void setProvince(ProvinceEntity province) {
-		this.province = province;
-	}
-
-	public DistrictEntity getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(DistrictEntity district) {
-		this.district = district;
 	}
 
 	public WardEntity getWard() {
