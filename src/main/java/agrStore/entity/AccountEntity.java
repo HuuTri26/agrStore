@@ -63,18 +63,19 @@ public class AccountEntity {
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
 	
-	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
-	private CustomerEntity customer;
-	
-	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
-	private StaffEntity staff;
-	
-	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
-	private AdminEntity admin;
+	/*
+	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private
+	 * CustomerEntity customer;
+	 * 
+	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private StaffEntity
+	 * staff;
+	 * 
+	 * @OneToOne(mappedBy = "account", fetch = FetchType.LAZY) private AdminEntity
+	 * admin;
+	 */
 
 	public AccountEntity(Integer id, Boolean status, String avatar, String gmail, String fullName, String phoneNumber,
-			String password, Date createAt, Date updateAt, RoleEntity role, AddressEntity address,
-			CustomerEntity customer, StaffEntity staff, AdminEntity admin) {
+			String password, Date createAt, Date updateAt, RoleEntity role, AddressEntity address) {
 		super();
 		this.id = id;
 		this.status = status;
@@ -87,9 +88,9 @@ public class AccountEntity {
 		this.updateAt = updateAt;
 		this.role = role;
 		this.address = address;
-		this.customer = customer;
-		this.staff = staff;
-		this.admin = admin;
+		/*
+		 * this.customer = customer; this.staff = staff; this.admin = admin;
+		 */
 	}
 
 	public AccountEntity() {
@@ -197,28 +198,19 @@ public class AccountEntity {
 		this.address = address;
 	}
 
-	public CustomerEntity getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(CustomerEntity customer) {
-		this.customer = customer;
-	}
-
-	public StaffEntity getStaff() {
-		return staff;
-	}
-
-	public void setStaff(StaffEntity staff) {
-		this.staff = staff;
-	}
-
-	public AdminEntity getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(AdminEntity admin) {
-		this.admin = admin;
-	}
+	/*
+	 * public CustomerEntity getCustomer() { return customer; }
+	 * 
+	 * public void setCustomer(CustomerEntity customer) { this.customer = customer;
+	 * }
+	 * 
+	 * public StaffEntity getStaff() { return staff; }
+	 * 
+	 * public void setStaff(StaffEntity staff) { this.staff = staff; }
+	 * 
+	 * public AdminEntity getAdmin() { return admin; }
+	 * 
+	 * public void setAdmin(AdminEntity admin) { this.admin = admin; }
+	 */
 	
 }
