@@ -2,6 +2,7 @@ package agrStore.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,49 +20,57 @@ public class CartEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cartId")
-	private Integer id;
+	private Integer cartId;
 	
-	@Column(name = "productQuantity")
-	private Integer productQuantity;
+	@Column(name = "totalQuantity")
+	private Integer totalQuantity;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="accountId")
+	private AccountEntity account;
 	
-	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
-	private List<CartItemEntity> cartItems;
+	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	private List<CartItemEntity> cartItemList;
 	
 	public CartEntity() {
 		super();
 	}
 
-	public CartEntity(Integer id, Integer productQuantity, List<CartItemEntity> cartItems) {
-		super();
-		this.id = id;
-		this.productQuantity = productQuantity;
-		this.cartItems = cartItems;
+	public Integer getCartId() {
+		return cartId;
 	}
 
-	public Integer getId() {
-		return id;
+	public void setCartId(Integer cartId) {
+		this.cartId = cartId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Integer getTotalQuantity() {
+		return totalQuantity;
 	}
 
-	public Integer getProductQuantity() {
-		return productQuantity;
+	public void setTotalQuantity(Integer totalQuantity) {
+		this.totalQuantity = totalQuantity;
 	}
 
-	public void setProductQuantity(Integer productQuantity) {
-		this.productQuantity = productQuantity;
+	public AccountEntity getAccount() {
+		return account;
 	}
 
-
-	public List<CartItemEntity> getCartItems() {
-		return cartItems;
+	public void setAccount(AccountEntity account) {
+		this.account = account;
 	}
 
-	public void setCartItems(List<CartItemEntity> cartItems) {
-		this.cartItems = cartItems;
+	public List<CartItemEntity> getCartItemList() {
+		return cartItemList;
 	}
+
+	public void setCartItemList(List<CartItemEntity> cartItemList) {
+		this.cartItemList = cartItemList;
+	}
+	
+	
+
+	
 	
 }
