@@ -33,6 +33,14 @@ public class CartItemEntity {
 		super();
 	}
 
+	public CartItemEntity(Integer cartItemId, Integer quantity, CartEntity cart, ProductEntity product) {
+		super();
+		this.cartItemId = cartItemId;
+		this.quantity = quantity;
+		this.cart = cart;
+		this.product = product;
+	}
+
 	public Integer getCartItemId() {
 		return cartItemId;
 	}
@@ -64,7 +72,5 @@ public class CartItemEntity {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
-	
-	
 
 }

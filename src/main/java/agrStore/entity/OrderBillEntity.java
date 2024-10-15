@@ -22,45 +22,50 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "OrderBill")
 public class OrderBillEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderBillId")
 	private Integer orderBillId;
-	
+
 	@Column(name = "statusOrder")
 	private int statusOrder;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "orderTime")
 	private Date orderTime;
-	
+
 	@Column(name = "totalQuantity")
 	private int totalQuantity;
-	
+
 	@Column(name = "totalPrice")
 	private int totalPrice;
-	
+
+	@Column(name = "employeeId")
+	private int employeeId;
+
 	@ManyToOne()
-	@JoinColumn(name="accountId")
+	@JoinColumn(name = "accountId")
 	private AccountEntity account;
-	
-	@OneToMany(mappedBy = "orderBill", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "orderBill", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<OrderBillDetailEntity> orderBillDetailList;
 
 	public OrderBillEntity() {
 		super();
 	}
 
-	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, int totalPrice) {
+	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, int totalPrice,
+			int employeeId) {
 		super();
 		this.orderBillId = orderBillId;
 		this.statusOrder = statusOrder;
 		this.orderTime = orderTime;
 		this.totalQuantity = totalQuantity;
 		this.totalPrice = totalPrice;
+		this.employeeId = employeeId;
 	}
 
 	public Integer getOrderBillId() {
@@ -103,6 +108,14 @@ public class OrderBillEntity {
 		this.totalPrice = totalPrice;
 	}
 
+	public int getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+
 	public AccountEntity getAccount() {
 		return account;
 	}
@@ -118,8 +131,5 @@ public class OrderBillEntity {
 	public void setOrderBillDetailList(List<OrderBillDetailEntity> orderBillDetailList) {
 		this.orderBillDetailList = orderBillDetailList;
 	}
-	
-	
-	
 
 }

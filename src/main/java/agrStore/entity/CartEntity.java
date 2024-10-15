@@ -21,20 +21,27 @@ public class CartEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cartId")
 	private Integer cartId;
-	
+
 	@Column(name = "totalQuantity")
 	private Integer totalQuantity;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="accountId")
+	@JoinColumn(name = "accountId")
 	private AccountEntity account;
-	
-	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<CartItemEntity> cartItemList;
-	
+
 	public CartEntity() {
 		super();
+	}
+
+	public CartEntity(Integer cartId, Integer totalQuantity, AccountEntity account) {
+		super();
+		this.cartId = cartId;
+		this.totalQuantity = totalQuantity;
+		this.account = account;
 	}
 
 	public Integer getCartId() {
@@ -68,9 +75,5 @@ public class CartEntity {
 	public void setCartItemList(List<CartItemEntity> cartItemList) {
 		this.cartItemList = cartItemList;
 	}
-	
-	
 
-	
-	
 }

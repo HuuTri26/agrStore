@@ -26,7 +26,7 @@ public class ProductEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "productId")
 	private Integer productId;
-	
+
 	@Column(name = "productName")
 	private String productName;
 
@@ -41,10 +41,10 @@ public class ProductEntity {
 
 	@Column(name = "image")
 	private String image;
-	
+
 	@Column(name = "unit")
 	private String unit;
-	
+
 	@Column(name = "status")
 	private Boolean status;
 
@@ -57,29 +57,47 @@ public class ProductEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "updateAt")
 	private Date updateAt;
-	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="categoryId")
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "categoryId")
 	private CategoryEntity category;
-	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "providerId")
 	private ProvidertEntity provider;
-	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<CartItemEntity> cartItems;
-	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<OrderBillDetailEntity> orderBillDetailList;
-	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<ImportBillDetailEntity> importBillDetailList;
 
 	public ProductEntity() {
 		super();
+	}
+
+	public ProductEntity(Integer productId, String productName, double price, int quantity, String descript,
+			String image, String unit, Boolean status, Date createAt, Date updateAt, CategoryEntity category,
+			ProvidertEntity provider) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.price = price;
+		this.quantity = quantity;
+		this.descript = descript;
+		this.image = image;
+		this.unit = unit;
+		this.status = status;
+		this.createAt = createAt;
+		this.updateAt = updateAt;
+		this.category = category;
+		this.provider = provider;
 	}
 
 	public Integer getProductId() {
@@ -201,6 +219,5 @@ public class ProductEntity {
 	public void setImportBillDetailList(List<ImportBillDetailEntity> importBillDetailList) {
 		this.importBillDetailList = importBillDetailList;
 	}
-	
-	
+
 }

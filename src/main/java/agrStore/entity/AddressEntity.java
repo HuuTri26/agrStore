@@ -20,22 +20,26 @@ public class AddressEntity {
 	@GeneratedValue
 	@Column(name = "addressId")
 	private Integer id;
-	
+
+	@Column(name = "streetName")
+	private String streetName;
+
 	@ManyToOne()
 	@JoinColumn(name = "wardId")
 	private WardEntity ward;
-	
-	@OneToMany(mappedBy = "address", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "address", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<AccountEntity> account;
 
 	public AddressEntity() {
 		super();
 	}
 
-	public AddressEntity(Integer id, WardEntity ward) {
+	public AddressEntity(Integer id, String streetName, WardEntity ward) {
 		super();
 		this.id = id;
+		this.streetName = streetName;
 		this.ward = ward;
 	}
 
@@ -45,6 +49,14 @@ public class AddressEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 
 	public WardEntity getWard() {
@@ -62,7 +74,5 @@ public class AddressEntity {
 	public void setAccount(List<AccountEntity> account) {
 		this.account = account;
 	}
-	
-	
-	
+
 }

@@ -45,6 +45,73 @@
 	float: right;
 	width: 500px;
 }
+
+/* Cải thiện layout cho phần address-form * /
+.col-lg-3 {
+	padding: 15px; /* Khoảng cách giữa các cột */
+	margin-bottom: 20px; /* Khoảng cách phía dưới */
+}
+
+/* Form address */
+.address-form {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Các input, select có chiều dài 100%, padding và border */
+.address-form select, .address-form input {
+	width: 100%; /* Đảm bảo chiều rộng của ô nhập/select là 100% */
+	padding: 8px 12px; /* Padding cho các ô nhập */
+	margin-bottom: 10px; /* Khoảng cách giữa các ô nhập */
+	border: 1px solid #ccc; /* Đường viền ô nhập */
+	border-radius: 4px; /* Bo góc cho ô nhập */
+	font-size: 14px; /* Kích thước chữ */
+	line-height: 1.4; /* Chiều cao dòng */
+	box-sizing: border-box;
+	/* Đảm bảo padding và border được tính vào chiều rộng */
+}
+
+/* Định dạng cho các label */
+.address-form label {
+	margin-bottom: 5px; /* Khoảng cách giữa label và ô nhập */
+	font-weight: bold; /* Làm đậm label */
+	font-size: 14px; /* Kích thước chữ */
+}
+
+/* Hiệu ứng khi hover vào input */
+.address-form input:focus, .address-form select:focus {
+	border-color: #007bff; /* Màu viền khi focus */
+	outline: none; /* Loại bỏ outline mặc định */
+}
+
+/* Input readonly với màu nền khác */
+.address-form input[readonly] {
+	background-color: #f0f0f0; /* Màu nền cho ô nhập readonly */
+	cursor: not-allowed; /* Đổi con trỏ khi hover vào ô nhập readonly */
+}
+
+/* Nút submit */
+.contact-form-btn {
+	display: flex;
+	justify-content: center; /* Căn giữa nút */
+	margin-top: 20px;
+}
+
+.button--md {
+	padding: 10px 20px; /* Điều chỉnh kích thước nút */
+	background-color: #007bff; /* Màu nền của nút */
+	color: white;
+	border: none;
+	border-radius: 4px; /* Bo góc cho nút */
+	font-size: 16px; /* Kích thước chữ */
+	cursor: pointer; /* Con trỏ khi hover vào nút */
+	transition: background-color 0.3s ease;
+	/* Hiệu ứng chuyển màu nền khi hover */
+}
+
+.button--md:hover {
+	background-color: #0056b3; /* Màu nền khi hover */
+}
 </style>
 
 </head>
@@ -157,7 +224,9 @@
 											</c:forEach>
 										</select> <input type="text" id="wardText" readonly
 											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
-
+										<label for="fid-name">Tên đường:<span class="requite">*</span></label>
+										<input type="text" id="streetName" name="streetName" value=""
+											class="txt-input w-5">
 
 									</div>
 									<div class="contact-form-btn">

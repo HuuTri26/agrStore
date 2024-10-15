@@ -29,61 +29,77 @@ public class AccountEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountId")
 	private Integer accountId;
-	
+
 	@Column(name = "status")
 	private Boolean status;
-	
+
 	@Column(name = "avatar")
 	private String avatar;
-	
+
 	@Column(name = "gmail")
 	private String gmail;
-	
+
 	@Column(name = "fullName")
 	private String fullName;
-	
+
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "createAt")
 	private Date createAt;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "updateAt")
 	private Date updateAt;
-	
-	@OneToOne(mappedBy = "account", fetch =  FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private CartEntity cart;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private RoleEntity role;
-	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
-	
-	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<OrderBillEntity> orderBillList;
-	
-	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<ImportBillEntity> importBillList;
-	
-	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
 	private List<FeedbackEntity> feedbackList;
 
 	public AccountEntity() {
 		super();
+	}
+
+	public AccountEntity(Integer accountId, Boolean status, String avatar, String gmail, String fullName,
+			String phoneNumber, String password, Date createAt, Date updateAt, RoleEntity role, AddressEntity address) {
+		super();
+		this.accountId = accountId;
+		this.status = status;
+		this.avatar = avatar;
+		this.gmail = gmail;
+		this.fullName = fullName;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.createAt = createAt;
+		this.updateAt = updateAt;
+		this.role = role;
+		this.address = address;
 	}
 
 	public Integer getAccountId() {
@@ -173,9 +189,5 @@ public class AccountEntity {
 	public void setAddress(AddressEntity address) {
 		this.address = address;
 	}
-	
-	
-	
-	
-	
+
 }
