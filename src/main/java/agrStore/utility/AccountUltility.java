@@ -10,4 +10,6 @@ public interface AccountUltility {
 	public Boolean isValidPhoneNumber(String phoneNumber);
 	public String getHashPassword(String password);
 	public String generateOTP();
+	public String standardizeStreetName(String name);
+	public Boolean isValidStreetName(String name);
 }

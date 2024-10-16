@@ -212,16 +212,13 @@
 										</select> <input type="text" id="wardText" readonly
 											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
 										<label for="fid-name">Tên đường:<span class="requite">*</span></label>
-										<input type="text" id="streetName" name="streetName" value=""
-											class="txt-input w-5">
+										<input type="text" id="streetName" name="streetName"
+											placeholder="vd: Số 23, Đường Lê Văn Việt" class="txt-input w-5">
 									</div>
-
-									</p>
-
+									${streetErr }
 									<p class="form-row wrap-btn">
 										<button class="btn btn-submit btn-bold" name="sign-up">Sign
 											up</button>
-
 									</p>
 								</div>
 							</form>

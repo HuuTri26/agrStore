@@ -6,4 +6,5 @@ public interface AccountDAO {
 	public void addAccount(AccountEntity acc);
 	public void updateAccount(AccountEntity acc);
 	public AccountEntity getAccountByGmail(String gmail);
+	public Long countAccountByAddressId(Integer id);
 }

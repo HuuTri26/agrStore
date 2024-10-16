@@ -28,8 +28,7 @@ public class AddressEntity {
 	@JoinColumn(name = "wardId")
 	private WardEntity ward;
 
-	@OneToMany(mappedBy = "address", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
 	private List<AccountEntity> account;
 
 	public AddressEntity() {
