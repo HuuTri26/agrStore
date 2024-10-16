@@ -1,5 +1,8 @@
 package agrStore.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,24 +20,27 @@ public class AddressEntity {
 	@GeneratedValue
 	@Column(name = "addressId")
 	private Integer id;
-	
+
+	@Column(name = "streetName")
+	private String streetName;
+
 	@ManyToOne()
 	@JoinColumn(name = "wardId")
 	private WardEntity ward;
-	
-	@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
-	private AccountEntity account;
-	
-	public AddressEntity(Integer id, WardEntity ward,
-			AccountEntity account) {
-		super();
-		this.id = id;
-		this.ward = ward;
-		this.account = account;
-	}
+
+	@OneToMany(mappedBy = "address", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH })
+	private List<AccountEntity> account;
 
 	public AddressEntity() {
 		super();
+	}
+
+	public AddressEntity(Integer id, String streetName, WardEntity ward) {
+		super();
+		this.id = id;
+		this.streetName = streetName;
+		this.ward = ward;
 	}
 
 	public Integer getId() {
@@ -45,6 +51,14 @@ public class AddressEntity {
 		this.id = id;
 	}
 
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+
 	public WardEntity getWard() {
 		return ward;
 	}
@@ -53,12 +67,12 @@ public class AddressEntity {
 		this.ward = ward;
 	}
 
-	public AccountEntity getAccount() {
+	public List<AccountEntity> getAccount() {
 		return account;
 	}
 
-	public void setAccount(AccountEntity account) {
+	public void setAccount(List<AccountEntity> account) {
 		this.account = account;
 	}
-	
+
 }

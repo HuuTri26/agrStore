@@ -1,5 +1,6 @@
 package agrStore.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,32 +16,37 @@ public class CartItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cartItemId")
-	private Integer id;
-	
+	private Integer cartItemId;
+
 	@Column(name = "quantity")
 	private Integer quantity;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "cartId")
 	private CartEntity cart;
-	
+
+	@ManyToOne()
+	@JoinColumn(name = "productId")
+	private ProductEntity product;
+
 	public CartItemEntity() {
 		super();
 	}
 
-	public CartItemEntity(Integer id, Integer quantity, CartEntity cart) {
+	public CartItemEntity(Integer cartItemId, Integer quantity, CartEntity cart, ProductEntity product) {
 		super();
-		this.id = id;
+		this.cartItemId = cartItemId;
 		this.quantity = quantity;
 		this.cart = cart;
+		this.product = product;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCartItemId() {
+		return cartItemId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCartItemId(Integer cartItemId) {
+		this.cartItemId = cartItemId;
 	}
 
 	public Integer getQuantity() {
@@ -58,5 +64,13 @@ public class CartItemEntity {
 	public void setCart(CartEntity cart) {
 		this.cart = cart;
 	}
-	
+
+	public ProductEntity getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductEntity product) {
+		this.product = product;
+	}
+
 }
