@@ -1,11 +1,15 @@
 package agrStore.controller.customer;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
+import agrStore.bean.UploadFile;
 import agrStore.entity.AccountEntity;
 import agrStore.entity.AddressEntity;
 import agrStore.entity.DistrictEntity;
@@ -46,6 +52,9 @@ public class customerAccountController {
 
 	@Autowired
 	AccountUltility accountUltility;
+
+	@Autowired
+	UploadFile baseUploadFile;
 
 	@RequestMapping("/customerProfile")
 	public String loadAddressSelection(@RequestParam(value = "provinceId", required = false) Integer provinceId,
@@ -98,20 +107,52 @@ public class customerAccountController {
 		return "customer/account/customerProfile";
 	}
 
-	@RequestMapping(value = "/customerProfile", params = "save", method = RequestMethod.POST)
-	public String saveNewAddress(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
-		HttpSession session = request.getSession();
+	@RequestMapping(value = "/customerProfile", params = "upload-img", method = RequestMethod.POST)
+	public String uploadProfileImage(HttpServletRequest request, Model model,
+			@RequestParam("avatar") MultipartFile avatar) {
+		if (avatar.isEmpty()) {
+			model.addAttribute("avatarErr", "Vui lòng file để upload!");
+			System.out.println("Error: Avatar file not found!");
+		} else {
+			try {
+				HttpSession session = request.getSession();
+				AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 
-		// Lấy các dữ liệu từ session
-		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
-		WardEntity selectedWard = (WardEntity) session.getAttribute("selectedWard");
+				String fileName = avatar.getOriginalFilename();
+				String photoPath = baseUploadFile.getBasePath() + File.separator + fileName;
+				avatar.transferTo(new File(photoPath));
+				System.out.println("==> Upload file successfully!");
+
+				Thread.sleep(2500);
+				loggedInUser.setAvatar(fileName);
+
+				System.out.println("==> Set avatar image to user's account!");
+				return "customer/account/customerProfile";
+			} catch (Exception e) {
+				model.addAttribute("avatarErr", "Lỗi upload file!!");
+				System.out.println("Error: Upload file failed!");
+			}
+		}
+		return "customer/account/customerProfile";
+	}
+
+	@RequestMapping(value = "/customerProfile", params = "save", method = RequestMethod.POST)
+	public String saveProfile(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
+		HttpSession session = request.getSession();
 
 		Boolean isValid = Boolean.TRUE;
 
 		// Lấy các trường mà người dùng đc phép sửa
 		String fullName = request.getParameter("fullName");
 		String phoneNumber = request.getParameter("phoneNumber");
-		String streetName = request.getParameter("streetName");
+		String streetName = accountUltility.standardizeStreetName(request.getParameter("streetName"));
+
+		// Lấy các dữ liệu từ session
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+		WardEntity selectedWard = (WardEntity) session.getAttribute("selectedWard");
+
+		// Lưu address cũ
+		AddressEntity oldAddr = loggedInUser.getAddress();
 
 		if (fullName.isEmpty()) {
 			model.addAttribute("nameErr", "Vui lòng nhập họ và tên!");
@@ -125,44 +166,49 @@ public class customerAccountController {
 			model.addAttribute("phoneErr", "Số điện thoại bạn nhập không hợp lệ, vui lòng nhập lại!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Phone number invalid!");
+		} else if (!streetName.isEmpty() && !accountUltility.isValidStreetName(streetName)) {
+			model.addAttribute("streetErr", "Tên đường không hợp lệ, vui lòng nhập lại!");
+			isValid = Boolean.FALSE;
+			System.out.println("Error: Street name invalid!");
+		}
+
+		if (selectedWard != null && !streetName.isEmpty()) {
+			System.out.println("==> Found new ward, begin update new address!");
+			// Kiểm tra địa chỉ có tồn tại trong CSDL?
+			AddressEntity existingAddr = addressService.getAddressByStreetAndWard(streetName, selectedWard.getId());
+			try {
+				if (existingAddr != null) { // Nếu address có tồn tại trong CSDL
+					System.out.println("==> Found existing address, set existing address to user's account!");
+					loggedInUser.setAddress(existingAddr);
+				} else { // Nếu address ko tồn tại trong CSDL
+					System.out.println("==> Address not found, create new address for user's address!");
+					// Tạo 1 address mà người dùng vừa nhập
+					AddressEntity inputAddr = new AddressEntity();
+					inputAddr.setStreetName(streetName);
+					inputAddr.setWard(selectedWard);
+					addressService.addAddress(inputAddr);
+					loggedInUser.setAddress(inputAddr);
+				}
+			} catch (Exception e) {
+				System.out.println("Error: User's address update failed!");
+			}
+		} else {
+			System.out.println("==> Ward or street name not found, skipping address update!");
 		}
 
 		if (isValid) {
-			// Lưu address cũ
-			AddressEntity oldAddr = loggedInUser.getAddress();
-			AddressEntity existingAddr = addressService.getAddressByStreetAndWard(accountUltility.standardizeStreetName(streetName), selectedWard.getId());
 
 			try {
-				if (selectedWard != null) {
-					// Tạo 1 address mà người dùng vừa nhập
-					AddressEntity inputAddr = new AddressEntity();
-					inputAddr.setStreetName(accountUltility.standardizeStreetName(streetName));
-					inputAddr.setWard(selectedWard);
-
-					if (inputAddr == oldAddr) { // Nếu address nhập trùng với address cũ
-						System.out.println("==> Found duplicated address!");
-					} else if (existingAddr != null) {
-						System.out.println("==> Found existing address, set existing address to user's account!");
-						loggedInUser.setAddress(existingAddr);
-						
-					}else { // Nếu address nhập ko tồn tại trong CSDL
-						System.out.println("==> Address not found, create new address for user's account!");
-						addressService.addAddress(inputAddr);
-						loggedInUser.setAddress(inputAddr);
-					}
-
-					System.out.println("==> Set new address to account");
-				}
 				loggedInUser.setFullName(accountUltility.standardizeName(fullName));
 				loggedInUser.setPhoneNumber(phoneNumber);
 
 				accountService.updateAccount(loggedInUser);
 				System.out.println("==> User's account updated successfully!");
-				
-				//Nếu 0 có account nào tham chiếu tới address cũ xóa address này
+
+				// Nếu 0 có account nào tham chiếu tới address cũ xóa address này
 				if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
-					System.out.println("==> Trying delete old address!");
 					addressService.deleteAddress(oldAddr);
+					System.out.println("==> Old address deleted!");
 				}
 
 				return "redirect:/index.htm";

@@ -16,18 +16,18 @@
 	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
 
 	<!-- Cấu hình interceptor -->
-	<!-- <mvc:interceptors>
-
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="agrStore.interceptor.CustomerInterceptor" />
-		</mvc:interceptor>
-
-	</mvc:interceptors> -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class="agrStore.interceptor.CustomerInterceptor" /> </mvc:interceptor> </mvc:interceptors> -->
 
 	<!-- Cấu hình view -->
 	<bean id="viewResolver" p:prefix="/WEB-INF/views/" p:suffix=".jsp"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
+
+	<!-- Cấu hình Upload File -->
+	<bean class="agrStore.bean.UploadFile">
+		<property name="basePath"
+			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
+	</bean>
 
 	<!-- Cấu hình package chứa các controller -->
 	<context:component-scan

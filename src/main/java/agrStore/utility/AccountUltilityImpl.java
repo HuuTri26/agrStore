@@ -32,6 +32,9 @@ public class AccountUltilityImpl implements AccountUltility{
 
 		// Chuẩn hóa họ tên
 		public String standardizeName(String str) {
+			if (str == null || str.isEmpty()) {
+		        return str;
+		    }
 			str = standardize(str);
 			String temp[] = str.split(" ");
 			str = "";

@@ -52,11 +52,23 @@
 margin-bottom
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 20px
+
+
+
+
 
 
 ; /* Khoảng cách phía dưới */
@@ -165,18 +177,21 @@ margin-bottom
 				<div class="row">
 					<div class="col-lg-3 order-lg-0 order-1">
 						<div class="dashboard__content-card-img">
-							<form action="#" style="text-align: center">
+							<form action="customerProfile.htm" method="post"
+								enctype="multipart/form-data" style="text-align: center">
 								<div class="dashboard__content-img-wrapper">
 									<div id="imagePreview"
-										style="background-image: url('.main/src/images/user/img-07.png');"></div>
+										style="background-image: url('<c:url value='/assets/user-images/${loggedInUser.avatar}' />');"></div>
 								</div>
-								<!-- <button class="button button--outline">
-                            Choose Image
-                          </button> -->
 								<div class="upload-image button button--outline">
-									<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-										id="imageUpload" /> <label for="imageUpload">Chọn ảnh</label>
+									<input name="avatar" type='file' id="imageUpload"
+										accept=".png, .jpg, .jpeg" id="imageUpload" /> <label
+										for="imageUpload">Chọn ảnh</label>
 								</div>
+								<div class="upload-image button button--outline">
+									<button name="upload-img">Upload</button>
+								</div>
+								${avatarErr }
 							</form>
 						</div>
 					</div>
@@ -186,9 +201,9 @@ margin-bottom
 							<div class="contact-form__content">
 								<div class="col-lg-6 order-lg-0 order-2">
 									<div class="contact-form-input">
-										<label for="fname1">FullName </label> <input type="text" name="fullName"
-											id="fname1" value="${loggedInUser.fullName }" />
-											${nameErr }
+										<label for="fname1">FullName </label> <input type="text"
+											name="fullName" id="fname1" value="${loggedInUser.fullName }" />
+										${nameErr }
 									</div>
 									<div class="contact-form-input">
 										<label for="email1">Email </label> <input type="text"
@@ -196,9 +211,9 @@ margin-bottom
 											readonly="readonly" />
 									</div>
 									<div class="contact-form-input">
-										<label for="number1">Phone Number</label> <input type="number" name="phoneNumber"
-											id="number1" value="${loggedInUser.phoneNumber }" />
-											${phoneErr }
+										<label for="number1">Phone Number</label> <input type="number"
+											name="phoneNumber" id="number1"
+											value="${loggedInUser.phoneNumber }" /> ${phoneErr }
 									</div>
 									<div class="contact-form-input">
 										<label for="number1">Địa chỉ</label>
@@ -240,9 +255,9 @@ margin-bottom
 										</select> <input type="text" id="wardText" readonly
 											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
 										<label for="fid-name">Tên đường:<span class="requite">*</span></label>
-										<input type="text" id="streetName" name="streetName" placeholder="Nhập tên đường cụ thể"
-											class="txt-input w-5">
-
+										<input type="text" id="streetName" name="streetName"
+											placeholder="Nhập tên đường cụ thể" class="txt-input w-5">
+										${streetErr }
 									</div>
 									<div class="contact-form-btn">
 										<button class="button button--md" name="save">Lưu
