@@ -1,5 +1,7 @@
 package agrStore.serviceImpl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,20 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public AccountEntity getAccountByGmail(String gmail) {
 		return AccountDAO.getAccountByGmail(gmail);
+	}
+
+	@Override
+	public List<AccountEntity> getAllCustomer() {
+		// TODO Auto-generated method stub
+		List<AccountEntity> customers = this.AccountDAO.getAllCustomer();
+		return customers;
+	}
+
+	@Override
+	public AccountEntity getAccountById(Integer id) {
+		// TODO Auto-generated method stub
+		AccountEntity account = this.AccountDAO.getAccountById(id);
+		return account;
 	}
 
 }

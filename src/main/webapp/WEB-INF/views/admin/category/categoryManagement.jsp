@@ -97,47 +97,56 @@
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
-													<th>Id</th>
-													<th>Name</th>
-													<th>Status</th>
-													<th>Description</th>
-													<th>Create At</th>
+													<th>ID</th>
+													<th>Ảnh</th>
+													<th>Tên thể loại</th>
+													<th>Trạng thái</th>
+													<!-- <th>Description</th>
+													<th>Create At</th> -->
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><span class="badge shade-green min-70">Active</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
+												<c:forEach var="category" items="${categories}">
+													<tr>
+														<td>${category.categoryId }</td>
+														<td><div class="media-box">
+																<img src="assets/images/user3.png" class="media-avatar" />
+																<!-- 	<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p> -->
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
+															</div></td>
+														<td>${category.categoryName }</td>
+														<td><span class="badge shade-green min-70">${category.status }</span>
+														</td>
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																		</a> <a href="categoryAdd.htm"><i
+																			class="bi bi-plus-circle"></i> </a> <a
+																			href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
+																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
+															</div>
+														</td>
 
 
-												</tr>
-												<tr>
+													</tr>
+												</c:forEach>
+
+												<!-- <tr>
 													<td>2</td>
 													<td>Mận</td>
 													<td><span class="badge shade-red min-70">Blocked</span>
@@ -332,7 +341,7 @@
 														</div>
 													</td>
 
-												</tr>
+												</tr> -->
 											</tbody>
 										</table>
 									</div>

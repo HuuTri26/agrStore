@@ -102,28 +102,114 @@
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
-													<th>Id</th>
-													<th>Image</th>
-													<th>Name</th>
-													<th>Category</th>
+													<th>ID</th>
+													<th>Ảnh</th>
+													<th>Tên sản phẩm</th>
+													<th>Thể loại</th>
 													<th>Status</th>
-													<th>Description</th>
+													<!-- <th>Description</th> -->
 													<!-- <th>Provider Name</th> -->
-													<th>Price</th>
-													<th>Quantity</th>
-													<th>unit</th>
-													<th>updateAt</th>
+													<th>Giá</th>
+													<th>Số lượng</th>
+													<th>Đơn vị</th>
+													<th>Ngày tạo</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<c:forEach var="product" items="${products}">
+													<tr>
+														<td>${product.productId }</td>
+														<td><div class="media-box">
+																<img src="assets/images/user3.png" class="media-avatar" />
+																<!-- 	<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p> -->
+															</div>
+															</div></td>
+														<td>${product.productName}</td>
+														<td>${product.category.categoryName }</td>
+														<td><span class="badge shade-green min-70">Active</span>
+														</td>
+														<!-- <td>Táo ngon v~</td> -->
+														<td>${product.price }$</td>
+														<td>${product.quantity }</td>
+														<td>${product.unit }</td>
+														<td>${product.createAt }</td>
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																		</a> <a href="categoryAdd.htm"><i
+																			class="bi bi-plus-circle"></i> </a> <a
+																			href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
+																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
+															</div>
+														</td>
+
+
+													</tr>
+												</c:forEach>
+												<!-- <tr>
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
+														</div>
+														</div></td>
+													<td>Táo</td>
+													<td>Trai Cay</td>
+													<td><span class="badge shade-green min-70">Active</span>
+													</td>
+													<td>Táo ngon v~</td>
+													<td>300$</td>
+													<td>23</td>
+													<td>kg</td>
+													<td>2011/12/06</td>
+													<td>
+														<div class="actions">
+															<div class="dropdown">
+																<a href="#" class="viewRow" data-bs-toggle="modal"
+																	data-bs-target="#viewRow"> <i
+																	class="bi bi-list text-green"></i>
+																</a>
+																<div class="dropdown-content">
+																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																	</a> <a href="categoryAdd.htm"><i
+																		class="bi bi-plus-circle"></i> </a> <a
+																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	</a> <a href="categoryActive.htm"><i
+																		class="bi bi-check-circle active-icon"></i> </a>
+																</div>
+															</div>
+															<a href="categoryDelete.htm" class="deleteRow"> <i
+																class="bi bi-trash text-red"></i>
+															</a>
+														</div>
+													</td>
+
+
+												</tr> -->
+												<!-- <tr>
+													<td>1</td>
+													<td><div class="media-box">
+															<img src="assets/images/user3.png" class="media-avatar" />
+																<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p>
 														</div>
 														</div></td>
 													<td>Táo</td>
@@ -163,9 +249,9 @@
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
 														</div>
 														</div></td>
 													<td>Táo</td>
@@ -205,9 +291,9 @@
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
 														</div>
 														</div></td>
 													<td>Táo</td>
@@ -247,9 +333,9 @@
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
 														</div>
 														</div></td>
 													<td>Táo</td>
@@ -289,51 +375,9 @@
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div>
-														</div></td>
-													<td>Táo</td>
-													<td>Trai Cay</td>
-													<td><span class="badge shade-green min-70">Active</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>300$</td>
-													<td>23</td>
-													<td>kg</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
 														</div>
 														</div></td>
 													<td>Táo</td>
@@ -373,9 +417,9 @@
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
 														</div></td>
 													<td>Táo</td>
 													<td>Trai Cay</td>
@@ -414,9 +458,9 @@
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+																<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
+																<p>ID: #Max00987</p>
 														</div>
 														</div></td>
 													<td>Táo</td>
@@ -451,7 +495,7 @@
 													</td>
 
 
-												</tr>
+												</tr> -->
 											</tbody>
 										</table>
 									</div>

@@ -2,6 +2,7 @@ package agrStore.DAOImpl;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -45,6 +46,17 @@ public class AddressDAOImpl implements AddressDAO{
 	        e.printStackTrace();
 	    }
 		
+	}
+
+	@Override
+	public AddressEntity getAddressById(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM AddressEntity WHERE id = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		AddressEntity address = (AddressEntity) query.uniqueResult();
+		return address;
 	}
 
 }
