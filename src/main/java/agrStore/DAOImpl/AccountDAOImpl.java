@@ -65,4 +65,24 @@ public class AccountDAOImpl implements AccountDAO {
 		return account;
 	}
 
+	@Override
+	public Long countAccountByAddressId(Integer id) {
+	    Session session = factory.getCurrentSession();
+	    String hql = "SELECT COUNT(a) FROM AccountEntity a WHERE a.address.id = :id";
+	    Long count = 0L;
+	    try {
+	        Query query = session.createQuery(hql);
+	        query.setParameter("id", id);
+	        count = (Long) query.uniqueResult();
+	        if (count == null) {
+	            count = 0L;
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.toString());
+	        e.printStackTrace();
+	    }
+	    return count;
+	}
+
+
 }

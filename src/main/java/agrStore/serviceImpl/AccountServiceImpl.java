@@ -33,4 +33,9 @@ public class AccountServiceImpl implements AccountService{
 		return AccountDAO.getAccountByGmail(gmail);
 	}
 
+	@Override
+	public Long countAccontByAddressId(Integer id) {
+		return AccountDAO.countAccountByAddressId(id);
+	}
+
 }

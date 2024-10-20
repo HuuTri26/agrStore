@@ -28,4 +28,14 @@ public class AddressServiceImpl implements AddressService{
 		
 	}
 
+	@Override
+	public AddressEntity getAddressByStreetAndWard(String name, Integer id) {
+		return AddressDAO.getAddressByStreetAndWard(name, id);
+	}
+
+	@Override
+	public Boolean deleteAddress(AddressEntity addr) {
+		return AddressDAO.deleteAddress(addr);
+	}
+
 }

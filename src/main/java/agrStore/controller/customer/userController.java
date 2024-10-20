@@ -138,7 +138,15 @@ public class userController {
 		if (isValid) {
 			System.out.println("==> Login successfully! End login session");
 			session.setAttribute("loggedInUser", account_t);
-			return "redirect:/index.htm";
+			
+			if(account_t.getRole().getId() == 1) {
+				return "admin/adminDashboard";
+			}else if(account_t.getRole().getId() == 2) {
+				return "redirect:/index.htm";
+			}else {
+				return "redirect:/index.htm";
+			}
+			
 		} else {
 			System.out.println("==> Login failed!");
 			return "customer/login/userLogin";
@@ -320,35 +328,35 @@ public class userController {
 			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session)
 			throws IOException {
 
-		// Lấy phản hồi của Google reCaptcha
-		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-
-		// Lấy các mã captcha khi tạo ra cái ảnh
-		String captcha = session.getAttribute("captchaSecurity").toString();
-
-		// Lấy captcha do người dùng nhập
-		String captchaInput = request.getParameter("captcha-input");
-
-		System.out.println("==> Captcha code use for this sesion: " + captcha);
-
-		// Xác minh ReCaptcha của Google
-		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
-
-		// Xác minh Captcha bằng hình ảnh
-		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
-
-		if (!isVerify || !isMatch) {
-			// Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
-			if (!isVerify) {
-				System.out.println("Error: Google ReCaptcha verification failed!");
-				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
-			}
-			if (!isMatch) {
-				System.out.println("Error: Wrong image captcha code!");
-				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
-			}
-			return "customer/login/userSignUpGmail";
-		}
+//		// Lấy phản hồi của Google reCaptcha
+//		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+//
+//		// Lấy các mã captcha khi tạo ra cái ảnh
+//		String captcha = session.getAttribute("captchaSecurity").toString();
+//
+//		// Lấy captcha do người dùng nhập
+//		String captchaInput = request.getParameter("captcha-input");
+//
+//		System.out.println("==> Captcha code use for this sesion: " + captcha);
+//
+//		// Xác minh ReCaptcha của Google
+//		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
+//
+//		// Xác minh Captcha bằng hình ảnh
+//		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
+//
+//		if (!isVerify || !isMatch) {
+//			// Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
+//			if (!isVerify) {
+//				System.out.println("Error: Google ReCaptcha verification failed!");
+//				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+//			}
+//			if (!isMatch) {
+//				System.out.println("Error: Wrong image captcha code!");
+//				model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
+//			}
+//			return "customer/login/userSignUpGmail";
+//		}
 
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 		if (account.getGmail().isEmpty()) {
@@ -492,6 +500,7 @@ public class userController {
 		String reEnterPassword = request.getParameter("re-enter-password");
 		String fullName = request.getParameter("full-name");
 		String phoneNumber = request.getParameter("phone-number");
+		String streetName = request.getParameter("streetName");
 
 		Boolean isValid = Boolean.TRUE;
 
@@ -518,21 +527,41 @@ public class userController {
 			model.addAttribute("phoneErr", "Số điện thoại bạn nhập không hợp lệ, vui lòng nhập lại!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Phone number invalid!");
+		}else if(streetName.isEmpty()) {
+			model.addAttribute("streetErr", "Tên đường không được phép để trống!");
+			isValid = Boolean.FALSE;
+			System.out.println("Error: Street name field empty!");
+		}else if(!accountUltility.isValidStreetName(streetName)) {
+			model.addAttribute("streetErr", "Tên đường không hợp lệ, vui lòng nhập lại!");
+			isValid = Boolean.FALSE;
+			System.out.println("Error: Street name invalid!");
 		}
 
 		if (isValid) {
-			// Tạo địa chỉ cho user's account
-			System.out.println("==> Create new address for user's account");
-			AddressEntity address = new AddressEntity();
-			try {
-				address.setWard(selectedWard);
+			AddressEntity address = addressService.getAddressByStreetAndWard(accountUltility.standardizeStreetName(streetName), selectedWard.getId()); 
+			
+			//Kiểm tra address này đã tồn tại trong hệ thống hay ko?
+			if(address != null) {
+				//Nếu có tìm thấy gán address_t này cho account
+				System.out.println("==> Existing address found, set this address to user's account!");
+				account.setAddress(address);
+			}else {
+				//Nếu ko tìm thấy, tạo address mới cho user's account
+				System.out.println("==> Address not found, create new address for user's account!");
+				try {
+					AddressEntity newAddr = new AddressEntity();
+					
+					newAddr.setWard(selectedWard);
+					newAddr.setStreetName(accountUltility.standardizeStreetName(streetName));
 
-				addressService.addAddress(address);
-
-				System.out.println("==> User's address created successfully!");
-
-			} catch (Exception e) {
-				System.out.println("Error: User's address created failed!");
+					addressService.addAddress(newAddr);
+					
+					account.setAddress(newAddr);
+					System.out.println("==> User's address created successfully!");
+					
+				} catch (Exception e) {
+					System.out.println("Error: User's address created failed!");
+				}
 			}
 
 			// Tạo account mới với role là customer
@@ -547,7 +576,6 @@ public class userController {
 					account.setCreateAt(new Date());
 					account.setUpdateAt(new Date());
 					account.setRole(customerRole);
-					account.setAddress(address);
 
 					accountService.addAccount(account);
 					System.out.println("==> User's account created successfully!");
