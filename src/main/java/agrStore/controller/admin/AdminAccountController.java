@@ -16,5 +16,12 @@ public class AdminAccountController {
 
 		return "admin/account/adminProfile";
 	}
+	@RequestMapping("/adminChangePassword")
+	public String adminChangePassword(HttpServletRequest request, HttpSession session,
+			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
+		// code
+
+		return "admin/account/adminChangePassword";
+	}
 
 }
