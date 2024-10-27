@@ -26,7 +26,7 @@
 	<!-- Cấu hình Upload File -->
 	<bean class="agrStore.bean.UploadFile">
 		<property name="basePath"
-			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
+			value="E:\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
 	</bean>
 
 	<!-- Cấu hình package chứa các controller -->
