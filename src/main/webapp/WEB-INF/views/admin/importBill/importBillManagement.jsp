@@ -68,6 +68,12 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.add-category {
+	float: right;
+	font-size: 10px;
+	margin-right: 4px;
+}
 </style>
 </head>
 <body>
@@ -91,37 +97,33 @@
 								<div class="card-header">
 									<div class="card-title">Import Bill Management</div>
 								</div>
+									<a href="importBillManagement/importBill.htm?action=create">
+										<button type="button" class="btn btn-info add-category">
+											<i class="bi bi-plus-square"></i> Create Import Bill
+										</button>
+									</a>
 								<div class="card-body">
-									<button>Add</button>
+
 									<div class="table-responsive">
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>Product Id</th>
-													<th>Product Name</th>
-													<th>Id Staff</th>
-													<th>Staff Name</th>
-													<th>Provider Id</th>
-													<th>Provider Name</th>
-													<th>Quantity</th>
-													<th>Price</th>
-													<th>Unit</th>
+													<th>StaffName</th>
+													<th>Total Quantity</th>
+													<th>Total Price</th>
+													<th>Import At</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
 													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
 													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
+
+													<td>10</td>
+													<td>2000</td>
+													<td>2011/12/06</td>
 
 													<td>
 														<div class="actions">
@@ -131,10 +133,12 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a
+																		href="importBillManagement/importBill.htm?action=view&id=${importBill.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="importBillManagement/importBill.htm?action=edit&id=${importBill.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -149,15 +153,11 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
 													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
+
+													<td>10</td>
+													<td>2000</td>
+													<td>2011/12/06</td>
 
 													<td>
 														<div class="actions">
@@ -167,226 +167,12 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
-													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
-													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
-													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
-													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
-													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>2</td>
-													<td>Táo</td>
-													<td>4</td>
-													<td>Trí</td>
-													<td>3</td>
-													<td>Vinamilk</td>
-													<td>20</td>
-													<td>200$</td>
-													<td>Kg</td>
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a
+																		href="importBillManagement/importBill.htm?action=view&id=${importBill.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="importBillManagement/importBill.htm?action=edit&id=${importBill.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>

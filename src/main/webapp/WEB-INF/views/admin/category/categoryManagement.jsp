@@ -26,7 +26,7 @@
 	display: none;
 	position: absolute;
 	background-color: #f8f9fa;
-	min-width: 120px;
+	min-width: 150px;
 	box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
 	z-index: 1;
 	border-radius: 8px;
@@ -68,6 +68,15 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.add-category {
+	float: right;
+	font-size: 10px;
+}
+button{
+	outline:none;
+	border:none;
+}
 </style>
 </head>
 <body>
@@ -90,9 +99,16 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Category Management</div>
+									<a href="categoryManagement/category.htm?action=add">
+										<button type="button" class="btn btn-info add-category">
+											<i class="bi bi-plus-square"></i> Add
+										</button>
+									</a>
+
 								</div>
+
 								<div class="card-body">
-									<button>Add</button>
+
 									<div class="table-responsive">
 										<table id="basicExample" class="table custom-table">
 											<thead>
@@ -109,7 +125,7 @@
 												<tr>
 													<td>1</td>
 													<td>Táo</td>
-													<td><span class="badge shade-green min-70">Active</span>
+													<td><button class="badge shade-green min-70">Active</button>
 													</td>
 													<td>Táo ngon v~</td>
 													<td>2011/12/06</td>
@@ -121,10 +137,11 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a href="categoryManagement/category.htm?action=view&id=${category.id}">
+																		<i class="bi bi-eye"></i>
+																	</a>  <a
+																		href="categoryManagement/category.htm?action=edit&id=${category.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -140,7 +157,7 @@
 												<tr>
 													<td>2</td>
 													<td>Mận</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
+													<td><button class="badge shade-red min-70">Blocked</button>
 													</td>
 													<td>Mận ngon</td>
 													<td>2015/12/06</td>
@@ -165,174 +182,7 @@
 													</td>
 
 												</tr>
-												<tr>
-													<td>3</td>
-													<td>Ổi</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
-													</td>
-													<td>Mận ngon</td>
-													<td>2014/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><span class="badge shade-red min-70">Blocked</span>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
+											
 											</tbody>
 										</table>
 									</div>

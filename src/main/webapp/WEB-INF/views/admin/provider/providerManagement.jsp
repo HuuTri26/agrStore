@@ -26,7 +26,7 @@
 	display: none;
 	position: absolute;
 	background-color: #f8f9fa;
-	min-width: 60px;
+	min-width: 150px;
 	box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
 	z-index: 1;
 	border-radius: 8px;
@@ -68,6 +68,15 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.add-category {
+	float: right;
+	font-size: 10px;
+}
+button{
+	outline:none;
+	border:none;
+}
 </style>
 </head>
 <body>
@@ -89,55 +98,35 @@
 							<!-- Card start -->
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Feedback Management</div>
+									<div class="card-title">Category Management</div>
+									<a href="providerManagement/provider.htm?action=add">
+										<button type="button" class="btn btn-info add-category">
+											<i class="bi bi-plus-square"></i> Add
+										</button>
+									</a>
+
 								</div>
+
 								<div class="card-body">
-									<!-- <button>Add</button> -->
+
 									<div class="table-responsive">
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>Customer</th>
-													<th>Product Details</th>
-													<th>Star</th>
-													<th>Date</th>
-													<th>Comment</th>
-													<th>Actions</th>
+													<th>Provider Name</th>
+													<th>Status</th>
+													<th>Phonenumber</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
 													<td>1</td>
-													<td>
-														<div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																alt="Bootstrap Gallery">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Huu tri</a>
-															</div>
-														</div>
+													<td>Provider1</td>
+													<td><button class="badge shade-green min-70">Active</button>
 													</td>
-													<td>
-														<div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/food/img1.jpg'/>"
-																class="media-avatar-lg" alt="Product">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Tao</a>
-																<p>ID: 1</p>
-																<div class="rating-block">
-																	<div class="rate2"></div>
-																</div>
-															</div>
-														</div>
-													</td>
-													<td>4</td>
-													<td>2011/12/06</td>
-													<td>Great Product. Very happy with the purchase and
-														will surely shop for more with Leather Villa in the time
-														to come.</td>
+													<td>0123456</td>
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -147,12 +136,16 @@
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="feedbackManagement/feedback.htm?action=view&id=${feedback.id}">
+																		href="providerManagement/provider.htm?action=view&id=${provider.id}">
 																		<i class="bi bi-eye"></i>
-																	</a>
+																	</a> <a
+																		href="providerManagement/provider.htm?action=edit&id=${provider.id}">
+																		<i class="bi bi-pencil"></i>
+																	</a> <a href="providerActive.htm"><i
+																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="providerDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>
@@ -162,36 +155,10 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>
-														<div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																alt="Bootstrap Gallery">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Huu tri</a>
-															</div>
-														</div>
+													<td>Provider1</td>
+													<td><button class="badge shade-red min-70">Block</button>
 													</td>
-													<td>
-														<div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/food/img1.jpg'/>"
-																class="media-avatar-lg" alt="Product">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Tao</a>
-																<p>ID: 1</p>
-																<div class="rating-block">
-																	<div class="rate2"></div>
-																</div>
-															</div>
-														</div>
-													</td>
-													<td>4</td>
-													<td>2011/12/06</td>
-
-													<td>Great Product. Very happy with the purchase and
-														will surely shop for more with Leather Villa in the time
-														to come.</td>
+													<td>0123456</td>
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -201,18 +168,16 @@
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="customerManagement/customer.htm?action=view&id=${customer.id}">
+																		href="providerManagement/provider.htm?action=view&id=${provider.id}">
 																		<i class="bi bi-eye"></i>
 																	</a> <a
-																		href="customerManagement/customer.htm?action=edit&id=${customer.id}">
+																		href="providerManagement/provider.htm?action=edit&id=${provider.id}">
 																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a> <a
-																		href="categoryActive.htm"><i
+																	</a> <a href="providerActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="providerDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>
@@ -220,12 +185,15 @@
 
 
 												</tr>
+
 											</tbody>
 										</table>
 									</div>
-
 								</div>
 							</div>
+							<!-- Card end -->
+
+
 						</div>
 					</div>
 					<!-- Row end -->
@@ -249,11 +217,6 @@
 
 
 	</div>
-	<!-- Rating JS -->
-	<script
-		src="<c:url value='assets/admin/assets/vendor/rating/raty.js'/>"></script>
-	<script
-		src="<c:url value='assets/admin/assets/vendor/rating/raty-custom.js'/>"></script>
 	<%@include file="/WEB-INF/views/include/admin/footer.jsp"%>
 </body>
 </html>

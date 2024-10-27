@@ -24,12 +24,21 @@
 <link rel="shortcut icon"
 	href="<c:url value='/assets/admin/assets/images/favicon.svg'/>">
 
+
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+	rel="stylesheet">
+
 <!-- Title -->
 <title>Admin dashboard</title>
 
 <!-- *************
 			************ Common Css Files *************
 		************ -->
+
+<!-- Bootstrap css -->
+<link rel="stylesheet"
+	href="<c:url value='/assets/admin/assets/css/bootstrap.min.css'/>">
 
 <!-- Animated css -->
 <link rel="stylesheet"

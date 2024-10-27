@@ -68,6 +68,14 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.add-category {
+	float: right;
+	font-size: 10px;
+}
+button{
+	border:none;
+}
 </style>
 </head>
 <body>
@@ -90,9 +98,14 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Staff Management</div>
+									<a href="staffManagement/staff.htm?action=add">
+										<button type="button" class="btn btn-info add-category">
+											<i class="bi bi-plus-square"></i> Add
+										</button>
+									</a>
 								</div>
 								<div class="card-body">
-									<button>Add</button>
+
 									<div class="table-responsive">
 										<table id="basicExample" class="table custom-table">
 											<thead>
@@ -122,7 +135,7 @@
 													<td>090399335
 													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
 
-													<td><span class="badge shade-green min-70">Active</span>
+													<td><button class="badge shade-green min-70">Active</button>
 													</td>
 
 													<td>2011/12/06</td>
@@ -134,10 +147,13 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																	<a
+																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
+																		<i class="bi bi-eye"></i>
 																	</a> <a href="categoryAdd.htm"><i
 																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -163,7 +179,7 @@
 													<td>090399335
 													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
 
-													<td><span class="badge shade-green min-70">Active</span>
+													<td><button class="badge shade-yellow min-70">Active</button>
 													</td>
 
 													<td>2011/12/06</td>
@@ -175,10 +191,13 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																	<a
+																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
+																		<i class="bi bi-eye"></i>
 																	</a> <a href="categoryAdd.htm"><i
 																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -204,7 +223,7 @@
 													<td>090399335
 													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
 
-													<td><span class="badge shade-green min-70">Active</span>
+													<td><button class="badge shade-red min-70">Block</button>
 													</td>
 
 													<td>2011/12/06</td>
@@ -216,215 +235,13 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																	<a
+																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
+																		<i class="bi bi-eye"></i>
 																	</a> <a href="categoryAdd.htm"><i
 																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><span class="badge shade-yellow min-70">Active</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><span class="badge shade-green min-70">Active</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><span class="badge shade-green min-70">Active</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><span class="badge shade-green min-70">Active</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><span class="badge shade-green min-70">Active</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
