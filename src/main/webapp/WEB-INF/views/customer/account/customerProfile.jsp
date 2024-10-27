@@ -49,7 +49,29 @@
 /* Cải thiện layout cho phần address-form * /
 .col-lg-3 {
 	padding: 15px; /* Khoảng cách giữa các cột */
-	margin-bottom: 20px; /* Khoảng cách phía dưới */
+margin-bottom
+
+
+
+
+
+
+:
+
+
+
+ 
+
+
+
+20px
+
+
+
+
+
+
+; /* Khoảng cách phía dưới */
 }
 
 /* Form address */
@@ -155,42 +177,50 @@
 				<div class="row">
 					<div class="col-lg-3 order-lg-0 order-1">
 						<div class="dashboard__content-card-img">
-							<form action="#" style="text-align: center">
+							<form action="customerProfile.htm" method="post"
+								enctype="multipart/form-data" style="text-align: center">
 								<div class="dashboard__content-img-wrapper">
 									<div id="imagePreview"
-										style="background-image: url('.main/src/images/user/img-07.png');"></div>
+										style="background-image: url('<c:url value='/assets/user-images/${loggedInUser.avatar}' />');"></div>
 								</div>
-								<!-- <button class="button button--outline">
-                            Choose Image
-                          </button> -->
 								<div class="upload-image button button--outline">
-									<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-										id="imageUpload" /> <label for="imageUpload">Chọn ảnh</label>
+									<input name="avatar" type='file' id="imageUpload"
+										accept=".png, .jpg, .jpeg" id="imageUpload" /> <label
+										for="imageUpload">Chọn ảnh</label>
 								</div>
+								<div class="upload-image button button--outline">
+									<button name="upload-img">Upload</button>
+								</div>
+								${avatarErr }
 							</form>
 						</div>
 					</div>
 					<div class="col-lg-9 order-lg-0 order-2">
 
-						<form action="#">
+						<form action="customerProfile.htm" method="post">
 							<div class="contact-form__content">
 								<div class="col-lg-6 order-lg-0 order-2">
 									<div class="contact-form-input">
 										<label for="fname1">FullName </label> <input type="text"
-											id="fname1" placeholder="Quoc Toan" />
+											name="fullName" id="fname1" value="${loggedInUser.fullName }" />
+										${nameErr }
 									</div>
 									<div class="contact-form-input">
 										<label for="email1">Email </label> <input type="text"
-											id="email1" placeholder="dinhquoctoan@gmail.com" />
+											id="email1" value="${loggedInUser.gmail }"
+											readonly="readonly" />
 									</div>
 									<div class="contact-form-input">
 										<label for="number1">Phone Number</label> <input type="number"
-											id="number1" placeholder="0123456789" />
+											name="phoneNumber" id="number1"
+											value="${loggedInUser.phoneNumber }" /> ${phoneErr }
 									</div>
 									<div class="contact-form-input">
-										<label for="number1">Địa chỉ</label> <input type="text"
-											id="address" placeholder="TPHCM" />
+										<label for="number1">Địa chỉ</label>
+										<textarea rows="5" cols="100" readonly="readonly">${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
 									</div>
+
+
 								</div>
 								<div class="col-lg-3 order-lg-0 order-2">
 									<div class="address-form">
@@ -225,12 +255,12 @@
 										</select> <input type="text" id="wardText" readonly
 											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
 										<label for="fid-name">Tên đường:<span class="requite">*</span></label>
-										<input type="text" id="streetName" name="streetName" value=""
-											class="txt-input w-5">
-
+										<input type="text" id="streetName" name="streetName"
+											placeholder="Nhập tên đường cụ thể" class="txt-input w-5">
+										${streetErr }
 									</div>
 									<div class="contact-form-btn">
-										<button class="button button--md" type="submit">Lưu
+										<button class="button button--md" name="save">Lưu
 											thay đổi</button>
 									</div>
 								</div>

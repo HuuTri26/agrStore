@@ -12,4 +12,5 @@ public interface AccountService {
 	public void addAccount(AccountEntity acc);
 	public void updateAccount(AccountEntity acc);
 	public AccountEntity getAccountByGmail(String gmail);
+	public Long countAccontByAddressId(Integer id);
 }

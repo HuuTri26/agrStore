@@ -32,6 +32,9 @@ public class AccountUltilityImpl implements AccountUltility{
 
 		// Chuẩn hóa họ tên
 		public String standardizeName(String str) {
+			if (str == null || str.isEmpty()) {
+		        return str;
+		    }
 			str = standardize(str);
 			String temp[] = str.split(" ");
 			str = "";
@@ -89,5 +92,22 @@ public class AccountUltilityImpl implements AccountUltility{
 			}
 
 			return otp;
+		}
+
+		@Override
+		public String standardizeStreetName(String name) {
+			// Xóa các khoảng trắng thừa
+			name = name.trim().replaceAll("\\s+", " ");
+		    
+		    // Chuẩn hóa dấu phẩy: xóa khoảng trắng trước dấu phẩy và đảm bảo một khoảng trắng sau dấu phẩy
+			name = name.replaceAll("\\s*,\\s*", ", ");
+		    
+		    return standardizeName(name);
+		}
+
+		@Override
+		public Boolean isValidStreetName(String name) {
+			String regex = "^Số\\s[0-9/]+,\\sĐường\\s[A-Za-zÀ-Ỵà-ỹ0-9\\s]+$";
+		    return name.matches(regex);
 		}
 }
