@@ -110,7 +110,7 @@
 									<div class="row gx-3">
 										<div class="col-sm-6 col-12">
 											<div class="card-border">
-												<div class="card-border-title">Cusstomer Images</div>
+												<div class="card-border-title">Customer Images</div>
 												<div class="card-border-body">
 
 													<div id="dropzone" class="dropzone-dark">
@@ -140,66 +140,82 @@
 													<div class="row gx-3">
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
-																<label class="form-label">Cusstomer Name <span
+																<label class="form-label">Customer Name <span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="form-control" placeholder=""
+																	value="${customer.fullName }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
-																<label class="form-label">Cusstomer Phone <span
+																<label class="form-label">Customer Phone <span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="form-control" placeholder=""
+																	value="${customer.phoneNumber }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
-																<label class="form-label">Cusstomer Gmail <span
+																<label class="form-label">Customer Gmail <span
 																	class="text-red">*</span></label> <input type="email"
-																	class="form-control" placeholder="">
+																	class="form-control" placeholder=""
+																	value="${customer.gmail }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
-																<label class="form-label">Customer Ward <span
+																<!-- <label class="form-label">Customer Ward <span
 																	class="text-red">*</span></label> <select class="form-control">
 																	<option value="Select Ward">Select
-																		wward</option>
+																		ward</option>
 																	<option value="Mobiles">Ward</option>
 																	<option value="Books">Ward</option>
 																	<option value="Games">Ward</option>
-																</select>
+																</select> -->
+																<label class="form-label">Xã <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder=""
+																	value="${wardName }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
-																<label class="form-label">Cusstomer District <span
+																<!-- <label class="form-label">Customer District <span
 																	class="text-red">*</span></label> <select class="form-control">
 																	<option value="Select District">Select
-																		Disstrict</option>
+																		District</option>
 																	<option value="Mobiles">Disstrict1</option>
 																	<option value="Books">District2</option>
 																	<option value="Games">Disstrict3</option>
-																</select>
+																</select> -->
+																<label class="form-label">Huyện <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder=""
+																	value="${districtName }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
-																<label class="form-label">Customer Province <span
+																<!-- <label class="form-label">Customer Province <span
 																	class="text-red">*</span></label> <select class="form-control">
 																	<option value="Select Province">Select
 																		Province</option>
 																	<option value="Mobiles">Province1</option>
 																	<option value="Books">Province2</option>
 																	<option value="Games">Province3</option>
-																</select>
+																</select> -->
+																<label class="form-label">Tỉnh <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder=""
+																	value="${provinceName }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-12 col-12">
 															<div class="mb-3">
-																<label class="form-label">Cusstomer Address <span
+																<label class="form-label">Customer Address <span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="form-control" placeholder=""
+																	value="${customer.address.streetName }" readonly>
 															</div>
 														</div>
 
@@ -262,7 +278,9 @@
 
 										<div class="col-sm-12 col-12">
 											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">Cancel</button>
+												<button type="button" class="btn btn-light">
+													<a href="customerManagement.htm">Back</a>
+												</button>
 												<!-- Nút submit tương ứng với từng mode -->
 												<c:choose>
 													<c:when test="${mode == 'ADD'}">

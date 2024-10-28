@@ -102,19 +102,73 @@ button {
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
-													<th>Id</th>
+													<th>ID</th>
 													<th>Image</th>
 													<th>FullName</th>
 													<th>Gmail</th>
 													<th>Phone Number</th>
 													<th>Address</th>
-													<th>Status</th>
+													<!-- <th>Status</th> -->
 													<th>Create At</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<c:forEach var="customer" items="${customers }">
+													<tr>
+														<td>${customer.accountId }</td>
+														<td><div class="media-box">
+																<img src="assets/admin/assets/images/user3.png"
+																	class="media-avatar rounded-circle img-fluid"
+																	alt="User Avatar"
+																	style="width: 45px; height: 45px; object-fit: cover;" />
+																<!-- 	<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p> -->
+															</div></td>
+														<td>${customer.fullName }</td>
+														<td>${customer.gmail }</td>
+														<td>${customer.phoneNumber }</td>
+														<td>${customer.address.streetName }</td>
+
+														<%-- <td><span class="badge shade-green min-70">${customer.status }</span>
+														</td> --%>
+
+														<td>${customer.createAt }</td>
+														<td>
+															<!-- <div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																		<a href="customerManagement/customerDetail.htm"><i class="bi bi-eye"></i>
+																		</a> <a href="categoryAdd.htm"><i
+																			class="bi bi-plus-circle"></i> </a> <a
+																			href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
+																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
+															</div> -->
+															<div class="actions">
+																<a
+																	href="customerManagement/customer.htm?action=view&id=${customer.accountId}">
+																	<i class="bi bi-eye text-green"></i>
+																</a>
+															</div>
+														</td>
+
+
+													</tr>
+												</c:forEach>
+
+												<%-- <tr>
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
@@ -160,46 +214,46 @@ button {
 
 												</tr>
 												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+												<td>1</td>
+												<td><div class="media-box">
+														<img src="assets/images/user3.png" class="media-avatar" />
+														<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
 																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
+													</div></td>
+												<td>Hữu Trí</td>
+												<td>huutri@gmail.com</td>
+												<td>090399335
+												<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
 
-													<td><button class="badge shade-red min-70">Block</button>
-													</td>
+												<td><button class="badge shade-red min-70">Block</button>
+												</td>
 
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
+												<td>2011/12/06</td>
+												<td>
+													<div class="actions">
+														<div class="dropdown">
+															<a href="#" class="viewRow" data-bs-toggle="modal"
+																data-bs-target="#viewRow"> <i
+																class="bi bi-list text-green"></i>
 															</a>
+															<div class="dropdown-content">
+																<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																</a> <a href="categoryAdd.htm"><i
+																	class="bi bi-plus-circle"></i> </a> <a
+																	href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																</a> <a href="categoryActive.htm"><i
+																	class="bi bi-check-circle active-icon"></i> </a>
+															</div>
 														</div>
-													</td>
+														<a href="categoryDelete.htm" class="deleteRow"> <i
+															class="bi bi-trash text-red"></i>
+														</a>
+													</div>
+												</td>
 
 
-												</tr>
+												</tr> --%>
 											</tbody>
 										</table>
 									</div>
