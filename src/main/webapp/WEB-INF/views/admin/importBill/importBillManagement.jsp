@@ -126,13 +126,15 @@
 																alt="Bootstrap Gallery">
 															<div class="media-box-body">
 																<a href="#" class="text-truncate">Huu tri</a>
-																
+
 															</div>
 														</div>
 													</td>
 
 													<td>10</td>
-													<td>2000</td>
+													<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 													<td>2011/12/06</td>
 
 													<td>
@@ -163,18 +165,22 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>	<div class="media-box">
+													<td>
+														<div class="media-box">
 															<img
 																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
 																alt="Bootstrap Gallery">
 															<div class="media-box-body">
 																<a href="#" class="text-truncate">Huu tri</a>
-															
+
 															</div>
-														</div></td>
+														</div>
+													</td>
 
 													<td>10</td>
-													<td>2000</td>
+													<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 													<td>2011/12/06</td>
 
 													<td>

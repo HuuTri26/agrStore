@@ -178,7 +178,9 @@
 																			</div></td>
 																		<td>Táo</td>
 																		<td>10</td>
-																		<td>2000</td>
+																		<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 
 
 																	</tr>

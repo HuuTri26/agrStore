@@ -144,7 +144,9 @@ button {
 														<td>${product.productName }</td>
 														<td>${product.category.categoryName }</td>
 														<td>${product.descript }</td>
-														<td>${product.price }</td>
+														<td><fmt:formatNumber value="${product.price }"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 														<td>${product.quantity }</td>
 														<td>${product.unit }</td>
 														<td>${product.updateAt }</td>
