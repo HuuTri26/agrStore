@@ -201,7 +201,7 @@
 														</select>
 													</div>
 												</div>
-												<div class="col-xxl-8 col-sm-12 col-12">
+												<div class="col-xxl-8 col-sm-6 col-12">
 													<!-- Form Field Start -->
 													<div class="mb-3">
 														<label for="address" class="form-label">Address</label> <input
@@ -209,7 +209,7 @@
 															id="address" placeholder="">
 													</div>
 												</div>
-												<div class="col-xxl-2 col-sm-2 col-12">
+												<div class="col-xxl-2 col-sm-6 col-12">
 													<!-- Form Field Start -->
 													<div class="mb-3">
 														<label for="status" class="form-label">Status</label> <input

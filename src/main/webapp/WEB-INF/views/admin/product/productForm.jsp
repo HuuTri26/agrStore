@@ -184,103 +184,103 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form>
-										<div class="row gx-3">
-											<div class="col-sm-6 col-12">
-												<div class="card-border">
-													<div class="card-border-title">Product Images</div>
-													<div class="card-border-body">
-														<form>
-															<c:choose>
-																<c:when test="${mode == 'ADD'}">
-																	<!-- Hiển thị form thêm mới -->
-																	<div id="dropzone" class="dropzone-dark">
-																		<div class="input_file_cate">
+									<!-- 	<form> -->
+									<div class="row gx-3">
+										<div class="col-sm-6 col-12">
+											<div class="card-border">
+												<div class="card-border-title">Product Images</div>
+												<div class="card-border-body">
+													<!-- <form> -->
+													<c:choose>
+														<c:when test="${mode == 'ADD'}">
+															<!-- Hiển thị form thêm mới -->
+															<div id="dropzone" class="dropzone-dark">
+																<div class="input_file_cate">
 
-																			<input type="file" class="dz-button" />
-																			<!-- <br> <span class="note needsclick">(This is
-																	just a demo dropzone. Selected files are <strong>not</strong>
-																	actually uploaded.)
-																</span> -->
-																		</div>
-																		<div class="dz-message needsclick button-container">
-																			<button class="upload-btn">Upload ảnh</button>
-																		</div>
-
-
-
-																	</div>
-																</c:when>
-
-																<c:when test="${mode == 'VIEW'}">
-																	<!-- Hiển thị thông tin chi tiết -->
-
-
-
-
-																	<img
-																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
-																		class="img-fluid change-img-avatar"
-																		alt="Free Dashboards">
-
-
+																	<input type="file" class="dz-button" />
 																	<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
+																</div>
+																<div class="dz-message needsclick button-container">
+																	<button class="upload-btn">Upload ảnh</button>
+																</div>
+
+
+
+															</div>
+														</c:when>
+
+														<c:when test="${mode == 'VIEW'}">
+															<!-- Hiển thị thông tin chi tiết -->
 
 
 
 
+															<img
+																src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																class="img-fluid change-img-avatar"
+																alt="Free Dashboards">
 
 
-
-
-
-																	<!-- <br> <span class="note needsclick">(This is
+															<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
 
 
-																	<!-- Disable các input field -->
-																	<%-- <input type="text" class="form-control"
+
+
+
+
+
+
+
+															<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+															<!-- Disable các input field -->
+															<%-- <input type="text" class="form-control"
 												value="${category.name}" disabled> --%>
-																</c:when>
+														</c:when>
 
-																<c:when test="${mode == 'EDIT'}">
-																	<!-- Hiển thị form chỉnh sửa -->
-																	<div id="dropzone" class="dropzone-dark">
+														<c:when test="${mode == 'EDIT'}">
+															<!-- Hiển thị form chỉnh sửa -->
+															<div id="dropzone" class="dropzone-dark">
 
 
-																		<div class="input_file_cate">
+																<div class="input_file_cate">
 
-																			<input type="file" class="dz-button" />
-																			<!-- <br> <span class="note needsclick">(This is
+																	<input type="file" class="dz-button" />
+																	<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
-																		</div>
-																		<div class="dz-message needsclick button-container">
-																			<button class="upload-btn">Upload ảnh</button>
-																		</div>
+																</div>
+																<div class="dz-message needsclick button-container">
+																	<button class="upload-btn">Upload ảnh</button>
+																</div>
 
 
 
-																	</div>
-																	<!-- Populate dữ liệu vào form -->
-																	<%-- <input type="text" class="form-control"
+															</div>
+															<!-- Populate dữ liệu vào form -->
+															<%-- <input type="text" class="form-control"
 												value="${category.name}"> --%>
-																</c:when>
-															</c:choose>
+														</c:when>
+													</c:choose>
 
-														</form>
+													<!-- 	</form> -->
 
-													</div>
 												</div>
 											</div>
-
 										</div>
+
+
 
 										<form:form action="productManagement/product.htm"
 											method="post" modelAttribute="product">
@@ -290,7 +290,7 @@
 												<div class="card-border">
 													<div class="card-border-title">Add Product</div>
 													<div class="card-border-body">
-													
+
 														<form:hidden path="productId" />
 
 
@@ -341,9 +341,17 @@
 																	<form:errors path="unit" />
 																</div>
 															</div>
-
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
 																	<label class="form-label">Product Status <span
 																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+																<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Quantity <span
+																		class="text-red">*</span></label> <input type="number"
 																		class="form-control" placeholder="">
 																</div>
 															</div>
@@ -387,17 +395,11 @@
 																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>
-														</div>
-
-													</div>
-												</div>
-											</div>
-
-											<div class="col-sm-12 col-12">
-												<div class="custom-btn-group flex-end">
-													<button type="button" class="btn btn-light">Cancel</button>
-													<button name="${mode }" class="btn btn-success">${mode }</button>
-													<%-- <c:choose>
+															<div class="col-sm-12 col-12">
+																<div class="custom-btn-group flex-end">
+																	<button type="button" class="btn btn-light">Cancel</button>
+																	<button name="${mode }" class="btn btn-success">${mode }</button>
+																	<%-- <c:choose>
 														<c:when test="${mode == 'ADD'}">
 															<button type="submit" class="btn btn-success">Add
 																Category</button>
@@ -407,38 +409,39 @@
 															Category</button>
 													</c:when>
 													</c:choose> --%>
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
-
 										</form:form>
-
 									</div>
-
 								</div>
 							</div>
 
+
+
+
 						</div>
 
-
 					</div>
+
+					<!-- Row end -->
+
 				</div>
+				<!-- Content wrapper end -->
+				<!-- App Footer start -->
+				<div class="app-footer">
+					<span>Nhom10</span>
+				</div>
+				<!-- App footer end -->
+
 			</div>
 		</div>
-		<!-- Row end -->
+		<!-- Content wrapper scroll end -->
 
-	</div>
-	<!-- Content wrapper end -->
-	<!-- App Footer start -->
-	<div class="app-footer">
-		<span>Nhom10</span>
-	</div>
-	<!-- App footer end -->
-
-	</div>
-	</div>
-	<!-- Content wrapper scroll end -->
-
-	<!-- *************
+		<!-- *************
 				************ Main container end *************
 			************* -->
 

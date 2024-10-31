@@ -87,23 +87,26 @@
 						<div class="col-sm-12 col-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title"><h2 class="mb-4">Create Import Bill</h2></div>
+									<div class="card-title">
+										<h2 class="mb-4">Create Import Bill</h2>
+									</div>
 								</div>
 								<div class="card-body">
 
 									<div class="row gx-3">
 										<div class="container mt-4">
-											
+
 
 											<!-- Chọn nhà cung cấp -->
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="supplier" class="form-label">Chosse Provider</label> <select class="form-select" id="supplier"
+														<label for="supplier" class="form-label">Chosse
+															Provider</label> <select class="form-select" id="supplier"
 															onchange="loadProducts()">
 															<option value="">Provider1</option>
 															<option value="">Provider2</option>
-														<%-- 	<c:forEach items="${suppliers}" var="supplier">
+															<%-- 	<c:forEach items="${suppliers}" var="supplier">
 																<option value="${supplier.id}">${supplier.name}</option>
 															</c:forEach> --%>
 														</select>
@@ -128,6 +131,7 @@
 														<tr>
 															<th>Choose</th>
 															<th>ProductID</th>
+															<th>Product Image</th>
 															<th>ProductName</th>
 															<th>Import Price</th>
 															<th>Unit</th>
@@ -138,6 +142,11 @@
 														<tr>
 															<td><input type="checkbox" /></td>
 															<td>SP001</td>
+															<td><div class="media-box">
+																	<img
+																		src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																		alt="Bootstrap Gallery">
+																</div></td>
 															<td>Sản phẩm A</td>
 															<td>100,000</td>
 															<td>Cái</td>
@@ -145,6 +154,11 @@
 														<tr>
 															<td><input type="checkbox" /></td>
 															<td>SP002</td>
+															<td><div class="media-box">
+																	<img
+																		src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																		alt="Bootstrap Gallery">
+																</div></td>
 															<td>Sản phẩm B</td>
 															<td>150,000</td>
 															<td>Cái</td>
@@ -169,6 +183,7 @@
 														<thead class="table-light">
 															<tr>
 																<th>Product Id</th>
+																<th>Product Image</th>
 																<th>Product Name</th>
 																<th>Unit</th>
 																<th>Import Price</th>
@@ -181,6 +196,11 @@
 															<!-- Dữ liệu mẫu -->
 															<tr>
 																<td>SP001</td>
+																<td><div class="media-box">
+																		<img
+																			src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																			alt="Bootstrap Gallery">
+																	</div></td>
 																<td>Sản phẩm A</td>
 																<td>Cái</td>
 																<td>100,000</td>
@@ -192,6 +212,13 @@
 															</tr>
 															<tr>
 																<td>SP002</td>
+																<td>
+																	<div class="media-box">
+																		<img
+																			src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																			alt="Bootstrap Gallery">
+																	</div>
+																</td>
 																<td>Sản phẩm B</td>
 																<td>Cái</td>
 																<td>150,000</td>
@@ -206,7 +233,8 @@
 														</tbody>
 														<tfoot>
 															<tr>
-																<td colspan="5" class="text-end"><strong>Total Import:</strong></td>
+																<td colspan="5" class="text-end"><strong>Total
+																		Import:</strong></td>
 																<td colspan="2"><span id="totalAmount">0</span> VNĐ</td>
 															</tr>
 														</tfoot>
@@ -215,7 +243,8 @@
 													<div class="row mt-3">
 														<div class="col-md-12 text-end">
 															<button type="button" class="btn btn-secondary">Cancel</button>
-															<button type="submit" class="btn btn-primary">Confirm Import</button>
+															<button type="submit" class="btn btn-primary">Confirm
+																Import</button>
 														</div>
 													</div>
 												</form>
