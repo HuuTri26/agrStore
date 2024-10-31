@@ -97,11 +97,11 @@
 								<div class="card-header">
 									<div class="card-title">Import Bill Management</div>
 								</div>
-									<a href="importBillManagement/importBill.htm?action=create">
-										<button type="button" class="btn btn-info add-category">
-											<i class="bi bi-plus-square"></i> Create Import Bill
-										</button>
-									</a>
+								<a href="importBillManagement/importBill.htm?action=create">
+									<button type="button" class="btn btn-info add-category">
+										<i class="bi bi-plus-square"></i> Create Import Bill
+									</button>
+								</a>
 								<div class="card-body">
 
 									<div class="table-responsive">
@@ -109,7 +109,7 @@
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>StaffName</th>
+													<th>Staff</th>
 													<th>Total Quantity</th>
 													<th>Total Price</th>
 													<th>Import At</th>
@@ -119,7 +119,17 @@
 											<tbody>
 												<tr>
 													<td>1</td>
-													<td>Trí</td>
+													<td>
+														<div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+																
+															</div>
+														</div>
+													</td>
 
 													<td>10</td>
 													<td>2000</td>
@@ -153,7 +163,15 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>Trí</td>
+													<td>	<div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															
+															</div>
+														</div></td>
 
 													<td>10</td>
 													<td>2000</td>

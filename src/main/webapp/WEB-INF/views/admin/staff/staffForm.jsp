@@ -368,57 +368,6 @@
 																</div>
 															</div>
 
-															<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Provider <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Product Provider</option>
-																	<option value="Mobiles">Provider1</option>
-																	<option value="Books">Provider2</option>
-																	<option value="Games">Provider3</option>
-																</select>
-															</div>
-														</div> -->
-															<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Price <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-															<!-- 	<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Quantity <span
-																	class="text-red">*</span></label> <input type="number"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-															<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Unit <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-															<!-- <div class="col-sm-6 col-12">
-															<div class=" mb-3">
-																<label class="form-label">Product Discount</label>
-																<div class="input-group">
-																	<input type="text" class="form-control"
-																		placeholder="Set Product Discount"> <span
-																		class="input-group-text">%</span>
-																</div>
-															</div>
-														</div> -->
-															<!-- 	<div class="col-sm-12 col-12">
-															<div class="mb-0">
-																<label class="form-label">Staff Description <span
-																	class="text-red">*</span></label>
-																<textarea rows="4" class="form-control"
-																	placeholder="Enter Description"></textarea>
-															</div>
-														</div> -->
 														</div>
 
 													</div>

@@ -266,8 +266,8 @@ select.btn-status {
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>CustomerName</th>
-													<th>StaffName</th>
+													<th>Customer</th>
+													<th>Staff</th>
 													<th>Total Quantity</th>
 													<th>Total Price</th>
 													<th>Order At</th>
@@ -278,8 +278,22 @@ select.btn-status {
 											<tbody>
 												<tr>
 													<td>1</td>
-													<td>Trí</td>
-													<td>Toan</td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
 													<td>5</td>
 													<td>2000</td>
 													<td>2011/12/06</td>
@@ -339,8 +353,22 @@ select.btn-status {
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>Trí</td>
-													<td>Toan</td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
 													<td>5</td>
 													<td>2000</td>
 													<td>2011/12/06</td>
@@ -400,8 +428,22 @@ select.btn-status {
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>Trí</td>
-													<td>Toan</td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
 													<td>5</td>
 													<td>2000</td>
 													<td>2011/12/06</td>
