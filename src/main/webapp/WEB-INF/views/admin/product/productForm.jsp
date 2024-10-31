@@ -166,13 +166,12 @@
 								<div class="card-header">
 									<c:choose>
 
-
 										<c:when test="${mode == 'VIEW'}">
 											<!-- Hiển thị thông tin chi tiết -->
 											<div class="card-title">VIEW PRODUCT</div>
 											<!-- Disable các input field -->
-											<input type="text" class="form-control"
-												value="${product.name}" disabled>
+											<%-- <input type="text" class="form-control"
+												value="${product.name}" disabled> --%>
 										</c:when>
 
 										<c:when test="${mode == 'EDIT'}">
@@ -196,8 +195,6 @@
 																<c:when test="${mode == 'ADD'}">
 																	<!-- Hiển thị form thêm mới -->
 																	<div id="dropzone" class="dropzone-dark">
-
-
 																		<div class="input_file_cate">
 
 																			<input type="file" class="dz-button" />
@@ -283,73 +280,68 @@
 												</div>
 											</div>
 
+										</div>
+
+										<form:form action="productManagement/product.htm"
+											method="post" modelAttribute="product">
+
+
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
 													<div class="card-border-title">Add Product</div>
 													<div class="card-border-body">
+													
+														<form:hidden path="productId" />
+
 
 														<div class="row gx-3">
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Product Name <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label>
+																	<form:input path="productName" class="form-control"
+																		placeholder="Nhập tên của sản phẩm"
+																		readonly="${mode == 'VIEW'}" />
+																	<form:errors path="productName" />
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Product Category <span
-																		class="text-red">*</span></label> <select class="form-control">
-																		<option value="Select Product Category">Select
-																			Product Category</option>
-																		<option value="Mobiles">Vegetable</option>
-																		<option value="Books">Juice</option>
-																		<option value="Games">Meat</option>
-																	</select>
+																		class="text-red">*</span></label>
+																	<form:select path="category.categoryId"
+																		class="form-control" disabled="${mode == 'VIEW'}">
+																		<form:option value="">-- Select
+																			Product Category --</form:option>
+
+																		<c:forEach var="category" items="${categories }">
+																			<form:option value="${category.categoryId }">${category.categoryName }</form:option>
+																		</c:forEach>
+
+																	</form:select>
+																	<form:errors path="category.categoryId" />
 																</div>
 															</div>
-															<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Provider <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Product Provider</option>
-																	<option value="Mobiles">Provider1</option>
-																	<option value="Books">Provider2</option>
-																	<option value="Games">Provider3</option>
-																</select>
-															</div>
-														</div> -->
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Product Price <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label>
+																	<form:input path="price" class="form-control"
+																		type="number" readonly="${mode == 'VIEW'}" />
+																	<form:errors path="price" />
 																</div>
 															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Product Quantity <span
-																		class="text-red">*</span></label> <input type="number"
-																		class="form-control" placeholder="">
-																</div>
-															</div>
-															<!-- 	<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Quantity <span
-																	class="text-red">*</span></label> <input type="number"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Product Unit <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label>
+																	<form:input path="unit" class="form-control"
+																		placeholder="Nhập đơn vị tính của sản phẩm"
+																		readonly="${mode == 'VIEW'}" />
+																	<form:errors path="unit" />
 																</div>
 															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
+
 																	<label class="form-label">Product Status <span
 																		class="text-red">*</span></label> <input type="text"
 																		class="form-control" placeholder="">
@@ -384,11 +376,15 @@
 																</div>
 															</div>
 														</div> -->
+
 															<div class="col-sm-12 col-12">
 																<div class="mb-0">
 																	<label class="form-label">Product Description <span
 																		class="text-red">*</span></label>
-																	<textarea rows="4" class="form-control" placeholder=""></textarea>
+																	<form:textarea path="descript" rows="4"
+																		class="form-control"
+																		placeholder="Nhập mô tả của sản phẩm"
+																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>
 														</div>
@@ -400,21 +396,24 @@
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
 													<button type="button" class="btn btn-light">Cancel</button>
-													<c:choose>
+													<button name="${mode }" class="btn btn-success">${mode }</button>
+													<%-- <c:choose>
 														<c:when test="${mode == 'ADD'}">
 															<button type="submit" class="btn btn-success">Add
 																Category</button>
 														</c:when>
 														<c:when test="${mode == 'EDIT'}">
-															<button type="submit" class="btn btn-primary">Update
-																Category</button>
-														</c:when>
-													</c:choose>
-
+														<button type="submit" class="btn btn-primary">Update
+															Category</button>
+													</c:when>
+													</c:choose> --%>
 												</div>
 											</div>
-										</div>
-									</form>
+
+										</form:form>
+
+									</div>
+
 								</div>
 							</div>
 
