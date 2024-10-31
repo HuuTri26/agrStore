@@ -141,6 +141,8 @@
 													<div class="card-border-body">
 													
 														<form:hidden path="productId" />
+														<form:hidden path="status" />
+														<form:hidden path="createAt" />
 
 														<div class="row gx-3">
 															<div class="col-sm-6 col-12">

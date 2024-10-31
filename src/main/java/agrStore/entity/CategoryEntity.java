@@ -27,7 +27,7 @@ public class CategoryEntity {
 	@Column(name = "status")
 	private Boolean status;
 	
-	@Column(name = "iamge")
+	@Column(name = "image")
 	private String image;
 	
 	@Column(name = "descript")

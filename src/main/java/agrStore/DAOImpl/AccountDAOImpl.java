@@ -31,8 +31,6 @@ public class AccountDAOImpl implements AccountDAO {
 		}catch (Exception e) {
 			t.rollback();
 			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		
 	}
