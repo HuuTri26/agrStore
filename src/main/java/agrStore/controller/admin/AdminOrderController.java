@@ -39,6 +39,7 @@ public class AdminOrderController {
 	public String orderManagement(HttpServletRequest request, HttpSession session, ModelMap model,
 			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
 		// code
+    model.addAttribute("currentPage", "order");
 		List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
 		model.addAttribute("orderBills", orderBills);
 		return "admin/order/orderManagement";

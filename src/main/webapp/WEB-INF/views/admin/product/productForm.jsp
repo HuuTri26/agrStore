@@ -68,6 +68,83 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.dropzone-dark {
+	width: 100%;
+	max-width: 600px; /* Reduced from 800px */
+	margin: 0 auto;
+	padding: 20px; /* Reduced from 30px */
+	background: #f8f9fa;
+	border-radius: 8px; /* Reduced from 12px */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dz-message {
+	width: 100%;
+	margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.dz-button {
+	width: 100%;
+	padding: 25px; /* Reduced from 40px */
+	border: 2px dashed #4a90e2;
+	border-radius: 6px; /* Reduced from 8px */
+	cursor: pointer;
+	background: #f0f7ff;
+	transition: all 0.3s ease;
+	height: 30vh;
+}
+
+.dz-button:hover {
+	border-color: #357abd;
+	background: #e6f2ff;
+	transform: translateY(-2px);
+}
+
+.dz-button::file-selector-button {
+	padding: 10px 20px; /* Reduced from 12px 24px */
+	background: #4a90e2;
+	color: white;
+	border: none;
+	border-radius: 4px; /* Reduced from 6px */
+	font-size: 14px; /* Reduced from 16px */
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.dz-button::file-selector-button:hover {
+	background: #357abd;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px; /* Reduced from 20px */
+}
+
+.upload-btn {
+	padding: 12px 30px; /* Reduced from 15px 40px */
+	background: linear-gradient(45deg, #4a90e2, #357abd);
+	color: white;
+	border: none;
+	border-radius: 6px; /* Reduced from 8px */
+	font-size: 16px; /* Reduced from 18px */
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+	width: 100%;
+}
+
+.upload-btn:hover {
+	background: linear-gradient(45deg, #357abd, #2868a9);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+.upload-btn:active {
+	transform: translateY(1px);
+}
 </style>
 </head>
 <body>
@@ -89,13 +166,12 @@
 								<div class="card-header">
 									<c:choose>
 
-
 										<c:when test="${mode == 'VIEW'}">
 											<!-- Hiển thị thông tin chi tiết -->
 											<div class="card-title">VIEW PRODUCT</div>
 											<!-- Disable các input field -->
-											<input type="text" class="form-control"
-												value="${product.name}" disabled>
+											<%-- <input type="text" class="form-control"
+												value="${product.name}" disabled> --%>
 										</c:when>
 
 										<c:when test="${mode == 'EDIT'}">
@@ -108,91 +184,199 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-
+									<!-- 	<form> -->
 									<div class="row gx-3">
 										<div class="col-sm-6 col-12">
 											<div class="card-border">
 												<div class="card-border-title">Product Images</div>
 												<div class="card-border-body">
+													<!-- <form> -->
+													<c:choose>
+														<c:when test="${mode == 'ADD'}">
+															<!-- Hiển thị form thêm mới -->
+															<div id="dropzone" class="dropzone-dark">
+																<div class="input_file_cate">
 
-													<div id="dropzone" class="dropzone-dark">
-														<form action="/upload"
-															class="dropzone needsclick dz-clickable" id="demo-upload">
-
-															<div class="dz-message needsclick">
-																<button type="button" class="dz-button">Chọn
-																	ảnh</button>
-																<!-- <br> <span class="note needsclick">(This is
+																	<input type="file" class="dz-button" />
+																	<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
-															</div>
+																</div>
+																<div class="dz-message needsclick button-container">
+																	<button class="upload-btn">Upload ảnh</button>
+																</div>
 
-														</form>
-													</div>
+
+
+															</div>
+														</c:when>
+
+														<c:when test="${mode == 'VIEW'}">
+															<!-- Hiển thị thông tin chi tiết -->
+
+
+
+
+															<img
+																src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																class="img-fluid change-img-avatar"
+																alt="Free Dashboards">
+
+
+															<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+
+
+
+
+
+
+
+															<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+															<!-- Disable các input field -->
+															<%-- <input type="text" class="form-control"
+												value="${category.name}" disabled> --%>
+														</c:when>
+
+														<c:when test="${mode == 'EDIT'}">
+															<!-- Hiển thị form chỉnh sửa -->
+															<div id="dropzone" class="dropzone-dark">
+
+
+																<div class="input_file_cate">
+
+																	<input type="file" class="dz-button" />
+																	<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+																</div>
+																<div class="dz-message needsclick button-container">
+																	<button class="upload-btn">Upload ảnh</button>
+																</div>
+
+
+
+															</div>
+															<!-- Populate dữ liệu vào form -->
+															<%-- <input type="text" class="form-control"
+												value="${category.name}"> --%>
+														</c:when>
+													</c:choose>
+
+													<!-- 	</form> -->
 
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-6 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Add Product</div>
-												<div class="card-border-body">
 
-													<div class="row gx-3">
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Name <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+
+
+										<form:form action="productManagement/product.htm"
+											method="post" modelAttribute="product">
+
+
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Add Product</div>
+													<div class="card-border-body">
+
+														<form:hidden path="productId" />
+														<form:hidden path="status" />
+														<form:hidden path="createAt" />
+
+
+														<div class="row gx-3">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Product Name <span
+																		class="text-red">*</span></label>
+																	<form:input path="productName" class="form-control"
+																		placeholder="Nhập tên của sản phẩm"
+																		readonly="${mode == 'VIEW'}" />
+																	<form:errors path="productName" />
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Category <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Product Category</option>
-																	<option value="Mobiles">Vegetable</option>
-																	<option value="Books">Juice</option>
-																	<option value="Games">Meat</option>
-																</select>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Product Category <span
+																		class="text-red">*</span></label>
+																	<form:select path="category.categoryId"
+																		class="form-control" disabled="${mode == 'VIEW'}">
+																		<form:option value="">-- Select
+																			Product Category --</form:option>
+
+																		<c:forEach var="category" items="${categories }">
+																			<form:option value="${category.categoryId }">${category.categoryName }</form:option>
+																		</c:forEach>
+
+																	</form:select>
+																	<form:errors path="category.categoryId" />
+																</div>
 															</div>
-														</div>
-														<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Provider <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Product Provider</option>
-																	<option value="Mobiles">Provider1</option>
-																	<option value="Books">Provider2</option>
-																	<option value="Games">Provider3</option>
-																</select>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Product Price <span
+																		class="text-red">*</span></label>
+																	<form:input path="price" class="form-control"
+																		type="number" readonly="${mode == 'VIEW'}" />
+																	<form:errors path="price" />
+																</div>
 															</div>
-														</div> -->
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Price <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Product Unit <span
+																		class="text-red">*</span></label>
+																	<form:input path="unit" class="form-control"
+																		placeholder="Nhập đơn vị tính của sản phẩm"
+																		readonly="${mode == 'VIEW'}" />
+																	<form:errors path="unit" />
+																</div>
 															</div>
-														</div>
-														<!-- 	<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Quantity <span
-																	class="text-red">*</span></label> <input type="number"
-																	class="form-control" placeholder="Enter Product Price">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Product Status <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
 															</div>
-														</div> -->
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Unit <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Quantity <span
+																		class="text-red">*</span></label> <input type="number"
+																		class="form-control" placeholder="">
+																</div>
 															</div>
-														</div>
-														<!-- <div class="col-sm-6 col-12">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Provider <span
+																		class="text-red">*</span></label> <select class="form-control">
+																		<option value="Select Product Product">Select
+																			Provider</option>
+																		<option value="Mobiles">Provider1</option>
+																		<option value="Books">Provider2</option>
+																		<option value="Games">Provider3</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Create At <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+															<!-- <div class="col-sm-6 col-12">
 															<div class=" mb-3">
 																<label class="form-label">Product Discount</label>
 																<div class="input-group">
@@ -202,41 +386,49 @@
 																</div>
 															</div>
 														</div> -->
-														<div class="col-sm-12 col-12">
-															<div class="mb-0">
-																<label class="form-label">Product Description <span
-																	class="text-red">*</span></label>
-																<textarea rows="4" class="form-control"
-																	placeholder=""></textarea>
+
+															<div class="col-sm-12 col-12">
+																<div class="mb-0">
+																	<label class="form-label">Product Description <span
+																		class="text-red">*</span></label>
+																	<form:textarea path="descript" rows="4"
+																		class="form-control"
+																		placeholder="Nhập mô tả của sản phẩm"
+																		readonly="${mode == 'VIEW'}"></form:textarea>
+																</div>
 															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-
-										<div class="col-sm-12 col-12">
-											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">Cancel</button>
-												<c:choose>
-													<c:when test="${mode == 'ADD'}">
-														<button type="submit" class="btn btn-success">Add
-															Category</button>
-													</c:when>
-													<c:when test="${mode == 'EDIT'}">
+															<div class="col-sm-12 col-12">
+																<div class="custom-btn-group flex-end">
+																	<button type="button" class="btn btn-light">Cancel</button>
+																	<button name="${mode }" class="btn btn-success">${mode }</button>
+																	<%-- <c:choose>
+														<c:when test="${mode == 'ADD'}">
+															<button type="submit" class="btn btn-success">Add
+																Category</button>
+														</c:when>
+														<c:when test="${mode == 'EDIT'}">
 														<button type="submit" class="btn btn-primary">Update
 															Category</button>
 													</c:when>
-												</c:choose>
+													</c:choose> --%>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
 											</div>
-										</div>
+										</form:form>
 									</div>
-
 								</div>
 							</div>
+
+
+
+
 						</div>
+
 					</div>
+
 					<!-- Row end -->
 
 				</div>

@@ -107,6 +107,135 @@
 .status-completed {
 	color: #28a745;
 }
+/* Custom select styling */
+.btn-group {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-status {
+  min-width: 200px;
+  padding: 10px 15px;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-status:hover {
+  background-color: #f8f9fa;
+  border-color: #c1c9d0;
+}
+
+.btn-status:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  outline: none;
+}
+
+/* Dropdown arrow */
+.dropdown-toggle::after {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Dropdown menu */
+select.btn-status {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Option styling */
+.btn-status option {
+  padding: 10px 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+}
+
+.btn-status option:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Status pending specific style */
+.status-pending {
+  color: #6c757d;
+}
+
+.status-pending:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Status processing specific style */
+.status-processing {
+  color: #ffc107;
+}
+
+.status-processing:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Status completed specific style */
+.status-completed {
+  color: #28a745;
+}
+
+.status-completed:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Status cancelled specific style */
+.status-cancelled {
+  color: #dc3545;
+}
+
+.status-cancelled:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Icon styling */
+.status-pending i {
+  color: #ffc107;
+  margin-right: 8px;
+}
+
+.status-processing i {
+  color: #ffc107;
+  margin-right: 8px;
+}
+
+.status-completed i {
+  color: #28a745;
+  margin-right: 8px;
+}
+
+.status-cancelled i {
+  color: #dc3545;
+  margin-right: 8px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  .btn-status {
+    min-width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -139,6 +268,7 @@
 													<th>ID</th>
 													<th>CustomerName</th>
 													<th>StaffName</th>
+
 													<th>Total Quantity</th>
 													<th>Total Price</th>
 													<th>Order At</th>
@@ -203,49 +333,12 @@
 												</c:forEach>
 												<%-- <tr>
 													<td>1</td>
-													<td>Trí</td>
-													<td>Toan</td>
-													<td>5</td>
-													<td>2000</td>
-													<td>2011/12/06</td>
-													<td>
-
-														<div class="btn-group">
-															<button type="button"
-																class="btn btn-light btn-status dropdown-toggle border"
-																data-bs-toggle="dropdown" aria-expanded="false">
-																Trạng thái</button>
-															<ul class="dropdown-menu">
-																<li><a class="dropdown-item status-pending"><i
-																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
-																<li><a class="dropdown-item status-confirmed"><i
-																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
-																<li><a class="dropdown-item status-shipping"><i
-																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
-																<li><a class="dropdown-item status-completed"><i
-																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
-															</ul>
-														</div>
-													</td>
-
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="orderManagement/order.htm?action=view&id=${order.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a
-																		href="orderManagement/order.htm?action=edit&id=${order.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
 															</div>
 															<a href="categoryDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
@@ -259,30 +352,40 @@
 													<td>1</td>
 													<td>Trí</td>
 													<td>Toan</td>
+
 													<td>5</td>
-													<td>2000</td>
+													<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 													<td>2011/12/06</td>
 													<td>
 
 														<div class="btn-group">
-															<button type="button"
+															<select 
 																class="btn btn-light btn-status dropdown-toggle border"
 																data-bs-toggle="dropdown" aria-expanded="false">
-																Trạng thái</button>
-															<ul class="dropdown-menu">
-																<li><a class="dropdown-item status-pending"><i
-																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
-																<li><a class="dropdown-item status-confirmed"><i
-																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
-																<li><a class="dropdown-item status-shipping"><i
-																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
-																<li><a class="dropdown-item status-completed"><i
-																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
-															</ul>
+																Trạng thái
+
+
+																<option value="waitting"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ xác nhận
+																</option>
+
+																<option value="confirmed"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Đã xác nhận
+																</option>
+																<option value="shipping"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ giao
+																</option>
+																<option value="paid"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Thanh toán
+																</option>
+															</select>
 														</div>
-													</td>
-
-
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -311,32 +414,55 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>Trí</td>
-													<td>Toan</td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
+													<td><div class="media-box">
+															<img
+																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																alt="Bootstrap Gallery">
+															<div class="media-box-body">
+																<a href="#" class="text-truncate">Huu tri</a>
+															</div>
+														</div></td>
 													<td>5</td>
-													<td>2000</td>
+													<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 													<td>2011/12/06</td>
 													<td>
 
 														<div class="btn-group">
-															<button type="button"
+															<select 
 																class="btn btn-light btn-status dropdown-toggle border"
 																data-bs-toggle="dropdown" aria-expanded="false">
-																Trạng thái</button>
-															<ul class="dropdown-menu">
-																<li><a class="dropdown-item status-pending"><i
-																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
-																<li><a class="dropdown-item status-confirmed"><i
-																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
-																<li><a class="dropdown-item status-shipping"><i
-																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
-																<li><a class="dropdown-item status-completed"><i
-																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
-															</ul>
+																Trạng thái
+
+
+																<option value="waitting"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ xác nhận
+																</option>
+
+																<option value="confirmed"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Đã xác nhận
+																</option>
+																<option value="shipping"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ giao
+																</option>
+																<option value="paid"
+																	class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Thanh toán
+																</option>
+															</select>
 														</div>
-													</td>
-
-
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -361,8 +487,8 @@
 														</div>
 													</td>
 
-
 												</tr> --%>
+
 											</tbody>
 										</table>
 									</div>
@@ -400,7 +526,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-	<script>
+	<!-- <script>
         // Khởi tạo dropdown
         const dropdown = new bootstrap.Dropdown(document.querySelector('.btn-status'));
         const button = document.querySelector('.btn-status');
@@ -424,6 +550,6 @@
                 dropdown.hide();
             });
         });
-    </script>
+    </script> -->
 </body>
 </html>
