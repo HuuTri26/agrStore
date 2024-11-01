@@ -120,36 +120,49 @@
 															<div class="mb-3">
 																<label class="form-label">Customer Name<span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="form-control"
+																	value="${orderBill.account.fullName }">
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Employee Name<span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="form-control" value="${employee.fullName }">
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Total Price <span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="form-control" value="${orderBill.totalPrice }">
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Total Quantity <span
 																	class="text-red">*</span></label> <input type="number"
-																	class="form-control" placeholder="">
+																	class="form-control"
+																	value="${orderBill.totalQuantity }">
 															</div>
 														</div>
 													</div>
-													<div class="col-sm-6 col-12">
+													<!-- <div class="col-sm-6 col-12">
 														<div class="mb-3">
 															<label class="form-label">Status Order <span
 																class="text-red">*</span></label> <input type="number"
 																class="form-control" placeholder="">
+														</div>
+													</div> -->
+													<div class="col-sm-6 col-12">
+														<div class="mb-3">
+															<label class="form-label">Status Order <span
+																class="text-red">*</span></label>
+															<form:form method="post" modelAttribute="orderBill">
+																<form:select path="statusOrder" class="form-control">
+																	<form:options items="${statusOrderMap}" />
+																</form:select>
+															</form:form>
 														</div>
 													</div>
 
@@ -174,14 +187,25 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
+																	<c:forEach var="orderBillDetail"
+																		items="${orderBillDetailEntities }" varStatus="status">
+																		<tr>
+																			<td>${status.index + 1}</td>
+																			<td>${orderBillDetail.product.productName}</td>
+																			<td>${orderBillDetail.quantity }</td>
+																			<td>${orderBillDetail.price }</td>
+
+
+																		</tr>
+																	</c:forEach>
+																	<!-- <tr>
 																		<td>1</td>
 																		<td>Táo</td>
 																		<td>10</td>
 																		<td>2000</td>
 
 
-																	</tr>
+																	</tr> -->
 																</tbody>
 															</table>
 														</div>

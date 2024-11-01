@@ -136,7 +136,7 @@
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
-													<th>Id</th>
+													<th>ID</th>
 													<th>CustomerName</th>
 													<th>StaffName</th>
 													<th>Total Quantity</th>
@@ -147,7 +147,115 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<c:forEach var="orderBill" items="${orderBills }">
+													<tr>
+														<td>${orderBill.orderBillId }</td>
+														<td>${orderBill.account.fullName }</td>
+														<td>${orderBill.employeeId }</td>
+														<td>${orderBill.totalQuantity }</td>
+														<td>${orderBill.totalPrice }</td>
+														<td>${orderBill.orderTime }</td>
+														<td><c:choose>
+																<c:when test="${orderBill.statusOrder == 1}">
+            Chờ xác nhận
+        </c:when>
+																<c:when test="${orderBill.statusOrder == 2}">
+            Đã xác nhận
+        </c:when>
+																<c:when test="${orderBill.statusOrder == 3}">
+            Chờ giao hàng
+        </c:when>
+																<c:when test="${orderBill.statusOrder == 4}">
+            Hoàn thành
+        </c:when>
+																<c:otherwise>
+            Trạng thái không xác định
+        </c:otherwise>
+															</c:choose></td>
+
+
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
+																			<i class="bi bi-eye"></i>
+																		</a> <a
+																			href="orderManagement/order.htm?action=edit&id=${orderBill.orderBillId}">
+																			<i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
+																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
+															</div>
+														</td>
+
+
+													</tr>
+												</c:forEach>
+												<%-- <tr>
+													<td>1</td>
+													<td>Trí</td>
+													<td>Toan</td>
+													<td>5</td>
+													<td>2000</td>
+													<td>2011/12/06</td>
+													<td>
+
+														<div class="btn-group">
+															<button type="button"
+																class="btn btn-light btn-status dropdown-toggle border"
+																data-bs-toggle="dropdown" aria-expanded="false">
+																Trạng thái</button>
+															<ul class="dropdown-menu">
+																<li><a class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
+																<li><a class="dropdown-item status-confirmed"><i
+																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
+																<li><a class="dropdown-item status-shipping"><i
+																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
+																<li><a class="dropdown-item status-completed"><i
+																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
+															</ul>
+														</div>
+													</td>
+
+
+													<td>
+														<div class="actions">
+															<div class="dropdown">
+																<a href="#" class="viewRow" data-bs-toggle="modal"
+																	data-bs-target="#viewRow"> <i
+																	class="bi bi-list text-green"></i>
+																</a>
+																<div class="dropdown-content">
+																	<a
+																		href="orderManagement/order.htm?action=view&id=${order.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="orderManagement/order.htm?action=edit&id=${order.id}">
+																		<i class="bi bi-pencil"></i>
+																	</a> <a href="categoryActive.htm"><i
+																		class="bi bi-check-circle active-icon"></i> </a>
+																</div>
+															</div>
+															<a href="categoryDelete.htm" class="deleteRow"> <i
+																class="bi bi-trash text-red"></i>
+															</a>
+														</div>
+													</td>
+
+
+												</tr> --%>
+												<%-- <tr>
 													<td>1</td>
 													<td>Trí</td>
 													<td>Toan</td>
@@ -254,61 +362,7 @@
 													</td>
 
 
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Trí</td>
-													<td>Toan</td>
-													<td>5</td>
-													<td>2000</td>
-													<td>2011/12/06</td>
-													<td>
-
-														<div class="btn-group">
-															<button type="button"
-																class="btn btn-light btn-status dropdown-toggle border"
-																data-bs-toggle="dropdown" aria-expanded="false">
-																Trạng thái</button>
-															<ul class="dropdown-menu">
-																<li><a class="dropdown-item status-pending"><i
-																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
-																<li><a class="dropdown-item status-confirmed"><i
-																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
-																<li><a class="dropdown-item status-shipping"><i
-																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
-																<li><a class="dropdown-item status-completed"><i
-																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
-															</ul>
-														</div>
-													</td>
-
-
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="orderManagement/order.htm?action=view&id=${order.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a
-																		href="orderManagement/order.htm?action=edit&id=${order.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
+												</tr> --%>
 											</tbody>
 										</table>
 									</div>
