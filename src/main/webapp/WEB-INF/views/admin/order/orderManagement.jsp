@@ -265,9 +265,10 @@ select.btn-status {
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
-													<th>Id</th>
-													<th>Customer</th>
-													<th>Staff</th>
+													<th>ID</th>
+													<th>CustomerName</th>
+													<th>StaffName</th>
+
 													<th>Total Quantity</th>
 													<th>Total Price</th>
 													<th>Order At</th>
@@ -276,7 +277,61 @@ select.btn-status {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<c:forEach var="orderBill" items="${orderBills }">
+													<tr>
+														<td>${orderBill.orderBillId }</td>
+														<td>${orderBill.account.fullName }</td>
+														<td>${orderBill.employeeId }</td>
+														<td>${orderBill.totalQuantity }</td>
+														<td>${orderBill.totalPrice }</td>
+														<td>${orderBill.orderTime }</td>
+														<td><c:choose>
+																<c:when test="${orderBill.statusOrder == 1}">
+            Chờ xác nhận
+        </c:when>
+																<c:when test="${orderBill.statusOrder == 2}">
+            Đã xác nhận
+        </c:when>
+																<c:when test="${orderBill.statusOrder == 3}">
+            Chờ giao hàng
+        </c:when>
+																<c:when test="${orderBill.statusOrder == 4}">
+            Hoàn thành
+        </c:when>
+																<c:otherwise>
+            Trạng thái không xác định
+        </c:otherwise>
+															</c:choose></td>
+
+
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
+																			<i class="bi bi-eye"></i>
+																		</a> <a
+																			href="orderManagement/order.htm?action=edit&id=${orderBill.orderBillId}">
+																			<i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
+																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
+															</div>
+														</td>
+
+
+													</tr>
+												</c:forEach>
+												<%-- <tr>
 													<td>1</td>
 													<td><div class="media-box">
 															<img
@@ -285,15 +340,19 @@ select.btn-status {
 															<div class="media-box-body">
 																<a href="#" class="text-truncate">Huu tri</a>
 															</div>
-														</div></td>
-													<td><div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																alt="Bootstrap Gallery">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Huu tri</a>
-															</div>
-														</div></td>
+															<a href="categoryDelete.htm" class="deleteRow"> <i
+																class="bi bi-trash text-red"></i>
+															</a>
+														</div>
+													</td>
+
+
+												</tr> --%>
+												<%-- <tr>
+													<td>1</td>
+													<td>Trí</td>
+													<td>Toan</td>
+
 													<td>5</td>
 													<td><fmt:formatNumber value="85000"
 															pattern="#,###.## VND;VND -#,###.##" type="currency"
@@ -428,9 +487,8 @@ select.btn-status {
 														</div>
 													</td>
 
+												</tr> --%>
 
-												</tr>
-												
 											</tbody>
 										</table>
 									</div>
