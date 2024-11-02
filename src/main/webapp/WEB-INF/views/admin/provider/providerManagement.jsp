@@ -73,9 +73,10 @@
 	float: right;
 	font-size: 10px;
 }
-button{
-	outline:none;
-	border:none;
+
+button {
+	outline: none;
+	border: none;
 }
 </style>
 </head>
@@ -98,10 +99,10 @@ button{
 							<!-- Card start -->
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Category Management</div>
-									<a href="categoryManagement/category.htm?action=add">
+									<div class="card-title">${currentPage} Management</div>
+									<a href="providerManagement/provider.htm?action=add">
 										<button type="button" class="btn btn-info add-category">
-											<i class="bi bi-plus-square"></i> Add
+											<i class="bi bi-plus-square"></i>
 										</button>
 									</a>
 
@@ -114,75 +115,54 @@ button{
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>Name</th>
+													<th>Provider Name</th>
 													<th>Status</th>
-													<th>Description</th>
-													<th>Create At</th>
+													<th>Phonenumber</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><button class="badge shade-green min-70">Active</button>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryManagement/category.htm?action=view&id=${category.id}">
-																		<i class="bi bi-eye"></i>
-																	</a>  <a
-																		href="categoryManagement/category.htm?action=edit&id=${category.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
+												<c:forEach var="provider" items="${Providers}">
+													<tr>
+														<td>${provider.id}</td>
+														<td>${provider.providerName}</td>
+														<td>
+															<button
+																class="badge ${provider.status == 'Active' ? 'shade-green' : 'shade-red'} min-70">
+																${provider.status}</button>
+														</td>
+														<td>${provider.phoneNumber}</td>
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="providerManagement/provider.htm?action=view&id=${provider.id}">
+																			<i class="bi bi-eye"></i>
+																		</a> <a
+																			href="providerManagement/provider.htm?action=edit&id=${provider.id}">
+																			<i class="bi bi-pencil"></i>
+																		</a> <a href="providerActive.htm?id=${provider.id}"> <i
+																			class="bi bi-check-circle active-icon"></i>
+																		</a>
+																	</div>
 																</div>
+																<form
+																	action="/agrStoreManagement/providerManagement/provider.htm"
+																	method="post">
+																	<input type="hidden" name="mode" value="DELETE" /> <input
+																		type="hidden" name="id" value="${provider.id}" />
+																	<button type="submit"
+																		onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</button>
+																</form>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>Mận</td>
-													<td><button class="badge shade-red min-70">Blocked</button>
-													</td>
-													<td>Mận ngon</td>
-													<td>2015/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="#"><i class="bi bi-eye"></i> </a> <a href="#"><i
-																		class="bi bi-plus-circle"></i> </a> <a href="#"><i
-																		class="bi bi-pencil"></i> </a> <a href="#"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="#" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-												</tr>
-											
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>

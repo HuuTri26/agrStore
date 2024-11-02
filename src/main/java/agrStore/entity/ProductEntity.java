@@ -64,7 +64,7 @@ public class ProductEntity {
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "providerId")
-	private ProvidertEntity provider;
+	private ProviderEntity provider;
 
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.REFRESH })
@@ -84,7 +84,7 @@ public class ProductEntity {
 
 	public ProductEntity(Integer productId, String productName, double price, int quantity, String descript,
 			String image, String unit, Boolean status, Date createAt, Date updateAt, CategoryEntity category,
-			ProvidertEntity provider) {
+			ProviderEntity provider) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -188,11 +188,11 @@ public class ProductEntity {
 		this.category = category;
 	}
 
-	public ProvidertEntity getProvider() {
+	public ProviderEntity getProvider() {
 		return provider;
 	}
 
-	public void setProvider(ProvidertEntity provider) {
+	public void setProvider(ProviderEntity provider) {
 		this.provider = provider;
 	}
 

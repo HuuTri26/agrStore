@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Provider")
-public class ProvidertEntity {
+public class ProviderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "providerId")
@@ -34,11 +34,11 @@ public class ProvidertEntity {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<ProductEntity> productList;
 
-	public ProvidertEntity() {
+	public ProviderEntity() {
 		super();
 	}
 
-	public ProvidertEntity(Integer id, String providerName, String phoneNumber, Boolean status) {
+	public ProviderEntity(Integer id, String providerName, String phoneNumber, Boolean status) {
 		super();
 		this.id = id;
 		this.providerName = providerName;

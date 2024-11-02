@@ -32,7 +32,7 @@
 					aria-labelledby="userSettings">
 					<div class="header-profile-actions">
 						<a href="adminProfile.htm">Profile</a> <a
-							href="customerChangePassword.htm">ChangePassword</a> <a
+							href="adminChangePassword.htm">ChangePassword</a> <a
 							href="logout.htm">Logout</a>
 					</div>
 				</div></li>

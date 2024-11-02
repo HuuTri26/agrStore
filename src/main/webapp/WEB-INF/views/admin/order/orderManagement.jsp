@@ -68,6 +68,45 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.btn-status {
+	min-width: 160px;
+	text-align: left;
+	position: relative;
+	padding: 8px 15px;
+}
+
+.dropdown-menu {
+	min-width: 160px;
+	padding: 5px 0;
+}
+
+.dropdown-item {
+	padding: 8px 15px;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.dropdown-item:hover {
+	background-color: #f8f9fa;
+	padding-left: 20px;
+}
+
+.status-pending {
+	color: #ffc107;
+}
+
+.status-confirmed {
+	color: #17a2b8;
+}
+
+.status-shipping {
+	color: #fd7e14;
+}
+
+.status-completed {
+	color: #28a745;
+}
 </style>
 </head>
 <body>
@@ -92,40 +131,50 @@
 									<div class="card-title">Order Management</div>
 								</div>
 								<div class="card-body">
-									<button>Add</button>
+
 									<div class="table-responsive">
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>CustomerId</th>
 													<th>CustomerName</th>
-													<th>ProductId</th>
-													<th>ProductName</th>
-													<th>StaffId</th>
 													<th>StaffName</th>
-													<th>Quantity</th>
-													<th>TotalPrice</th>
+													<th>Total Quantity</th>
+													<th>Total Price</th>
+													<th>Order At</th>
 													<th>Order Status</th>
-													<th>Create At</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
 													<td>1</td>
-													<td>3</td>
 													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
 													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-red min-70">Cancel</span>
+													<td>5</td>
+													<td>2000</td>
+													<td>2011/12/06</td>
+													<td>
+
+														<div class="btn-group">
+															<button type="button"
+																class="btn btn-light btn-status dropdown-toggle border"
+																data-bs-toggle="dropdown" aria-expanded="false">
+																Trạng thái</button>
+															<ul class="dropdown-menu">
+																<li><a class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
+																<li><a class="dropdown-item status-confirmed"><i
+																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
+																<li><a class="dropdown-item status-shipping"><i
+																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
+																<li><a class="dropdown-item status-completed"><i
+																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
+															</ul>
+														</div>
 													</td>
 
-													<td>2011/12/06</td>
+
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -134,10 +183,12 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a
+																		href="orderManagement/order.htm?action=view&id=${order.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="orderManagement/order.htm?action=edit&id=${order.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -152,18 +203,32 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>3</td>
 													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
 													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
+													<td>5</td>
+													<td>2000</td>
+													<td>2011/12/06</td>
+													<td>
+
+														<div class="btn-group">
+															<button type="button"
+																class="btn btn-light btn-status dropdown-toggle border"
+																data-bs-toggle="dropdown" aria-expanded="false">
+																Trạng thái</button>
+															<ul class="dropdown-menu">
+																<li><a class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
+																<li><a class="dropdown-item status-confirmed"><i
+																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
+																<li><a class="dropdown-item status-shipping"><i
+																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
+																<li><a class="dropdown-item status-completed"><i
+																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
+															</ul>
+														</div>
 													</td>
 
-													<td>2011/12/06</td>
+
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -172,10 +237,12 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a
+																		href="orderManagement/order.htm?action=view&id=${order.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="orderManagement/order.htm?action=edit&id=${order.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -190,56 +257,32 @@
 												</tr>
 												<tr>
 													<td>1</td>
-													<td>3</td>
 													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
 													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
-													</td>
-
+													<td>5</td>
+													<td>2000</td>
 													<td>2011/12/06</td>
 													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
+
+														<div class="btn-group">
+															<button type="button"
+																class="btn btn-light btn-status dropdown-toggle border"
+																data-bs-toggle="dropdown" aria-expanded="false">
+																Trạng thái</button>
+															<ul class="dropdown-menu">
+																<li><a class="dropdown-item status-pending"><i
+																		class="fas fa-clock me-2"></i>Chờ xác nhận</a></li>
+																<li><a class="dropdown-item status-confirmed"><i
+																		class="fas fa-check me-2"></i>Đã xác nhận</a></li>
+																<li><a class="dropdown-item status-shipping"><i
+																		class="fas fa-truck me-2"></i>Chờ giao hàng</a></li>
+																<li><a class="dropdown-item status-completed"><i
+																		class="fas fa-check-circle me-2"></i>Hoàn thành</a></li>
+															</ul>
 														</div>
 													</td>
 
 
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>3</td>
-													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
-													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
-													</td>
-
-													<td>2011/12/06</td>
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -248,162 +291,12 @@
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>3</td>
-													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
-													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>3</td>
-													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
-													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>3</td>
-													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
-													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>3</td>
-													<td>Trí</td>
-													<td>2</td>
-													<td>Tao</td>
-													<td>1</td>
-													<td>Toan</td>
-													<td>20</td>
-													<td>200$</td>
-													<td><span class="badge shade-green min-70">Confirmed</span>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a
+																		href="orderManagement/order.htm?action=view&id=${order.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="orderManagement/order.htm?action=edit&id=${order.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
@@ -448,5 +341,35 @@
 
 	</div>
 	<%@include file="/WEB-INF/views/include/admin/footer.jsp"%>
+	<!-- Chuyển trạng thái order -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+	<script>
+        // Khởi tạo dropdown
+        const dropdown = new bootstrap.Dropdown(document.querySelector('.btn-status'));
+        const button = document.querySelector('.btn-status');
+
+        // Thêm event listener cho các items
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Cập nhật text và style của button
+                button.textContent = this.textContent;
+                button.className = 'btn btn-light btn-status dropdown-toggle border';
+                
+                // Thêm màu tương ứng cho button
+                if (this.classList.contains('status-pending')) button.classList.add('status-pending');
+                if (this.classList.contains('status-confirmed')) button.classList.add('status-confirmed');
+                if (this.classList.contains('status-shipping')) button.classList.add('status-shipping');
+                if (this.classList.contains('status-completed')) button.classList.add('status-completed');
+                
+                // Đóng dropdown
+                dropdown.hide();
+            });
+        });
+    </script>
 </body>
 </html>

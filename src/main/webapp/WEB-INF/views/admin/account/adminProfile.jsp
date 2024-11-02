@@ -36,6 +36,7 @@
 										<div
 											class="col-xxl-8 col-xl-12 col-lg-7 col-md-6 col-sm-12 col-12">
 											<div class="row gx-3">
+											
 												<div class="col-sm-6 col-12">
 													<div class="d-flex flex-row">
 														<img
@@ -62,15 +63,15 @@
 													<div class="mb-3">
 														<label for="fullName" class="form-label">Full Name</label>
 														<input type="text" class="form-control"
-															placeholder="Full Name">
+															placeholder="">
 													</div>
 												</div>
 												<div class="col-xxl-4 col-sm-6 col-12">
 													<!-- Form Field Start -->
 													<div class="mb-3">
-														<label for="emailID" class="form-label">Gmail</label> <input
+														<label for="email" class="form-label">Gmail</label> <input
 															type="email" disabled="disabled" class="form-control"
-															id="emailID" placeholder="reese@meail.com">
+															id="email" placeholder="">
 													</div>
 												</div>
 												<div class="col-xxl-4 col-sm-6 col-12">
@@ -78,24 +79,16 @@
 													<div class="mb-3">
 														<label for="phoneNo" class="form-label">Phone</label> <input
 															type="text" class="form-control"
-															placeholder="123-456-7890">
+															placeholder="">
 													</div>
 												</div>
 
-												<!-- <div class="col-xxl-4 col-sm-6 col-12">
-													Form Field Start
-													<div class="mb-3">
-														<label for="city" class="form-label">City</label> <input
-															type="text" class="form-control" id="city"
-															placeholder="City">
-													</div>
-												</div> -->
 
 												<div class="col-xxl-4 col-sm-6 col-12">
 													<!-- Form Field Start -->
 													<div class="mb-3">
 														<label for="country" class="form-label">Province</label> <select
-															class="form-control" id="country">
+															class="form-control" id="province">
 															<option selected="selected">TP HCM</option>
 															<option>Cần Thơ</option>
 															<option>Hải Phòng</option>
@@ -118,7 +111,7 @@
 													<!-- Form Field Start -->
 													<div class="mb-3">
 														<label for="country" class="form-label">Ward</label> <select
-															class="form-control" id="country">
+															class="form-control" id="ward">
 															<option selected="selected">TP HCM</option>
 															<option>Cần Thơ</option>
 															<option>Hải Phòng</option>
@@ -131,7 +124,7 @@
 													<div class="mb-3">
 														<label for="address" class="form-label">Address</label> <input
 															type="text" disabled="disabled" class="form-control"
-															id="address" placeholder="Address">
+															id="address" placeholder="">
 													</div>
 												</div>
 												<div class="col-xxl-2 col-sm-2 col-12">
@@ -139,7 +132,7 @@
 													<div class="mb-3">
 														<label for="status" class="form-label">Status</label> <input
 															type="text" disabled="disabled" class="form-control"
-															id="address" placeholder="Hoạt động">
+															id="status" placeholder="">
 													</div>
 												</div>
 												<!-- <div class="col-xxl-4 col-sm-6 col-12">
