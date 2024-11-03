@@ -27,6 +27,7 @@ import agrStore.entity.ProviderEntity;
 import agrStore.service.CategoryService;
 import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
+import agrStore.utility.Ultility;
 
 @Controller
 @SessionAttributes("product")
@@ -44,18 +45,14 @@ public class AdminProductController {
 	@Autowired
 	@Qualifier("product")
 	UploadFile baseUploadFile;
-
-	@RequestMapping("/productManagement")
-	public String productManagement(Model model) {
-		List<ProductEntity> products = productService.getListProduct();
-		model.addAttribute("products", products);
-		return "admin/product/productManagement";
-	}
 	
-	@ModelAttribute("product")
-    public ProductEntity createProduct() {
-        return new ProductEntity();
-    }
+	@Autowired
+	Ultility ultility;
+	
+	@ModelAttribute("products")
+	public List<ProductEntity> loadListProduct(){
+		return productService.getListProduct();
+	}
 
 	@ModelAttribute("categories")
 	public List<CategoryEntity> loadCategories() {
@@ -71,17 +68,21 @@ public class AdminProductController {
 	public Date getSystemDate() {
 		return new Date();
 	}
+	
+	@RequestMapping("/productManagement")
+	public String productManagement() {
+		return "admin/product/productManagement";
+	}
 
 	@RequestMapping(value = "/productManagement/product", method = RequestMethod.GET)
 	public String handleProduct(@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "id", required = false) Integer id, Model model) {
 
-//		model.addAttribute("product", new ProductEntity());
-
 		if (action != null) {
 			switch (action) {
 			case "add":
 				System.out.println("==> Add product mode");
+				model.addAttribute("product", new ProductEntity());
 				model.addAttribute("mode", "ADD");
 				break;
 
@@ -91,7 +92,6 @@ public class AdminProductController {
 					ProductEntity product = productService.getProductById(id);
 					model.addAttribute("mode", "VIEW");
 					model.addAttribute("product", product);
-					model.addAttribute("pdImg", product.getImage());
 				}
 				break;
 
@@ -115,7 +115,7 @@ public class AdminProductController {
 
 		Boolean isValid = Boolean.TRUE;
 
-		if (product.getProductName().isEmpty()) {
+		if (product.getProductName() == null || ultility.standardizeName(product.getProductName()).isEmpty()) {
 			errors.rejectValue("productName", "product", "Tên sản phẩm không được để trống!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Product Name field empty!");
@@ -127,40 +127,42 @@ public class AdminProductController {
 			errors.rejectValue("price", "product", "Giá sản phẩm không hợp lệ!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Invalid price field!");
-		} else if (product.getUnit().isEmpty()) {
+		} else if (product.getUnit() == null || ultility.standardize(product.getUnit()).isEmpty()) {
 			errors.rejectValue("unit", "product", "Đơn vị của sản phẩm không được để trống!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Unit field empty!");
 		}
 
 		if (!isValid) {
-			model.addAttribute("mode", "ADD");
-			return "admin/product/productForm";
-		}
-
-		try {
-			ProductEntity newProduct = new ProductEntity();
-			newProduct.setProductName(product.getProductName().trim());
-			CategoryEntity category = categoryService.getCategoryById(product.getCategory().getCategoryId());
-			ProviderEntity provider = providerService.getProviderById(product.getProvider().getId());
-			newProduct.setCategory(category);
-			newProduct.setProvider(provider);
-			newProduct.setPrice(product.getPrice());
-			newProduct.setUnit(product.getUnit());
-			newProduct.setDescript(product.getDescript());
-			newProduct.setCreateAt(new Date());
-			newProduct.setUpdateAt(new Date());
-			newProduct.setStatus(Boolean.TRUE);
-			newProduct.setImage(product.getImage());
-
-			productService.addProduct(newProduct);
-			System.out.println("==> New product add successfully!");
-			return "redirect:/productManagement.htm";
-		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("Error: New product add failed!");
 			model.addAttribute("mode", "ADD");
 			return "admin/product/productForm";
+		}else {
+			try {
+				ProductEntity newProduct = new ProductEntity();
+				newProduct.setProductName(ultility.standardizeName(product.getProductName()));
+				CategoryEntity category = categoryService.getCategoryById(product.getCategory().getCategoryId());
+				ProviderEntity provider = providerService.getProviderById(product.getProvider().getId());
+				newProduct.setCategory(category);
+				newProduct.setProvider(provider);
+				newProduct.setPrice(product.getPrice());
+				newProduct.setQuantity(product.getQuantity());
+				newProduct.setUnit(ultility.standardize(product.getUnit()));
+				newProduct.setDescript(ultility.standardize(product.getDescript()));
+				newProduct.setCreateAt(new Date());
+				newProduct.setUpdateAt(new Date());
+				newProduct.setStatus(isValid);
+				newProduct.setImage(product.getImage());
+
+				productService.addProduct(newProduct);
+				System.out.println("==> New product add successfully!");
+				return "redirect:/productManagement.htm";
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error: New product add failed!");
+				model.addAttribute("mode", "ADD");
+				return "admin/product/productForm";
+			}
 		}
 
 	}
@@ -171,7 +173,7 @@ public class AdminProductController {
 		Boolean isValid = Boolean.TRUE;
 
 		// Kiểm tra tính hợp lệ của các trường
-		if (product.getProductName() == null || product.getProductName().trim().isEmpty()) {
+		if (product.getProductName() == null || ultility.standardizeName(product.getProductName()).isEmpty()) {
 			errors.rejectValue("productName", "product", "Tên sản phẩm không được để trống!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Product Name field empty!");
@@ -186,7 +188,7 @@ public class AdminProductController {
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Invalid price field!");
 		}
-		if (product.getUnit() == null || product.getUnit().trim().isEmpty()) {
+		if (product.getUnit() == null || ultility.standardize(product.getUnit()).isEmpty()) {
 			errors.rejectValue("unit", "product", "Đơn vị của sản phẩm không được để trống!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Unit field empty!");
@@ -194,28 +196,31 @@ public class AdminProductController {
 
 		// Nếu không hợp lệ, trả về lại form chỉnh sửa
 		if (!isValid) {
-			model.addAttribute("mode", "EDIT");
-			return "admin/product/productForm";
-		}
-
-		// Cập nhật sản phẩm nếu hợp lệ
-		try {
-			product.setProductName(product.getProductName().trim());
-			CategoryEntity category = categoryService.getCategoryById(product.getCategory().getCategoryId());
-			ProviderEntity provider = providerService.getProviderById(product.getProvider().getId());
-			product.setCategory(category);
-			product.setProvider(provider);
-			product.setUpdateAt(new Date());
-
-			productService.updateProduct(product);
-			System.out.println("==> Product updated successfully!");
-			return "redirect:/productManagement.htm";
-		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("Error: Product update failed!");
 			model.addAttribute("mode", "EDIT");
 			return "admin/product/productForm";
+		}else {
+			// Cập nhật sản phẩm nếu hợp lệ
+			try {
+				product.setProductName(ultility.standardizeName(product.getProductName()));
+				CategoryEntity category = categoryService.getCategoryById(product.getCategory().getCategoryId());
+				ProviderEntity provider = providerService.getProviderById(product.getProvider().getId());
+				product.setCategory(category);
+				product.setProvider(provider);
+				product.setUnit(ultility.standardize(product.getUnit()));
+				product.setUpdateAt(new Date());
+
+				productService.updateProduct(product);
+				System.out.println("==> Product updated successfully!");
+				return "redirect:/productManagement.htm";
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error: Product update failed!");
+				model.addAttribute("mode", "EDIT");
+				return "admin/product/productForm";
+			}
 		}
+		
 	}
 	
 	@RequestMapping(value = "/productManagement/deleteProduct", method = RequestMethod.GET)
@@ -232,11 +237,11 @@ public class AdminProductController {
 				e.printStackTrace();
 			}
 		
-		return "admin/product/productManagement";
+			return "redirect:/productManagement.htm";
 	}
 	
 
-	@RequestMapping(value = "/product/uploadImg", params = "UPLOAD", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/uploadImg", method = RequestMethod.POST)
 	public String uploadProductImage(HttpServletRequest request, Model model,
 			@RequestParam("image") MultipartFile image) {
 		if (image.isEmpty()) {
@@ -264,6 +269,7 @@ public class AdminProductController {
 				model.addAttribute("imgError", "Upload file thành công!");
 				return "admin/product/productForm";
 			} catch (Exception e) {
+				e.printStackTrace();
 				model.addAttribute("imgError", "Upload file không thành công!");
 				System.out.println("Error: Upload file failed!");
 			}

@@ -30,7 +30,7 @@ import agrStore.service.AddressService;
 import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.WardService;
-import agrStore.utility.AccountUltility;
+import agrStore.utility.Ultility;
 
 @Controller
 public class customerAccountController {
@@ -51,7 +51,7 @@ public class customerAccountController {
 	AddressService addressService;
 
 	@Autowired
-	AccountUltility accountUltility;
+	Ultility accountUltility;
 
 	@Autowired
 	@Qualifier("user")

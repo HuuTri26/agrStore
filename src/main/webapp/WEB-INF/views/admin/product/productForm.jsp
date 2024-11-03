@@ -198,7 +198,7 @@
 																		<input name="image" type="file" class="dz-button" />
 																	</div>
 																	<div class="dz-message needsclick button-container">
-																		<button name="UPLOAD" class="upload-btn">Upload
+																		<button type="submit" class="upload-btn">Upload
 																			Image</button>
 																	</div>
 																	${imgError}
@@ -206,7 +206,7 @@
 															</c:when>
 															<c:when test="${mode == 'VIEW'}">
 																<img
-																	src="<c:url value='/assets/product-images/${pdImg}'/>"
+																	src="<c:url value='/assets/product-images/${product.image }'/>"
 																	class="img-fluid change-img-avatar" alt="Product Image">
 															</c:when>
 														</c:choose>

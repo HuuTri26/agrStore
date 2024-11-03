@@ -29,7 +29,7 @@ import agrStore.entity.ProvinceEntity;
 import agrStore.entity.RoleEntity;
 import agrStore.entity.WardEntity;
 import agrStore.recaptcha.RecaptchaVerification;
-import agrStore.utility.AccountUltility;
+import agrStore.utility.Ultility;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
 import agrStore.service.DistrictService;
@@ -41,7 +41,7 @@ import agrStore.service.WardService;
 public class userController {
 
 	@Autowired
-	AccountUltility accountUltility;
+	Ultility accountUltility;
 
 	@Autowired
 	Mailer mailer;
