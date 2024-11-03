@@ -15,7 +15,7 @@ import agrStore.entity.CategoryEntity;
 
 @Repository
 @Transactional
-public class CategoryImpl implements CategoryDAO {
+public class CategoryDAOImpl implements CategoryDAO {
 
 	@Autowired
 	SessionFactory factory;
@@ -29,8 +29,6 @@ public class CategoryImpl implements CategoryDAO {
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
 
 	}

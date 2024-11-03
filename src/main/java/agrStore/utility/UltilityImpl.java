@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountUltilityImpl implements AccountUltility{
+public class UltilityImpl implements Ultility{
 
 	// Kiểm tra định dạng gmail
 		public Boolean isValidGmail(String gmail) {

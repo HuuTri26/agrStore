@@ -34,6 +34,13 @@
 			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\product-images\" />
 	</bean>
 
+	
+	<bean id="category" class="agrStore.bean.UploadFile">
+		<property name="basePath"
+			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\category-images\" />
+	</bean>
+
+
 	<!-- Cấu hình package chứa các controller -->
 	<context:component-scan
 		base-package="agrStore.controller, agrStore.utility, agrStore.controller.customer, agrStore.controller.admin, agrStore.DAO, agrStore.DAOImpl, agrStore.entity, agrStore.controller.staff, agrStore.service, agrStore.serviceImpl, agrStore.bean, agrStore.interceptor" />

@@ -3,7 +3,7 @@ package agrStore.utility;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface AccountUltility {
+public interface Ultility {
 	public Boolean isValidGmail(String gmail);
 	public String standardize(String str);
 	public String standardizeName(String str);
