@@ -29,6 +29,7 @@ import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
 import agrStore.utility.Ultility;
 
+
 @Controller
 @SessionAttributes("product")
 public class AdminProductController {
@@ -74,6 +75,7 @@ public class AdminProductController {
 		return "admin/product/productManagement";
 	}
 
+
 	@RequestMapping(value = "/productManagement/product", method = RequestMethod.GET)
 	public String handleProduct(@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "id", required = false) Integer id, Model model) {
@@ -83,6 +85,7 @@ public class AdminProductController {
 			case "add":
 				System.out.println("==> Add product mode");
 				model.addAttribute("product", new ProductEntity());
+
 				model.addAttribute("mode", "ADD");
 				break;
 
@@ -92,6 +95,7 @@ public class AdminProductController {
 					ProductEntity product = productService.getProductById(id);
 					model.addAttribute("mode", "VIEW");
 					model.addAttribute("product", product);
+					model.addAttribute("pdImg", product.getImage());
 				}
 				break;
 
@@ -164,7 +168,6 @@ public class AdminProductController {
 				return "admin/product/productForm";
 			}
 		}
-
 	}
 
 	@RequestMapping(value = "/productManagement/product", params = "EDIT", method = RequestMethod.POST)
@@ -220,7 +223,7 @@ public class AdminProductController {
 				return "admin/product/productForm";
 			}
 		}
-		
+
 	}
 	
 	@RequestMapping(value = "/productManagement/deleteProduct", method = RequestMethod.GET)
@@ -270,6 +273,7 @@ public class AdminProductController {
 				return "admin/product/productForm";
 			} catch (Exception e) {
 				e.printStackTrace();
+
 				model.addAttribute("imgError", "Upload file không thành công!");
 				System.out.println("Error: Upload file failed!");
 			}
