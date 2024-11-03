@@ -40,6 +40,7 @@ public class AdminOrderController {
 	public String orderManagement(HttpServletRequest request, HttpSession session, ModelMap model,
 			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
 		// code
+    model.addAttribute("currentPage", "order");
 		List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
 		Map<Integer, String> employeeNameMap = new HashMap<>();
 		for (OrderBillEntity orderBill : orderBills) {

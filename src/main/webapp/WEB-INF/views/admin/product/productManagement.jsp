@@ -121,7 +121,6 @@ button {
 													<th>Image</th>
 													<th>Name</th>
 													<th>Category</th>
-													<th>Status</th>
 													<th>Description</th>
 													<!-- <th>Provider Name</th> -->
 													<th>Price</th>
@@ -132,57 +131,58 @@ button {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+												<c:forEach var="product" items="${products }">
+													<tr>
+														<td>${product.productId }</td>
+														<td><div class="media-box">
+																<img src="<c:url value='/assets/product-images/${product.image }' />" class="media-avatar" />
+																<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div>
-														</div></td>
-													<td>Táo</td>
-													<td>Trai Cay</td>
-													<td><button class="badge shade-green min-70">Active</button>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>300$</td>
-													<td>23</td>
-													<td>kg</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="productManagement/product.htm?action=view&id=${product.id}"><i
-																		class="bi bi-eye"></i> </a> <a
-																		href="productManagement/product.htm?action=edit&id=${product.id}"><i
-																		class="bi bi-pencil"></i> </a> <a
-																		href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
+																<p>ID: #Max00987</p>
+														</div> -->
+															</div></td>
+														<td>${product.productName }</td>
+														<td>${product.category.categoryName }</td>
+														<td>${product.descript }</td>
+														<td><fmt:formatNumber value="${product.price }"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
+														<td>${product.quantity }</td>
+														<td>${product.unit }</td>
+														<td>${product.updateAt }</td>
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="productManagement/product.htm?action=view&id=${product.productId }"><i
+																			class="bi bi-eye"></i> </a> <a
+																			href="productManagement/product.htm?action=edit&id=${product.productId }"><i
+																			class="bi bi-pencil"></i> </a> <a
+																			href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
 																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
+														</td>
+													</tr>
+												</c:forEach>
 
-
-												</tr>
-												<tr>
+												<!-- <tr>
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+															<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div>
+																<p>ID: #Max00987</p>
+															</div>
 														</div></td>
 													<td>Táo</td>
 													<td>Trai Cay</td>
@@ -214,7 +214,7 @@ button {
 															</a>
 														</div>
 													</td>
-												</tr>
+												</tr> -->
 											</tbody>
 										</table>
 									</div>

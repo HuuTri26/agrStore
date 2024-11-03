@@ -68,6 +68,83 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.dropzone-dark {
+	width: 100%;
+	max-width: 600px; /* Reduced from 800px */
+	margin: 0 auto;
+	padding: 20px; /* Reduced from 30px */
+	background: #f8f9fa;
+	border-radius: 8px; /* Reduced from 12px */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dz-message {
+	width: 100%;
+	margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.dz-button {
+	width: 100%;
+	padding: 25px; /* Reduced from 40px */
+	border: 2px dashed #4a90e2;
+	border-radius: 6px; /* Reduced from 8px */
+	cursor: pointer;
+	background: #f0f7ff;
+	transition: all 0.3s ease;
+	height: 30vh;
+}
+
+.dz-button:hover {
+	border-color: #357abd;
+	background: #e6f2ff;
+	transform: translateY(-2px);
+}
+
+.dz-button::file-selector-button {
+	padding: 10px 20px; /* Reduced from 12px 24px */
+	background: #4a90e2;
+	color: white;
+	border: none;
+	border-radius: 4px; /* Reduced from 6px */
+	font-size: 14px; /* Reduced from 16px */
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.dz-button::file-selector-button:hover {
+	background: #357abd;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px; /* Reduced from 20px */
+}
+
+.upload-btn {
+	padding: 12px 30px; /* Reduced from 15px 40px */
+	background: linear-gradient(45deg, #4a90e2, #357abd);
+	color: white;
+	border: none;
+	border-radius: 6px; /* Reduced from 8px */
+	font-size: 16px; /* Reduced from 18px */
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+	width: 100%;
+}
+
+.upload-btn:hover {
+	background: linear-gradient(45deg, #357abd, #2868a9);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+.upload-btn:active {
+	transform: translateY(1px);
+}
 </style>
 </head>
 <body>
@@ -106,65 +183,132 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
+									<form>
+										<div class="row gx-3">
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Cusstomer Images</div>
+													<div class="card-border-body">
+														<form>
+															<c:choose>
+																<c:when test="${mode == 'ADD'}">
+																	<!-- Hiển thị form thêm mới -->
+																	<div id="dropzone" class="dropzone-dark">
 
-									<div class="row gx-3">
-										<div class="col-sm-6 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Customer Images</div>
-												<div class="card-border-body">
+																		<div class="input_file_cate">
 
-													<div id="dropzone" class="dropzone-dark">
-														<form action="/upload"
-															class="dropzone needsclick dz-clickable" id="demo-upload">
-
-															<div class="dz-message needsclick">
-																<button type="button" class="dz-button">Chọn
-																	ảnh</button>
-																<!-- <br> <span class="note needsclick">(This is
+																			<input type="file" class="dz-button" />
+																			<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
-															</div>
+																		</div>
+																		<div class="dz-message needsclick button-container">
+																			<button class="upload-btn">Upload ảnh</button>
+																		</div>
 
+
+
+																	</div>
+																</c:when>
+
+																<c:when test="${mode == 'VIEW'}">
+																	<!-- Hiển thị thông tin chi tiết -->
+
+
+
+
+																	<img
+																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																		class="img-fluid change-img-avatar"
+																		alt="Free Dashboards">
+
+
+																	<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+
+
+
+
+
+
+
+																	<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+																	<!-- Disable các input field -->
+																	<%-- <input type="text" class="form-control"
+												value="${category.name}" disabled> --%>
+																</c:when>
+
+																<c:when test="${mode == 'EDIT'}">
+																	<!-- Hiển thị form chỉnh sửa -->
+																	<div id="dropzone" class="dropzone-dark">
+
+
+																		<div class="input_file_cate">
+
+																			<input type="file" class="dz-button" />
+																			<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+																		</div>
+																		<div class="dz-message needsclick button-container">
+																			<button class="upload-btn">Upload ảnh</button>
+																		</div>
+
+
+
+																	</div>
+																	<!-- Populate dữ liệu vào form -->
+																	<%-- <input type="text" class="form-control"
+												value="${category.name}"> --%>
+																</c:when>
+															</c:choose>
 														</form>
 													</div>
-
 												</div>
 											</div>
-										</div>
-										<div class="col-sm-6 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Customer</div>
-												<div class="card-border-body">
-
-													<div class="row gx-3">
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Customer Name <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder=""
-																	value="${customer.fullName }" readonly>
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Customer</div>
+													<div class="card-border-body">
+														<div class="row gx-3">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Customer Name <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder=""
+																		value="${customer.fullName }" readonly>
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Customer Phone <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder=""
-																	value="${customer.phoneNumber }" readonly>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Customer Phone <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder=""
+																		value="${customer.phoneNumber }" readonly>
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Customer Gmail <span
-																	class="text-red">*</span></label> <input type="email"
-																	class="form-control" placeholder=""
-																	value="${customer.gmail }" readonly>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Customer Gmail <span
+																		class="text-red">*</span></label> <input type="email"
+																		class="form-control" placeholder=""
+																		value="${customer.gmail }" readonly>
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<!-- <label class="form-label">Customer Ward <span
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<!-- <label class="form-label">Customer Ward <span
 																	class="text-red">*</span></label> <select class="form-control">
 																	<option value="Select Ward">Select
 																		ward</option>
@@ -176,11 +320,11 @@
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder=""
 																	value="${customer.address.ward.name }" readonly>
+
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<!-- <label class="form-label">Customer District <span
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<!-- <label class="form-label">Customer District <span
 																	class="text-red">*</span></label> <select class="form-control">
 																	<option value="Select District">Select
 																		District</option>
@@ -192,11 +336,11 @@
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder=""
 																	value="${customer.address.ward.district.name }" readonly>
+
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<!-- <label class="form-label">Customer Province <span
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<!-- <label class="form-label">Customer Province <span
 																	class="text-red">*</span></label> <select class="form-control">
 																	<option value="Select Province">Select
 																		Province</option>
@@ -208,18 +352,32 @@
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder=""
 																	value="${customer.address.ward.district.province.name }" readonly>
-															</div>
-														</div>
-														<div class="col-sm-12 col-12">
-															<div class="mb-3">
-																<label class="form-label">Customer Address <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder=""
-																	value="${customer.address.streetName }" readonly>
-															</div>
-														</div>
 
-														<!-- <div class="col-sm-6 col-12">
+															</div>
+															<div class="col-sm-12 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Customer Address <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder=""
+																		value="${customer.address.streetName }" readonly>
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Status <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Create At <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+
+															<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Provider <span
 																	class="text-red">*</span></label> <select class="form-control">
@@ -231,28 +389,28 @@
 																</select>
 															</div>
 														</div> -->
-														<!-- <div class="col-sm-6 col-12">
+															<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Price <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-														<!-- 	<div class="col-sm-6 col-12">
+															<!-- 	<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Quantity <span
 																	class="text-red">*</span></label> <input type="number"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-														<!-- <div class="col-sm-6 col-12">
+															<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Unit <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-														<!-- <div class="col-sm-6 col-12">
+															<!-- <div class="col-sm-6 col-12">
 															<div class=" mb-3">
 																<label class="form-label">Product Discount</label>
 																<div class="input-group">
@@ -262,7 +420,7 @@
 																</div>
 															</div>
 														</div> -->
-														<!-- 	<div class="col-sm-12 col-12">
+															<!-- 	<div class="col-sm-12 col-12">
 															<div class="mb-0">
 																<label class="form-label">Staff Description <span
 																	class="text-red">*</span></label>
@@ -270,12 +428,13 @@
 																	placeholder="Enter Description"></textarea>
 															</div>
 														</div> -->
-													</div>
+														</div>
 
+
+													</div>
 												</div>
 											</div>
 										</div>
-
 										<div class="col-sm-12 col-12">
 											<div class="custom-btn-group flex-end">
 												<button type="button" class="btn btn-light">
@@ -294,8 +453,7 @@
 												</c:choose>
 											</div>
 										</div>
-									</div>
-
+									</form>
 								</div>
 							</div>
 						</div>

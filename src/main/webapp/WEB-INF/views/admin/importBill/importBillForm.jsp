@@ -118,11 +118,11 @@
 									<div class="row gx-3">
 										<div class="col-sm-12 col-12">
 											<div class="card-border">
-												<div class="card-border-title">Import bill </div>
+												<div class="card-border-title">Import bill</div>
 												<div class="card-border-body">
 
 													<div class="row gx-3">
-														
+
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Employee Name<span
@@ -145,7 +145,7 @@
 															</div>
 														</div>
 													</div>
-													
+
 
 												</div>
 
@@ -162,6 +162,7 @@
 																<thead>
 																	<tr>
 																		<th>STT</th>
+																		<th>Product Image</th>
 																		<th>Product Name</th>
 																		<th>Quantity</th>
 																		<th>Price</th>
@@ -170,9 +171,16 @@
 																<tbody>
 																	<tr>
 																		<td>1</td>
+																		<td><div class="media-box">
+																				<img
+																					src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																					alt="Bootstrap Gallery">
+																			</div></td>
 																		<td>Táo</td>
 																		<td>10</td>
-																		<td>2000</td>
+																		<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 
 
 																	</tr>

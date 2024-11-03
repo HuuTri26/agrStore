@@ -174,6 +174,15 @@
 														</div>
 													</div>
 
+														<div class="col-sm-6 col-12">
+															<div class="mb-3">
+																<label class="form-label">Order Time <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder="">
+															</div>
+														</div>
+
+													</div>
 												</div>
 
 											</div>
@@ -189,6 +198,7 @@
 																<thead>
 																	<tr>
 																		<th>STT</th>
+																		<th>Product Image</th>
 																		<th>Product Name</th>
 																		<th>Quantity</th>
 																		<th>Price</th>
@@ -210,9 +220,16 @@
 																	</c:forEach>
 																	<!-- <tr>
 																		<td>1</td>
+																		<td><div class="media-box">
+																				<img
+																					src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																					alt="Bootstrap Gallery">
+																			</div></td>
 																		<td>Táo</td>
 																		<td>10</td>
-																		<td>2000</td>
+																		<td><fmt:formatNumber value="85000"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></td>
 
 
 																	</tr> -->
