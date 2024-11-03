@@ -54,6 +54,7 @@ public class customerAccountController {
 	AccountUltility accountUltility;
 
 	@Autowired
+	@Qualifier("user")
 	UploadFile baseUploadFile;
 
 	@RequestMapping("/customerProfile")
