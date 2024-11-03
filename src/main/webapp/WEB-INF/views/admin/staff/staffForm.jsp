@@ -68,6 +68,83 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.dropzone-dark {
+	width: 100%;
+	max-width: 600px; /* Reduced from 800px */
+	margin: 0 auto;
+	padding: 20px; /* Reduced from 30px */
+	background: #f8f9fa;
+	border-radius: 8px; /* Reduced from 12px */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dz-message {
+	width: 100%;
+	margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.dz-button {
+	width: 100%;
+	padding: 25px; /* Reduced from 40px */
+	border: 2px dashed #4a90e2;
+	border-radius: 6px; /* Reduced from 8px */
+	cursor: pointer;
+	background: #f0f7ff;
+	transition: all 0.3s ease;
+	height: 30vh;
+}
+
+.dz-button:hover {
+	border-color: #357abd;
+	background: #e6f2ff;
+	transform: translateY(-2px);
+}
+
+.dz-button::file-selector-button {
+	padding: 10px 20px; /* Reduced from 12px 24px */
+	background: #4a90e2;
+	color: white;
+	border: none;
+	border-radius: 4px; /* Reduced from 6px */
+	font-size: 14px; /* Reduced from 16px */
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.dz-button::file-selector-button:hover {
+	background: #357abd;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px; /* Reduced from 20px */
+}
+
+.upload-btn {
+	padding: 12px 30px; /* Reduced from 15px 40px */
+	background: linear-gradient(45deg, #4a90e2, #357abd);
+	color: white;
+	border: none;
+	border-radius: 6px; /* Reduced from 8px */
+	font-size: 16px; /* Reduced from 18px */
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+	width: 100%;
+}
+
+.upload-btn:hover {
+	background: linear-gradient(45deg, #357abd, #2868a9);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+.upload-btn:active {
+	transform: translateY(1px);
+}
 </style>
 </head>
 <body>
@@ -110,178 +187,211 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
+									<form>
+										<div class="row gx-3">
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Staff Images</div>
+													<div class="card-border-body">
+														<form>
+															<c:choose>
+																<c:when test="${mode == 'ADD'}">
+																	<!-- Hiển thị form thêm mới -->
+																	<div id="dropzone" class="dropzone-dark">
 
-									<div class="row gx-3">
-										<div class="col-sm-6 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Staff Images</div>
-												<div class="card-border-body">
 
-													<div id="dropzone" class="dropzone-dark">
-														<form action="/upload"
-															class="dropzone needsclick dz-clickable" id="demo-upload">
+																		<div class="input_file_cate">
 
-															<div class="dz-message needsclick">
-																<button type="button" class="dz-button">Chọn
-																	ảnh</button>
-																<!-- <br> <span class="note needsclick">(This is
+																			<input type="file" class="dz-button" />
+																			<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
-															</div>
+																		</div>
+																		<div class="dz-message needsclick button-container">
+																			<button class="upload-btn">Upload ảnh</button>
+																		</div>
 
+
+
+																	</div>
+																</c:when>
+
+																<c:when test="${mode == 'VIEW'}">
+																	<!-- Hiển thị thông tin chi tiết -->
+
+
+
+
+																	<img
+																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																		class="img-fluid change-img-avatar"
+																		alt="Free Dashboards">
+
+
+																	<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+
+
+
+
+
+
+
+																	<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+
+
+																	<!-- Disable các input field -->
+																	<%-- <input type="text" class="form-control"
+												value="${category.name}" disabled> --%>
+																</c:when>
+
+																<c:when test="${mode == 'EDIT'}">
+																	<!-- Hiển thị form chỉnh sửa -->
+																	<div id="dropzone" class="dropzone-dark">
+
+
+																		<div class="input_file_cate">
+
+																			<input type="file" class="dz-button" />
+																			<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+																		</div>
+																		<div class="dz-message needsclick button-container">
+																			<button class="upload-btn">Upload ảnh</button>
+																		</div>
+
+
+
+																	</div>
+																	<!-- Populate dữ liệu vào form -->
+																	<%-- <input type="text" class="form-control"
+												value="${category.name}"> --%>
+																</c:when>
+															</c:choose>
 														</form>
-													</div>
 
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="col-sm-6 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Add Staff</div>
-												<div class="card-border-body">
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Add Staff</div>
+													<div class="card-border-body">
 
-													<div class="row gx-3">
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff Name <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
-															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff Phone <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
-															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff Gmail <span
-																	class="text-red">*</span></label> <input type="email"
-																	class="form-control" placeholder="">
-															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff Ward <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		wward</option>
-																	<option value="Mobiles">Ward</option>
-																	<option value="Books">Ward</option>
-																	<option value="Games">Ward</option>
-																</select>
-															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff District <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Disstrict</option>
-																	<option value="Mobiles">Disstrict1</option>
-																	<option value="Books">District2</option>
-																	<option value="Games">Disstrict3</option>
-																</select>
-															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff Province <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Province</option>
-																	<option value="Mobiles">Province1</option>
-																	<option value="Books">Province2</option>
-																	<option value="Games">Province3</option>
-																</select>
-															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Staff Address <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
-															</div>
-														</div>
-														
-														<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Provider <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Product Provider</option>
-																	<option value="Mobiles">Provider1</option>
-																	<option value="Books">Provider2</option>
-																	<option value="Games">Provider3</option>
-																</select>
-															</div>
-														</div> -->
-														<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Price <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-														<!-- 	<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Quantity <span
-																	class="text-red">*</span></label> <input type="number"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-														<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Unit <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-														<!-- <div class="col-sm-6 col-12">
-															<div class=" mb-3">
-																<label class="form-label">Product Discount</label>
-																<div class="input-group">
-																	<input type="text" class="form-control"
-																		placeholder="Set Product Discount"> <span
-																		class="input-group-text">%</span>
+														<div class="row gx-3">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Name <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
 																</div>
 															</div>
-														</div> -->
-													<!-- 	<div class="col-sm-12 col-12">
-															<div class="mb-0">
-																<label class="form-label">Staff Description <span
-																	class="text-red">*</span></label>
-																<textarea rows="4" class="form-control"
-																	placeholder="Enter Description"></textarea>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Phone <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
 															</div>
-														</div> -->
-													</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Gmail <span
+																		class="text-red">*</span></label> <input type="email"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Ward <span
+																		class="text-red">*</span></label> <select class="form-control">
+																		<option value="Select Product Category">Select
+																			wward</option>
+																		<option value="Mobiles">Ward</option>
+																		<option value="Books">Ward</option>
+																		<option value="Games">Ward</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff District <span
+																		class="text-red">*</span></label> <select class="form-control">
+																		<option value="Select Product Category">Select
+																			Disstrict</option>
+																		<option value="Mobiles">Disstrict1</option>
+																		<option value="Books">District2</option>
+																		<option value="Games">Disstrict3</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Province <span
+																		class="text-red">*</span></label> <select class="form-control">
+																		<option value="Select Product Category">Select
+																			Province</option>
+																		<option value="Mobiles">Province1</option>
+																		<option value="Books">Province2</option>
+																		<option value="Games">Province3</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-sm-12 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Address <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Status <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Create At <span
+																		class="text-red">*</span></label> <input type="date"
+																		class="form-control" placeholder="">
+																</div>
+															</div>
 
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-12 col-12">
+												<div class="custom-btn-group flex-end">
+													<button type="button" class="btn btn-light">Cancel</button>
+													<!-- Nút submit tương ứng với từng mode -->
+													<c:choose>
+														<c:when test="${mode == 'ADD'}">
+															<button type="submit" class="btn btn-success">Add
+																Staff</button>
+														</c:when>
+														<c:when test="${mode == 'EDIT'}">
+															<button type="submit" class="btn btn-primary">Update
+																Staff</button>
+														</c:when>
+													</c:choose>
 												</div>
 											</div>
 										</div>
-
-										<div class="col-sm-12 col-12">
-											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">Cancel</button>
-												<!-- Nút submit tương ứng với từng mode -->
-												<c:choose>
-													<c:when test="${mode == 'ADD'}">
-														<button type="submit" class="btn btn-success">Add
-															Staff</button>
-													</c:when>
-													<c:when test="${mode == 'EDIT'}">
-														<button type="submit" class="btn btn-primary">Update
-															Staff</button>
-													</c:when>
-												</c:choose>
-											</div>
-										</div>
-									</div>
-
+									</form>
 								</div>
 							</div>
 						</div>

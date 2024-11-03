@@ -1,6 +1,8 @@
 package agrStore.DAOImpl;
 
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -31,8 +33,6 @@ public class AccountDAOImpl implements AccountDAO {
 		}catch (Exception e) {
 			t.rollback();
 			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		
 	}
@@ -83,6 +83,36 @@ public class AccountDAOImpl implements AccountDAO {
 	    }
 	    return count;
 	}
+
+	@Override
+	public List<AccountEntity> getAllCustomer() {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM AccountEntity a WHERE a.role.id = :roleId";
+		Query query = session.createQuery(hql);
+		query.setParameter("roleId", 3);
+		List<AccountEntity> customers = query.list();
+		return customers;
+	}
+
+	@Override
+	public AccountEntity getAccountById(Integer id) {
+		// TODO Auto-generated method stub
+		AccountEntity account = null;
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM AccountEntity WHERE accountId = :id";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("id", id);
+			account = (AccountEntity) query.uniqueResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		return account;
+	}
+
 
 
 }

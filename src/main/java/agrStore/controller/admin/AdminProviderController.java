@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -47,7 +48,6 @@ public class AdminProviderController {
 					if (id != null) {
 						// Category category = categoryService.getCategoryById(id);
 						model.addAttribute("mode", "VIEW");
-						System.out.println();
 						// model.addAttribute("category", category);
 					}
 					break;
@@ -68,8 +68,6 @@ public class AdminProviderController {
 					}
 					break;	
 				}
-				
-				
 			}
 
 			return "admin/provider/providerForm"; // Trả về cùng một trang JSP
@@ -101,5 +99,6 @@ public class AdminProviderController {
 			}
 
 			return "redirect:/providerManagement.htm"; // Redirect sau khi xử lý
+
 		}
 }

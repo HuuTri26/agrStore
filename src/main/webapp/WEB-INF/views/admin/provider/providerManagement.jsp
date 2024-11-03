@@ -77,7 +77,6 @@
 button {
 	outline: none;
 	border: none;
-}
 </style>
 </head>
 <body>

@@ -18,8 +18,14 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+<<<<<<< HEAD
 		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN;integratedSecurity=false;trustServerCertificate=true;"
 		p:username="sa" p:password="123456789">
+=======
+		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN4;integratedSecurity=false;trustServerCertificate=true;"
+		p:username="sa" p:password="123">
+
+>>>>>>> fa7896241cd5deb411008ed31dc7c6a9fbaaeeb6
 	</bean>  
 
  

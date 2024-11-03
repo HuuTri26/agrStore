@@ -68,6 +68,83 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
+.dropzone-dark {
+	width: 100%;
+	max-width: 600px; /* Reduced from 800px */
+	margin: 0 auto;
+	padding: 20px; /* Reduced from 30px */
+	background: #f8f9fa;
+	border-radius: 8px; /* Reduced from 12px */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dz-message {
+	width: 100%;
+	margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.dz-button {
+	width: 100%;
+	padding: 25px; /* Reduced from 40px */
+	border: 2px dashed #4a90e2;
+	border-radius: 6px; /* Reduced from 8px */
+	cursor: pointer;
+	background: #f0f7ff;
+	transition: all 0.3s ease;
+	height: 30vh;
+}
+
+.dz-button:hover {
+	border-color: #357abd;
+	background: #e6f2ff;
+	transform: translateY(-2px);
+}
+
+.dz-button::file-selector-button {
+	padding: 10px 20px; /* Reduced from 12px 24px */
+	background: #4a90e2;
+	color: white;
+	border: none;
+	border-radius: 4px; /* Reduced from 6px */
+	font-size: 14px; /* Reduced from 16px */
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.dz-button::file-selector-button:hover {
+	background: #357abd;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px; /* Reduced from 20px */
+}
+
+.upload-btn {
+	padding: 12px 30px; /* Reduced from 15px 40px */
+	background: linear-gradient(45deg, #4a90e2, #357abd);
+	color: white;
+	border: none;
+	border-radius: 6px; /* Reduced from 8px */
+	font-size: 16px; /* Reduced from 18px */
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+	width: 100%;
+}
+
+.upload-btn:hover {
+	background: linear-gradient(45deg, #357abd, #2868a9);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+.upload-btn:active {
+	transform: translateY(1px);
+}
 </style>
 </head>
 <body>
