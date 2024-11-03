@@ -45,19 +45,19 @@ public class AdminCustomerController {
 		return "admin/customer/customerManagement";
 	}
 
-	@RequestMapping(value = "/customerManagement/customer", method = RequestMethod.POST)
-	public String processCustoner(
-			// @ModelAttribute("staff") StaffEntity category,
-			@RequestParam("mode") String mode) {
-
-		if ("ADD".equals(mode)) {
-			// categoryService.addCategory(category);
-		} else if ("EDIT".equals(mode)) {
-			// categoryService.updateCategory(category);
-		}
-
-		return "redirect:/admin/customer/customerManagement.htm"; // Redirect sau khi xử lý
-	}
+//	@RequestMapping(value = "/customerManagement/customer", method = RequestMethod.POST)
+//	public String processCustoner(
+//			// @ModelAttribute("staff") StaffEntity category,
+//			@RequestParam("mode") String mode) {
+//
+//		if ("ADD".equals(mode)) {
+//			// categoryService.addCategory(category);
+//		} else if ("EDIT".equals(mode)) {
+//			// categoryService.updateCategory(category);
+//		}
+//
+//		return "redirect:/admin/customer/customerManagement.htm"; // Redirect sau khi xử lý
+//	}
 
 	@RequestMapping(value = "/customerManagement/customer", method = RequestMethod.GET)
 	public String handleCustomer(@RequestParam(value = "action", required = false) String action,
@@ -107,7 +107,7 @@ public class AdminCustomerController {
 	}
 
 	@RequestMapping(value = "/customerManagement/customer", method = RequestMethod.POST)
-	public String processCustoner(ModelMap model,
+	public String processCustomer(ModelMap model,
 			// @ModelAttribute("staff") StaffEntity category,
 			@RequestParam("mode") String mode) {
 

@@ -185,37 +185,37 @@ public class AdminProductController {
 	    }
 	}
 
-	@RequestMapping(value = "/productManagement/product", method = RequestMethod.GET)
-	public String handleproduct(@RequestParam(value = "action", required = false) String action,
-			@RequestParam(value = "id", required = false) Integer id, Model model) {
-
-		if (action != null) {
-			switch (action) {
-			case "add":
-				model.addAttribute("mode", "ADD");
-				// model.addAttribute("product", new product());
-				break;
-
-			case "view":
-				if (id != null) {
-					// product product = productService.getproductById(id);
-					model.addAttribute("mode", "VIEW");
-					// model.addAttribute("product", product);
-				}
-				break;
-
-			case "edit":
-				if (id != null) {
-					// product product = productService.getproductById(id);
-					model.addAttribute("mode", "EDIT");
-					// model.addAttribute("product", product);
-				}
-				break;
-			}
-		}
-
-		return "admin/product/productForm"; // Trả về cùng một trang JSP
-	}
+//	@RequestMapping(value = "/productManagement/product", method = RequestMethod.GET)
+//	public String handleproduct(@RequestParam(value = "action", required = false) String action,
+//			@RequestParam(value = "id", required = false) Integer id, Model model) {
+//
+//		if (action != null) {
+//			switch (action) {
+//			case "add":
+//				model.addAttribute("mode", "ADD");
+//				// model.addAttribute("product", new product());
+//				break;
+//
+//			case "view":
+//				if (id != null) {
+//					// product product = productService.getproductById(id);
+//					model.addAttribute("mode", "VIEW");
+//					// model.addAttribute("product", product);
+//				}
+//				break;
+//
+//			case "edit":
+//				if (id != null) {
+//					// product product = productService.getproductById(id);
+//					model.addAttribute("mode", "EDIT");
+//					// model.addAttribute("product", product);
+//				}
+//				break;
+//			}
+//		}
+//
+//		return "admin/product/productForm"; // Trả về cùng một trang JSP
+//	}
 
 	@RequestMapping(value = "/productManagement/product", method = RequestMethod.POST)
 	public String processproduct(@ModelAttribute("product") ProductEntity product, @RequestParam("mode") String mode) {
