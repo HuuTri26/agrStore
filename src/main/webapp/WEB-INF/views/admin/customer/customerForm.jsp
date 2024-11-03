@@ -175,7 +175,7 @@
 																<label class="form-label">Xã <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder=""
-																	value="${wardName }" readonly>
+																	value="${customer.address.ward.name }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
@@ -191,7 +191,7 @@
 																<label class="form-label">Huyện <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder=""
-																	value="${districtName }" readonly>
+																	value="${customer.address.ward.district.name }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
@@ -207,7 +207,7 @@
 																<label class="form-label">Tỉnh <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder=""
-																	value="${provinceName }" readonly>
+																	value="${customer.address.ward.district.province.name }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-12 col-12">

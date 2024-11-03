@@ -151,9 +151,9 @@
 													<tr>
 														<td>${orderBill.orderBillId }</td>
 														<td>${orderBill.account.fullName }</td>
-														<td>${orderBill.employeeId }</td>
+														<td>${employeeNameMap[orderBill.employeeId]}</td>
 														<td>${orderBill.totalQuantity }</td>
-														<td>${orderBill.totalPrice }</td>
+														<td><fmt:formatNumber value="${orderBill.totalPrice}" pattern="#,##0" /></td>
 														<td>${orderBill.orderTime }</td>
 														<td><c:choose>
 																<c:when test="${orderBill.statusOrder == 1}">
