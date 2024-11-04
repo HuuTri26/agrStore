@@ -1,5 +1,6 @@
 package agrStore.controller.admin;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,18 @@ public class AdminOrderController {
 		// code
     model.addAttribute("currentPage", "order");
 		List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
+		Map<Integer, String> employeeNameMap = new HashMap<>();
+		for (OrderBillEntity orderBill : orderBills) {
+			int employeeID = orderBill.getEmployeeId();
+			if (!employeeNameMap.containsKey(employeeID)) {
+				String employeeName = this.accountService.getAccountById(employeeID).getFullName();
+				employeeNameMap.put(employeeID, employeeName);
+			}
+		}
+
 		model.addAttribute("orderBills", orderBills);
+		model.addAttribute("employeeNameMap", employeeNameMap);
+
 		return "admin/order/orderManagement";
 	}
 
@@ -51,13 +63,12 @@ public class AdminOrderController {
 		OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
 		AccountEntity employee = this.accountService.getAccountById(orderBill.getEmployeeId());
 		Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
-        statusOrderMap.put(1, "Chờ xác nhận");
-        statusOrderMap.put(2, "Đã xác nhận");
-        statusOrderMap.put(3, "Chờ giao hàng");
-        statusOrderMap.put(4, "Hoàn thành");
-        List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService.getAllOrderBillDetailByOrderBillID(id);
-
-        
+		statusOrderMap.put(1, "Chờ xác nhận");
+		statusOrderMap.put(2, "Đã xác nhận");
+		statusOrderMap.put(3, "Chờ giao hàng");
+		statusOrderMap.put(4, "Hoàn thành");
+		List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService
+				.getAllOrderBillDetailByOrderBillID(id);
 
 		if (action != null) {
 			switch (action) {
@@ -70,6 +81,15 @@ public class AdminOrderController {
 				if (id != null) {
 					// Category category = categoryService.getCategoryById(id);
 					model.addAttribute("mode", "VIEW");
+//					OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
+//					AccountEntity employee = this.accountService.getAccountById(orderBill.getEmployeeId());
+//					Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
+//					statusOrderMap.put(1, "Chờ xác nhận");
+//					statusOrderMap.put(2, "Đã xác nhận");
+//					statusOrderMap.put(3, "Chờ giao hàng");
+//					statusOrderMap.put(4, "Hoàn thành");
+//					List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService
+//							.getAllOrderBillDetailByOrderBillID(id);
 					model.addAttribute("orderBill", orderBill);
 					model.addAttribute("employee", employee);
 					model.addAttribute("statusOrderMap", statusOrderMap);
@@ -81,7 +101,19 @@ public class AdminOrderController {
 				if (id != null) {
 					// Category category = categoryService.getCategoryById(id);
 					model.addAttribute("mode", "EDIT");
-					// model.addAttribute("category", category);
+//					OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
+//					AccountEntity employee = this.accountService.getAccountById(orderBill.getEmployeeId());
+//					Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
+//					statusOrderMap.put(1, "Chờ xác nhận");
+//					statusOrderMap.put(2, "Đã xác nhận");
+//					statusOrderMap.put(3, "Chờ giao hàng");
+//					statusOrderMap.put(4, "Hoàn thành");
+//					List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService
+//							.getAllOrderBillDetailByOrderBillID(id);
+					model.addAttribute("orderBill", orderBill);
+					model.addAttribute("employee", employee);
+					model.addAttribute("statusOrderMap", statusOrderMap);
+					model.addAttribute("orderBillDetailEntities", orderBillDetailEntities);
 				}
 				break;
 			}
@@ -91,12 +123,28 @@ public class AdminOrderController {
 	}
 
 	@RequestMapping(value = "/orderManagement/order", method = RequestMethod.POST)
-	public String processCategory(@ModelAttribute("order") @RequestParam("mode") String mode) {
+	public String processCategory(@ModelAttribute("orderBill") @RequestParam("mode") String mode) {
+		System.out.println("mode: " + mode);
+		if ("ADD".equals(mode)) {
+			// categoryService.addCategory(category);
+		} else if ("EDIT".equals(mode)) {
+			// categoryService.updateCategory(category);
+		}
+
+		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý
+	}
+
+	@RequestMapping(value = "/orderManagement/order", method = RequestMethod.PUT)
+	public String updateStatusOrderBill(@ModelAttribute("orderBill") String statusOrder,
+			@RequestParam("mode") String mode) {
+		System.out.println("mode: " + mode);
+		System.out.println("statusOrder: " + statusOrder);
 
 		if ("ADD".equals(mode)) {
 			// categoryService.addCategory(category);
 		} else if ("EDIT".equals(mode)) {
 			// categoryService.updateCategory(category);
+			System.out.println(mode);
 		}
 
 		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý

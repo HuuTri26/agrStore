@@ -51,14 +51,14 @@ public class AdminCustomerController {
 			@RequestParam(value = "id", required = false) Integer id, Model model) {
 		AccountEntity customer = this.accountService.getAccountById(id);
 //		 System.out.println("Xã id: " + customer.getAddress().getWard().getId());
-		int wardID = customer.getAddress().getWard().getId();
-		WardEntity xa = this.wardDAO.getWardById(wardID);
-		int districtID = xa.getDistrict().getId();
+//		int wardID = customer.getAddress().getWard().getId();
+//		WardEntity xa = this.wardDAO.getWardById(wardID);
+//		int districtID = xa.getDistrict().getId();
 //		 System.out.println("Huyện ID: " + districtID);
-		DistrictEntity huyen = this.districtDAO.getDitrictById(districtID);
-		int provinceID = huyen.getProvince().getId();
+//		DistrictEntity huyen = this.districtDAO.getDitrictById(districtID);
+//		int provinceID = huyen.getProvince().getId();
 //		System.out.println("Tỉnh ID: " + provinceID);
-		ProvinceEntity tinh = this.provinceDAO.getProvinceById(provinceID);
+//		ProvinceEntity tinh = this.provinceDAO.getProvinceById(provinceID);
 		
 		if (action != null) {
 			switch (action) {
@@ -73,9 +73,9 @@ public class AdminCustomerController {
 					model.addAttribute("mode", "VIEW");
 					// model.addAttribute("category", category);
 					model.addAttribute("customer", customer);
-					model.addAttribute("wardName", xa.getName());
-					model.addAttribute("districtName", huyen.getName());
-					model.addAttribute("provinceName", tinh.getName());
+//					model.addAttribute("wardName", xa.getName());
+//					model.addAttribute("districtName", huyen.getName());
+//					model.addAttribute("provinceName", tinh.getName());
 					
 				}
 				break;
