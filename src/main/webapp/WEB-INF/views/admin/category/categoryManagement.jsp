@@ -73,9 +73,10 @@
 	float: right;
 	font-size: 10px;
 }
-button{
-	outline:none;
-	border:none;
+
+button {
+	outline: none;
+	border: none;
 }
 </style>
 </head>
@@ -115,46 +116,50 @@ button{
 												<tr>
 													<th>Id</th>
 													<th>Name</th>
-													<th>Status</th>
+													<!-- <th>Status</th> -->
 													<th>Description</th>
-													<th>Create At</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Táo</td>
-													<td><button class="badge shade-green min-70">Active</button>
-													</td>
-													<td>Táo ngon v~</td>
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a href="categoryManagement/category.htm?action=view&id=${category.id}">
-																		<i class="bi bi-eye"></i>
-																	</a>  <a
-																		href="categoryManagement/category.htm?action=edit&id=${category.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
+												<c:forEach var="category" items="${categories }">
+
+													<tr>
+														<td>${category.categoryId }</td>
+														<td>${category.categoryName }</td>
+														<!-- <td><button class="badge shade-green min-70">Active</button>
+														</td> -->
+														<td>${category.descript }</td>
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="categoryManagement/category.htm?action=view&id=${category.categoryId}">
+																			<i class="bi bi-eye"></i>
+																		</a> <a
+																			href="categoryManagement/category.htm?action=edit&id=${category.categoryId}">
+																			<i class="bi bi-pencil"></i>
+																		</a>
+																	</div>
 																</div>
+																<a
+																	href="categoryManagement/deleteCategory.htm?id=${category.categoryId}"
+																	class="deleteRow"> <i class="bi bi-trash text-red"></i>
+																</a>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
+														</td>
 
 
-												</tr>
-												<tr>
+													</tr>
+
+												</c:forEach>
+
+												<!-- <tr>
 													<td>2</td>
 													<td>Mận</td>
 													<td><button class="badge shade-red min-70">Blocked</button>
@@ -181,8 +186,8 @@ button{
 														</div>
 													</td>
 
-												</tr>
-											
+												</tr> -->
+
 											</tbody>
 										</table>
 									</div>

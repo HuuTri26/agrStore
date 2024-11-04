@@ -265,25 +265,6 @@
 						<!-- <h3 class="main-title">Related Products</h3> -->
 					</div>
 					<div class="biolife-tab biolife-tab-contain sm-margin-top-34px">
-						<!-- <div class="tab-head tab-head__icon-top-layout icon-top-layout">
-							<ul class="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
-								<li class="tab-element active"><a href="#tab01_1st"
-									class="tab-link"><span class="biolife-icon icon-lemon"></span>Rau
-										củ</a></li>
-								<li class="tab-element"><a href="#tab01_2nd"
-									class="tab-link"><span class="biolife-icon icon-grape2"></span>Trái
-										cây</a></li>
-								<li class="tab-element"><a href="#tab01_3rd"
-									class="tab-link"><span class="biolife-icon icon-blueberry"></span>Thực
-										phẩm sống</a></li>
-								<li class="tab-element"><a href="#tab01_4th"
-									class="tab-link"><span class="biolife-icon icon-orange"></span>Thức
-										ăn nhanh</a></li>
-								<li class="tab-element"><a href="#tab01_5th"
-									class="tab-link"><span class="biolife-icon icon-broccoli"></span>snack</a>
-								</li>
-							</ul>
-						</div> -->
 						<div class="tab-content">
 							<div id="tab01_1st" class="tab-contain active">
 								<ul

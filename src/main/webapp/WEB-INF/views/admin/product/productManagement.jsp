@@ -167,7 +167,7 @@ button {
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
 																</div>
-																<a href="categoryDelete.htm" class="deleteRow"> <i
+																<a href="productManagement/deleteProduct.htm?id=${product.productId }" class="deleteRow"> <i
 																	class="bi bi-trash text-red"></i>
 																</a>
 															</div>
