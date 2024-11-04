@@ -69,4 +69,17 @@ public class ProductDAOImpl implements ProductDAO {
 		return product;
 	}
 
+	@Override
+	public List<ProductEntity> getListProductByCategotyId(Integer cId) {
+		List<ProductEntity> products = null;
+
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ProductEntity p WHERE p.category.categoryId = :cId";
+		Query query = session.createQuery(hql);
+		query.setParameter("cId", cId);
+		products = query.list();
+
+		return products;
+	}
+
 }

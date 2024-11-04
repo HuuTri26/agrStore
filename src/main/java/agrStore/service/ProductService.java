@@ -15,4 +15,6 @@ public interface ProductService {
 	public void updateProduct(ProductEntity product);
 	public List<ProductEntity> getListProduct();
 	public ProductEntity getProductById(Integer id);
+	public List<ProductEntity> getListProductByCategoryId(Integer cId);
+	public List<ProductEntity> getRandomListProductByLimit(List<ProductEntity> list, Integer limit);
 }
