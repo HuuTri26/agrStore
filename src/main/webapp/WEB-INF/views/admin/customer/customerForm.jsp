@@ -315,11 +315,11 @@
 																	<option value="Books">Ward</option>
 																	<option value="Games">Ward</option>
 																</select> -->
-																	<label class="form-label">Xã <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder=""
-																		value="${wardName }" readonly>
-																</div>
+																<label class="form-label">Xã <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder=""
+																	value="${customer.address.ward.name }" readonly>
+
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
@@ -331,11 +331,11 @@
 																	<option value="Books">District2</option>
 																	<option value="Games">Disstrict3</option>
 																</select> -->
-																	<label class="form-label">Huyện <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder=""
-																		value="${districtName }" readonly>
-																</div>
+																<label class="form-label">Huyện <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder=""
+																	value="${customer.address.ward.district.name }" readonly>
+
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
@@ -347,11 +347,11 @@
 																	<option value="Books">Province2</option>
 																	<option value="Games">Province3</option>
 																</select> -->
-																	<label class="form-label">Tỉnh <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder=""
-																		value="${provinceName }" readonly>
-																</div>
+																<label class="form-label">Tỉnh <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" placeholder=""
+																	value="${customer.address.ward.district.province.name }" readonly>
+
 															</div>
 															<div class="col-sm-12 col-12">
 																<div class="mb-3">

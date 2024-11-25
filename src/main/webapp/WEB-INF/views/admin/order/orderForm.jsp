@@ -95,15 +95,15 @@
 											<div class="card-title">VIEW ORDER</div>
 											<!-- Disable các input field -->
 											<input type="text" class="form-control"
-												value="${product.name}" disabled>
+												value="${orderBill.orderBillId}" disabled>
 										</c:when>
 
 										<c:when test="${mode == 'EDIT'}">
 											<!-- Hiển thị form chỉnh sửa -->
 											<div class="card-title">EDIT ORDER</div>
 											<!-- Populate dữ liệu vào form -->
-											<%-- <input type="text" class="form-control"
-												value="${product.name}"> --%>
+											<input type="text" class="form-control"
+												value="${orderBill.orderBillId}" disabled>
 										</c:when>
 									</c:choose>
 								</div>
@@ -121,21 +121,28 @@
 																<label class="form-label">Customer Name<span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control"
-																	value="${orderBill.account.fullName }">
+																	value="${orderBill.account.fullName }" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Employee Name<span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" value="${employee.fullName }">
+																	class="form-control" value="${employee.fullName }"
+																	readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
+																<%-- <label class="form-label">Total Price <span
+																	class="text-red">*</span></label> <input type="text"
+																	class="form-control" value="${orderBill.totalPrice }"
+																	readonly> --%>
 																<label class="form-label">Total Price <span
 																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" value="${orderBill.totalPrice }">
+																	class="form-control"
+																	value="<fmt:formatNumber value='${orderBill.totalPrice}' pattern='#,##0' />"
+																	readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
@@ -143,7 +150,7 @@
 																<label class="form-label">Total Quantity <span
 																	class="text-red">*</span></label> <input type="number"
 																	class="form-control"
-																	value="${orderBill.totalQuantity }">
+																	value="${orderBill.totalQuantity }" readonly>
 															</div>
 														</div>
 													</div>
@@ -158,7 +165,8 @@
 														<div class="mb-3">
 															<label class="form-label">Status Order <span
 																class="text-red">*</span></label>
-															<form:form method="post" modelAttribute="orderBill">
+															<form:form method="PUT" modelAttribute="orderBill"
+																action="orderManagement/order.htm">
 																<form:select path="statusOrder" class="form-control">
 																	<form:options items="${statusOrderMap}" />
 																</form:select>
@@ -203,7 +211,9 @@
 																			<td>${status.index + 1}</td>
 																			<td>${orderBillDetail.product.productName}</td>
 																			<td>${orderBillDetail.quantity }</td>
-																			<td>${orderBillDetail.price }</td>
+																			<td><fmt:formatNumber
+																					value="${orderBillDetail.price }" pattern="#,##0" /></td>
+																			<%-- <td>${orderBillDetail.price }</td> --%>
 
 
 																		</tr>
@@ -235,15 +245,17 @@
 
 										<div class="col-sm-12 col-12">
 											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">Cancel</button>
+												<button type="button" class="btn btn-light">
+													<a href="orderManagement.htm">Cancel</a>
+												</button>
 												<c:choose>
 													<c:when test="${mode == 'ADD'}">
 														<button type="submit" class="btn btn-success">Add
-															Category</button>
+														</button>
 													</c:when>
 													<c:when test="${mode == 'EDIT'}">
 														<button type="submit" class="btn btn-primary">Update
-															Category</button>
+														</button>
 													</c:when>
 												</c:choose>
 											</div>

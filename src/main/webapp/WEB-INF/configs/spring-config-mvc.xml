@@ -24,10 +24,22 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
 
 	<!-- Cấu hình Upload File -->
-	<bean class="agrStore.bean.UploadFile">
+	<bean id="user" class="agrStore.bean.UploadFile">
 		<property name="basePath"
 			value="E:\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
 	</bean>
+	
+	<bean id="product" class="agrStore.bean.UploadFile">
+		<property name="basePath"
+			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\product-images\" />
+	</bean>
+
+	
+	<bean id="category" class="agrStore.bean.UploadFile">
+		<property name="basePath"
+			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\category-images\" />
+	</bean>
+
 
 	<!-- Cấu hình package chứa các controller -->
 	<context:component-scan

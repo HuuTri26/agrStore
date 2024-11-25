@@ -41,6 +41,57 @@
 	border-radius: 10px;
 	color: red;
 }
+
+.tab-element {
+	text-align: center;
+	display: inline-block;
+	margin: 0 10px;
+	text-decoration: none;
+	color: #333;
+}
+
+.tab-element.active .category-name {
+	color: #007bff; /* hoặc màu bạn muốn */
+	font-weight: bold;
+}
+
+.tab-element.active .icon-wrapper {
+	transform: translateY(-5px);
+}
+
+.icon-wrapper {
+	width: 100px;
+	height: 100px;
+	transition: transform 0.3s ease;
+}
+
+.icon-category {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.category-name {
+	display: block;
+	margin-top: 5px;
+	font-size: 16px;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+/* Hiệu ứng hover */
+.tab-element:hover .category-name {
+	color: #007bff;
+	transform: scale(1.1);
+	text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.tab-element:hover .icon-wrapper {
+	transform: translateY(-5px);
+}
 </style>
 </head>
 <!-- HEADER -->

@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+
 import agrStore.entity.AddressEntity;
 import agrStore.entity.ProviderEntity;
 
@@ -15,8 +16,9 @@ import agrStore.entity.ProviderEntity;
 public interface ProviderService {
 	public void addProvider(ProviderEntity provider);
 	public void updateProvider(ProviderEntity provider);
-	public ProviderEntity getInforById(int id);
-	public List<ProviderEntity> getListProviders();
+	public List<ProviderEntity> getListProvider();
+	public ProviderEntity getProviderById(Integer id);
 	public Boolean deleteProvider(ProviderEntity provider);
 	public Boolean disableProvider(ProviderEntity provider);
 }
+

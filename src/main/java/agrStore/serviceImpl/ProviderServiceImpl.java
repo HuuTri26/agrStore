@@ -28,16 +28,15 @@ public class ProviderServiceImpl implements ProviderService {
         providerDao.updateProvider(provider);
     }
     
-    @Override 
-    public ProviderEntity getInforById(int id) {
-        return providerDao.getInforById(id);
-    }
-    
-    @Override 
-    public List<ProviderEntity> getListProviders() {
-        return providerDao.getListProviders();
-    }
+   	@Override
+	public List<ProviderEntity> getListProvider() {
+		return providerDao.getListProvider();
+	}
 
+	@Override
+	public ProviderEntity getProviderById(Integer id) {
+		return providerDao.getProviderById(id);
+	}
     @Override
     public Boolean deleteProvider(ProviderEntity provider) {
         return providerDao.deleteProvider(provider);

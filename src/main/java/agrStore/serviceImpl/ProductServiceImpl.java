@@ -1,6 +1,8 @@
 package agrStore.serviceImpl;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,19 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ProductEntity getProductById(Integer id) {
 		return ProductDAO.getProductById(id);
+	}
+
+	@Override
+	public List<ProductEntity> getRandomListProductByLimit(List<ProductEntity> products, Integer limit) {
+		//Trộn ngẫu nhiên các phần tử
+		Collections.shuffle(products);
+		//Lấy giới hạn danh sách các phần tử
+		return products.stream().limit(limit).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ProductEntity> getListProductByCategoryId(Integer cId) {
+		return ProductDAO.getListProductByCategotyId(cId);
 	}
 
 }
