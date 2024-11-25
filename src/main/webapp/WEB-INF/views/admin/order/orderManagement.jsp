@@ -109,132 +109,133 @@
 }
 /* Custom select styling */
 .btn-group {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .btn-status {
-  min-width: 200px;
-  padding: 10px 15px;
-  background: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  text-align: left;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+	min-width: 200px;
+	padding: 10px 15px;
+	background: #fff;
+	border: 1px solid #dee2e6;
+	border-radius: 4px;
+	text-align: left;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.2s ease;
 }
 
 .btn-status:hover {
-  background-color: #f8f9fa;
-  border-color: #c1c9d0;
+	background-color: #f8f9fa;
+	border-color: #c1c9d0;
 }
 
 .btn-status:focus {
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-  outline: none;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+	outline: none;
 }
 
 /* Dropdown arrow */
 .dropdown-toggle::after {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 /* Dropdown menu */
 select.btn-status {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 40px;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-image:
+		url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	background-size: 16px;
+	padding-right: 40px;
 }
 
 /* Option styling */
 .btn-status option {
-  padding: 10px 15px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+	padding: 10px 15px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
 }
 
 .btn-status option:hover {
-  background-color: #007bff;
-  color: #fff;
+	background-color: #007bff;
+	color: #fff;
 }
 
 /* Status pending specific style */
 .status-pending {
-  color: #6c757d;
+	color: #6c757d;
 }
 
 .status-pending:hover {
-  background-color: #007bff;
-  color: #fff;
+	background-color: #007bff;
+	color: #fff;
 }
 
 /* Status processing specific style */
 .status-processing {
-  color: #ffc107;
+	color: #ffc107;
 }
 
 .status-processing:hover {
-  background-color: #007bff;
-  color: #fff;
+	background-color: #007bff;
+	color: #fff;
 }
 
 /* Status completed specific style */
 .status-completed {
-  color: #28a745;
+	color: #28a745;
 }
 
 .status-completed:hover {
-  background-color: #007bff;
-  color: #fff;
+	background-color: #007bff;
+	color: #fff;
 }
 
 /* Status cancelled specific style */
 .status-cancelled {
-  color: #dc3545;
+	color: #dc3545;
 }
 
 .status-cancelled:hover {
-  background-color: #007bff;
-  color: #fff;
+	background-color: #007bff;
+	color: #fff;
 }
 
 /* Icon styling */
 .status-pending i {
-  color: #ffc107;
-  margin-right: 8px;
+	color: #ffc107;
+	margin-right: 8px;
 }
 
 .status-processing i {
-  color: #ffc107;
-  margin-right: 8px;
+	color: #ffc107;
+	margin-right: 8px;
 }
 
 .status-completed i {
-  color: #28a745;
-  margin-right: 8px;
+	color: #28a745;
+	margin-right: 8px;
 }
 
 .status-cancelled i {
-  color: #dc3545;
-  margin-right: 8px;
+	color: #dc3545;
+	margin-right: 8px;
 }
 
 /* Mobile responsiveness */
-@media (max-width: 576px) {
-  .btn-status {
-    min-width: 100%;
-  }
+@media ( max-width : 576px) {
+	.btn-status {
+		min-width: 100%;
+	}
 }
 </style>
 </head>
@@ -283,9 +284,10 @@ select.btn-status {
 														<td>${orderBill.account.fullName }</td>
 														<td>${employeeNameMap[orderBill.employeeId]}</td>
 														<td>${orderBill.totalQuantity }</td>
-														<td><fmt:formatNumber value="${orderBill.totalPrice}" pattern="#,##0" /></td>
+														<td><fmt:formatNumber value="${orderBill.totalPrice}"
+																pattern="#,##0" /></td>
 														<td>${orderBill.orderTime }</td>
-														<td><c:choose>
+														<%-- <td><c:choose>
 																<c:when test="${orderBill.statusOrder == 1}">
             Chờ xác nhận
         </c:when>
@@ -301,7 +303,30 @@ select.btn-status {
 																<c:otherwise>
             Trạng thái không xác định
         </c:otherwise>
-															</c:choose></td>
+															</c:choose></td> --%>
+														<td>
+															<!-- Form để cập nhật trạng thái của đơn hàng -->
+															<form action="orderManagement/order/updateOrderStatus.htm" method="post">
+																<input type="hidden" name="orderBillId"
+																	value="${orderBill.orderBillId}" /> <select
+																	name="statusOrder" onchange="this.form.submit()">
+																	<option value="1"
+																		${orderBill.statusOrder == 1 ? 'selected' : ''}>Chờ
+																		xác nhận</option>
+																	<option value="2"
+																		${orderBill.statusOrder == 2 ? 'selected' : ''}>Đã
+																		xác nhận</option>
+																	<option value="3"
+																		${orderBill.statusOrder == 3 ? 'selected' : ''}>Chờ
+																		giao hàng</option>
+																	<option value="4"
+																		${orderBill.statusOrder == 4 ? 'selected' : ''}>Hoàn
+																		thành</option>
+																	
+																</select>
+																<!-- <button type="submit">Cập nhật</button> -->
+															</form>
+														</td>
 
 
 														<td>

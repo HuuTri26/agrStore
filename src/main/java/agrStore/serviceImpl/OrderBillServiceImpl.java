@@ -32,4 +32,10 @@ public class OrderBillServiceImpl implements OrderBillService{
 		return orderBill;
 	}
 
+	@Override
+	public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus) {
+		// TODO Auto-generated method stub
+		return this.orderBillDAO.updateOrderStatus(orderBillIdUpdate, newOrderStatus);
+	}
+
 }
