@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,13 +23,19 @@ public class ProviderDAOImpl implements ProviderDAO{
 
 	@Override
 	public void addProvider(ProviderEntity provider) {
-		Session session = factory.getCurrentSession();
-
+		//Session session = factory.getCurrentSession();
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
 		try {
+
 			session.save(provider);
+			t.commit();
 		} catch (Exception e) {
+			t.rollback();
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
 		
 	}
@@ -68,6 +75,36 @@ public class ProviderDAOImpl implements ProviderDAO{
 		provider = (ProviderEntity) query.uniqueResult();
 		
 		return provider;
+	}
+	
+	@Override
+	public Boolean deleteProvider(ProviderEntity provider) {
+		Boolean isSucess = Boolean.FALSE;
+		Session session = factory.getCurrentSession();
+		try {
+			session.delete(provider);
+			isSucess = Boolean.TRUE;
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		return isSucess;
+	}
+	
+	@Override
+	public Boolean disableProvider(ProviderEntity provider) {
+	    Boolean isSuccess = Boolean.FALSE;
+	    Session session = factory.getCurrentSession();
+	    try {
+	        // Cập nhật trạng thái của provider thành 'disabled'
+	        provider.setStatus(false);
+	        session.update(provider);
+	        isSuccess = Boolean.TRUE;
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.toString() + "\nStacktrace:");
+	        e.printStackTrace();
+	    }
+	    return isSuccess;
 	}
 	
 }
