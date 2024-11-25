@@ -18,17 +18,16 @@ public class ProviderServiceImpl implements ProviderService{
 	@Autowired
 	ProviderDAO ProviderDAO;
 
-	@Override
-	public void addProvdier(ProviderEntity provider) {
-		ProviderDAO.addProvider(provider);
-		
-	}
+	 @Override
+	    public void addProvider(ProviderEntity provider) {
+	        ProviderDAO.addProvider(provider); // gọi phương thức từ instance
+	    }
 
-	@Override
-	public void updateProvider(ProviderEntity provider) {
-		ProviderDAO.updateProvider(provider);
-		
-	}
+	    @Override 
+	    public void updateProvider(ProviderEntity provider) {
+	        ProviderDAO.updateProvider(provider);
+	    }
+
 
 	@Override
 	public List<ProviderEntity> getListProvider() {
@@ -39,5 +38,14 @@ public class ProviderServiceImpl implements ProviderService{
 	public ProviderEntity getProviderById(Integer id) {
 		return ProviderDAO.getProviderById(id);
 	}
+	
+	@Override
+    public Boolean deleteProvider(ProviderEntity provider) {
+        return ProviderDAO.deleteProvider(provider);
+    }
+
+    public Boolean disableProvider(ProviderEntity provider) {
+    	return ProviderDAO.disableProvider(provider);
+    }
 	
 }

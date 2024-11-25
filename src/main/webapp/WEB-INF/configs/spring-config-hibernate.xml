@@ -21,6 +21,7 @@
 		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN4;integratedSecurity=false;trustServerCertificate=true;"
 		p:username="sa" p:password="123">
 
+
 	</bean>  
 
  
