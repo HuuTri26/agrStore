@@ -185,10 +185,14 @@
 											<%-- <input type="text" class="form-control"
 												value="${category.name}"> --%>
 										</c:when>
+										<c:when test="${mode == 'DELETE'}">
+											<div class="card-title">DELETE PROVIDER</div>
+										</c:when>
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form>
+									<form:form action="providerManagement/provider.htm"
+										method="post" modelAttribute="provider">
 										<div class="row gx-3">
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
@@ -196,87 +200,25 @@
 													<div class="card-border-body">
 														<form>
 															<c:choose>
-																<c:when test="${mode == 'ADD'}">
-																	<!-- Hiển thị form thêm mới -->
+																<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
 																	<div id="dropzone" class="dropzone-dark">
-
-
 																		<div class="input_file_cate">
-
-																			<input type="file" class="dz-button" />
-																			<!-- <br> <span class="note needsclick">(This is
-																	just a demo dropzone. Selected files are <strong>not</strong>
-																	actually uploaded.)
-																</span> -->
+																			<input name="image" type="file" class="dz-button" />
 																		</div>
 																		<div class="dz-message needsclick button-container">
-																			<button class="upload-btn">Upload ảnh</button>
+
+																			<button type="submit" class="upload-btn">Upload
+
+																				Image</button>
 																		</div>
-
-
-
+																		${imgError}
 																	</div>
 																</c:when>
-
 																<c:when test="${mode == 'VIEW'}">
-																	<!-- Hiển thị thông tin chi tiết -->
-
-
-
-
 																	<img
 																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
 																		class="img-fluid change-img-avatar"
-																		alt="Free Dashboards">
-
-
-																	<!-- <br> <span class="note needsclick">(This is
-																	just a demo dropzone. Selected files are <strong>not</strong>
-																	actually uploaded.)
-																</span> -->
-
-
-
-
-
-
-
-
-
-																	<!-- <br> <span class="note needsclick">(This is
-																	just a demo dropzone. Selected files are <strong>not</strong>
-																	actually uploaded.)
-																</span> -->
-
-
-																	<!-- Disable các input field -->
-																	<%-- <input type="text" class="form-control"
-												value="${category.name}" disabled> --%>
-																</c:when>
-
-																<c:when test="${mode == 'EDIT'}">
-																	<!-- Hiển thị form chỉnh sửa -->
-																	<div id="dropzone" class="dropzone-dark">
-
-
-																		<div class="input_file_cate">
-
-																			<input type="file" class="dz-button" />
-																			<!-- <br> <span class="note needsclick">(This is
-																	just a demo dropzone. Selected files are <strong>not</strong>
-																	actually uploaded.)
-																</span> -->
-																		</div>
-																		<div class="dz-message needsclick button-container">
-																			<button class="upload-btn">Upload ảnh</button>
-																		</div>
-
-
-
-																	</div>
-																	<!-- Populate dữ liệu vào form -->
-																	<%-- <input type="text" class="form-control"
-												value="${category.name}"> --%>
+																		alt="Product Image">
 																</c:when>
 															</c:choose>
 														</form>
@@ -285,96 +227,62 @@
 													</div>
 												</div>
 											</div>
+
+
+
+											<!-- Product Details Section -->
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
-													<div class="card-border-title">Provider</div>
+													<div class="card-border-title">Add Provider</div>
 													<div class="card-border-body">
+														<form:hidden path="id" />
+														<form:hidden path="status" />
 
 														<div class="row gx-3">
 															<div class="col-sm-12 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Provider Name <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label>
+																	<form:input path="providerName" class="form-control"
+																		placeholder="Enter provider name"
+																		readonly="${mode == 'VIEW'}" />
+																	<form:errors path="providerName" />
 																</div>
 															</div>
+
 															<div class="col-sm-12 col-12">
 																<div class="mb-3">
-																	<label class="form-label">Provider PhoneNumber
-																		<span class="text-red">*</span>
-																	</label> <input type="text" class="form-control" placeholder="">
+																	<label class="form-label">Provider Phone <span
+																		class="text-red">*</span></label>
+																	<form:input path="phoneNumber" class="form-control"
+																		placeholder="Enter provider phonenumber"
+																		readonly="${mode == 'VIEW'}" />
+																	<form:errors path="phoneNumber" />
 																</div>
 															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Status <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
-																</div>
-															</div>
-															<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Category <span
-																	class="text-red">*</span></label> <select class="form-control">
-																	<option value="Select Product Category">Select
-																		Product Category</option>
-																	<option value="Mobiles">Mobiles</option>
-																	<option value="Books">Books</option>
-																	<option value="Games">Games</option>
-																</select>
-															</div>
-														</div> -->
-															<!-- <div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Product Price <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="Enter Product Price">
-															</div>
-														</div> -->
-															<!-- <div class="col-sm-6 col-12">
-															<div class=" mb-3">
-																<label class="form-label">Product Discount</label>
-																<div class="input-group">
-																	<input type="text" class="form-control"
-																		placeholder="Set Product Discount"> <span
-																		class="input-group-text">%</span>
-																</div>
-															</div>
-														</div> -->
-															<!-- <div class="col-sm-12 col-12">
-															<div class="mb-0">
-																<label class="form-label">Category Description <span
-																	class="text-red">*</span></label>
-																<textarea rows="4" class="form-control"
-																	placeholder="Enter Category Description"></textarea>
-															</div>
-														</div> -->
-														</div>
 
+															<div class="col-sm-12 col-12">
+																<div class="custom-btn-group flex-end">
+																	<button type="button" class="btn btn-light">Cancel</button>
+																	<c:choose>
+																		<c:when test="${mode == 'ADD'}">
+																			<button type="submit" name="${mode}"
+																				class="btn btn-success">Add Provider</button>
+																		</c:when>
+																		<c:when test="${mode == 'EDIT'}">
+																			<button type="submit" name="${mode}"
+																				class="btn btn-primary">Update Provider</button>
+																		</c:when>
+																	</c:choose>
+																</div>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
 
-											<div class="col-sm-12 col-12">
-												<div class="custom-btn-group flex-end">
-													<p>${mode }</p>
-													<button type="button" class="btn btn-light">Cancel</button>
-
-													<!-- Nút submit tương ứng với từng mode -->
-													<c:choose>
-														<c:when test="${mode == 'ADD'}">
-															<button type="submit" class="btn btn-success">Add
-																Category</button>
-														</c:when>
-														<c:when test="${mode == 'EDIT'}">
-															<button type="submit" class="btn btn-primary">Update
-																Category</button>
-														</c:when>
-													</c:choose>
-												</div>
-											</div>
 										</div>
-									</form>
+									</form:form>
 								</div>
 							</div>
 						</div>
