@@ -14,30 +14,84 @@
 			http://www.springframework.org/schema/mvc 
 			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<!-- Đọc các thuộc tính từ file cấu hình -->
+	<context:property-placeholder
+		location="file:C:\Users\Windows\OneDrive\Desktop\DeAnChoCa3Mon\agrStore\src\main\webapp\WEB-INF\configs\database.properties" />
+
 	<!-- Kết nối CSDL -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN4;integratedSecurity=false;trustServerCertificate=true;"
-		p:username="sa" p:password="huutri">
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN;integratedSecurity=false;trustServerCertificate=true;" 
+		p:username="sa" p:password="123"> </bean> -->
 
-	</bean>  
+	<!-- Cấu hình DataSource động -->
+	<bean id="dynamicDataSource"
+		class="agrStore.database.router.DynamicConnectionRouter">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="CUSTOMER_DB" value-ref="customerDataSource" />
+				<entry key="EMPLOYEE_DB" value-ref="employeeDataSource" />
+				<entry key="ADMIN_DB" value-ref="adminDataSource" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource"
+			ref="defaultDataSource" />
+	</bean>
 
- 
-	<!-- Cấu hình Hibernate -->
+	<!-- DataSource mặc định -->
+	<bean id="defaultDataSource"
+		class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="jdbcUrl" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maximumPoolSize" value="10" />
+	</bean>
+
+	<!-- DataSource cho Customer -->
+	<bean id="customerDataSource"
+		class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="jdbcUrl" value="${customer.db.url}" />
+		<property name="username" value="${customer.db.username}" />
+		<property name="password" value="${customer.db.password}" />
+		<property name="maximumPoolSize" value="5" />
+	</bean>
+
+	<!-- DataSource cho Employee -->
+	<bean id="employeeDataSource"
+		class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="jdbcUrl" value="${employee.db.url}" />
+		<property name="username" value="${employee.db.username}" />
+		<property name="password" value="${employee.db.password}" />
+		<property name="maximumPoolSize" value="5" />
+	</bean>
+
+	<!-- DataSource cho Admin -->
+	<bean id="adminDataSource"
+		class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="jdbcUrl" value="${admin.db.url}" />
+		<property name="username" value="${admin.db.username}" />
+		<property name="password" value="${admin.db.password}" />
+		<property name="maximumPoolSize" value="5" />
+	</bean>
+
+	<!-- Cấu hình Hibernate sử dụng DataSource động -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dynamicDataSource" />
+		<property name="packagesToScan" value="agrStore.entity" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<!-- <prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.default_schema">dbo</prop> -->
 			</props>
 		</property>
-		<property name="packagesToScan" value="agrStore.entity" />
-	</bean>  
- 
-
+	</bean>
 
 	<!-- Transaction Manager -->
 	<bean id="transactionManager"

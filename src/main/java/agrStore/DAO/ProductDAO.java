@@ -10,4 +10,5 @@ public interface ProductDAO {
 	public List<ProductEntity> getListProduct();
 	public ProductEntity getProductById(Integer id);
 	public List<ProductEntity> getListProductByCategotyId(Integer cId);
+	public List<ProductEntity> getListProductByProviderId(Integer pId);
 }

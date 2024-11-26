@@ -216,19 +216,16 @@
 																</c:when>
 																<c:when test="${mode == 'VIEW'}">
 																	<img
-																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																		src="<c:url value='/assets/provider-images/${provider.image }'/>"
 																		class="img-fluid change-img-avatar"
 																		alt="Product Image">
 																</c:when>
 															</c:choose>
 														</form>
 
-
 													</div>
 												</div>
 											</div>
-
-
 
 											<!-- Product Details Section -->
 											<div class="col-sm-6 col-12">

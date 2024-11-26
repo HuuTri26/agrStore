@@ -416,7 +416,7 @@
 						<div class="biolife-tab biolife-tab-contain sm-margin-top-34px">
 							<div class="tab-head tab-head__icon-top-layout icon-top-layout">
 								<ul class="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
-<!-- 
+									<!-- 
 									<li class="tab-element  ml-5"><a href="#tab01_2nd"
 										class="tab-link"><span class="biolife-icon icon-grape2"></span>Trái
 											cây</a></li>
@@ -449,94 +449,9 @@
 							<div class="container">
 								<ul class="biolife-carousel nav-center-bold nav-none-on-mobile"
 									data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}},{"breakpoint":450, "settings":{ "slidesToShow": 1, "slidesMargin":10}}]}'>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-01.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-02.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-03.jpg'/>"
-														width="153" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-04.jpg'/>"
-														width="224" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-01.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-02.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-03.jpg'/>"
-														width="153" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-04.jpg'/>"
-														width="224" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
+
+									
+									
 								</ul>
 							</div>
 						</div>
