@@ -94,6 +94,15 @@ public class AccountDAOImpl implements AccountDAO {
 		List<AccountEntity> customers = query.list();
 		return customers;
 	}
+	@Override
+	public List<AccountEntity> getAllStaff(){
+		Session session =this.factory.getCurrentSession();
+		String hql="FROM AccountEntity a where a.role.id=:roleId and a.status = 1";
+		Query query=session.createQuery(hql);
+		query.setParameter("roleId",2);
+		List<AccountEntity> staffs=query.list();
+		return staffs;
+	}
 
 	@Override
 	public AccountEntity getAccountById(Integer id) {

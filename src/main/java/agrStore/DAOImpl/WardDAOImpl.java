@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import agrStore.DAO.WardDAO;
+import agrStore.entity.CategoryEntity;
 import agrStore.entity.WardEntity;
 
 @Repository
@@ -45,5 +46,6 @@ public class WardDAOImpl implements WardDAO{
 		
 		return ward;
 	}
+	
 
 }

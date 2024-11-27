@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Province")
 public class ProvinceEntity {
-	@Id
+	@Id 
 	@GeneratedValue
 	@Column(name = "provinceId")
 	private Integer id;
@@ -58,5 +58,6 @@ public class ProvinceEntity {
 	public void setDistricts(List<DistrictEntity> districts) {
 		this.districts = districts;
 	}
+	
 	
 }

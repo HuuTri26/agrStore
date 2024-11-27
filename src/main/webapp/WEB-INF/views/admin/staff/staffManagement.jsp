@@ -98,7 +98,7 @@ button{
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Staff Management</div>
-									<a href="staffManagement/staff.htm?action=add">
+									<a href="staffManagement/staffAdd.htm">
 										<button type="button" class="btn btn-info add-category">
 											<i class="bi bi-plus-square"></i> Add
 										</button>
@@ -121,140 +121,52 @@ button{
 													<th>Action</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+										<tbody>
+												<c:forEach var="staff" items="${staffs }">
+													<tr>
+														<td>${staff.accountId }</td>
+														<td><div class="media-box">
+																<img src="<c:url value='/assets/admin/assets/images/${staff.avatar }'/>"
+																	class="media-avatar "/>
+																<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
 																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
+															</div></td>
+														<td>${staff.fullName }</td>
+														<td>${staff.gmail }</td>
+														<td>${staff.phoneNumber }</td>
+														<td>${staff.address.streetName }</td>
 
-													<td><button class="badge shade-green min-70">Active</button>
-													</td>
+														 <td><span class="badge shade-green min-70">${staff.status }</span>
+														</td> 
 
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
+														<td>${staff.createAt }</td>
+												<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="staffManagement/staff.htm?action=view&id=${staff.accountId }"><i
+																			class="bi bi-eye"></i> </a> <a
+																			href="staffManagement/staff.htm?action=edit&id=${staff.accountId }"><i
+																			class="bi bi-pencil"></i> </a> <a
+																			href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
 																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><button class="badge shade-yellow min-70">Active</button>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
+																<a href="staffManagement/deleteStaff.htm?id=${staff.accountId }" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
 																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
+														</td>
 
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><button class="badge shade-red min-70">Block</button>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-											</tbody>
+													</tr>
+												</c:forEach>
+										</tbody>
 										</table>
 									</div>
 								</div>

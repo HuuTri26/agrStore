@@ -224,7 +224,7 @@
 
 
 																	<img
-																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																		src="<c:url value='/assets/admin/assets/images/${staff.avatar}'/>"
 																		class="img-fluid change-img-avatar"
 																		alt="Free Dashboards">
 
@@ -283,88 +283,133 @@
 													</div>
 												</div>
 											</div>
+											<form:form action="staffManagement/staff.htm"
+											method="post" modelAttribute="staff" >
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
-													<div class="card-border-title">Add Staff</div>
+													<div class="card-border-title"></div>
 													<div class="card-border-body">
-
+													
+													<form:hidden path="accountId" />
 														<div class="row gx-3">
-															<div class="col-sm-6 col-12">
+																<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Name <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label> 
+																		<form:input path="fullName" class="form-control"
+																		placeholder="Enter Phone"
+																		readonly="${mode=='VIEW' }"/>
+																		<form:errors path="fullName"/>
 																</div>
+															</div>
+															
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Phone <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label> 
+																		<form:input path="phoneNumber" class="form-control"
+																		placeholder="Enter Phone"
+																		readonly="${mode=='VIEW' }"/>
+																		<form:errors path="phoneNumber"/>
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Gmail <span
-																		class="text-red">*</span></label> <input type="email"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label>
+																	<form:input path="gmail" class="form-control"
+																		placeholder="Enter gmail"
+																		readonly="${mode=='VIEW' }"/>
+																		<form:errors path="gmail"/>
 																</div>
 															</div>
+														<div class="col-sm-6 col-12">
+															    <div class="mb-3">
+															       
+															        <c:choose>
+															        
+															            <c:when test="${mode == 'VIEW'}">
+															             <label class="form-label">Tỉnh/Thành phố <span class="text-red">*</span></label>
+															                <input type="text" class="form-control" value="${staff.address.ward.district.province.name}" readonly>
+															            </c:when>
+															            <c:when test="${mode == 'EDIT'}">
+															              
+															            </c:when>
+															        </c:choose>
+															    </div>
+															</div>
+															
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Staff Ward <span
-																		class="text-red">*</span></label> <select class="form-control">
-																		<option value="Select Product Category">Select
-																			wward</option>
-																		<option value="Mobiles">Ward</option>
-																		<option value="Books">Ward</option>
-																		<option value="Games">Ward</option>
-																	</select>
-																</div>
+															    <div class="mb-3">
+															      
+															        <c:choose>
+															            <c:when test="${mode == 'VIEW'}">
+															              <label class="form-label">Quận/Huyện <span class="text-red">*</span></label>
+															                <input type="text" class="form-control" value="${staff.address.ward.district.name}" readonly>
+															            </c:when>
+															            <c:when test="${mode == 'EDIT'}">
+															                
+															            </c:when>
+															        </c:choose>
+															    </div>
 															</div>
+															
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Staff District <span
-																		class="text-red">*</span></label> <select class="form-control">
-																		<option value="Select Product Category">Select
-																			Disstrict</option>
-																		<option value="Mobiles">Disstrict1</option>
-																		<option value="Books">District2</option>
-																		<option value="Games">Disstrict3</option>
-																	</select>
-																</div>
+															    <div class="mb-3">
+															       
+															        <c:choose>
+															            <c:when test="${mode == 'VIEW'}">
+															             <label class="form-label">Xã/Phường <span class="text-red">*</span></label>
+															                <input type="text" class="form-control" value="${staff.address.ward.name}" readonly>
+															            </c:when>
+															            <c:when test="${mode == 'EDIT'}">
+															               
+															            </c:when>
+															        </c:choose>
+															    </div>
 															</div>
+															
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Staff Province <span
-																		class="text-red">*</span></label> <select class="form-control">
-																		<option value="Select Product Category">Select
-																			Province</option>
-																		<option value="Mobiles">Province1</option>
-																		<option value="Books">Province2</option>
-																		<option value="Games">Province3</option>
-																	</select>
-																</div>
-															</div>
-															<div class="col-sm-12 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Staff Address <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
-																</div>
+															    <div class="mb-3">
+															       
+															        <c:choose>
+															            <c:when test="${mode == 'VIEW'}">
+															             <label class="form-label">Số nhà <span class="text-red">*</span></label>
+															                <input type="text" class="form-control" value="${staff.address.streetName}" readonly>
+															            </c:when>
+															            <c:when test="${mode == 'EDIT'}">
+															               
+															            </c:when>
+															        </c:choose>
+															    </div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Status <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label>
+																		<form:input path="status" class="form-control"
+																		placeholder="Enter Phone"
+																		readonly="${mode=='VIEW' }"/>
+																		<form:errors path="status"/>
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Create At <span
-																		class="text-red">*</span></label> <input type="date"
-																		class="form-control" placeholder="">
+																		class="text-red">*</span></label> 
+																		<form:input path="createAt" class="form-control"
+																		placeholder="Enter Phone"
+																		readonly="${mode=='VIEW' }"/>
+																		<form:errors path="createAt"/>
+																</div>
+															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Update At <span
+																		class="text-red">*</span></label>
+																	<form:input path="updateAt" class="form-control"
+																		readonly="true" placeholder="${sysDate}" />
 																</div>
 															</div>
 
@@ -374,21 +419,17 @@
 												</div>
 											</div>
 
-											<div class="col-sm-12 col-12">
-												<div class="custom-btn-group flex-end">
-													<button type="button" class="btn btn-light">Cancel</button>
-													<!-- Nút submit tương ứng với từng mode -->
-													<c:choose>
-														<c:when test="${mode == 'ADD'}">
-															<button type="submit" class="btn btn-success">Add
-																Staff</button>
-														</c:when>
-														<c:when test="${mode == 'EDIT'}">
-															<button type="submit" class="btn btn-primary">Update
-																Staff</button>
-														</c:when>
-													</c:choose>
-												</div>
+										<div class="col-sm-12 col-12">
+																<div class="custom-btn-group flex-end">
+																	<button type="button" class="btn btn-light" onclick="window.location.href='staffManagement.htm'">Cancel</button>
+																	<c:choose>
+																		
+																		<c:when test="${mode == 'EDIT'}">
+																			<button name="${mode}" class="btn btn-primary">Update
+																				Product</button>
+																		</c:when>
+																	</c:choose>
+																</div>
 											</div>
 										</div>
 									</form>
@@ -396,7 +437,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- Row end -->
+					</form:form>
 
 				</div>
 				<!-- Content wrapper end -->

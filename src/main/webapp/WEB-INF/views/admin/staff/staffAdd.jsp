@@ -1,0 +1,277 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<%@include file="/WEB-INF/views/include/admin/header.jsp"%>
+<head>
+<!-- Scrollbar CSS -->
+<link rel="stylesheet"
+	href="<c:url value='/assets/admin/assets/vendor/overlay-scroll/OverlayScrollbars.min.css'/>">
+
+<!-- Data Tables -->
+<link rel="stylesheet"
+	href="<c:url value='/assets/admin/assets/vendor/datatables/dataTables.bs5.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/assets/admin/assets/vendor/datatables/dataTables.bs5-custom.css'/>" />
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+<style>
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f8f9fa;
+	min-width: 120px;
+	box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+	z-index: 1;
+	border-radius: 8px;
+	overflow: hidden;
+	top: 90%;
+	left: 0;
+	margin-top: 5px;
+	border: 1px solid #e1e4e8;
+	padding: 8px;
+	z-index: 10;
+}
+
+.dropdown:hover .dropdown-content {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dropdown-content a {
+	color: #24292e;
+	padding: 12px;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+	font-size: 12px;
+	width: calc(50% - 8px);
+	margin: 4px;
+	border-radius: 4px;
+}
+
+.dropdown-content a:hover {
+	background-color: #0366d6;
+	color: white;
+}
+
+.dropdown-content i {
+	font-size: 1.5em;
+	margin-bottom: 4px;
+}
+
+.dropzone-dark {
+	width: 100%;
+	max-width: 600px; /* Reduced from 800px */
+	margin: 0 auto;
+	padding: 20px; /* Reduced from 30px */
+	background: #f8f9fa;
+	border-radius: 8px; /* Reduced from 12px */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dz-message {
+	width: 100%;
+	margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.dz-button {
+	width: 100%;
+	padding: 25px; /* Reduced from 40px */
+	border: 2px dashed #4a90e2;
+	border-radius: 6px; /* Reduced from 8px */
+	cursor: pointer;
+	background: #f0f7ff;
+	transition: all 0.3s ease;
+	height: 30vh;
+}
+
+.dz-button:hover {
+	border-color: #357abd;
+	background: #e6f2ff;
+	transform: translateY(-2px);
+}
+
+.dz-button::file-selector-button {
+	padding: 10px 20px; /* Reduced from 12px 24px */
+	background: #4a90e2;
+	color: white;
+	border: none;
+	border-radius: 4px; /* Reduced from 6px */
+	font-size: 14px; /* Reduced from 16px */
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.dz-button::file-selector-button:hover {
+	background: #357abd;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px; /* Reduced from 20px */
+}
+
+.upload-btn {
+	padding: 12px 30px; /* Reduced from 15px 40px */
+	background: linear-gradient(45deg, #4a90e2, #357abd);
+	color: white;
+	border: none;
+	border-radius: 6px; /* Reduced from 8px */
+	font-size: 16px; /* Reduced from 18px */
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+	width: 100%;
+}
+
+.upload-btn:hover {
+	background: linear-gradient(45deg, #357abd, #2868a9);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+.upload-btn:active {
+	transform: translateY(1px);
+}
+</style>
+</head>
+<body>
+	<div class="page-wrapper">
+		<%@include file="/WEB-INF/views/include/admin/sideBar.jsp"%>
+		<div class="main-container">
+			<%@include file="/WEB-INF/views/include/admin/bodyHeader.jsp"%>
+				<!-- Content wrapper scroll start -->
+			<div class="content-wrapper-scroll">
+
+				<!-- Content wrapper start -->
+				<div class="content-wrapper">
+
+					<!-- Row start -->
+					
+
+				<form action="staffManagement/staffAdd.htm" name="frm-add" method="post">
+				<div class="row gx-3">
+						<div class="col-sm-12 col-12">
+							<div class="card">
+								<div class="card-header">
+								<div class="card-body">
+									<form>
+										<div class="row gx-3">
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div id="dropzone" class="dropzone-dark">
+
+
+																		<div class="input_file_cate">
+
+																			<input type="file" class="dz-button" />
+																			<!-- <br> <span class="note needsclick">(This is
+																	just a demo dropzone. Selected files are <strong>not</strong>
+																	actually uploaded.)
+																</span> -->
+																		</div>
+																		<div class="dz-message needsclick button-container">
+																			<button class="upload-btn">Upload ảnh</button>
+																		</div>
+
+
+
+																	</div>
+																<div class="col-lg-6">
+										    <div class="mb-3">
+										        <label for="fid-gmail" class="form-label">Gmail: <span class="text-danger">*</span></label>
+										        <input type="email" id="fid-gmail" name="fid-gmail" value="" class="form-control" placeholder="Nhập Gmail">
+										        <small class="text-danger">${gmErr}</small>
+										    </div>
+									    <div class="mb-3">
+									        <label for="fid-password" class="form-label">Mật khẩu: <span class="text-danger">*</span></label>
+									        <input type="password" id="fid-password" name="password" value="" class="form-control" placeholder="Nhập mật khẩu">
+									        <small class="text-danger">${passErr}</small>
+									    </div>
+									</div>
+																	<div class="col-lg-6">
+								    <div class="mb-3">
+								        <label for="re-enter-password" class="form-label">Nhập lại mật khẩu: <span class="text-danger">*</span></label>
+								        <input type="password" id="re-enter-password" name="re-enter-password" value="" class="form-control" placeholder="Nhập lại mật khẩu">
+								        <small class="text-danger">${rePassErr}</small>
+								    </div>
+								    <div class="mb-3">
+								        <label for="full-name" class="form-label">Họ và tên: <span class="text-danger">*</span></label>
+								        <input required type="text" id="full-name" name="full-name" value="" class="form-control" placeholder="Nhập họ và tên">
+								        <small class="text-danger">${nameErr}</small>
+								    </div>
+								    <div class="mb-3">
+								        <label for="phone-number" class="form-label">Số điện thoại: <span class="text-danger">*</span></label>
+								        <input required type="text" id="phone-number" name="phone-number" value="" class="form-control" placeholder="Nhập số điện thoại">
+								        <small class="text-danger">${phoneErr}</small>
+								    </div>
+								</div><div class="col-lg-6">
+    <div class="mb-3">
+        <label for="province" class="form-label">Tỉnh/Thành phố: <span class="text-danger">*</span></label>
+        <select id="province" name="provinceId" class="form-select" onchange="this.form.submit()">
+            <option value="">Chọn Tỉnh/Thành phố</option>
+            <c:forEach var="province" items="${provinces}">
+                <option value="${province.id}" ${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
+            </c:forEach>
+        </select>
+        <input type="text" id="provinceText" readonly class="form-control mt-2" 
+            value="${selectedProvince.name}" placeholder="Tỉnh/Thành phố đã chọn" />
+    </div>
+
+    <div class="mb-3">
+        <label for="district" class="form-label">Quận/Huyện: <span class="text-danger">*</span></label>
+        <select id="district" name="districtId" class="form-select" onchange="this.form.submit()">
+            <option value="">Chọn Quận/Huyện</option>
+            <c:forEach var="district" items="${districts}">
+                <option value="${district.id}" ${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
+            </c:forEach>
+        </select>
+        <input type="text" id="districtText" readonly class="form-control mt-2"
+            value="${selectedDistrict.name}" placeholder="Quận/Huyện đã chọn" />
+    </div>
+
+    <div class="mb-3">
+        <label for="ward" class="form-label">Xã/Phường: <span class="text-danger">*</span></label>
+        <select id="ward" name="wardId" class="form-select" onchange="this.form.submit()">
+            <option value="">Chọn Xã/Phường</option>
+            <c:forEach var="ward" items="${wards}">
+                <option value="${ward.id}">${ward.name}</option>
+            </c:forEach>
+        </select>
+        <input type="text" id="wardText" readonly class="form-control mt-2"
+            value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
+    </div>
+
+    <div class="mb-3">
+        <label for="streetName" class="form-label">Tên đường: <span class="text-danger">*</span></label>
+        <input type="text" id="streetName" name="streetName" class="form-control"
+            placeholder="vd: Số 23, Đường Lê Văn Việt">
+        <small class="text-danger">${streetErr}</small>
+    </div>
+
+   <div class="text-end">
+    <button type="button" class="btn btn-secondary btn-bold me-2"  onclick="window.location.href='staffManagement.htm'">
+        Cancel
+    </button>
+    <button type="submit" class="btn btn-primary btn-bold" name="add">
+        Add Staff
+    </button>
+</div>
+
+							</form>
+
+	<%@include file="/WEB-INF/views/include/admin/footer.jsp"%>
+</body>
+</html>

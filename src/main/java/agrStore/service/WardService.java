@@ -12,4 +12,5 @@ import agrStore.entity.WardEntity;
 public interface WardService {
 	public List<WardEntity> getListWardByDistrictId(Integer dId);
 	public WardEntity getWardById(Integer id);
+	
 }

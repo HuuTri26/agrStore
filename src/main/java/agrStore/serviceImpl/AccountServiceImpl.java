@@ -51,5 +51,9 @@ public class AccountServiceImpl implements AccountService{
 		// TODO Auto-generated method stub
 		return this.AccountDAO.getAccountById(id);
 	}
+	@Override
+	public List<AccountEntity>getAllStaff(){
+		return this.AccountDAO.getAllStaff();
+	}
 
 }

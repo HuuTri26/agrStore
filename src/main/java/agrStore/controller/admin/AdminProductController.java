@@ -119,6 +119,7 @@ public class AdminProductController {
 
 		Boolean isValid = Boolean.TRUE;
 
+		// Kiểm tra tính hợp lệ của các trường
 		if (product.getProductName() == null || ultility.standardizeName(product.getProductName()).isEmpty()) {
 			errors.rejectValue("productName", "product", "Tên sản phẩm không được để trống!");
 			isValid = Boolean.FALSE;
@@ -142,6 +143,7 @@ public class AdminProductController {
 			model.addAttribute("mode", "ADD");
 			return "admin/product/productForm";
 		}else {
+			//Cập nhật sản phẩm nếu hợp lệ
 			try {
 				ProductEntity newProduct = new ProductEntity();
 				newProduct.setProductName(ultility.standardizeName(product.getProductName()));
