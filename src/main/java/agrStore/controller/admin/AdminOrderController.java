@@ -40,7 +40,7 @@ public class AdminOrderController {
 	public String orderManagement(HttpServletRequest request, HttpSession session, ModelMap model,
 			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
 		// code
-    model.addAttribute("currentPage", "order");
+		model.addAttribute("currentPage", "order");
 		List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
 		Map<Integer, String> employeeNameMap = new HashMap<>();
 		for (OrderBillEntity orderBill : orderBills) {
@@ -148,5 +148,33 @@ public class AdminOrderController {
 		}
 
 		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý
+	}
+
+	@RequestMapping(value = "/orderManagement/order/updateOrderStatus", method = RequestMethod.POST)
+	public String updateOrderBillStatus(@RequestParam("orderBillId") Integer orderBillId,
+			@RequestParam("statusOrder") int statusOrder, ModelMap model) {
+		System.out.println(orderBillId);
+		System.out.println(statusOrder);
+		int kq =  this.orderBillService.updateOrderBillStatus(orderBillId, statusOrder);
+		if(kq == 1) {
+			List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
+			Map<Integer, String> employeeNameMap = new HashMap<>();
+			for (OrderBillEntity orderBill : orderBills) {
+				int employeeID = orderBill.getEmployeeId();
+				if (!employeeNameMap.containsKey(employeeID)) {
+					String employeeName = this.accountService.getAccountById(employeeID).getFullName();
+					employeeNameMap.put(employeeID, employeeName);
+				}
+			}
+
+			model.addAttribute("orderBills", orderBills);
+			model.addAttribute("employeeNameMap", employeeNameMap);
+		}
+		else {
+			System.out.println("Update thất bại");
+		}
+		
+
+		return "admin/order/orderManagement";
 	}
 }

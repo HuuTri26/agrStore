@@ -117,7 +117,55 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<c:forEach var="importBill" items="${importBills }">
+													<tr>
+														<td>${importBill.importBillId }</td>
+														<td>
+															<div class="media-box">
+																<img
+																	src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																	alt="Bootstrap Gallery">
+																<div class="media-box-body">
+																	<a href="#" class="text-truncate">${importBill.account.fullName }</a>
+
+																</div>
+															</div>
+														</td>
+
+														<td>${importBill.totalQuantity }</td>
+														<td><fmt:formatNumber value="85000"
+																pattern="#,###.## VND;VND -#,###.##" type="currency"
+																currencySymbol="VND" /></td>
+														<td>${importBill.createAt }</td>
+
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
+																			<i class="bi bi-eye"></i>
+																		</a> <a
+																			href="importBillManagement/importBill.htm?action=edit&id=${importBill.importBillId}">
+																			<i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
+																</div>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a>
+															</div>
+														</td>
+
+
+													</tr>
+												</c:forEach>
+												<%-- <tr>
 													<td>1</td>
 													<td>
 														<div class="media-box">
@@ -208,7 +256,7 @@
 													</td>
 
 
-												</tr>
+												</tr> --%>
 											</tbody>
 										</table>
 									</div>

@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -46,6 +47,32 @@ public class OrderBillDAOImpl implements OrderBillDAO{
 			e.printStackTrace();
 		}
 		return orderBill;
+	}
+
+	@Override
+	public int updateOrderStatus(Integer orderBillIdUpdate, int newOrderStatus) {
+		// TODO Auto-generated method stub
+		Session session = this.factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			OrderBillEntity orderBill = (OrderBillEntity) session.get(OrderBillEntity.class, orderBillIdUpdate);
+			if (orderBill != null) {
+				orderBill.setStatusOrder(newOrderStatus);
+				session.update(orderBill);
+				transaction.commit();
+			} else {
+	            System.out.println("OrderBillID: " + orderBillIdUpdate + " không tồn tại");
+	            return 0;
+	        }
+		} catch (Exception e) {
+			// TODO: handle exception
+			transaction.rollback();
+			System.out.println("Error: " + e.toString());
+			return 0;
+		}finally {
+			session.close();
+		}
+		return 1;
 	}
 
 }

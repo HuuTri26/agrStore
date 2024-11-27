@@ -108,117 +108,144 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
+									<form>
+										<div class="row gx-3">
+											<div class="col-sm-12 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Order</div>
+													<div class="card-border-body">
 
-									<div class="row gx-3">
-										<div class="col-sm-12 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Order</div>
-												<div class="card-border-body">
-
-													<div class="row gx-3">
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Customer Name<span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control"
-																	value="${orderBill.account.fullName }" readonly>
+														<div class="row gx-3">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Customer Name<span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control"
+																		value="${orderBill.account.fullName }" readonly>
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Employee Name<span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" value="${employee.fullName }"
-																	readonly>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Employee Name<span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" value="${employee.fullName }"
+																		readonly>
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<%-- <label class="form-label">Total Price <span
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<%-- <label class="form-label">Total Price <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" value="${orderBill.totalPrice }"
 																	readonly> --%>
-																<label class="form-label">Total Price <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control"
-																	value="<fmt:formatNumber value='${orderBill.totalPrice}' pattern='#,##0' />"
-																	readonly>
+																	<label class="form-label">Total Price <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control"
+																		value="<fmt:formatNumber value="${orderBill.totalPrice }"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />"
+																		readonly>
+																</div>
 															</div>
-														</div>
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Total Quantity <span
-																	class="text-red">*</span></label> <input type="number"
-																	class="form-control"
-																	value="${orderBill.totalQuantity }" readonly>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Total Quantity <span
+																		class="text-red">*</span></label> <input type="number"
+																		class="form-control"
+																		value="${orderBill.totalQuantity }" readonly>
+																</div>
 															</div>
-														</div>
-													</div>
-													<!-- <div class="col-sm-6 col-12">
+
+															<!-- <div class="col-sm-6 col-12">
 														<div class="mb-3">
 															<label class="form-label">Status Order <span
 																class="text-red">*</span></label> <input type="number"
 																class="form-control" placeholder="">
 														</div>
 													</div> -->
-													<div class="col-sm-6 col-12">
-														<div class="mb-3">
-															<label class="form-label">Status Order <span
-																class="text-red">*</span></label>
-															<form:form method="PUT" modelAttribute="orderBill"
-																action="orderManagement/order.htm">
-																<form:select path="statusOrder" class="form-control">
-																	<form:options items="${statusOrderMap}" />
-																</form:select>
-															</form:form>
-														</div>
-													</div>
-
-														<div class="col-sm-6 col-12">
-															<div class="mb-3">
-																<label class="form-label">Order Time <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Status Order <span
+																		class="text-red">*</span></label>
+																	<form:form method="PUT" modelAttribute="orderBill"
+																		action="orderManagement/order.htm">
+																		<form:select path="statusOrder" class="form-control">
+																			<form:options items="${statusOrderMap}" />
+																		</form:select>
+																	</form:form>
+																</div>
 															</div>
-														</div>
 
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Order Time <span
+																		class="text-red">*</span></label> <input type="text"
+																		class="form-control" value="${orderBill.orderTime }" readOnly>
+																</div>
+															</div>
+															<div class="col-sm-12 col-12">
+																<div class="custom-btn-group flex-end">
+																	<button type="button" class="btn btn-light">
+																		<a href="orderManagement.htm">Cancel</a>
+																	</button>
+																	<c:choose>
+																		<c:when test="${mode == 'ADD'}">
+																			<button type="submit" class="btn btn-success">Add
+																			</button>
+																		</c:when>
+																		<c:when test="${mode == 'EDIT'}">
+																			<button type="submit" class="btn btn-primary">Update
+																			</button>
+																		</c:when>
+																	</c:choose>
+																</div>
+															</div>
+
+														</div>
 													</div>
 												</div>
-
 											</div>
 										</div>
-										<div class="col-sm-12 col-12">
-											<div class="card-border">
-												<div class="card-border-title">Oder Item</div>
-												<div class="card-border-body">
 
-													<div class="row gx-3">
-														<div class="table-responsive">
-															<table id="basicExample" class="table custom-table">
-																<thead>
+									</form>
+									<div class="col-sm-12 col-12">
+										<div class="card-border">
+											<div class="card-border-title">Oder Item</div>
+											<div class="card-border-body">
+
+												<div class="row gx-3">
+													<div class="table-responsive">
+														<table id="basicExample" class="table custom-table">
+															<thead>
+																<tr>
+																	<th>STT</th>
+																	<th>Product Image</th>
+																	<th>Product Name</th>
+																	<th>Quantity</th>
+																	<th>Price</th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach var="orderBillDetail"
+																	items="${orderBillDetailEntities }" varStatus="status">
 																	<tr>
-																		<th>STT</th>
-																		<th>Product Image</th>
-																		<th>Product Name</th>
-																		<th>Quantity</th>
-																		<th>Price</th>
+																		<td>${status.index + 1}</td>
+																		<td><div class="media-box">
+																				<img src="/assets/product-images/${orderBillDetail.product.image}"
+																					class="media-avatar rounded-circle img-fluid"
+																					alt="User Avatar"
+																					style="width: 45px; height: 45px; object-fit: cover;" />
+																			</div></td>
+																		<td>${orderBillDetail.product.productName}</td>
+																		<td>${orderBillDetail.quantity }</td>
+																		<td><fmt:formatNumber
+																				value="${orderBillDetail.price }" pattern="#,##0" /></td>
+																		<%-- <td>${orderBillDetail.price }</td> --%>
+
+
 																	</tr>
-																</thead>
-																<tbody>
-																	<c:forEach var="orderBillDetail"
-																		items="${orderBillDetailEntities }" varStatus="status">
-																		<tr>
-																			<td>${status.index + 1}</td>
-																			<td>${orderBillDetail.product.productName}</td>
-																			<td>${orderBillDetail.quantity }</td>
-																			<td><fmt:formatNumber
-																					value="${orderBillDetail.price }" pattern="#,##0" /></td>
-																			<%-- <td>${orderBillDetail.price }</td> --%>
-
-
-																		</tr>
-																	</c:forEach>
-																	<!-- <tr>
+																</c:forEach>
+																<!-- <tr>
 																		<td>1</td>
 																		<td><div class="media-box">
 																				<img
@@ -233,54 +260,38 @@
 
 
 																	</tr> -->
-																</tbody>
-															</table>
-														</div>
-
+															</tbody>
+														</table>
 													</div>
 
 												</div>
-											</div>
-										</div>
 
-										<div class="col-sm-12 col-12">
-											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">
-													<a href="orderManagement.htm">Cancel</a>
-												</button>
-												<c:choose>
-													<c:when test="${mode == 'ADD'}">
-														<button type="submit" class="btn btn-success">Add
-														</button>
-													</c:when>
-													<c:when test="${mode == 'EDIT'}">
-														<button type="submit" class="btn btn-primary">Update
-														</button>
-													</c:when>
-												</c:choose>
 											</div>
 										</div>
 									</div>
 
+
 								</div>
+
 							</div>
 						</div>
 					</div>
-					<!-- Row end -->
-
 				</div>
-				<!-- Content wrapper end -->
-				<!-- App Footer start -->
-				<div class="app-footer">
-					<span>Nhom10</span>
-				</div>
-				<!-- App footer end -->
+				<!-- Row end -->
 
 			</div>
-		</div>
-		<!-- Content wrapper scroll end -->
+			<!-- Content wrapper end -->
+			<!-- App Footer start -->
+			<div class="app-footer">
+				<span>Nhom10</span>
+			</div>
+			<!-- App footer end -->
 
-		<!-- *************
+		</div>
+	</div>
+	<!-- Content wrapper scroll end -->
+
+	<!-- *************
 				************ Main container end *************
 			************* -->
 
