@@ -332,12 +332,13 @@
 							<div class="tab-head tab-head__icon-top-layout icon-top-layout">
 								<ul class="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
 									<c:forEach var="category" items="${categories }">
-											<a href="showProducts.htm?id=${category.categoryId}" class="tab-element ${category.categoryId == selectedCategoryId ? 'active' : ''} ml-5 ">
+										<a href="showProductsBycId.htm?cId=${category.categoryId}"
+											class="tab-element ${category.categoryId == selectedCategoryId ? 'active' : ''} ml-5 ">
 											<div class="icon-wrapper">
 												<span class="icon-category"
 													style="background-image: url('${pageContext.request.contextPath}/assets/category-images/${category.image}');"></span>
 											</div> <span class="category-name">${category.categoryName}</span>
-											</a>
+										</a>
 									</c:forEach>
 								</ul>
 							</div>
@@ -359,94 +360,22 @@
 							<div class="container">
 								<ul class="biolife-carousel nav-center-bold nav-none-on-mobile"
 									data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}},{"breakpoint":450, "settings":{ "slidesToShow": 1, "slidesMargin":10}}]}'>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-01.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-02.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-03.jpg'/>"
-														width="153" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-04.jpg'/>"
-														width="224" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-01.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-02.jpg'/>"
-														width="214" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-03.jpg'/>"
-														width="153" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
-									<li>
-										<div class="biolife-brd-container">
-											<a href="#" class="link">
-												<figure>
-													<img
-														src="<c:url value='/assets/assets/images/home-03/brd-04.jpg'/>"
-														width="224" height="163" alt="">
-												</figure>
-											</a>
-										</div>
-									</li>
+									<c:forEach var="provider" items="${providers }">
+										<li>
+											<div class="biolife-brd-container">
+												<a href="showProductsBypId.htm?pId=${provider.id}" class="link">
+													<figure>
+														<img
+															src="<c:url value='/assets/provider-images/${provider.image }'/>"
+															width="214" height="163" alt="">
+															<div class="tab-element ${provider.id == selectedProviderId ? 'active' : ''} ml-5 ">
+																<span class="category-name">${provider.providerName}</span>
+															</div>
+													</figure>
+												</a>
+											</div>
+										</li>
+									</c:forEach>
 								</ul>
 							</div>
 						</div>

@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import agrStore.entity.CategoryEntity;
-import agrStore.entity.ProductEntity;
 import agrStore.entity.ProviderEntity;
 import agrStore.service.ProviderService;
 import agrStore.utility.Ultility;

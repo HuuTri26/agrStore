@@ -30,8 +30,12 @@ public class RoleEntity {
 		this.name = name;
 		this.accounts = accounts;
 	}
-
-
+	
+	public RoleEntity(String name) {
+		super();
+		this.name = name;
+	}
+	
 	public RoleEntity() {
 		super();
 	}

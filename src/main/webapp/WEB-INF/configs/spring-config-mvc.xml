@@ -16,8 +16,8 @@
 	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
 
 	<!-- Cấu hình interceptor -->
-	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
-		class="agrStore.interceptor.CustomerInterceptor" /> </mvc:interceptor> </mvc:interceptors> -->
+	<mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class="agrStore.interceptor.CustomerInterceptor" /> </mvc:interceptor> </mvc:interceptors>
 
 	<!-- Cấu hình view -->
 	<bean id="viewResolver" p:prefix="/WEB-INF/views/" p:suffix=".jsp"

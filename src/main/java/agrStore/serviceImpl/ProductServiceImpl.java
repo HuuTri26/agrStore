@@ -52,4 +52,9 @@ public class ProductServiceImpl implements ProductService{
 		return ProductDAO.getListProductByCategotyId(cId);
 	}
 
+	@Override
+	public List<ProductEntity> getListProductByProviderId(Integer pId) {
+		return ProductDAO.getListProductByProviderId(pId);
+	}
+
 }
