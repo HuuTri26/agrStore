@@ -106,7 +106,7 @@ public class AdminCategoryController {
 
 				categoryService.addCategory(category);
 				System.out.println("==> New category add successfully!");
-				return "redirect:categoryManagement.htm";
+				return "redirect:/categoryManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New category add failed!");

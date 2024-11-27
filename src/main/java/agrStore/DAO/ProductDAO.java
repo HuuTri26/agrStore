@@ -9,4 +9,6 @@ public interface ProductDAO {
 	public void updateProduct(ProductEntity product);
 	public List<ProductEntity> getListProduct();
 	public ProductEntity getProductById(Integer id);
+	public List<ProductEntity> getListProductByCategotyId(Integer cId);
+	public List<ProductEntity> getListProductByProviderId(Integer pId);
 }

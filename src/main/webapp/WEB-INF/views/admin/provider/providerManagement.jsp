@@ -73,9 +73,10 @@
 	float: right;
 	font-size: 10px;
 }
-button{
-	outline:none;
-	border:none;
+
+button {
+	outline: none;
+	border: none;
 }
 </style>
 </head>
@@ -98,7 +99,7 @@ button{
 							<!-- Card start -->
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Category Management</div>
+									<div class="card-title">${currentPage}Management</div>
 									<a href="providerManagement/provider.htm?action=add">
 										<button type="button" class="btn btn-info add-category">
 											<i class="bi bi-plus-square"></i> Add
@@ -121,71 +122,43 @@ button{
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>Provider1</td>
-													<td><button class="badge shade-green min-70">Active</button>
-													</td>
-													<td>0123456</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="providerManagement/provider.htm?action=view&id=${provider.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a
-																		href="providerManagement/provider.htm?action=edit&id=${provider.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="providerActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
+												<c:forEach var="provider" items="${providers}">
+													<tr>
+														<td>${provider.id}</td>
+														<td>${provider.providerName}</td>
+														<td>
+															<button
+																class="badge ${provider.status == 'true' ? 'shade-green' : 'shade-red'} min-70">
+																${provider.status}</button>
+														</td>
+														<td>${provider.phoneNumber}</td>
+														<td>
+															<div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a
+																			href="providerManagement/provider.htm?action=view&id=${provider.id}">
+																			<i class="bi bi-eye"></i>
+																		</a> <a
+																			href="providerManagement/provider.htm?action=edit&id=${provider.id}">
+																			<i class="bi bi-pencil"></i>
+																		</a> <a href="providerActive.htm?id=${provider.id}"> <i
+																			class="bi bi-check-circle active-icon"></i>
+																		</a>
+																	</div>
 																</div>
-															</div>
-															<a href="providerDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>Provider1</td>
-													<td><button class="badge shade-red min-70">Block</button>
-													</td>
-													<td>0123456</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
+																<a href="providerManagement/deleteProvider.htm?id=${provider.id }" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
 																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="providerManagement/provider.htm?action=view&id=${provider.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a
-																		href="providerManagement/provider.htm?action=edit&id=${provider.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="providerActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
 															</div>
-															<a href="providerDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-
+															
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>

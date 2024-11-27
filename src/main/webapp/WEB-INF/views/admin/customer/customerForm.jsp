@@ -219,7 +219,7 @@
 
 
 																	<img
-																		src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																		src="<c:url value='/assets/user-images/${customer.avatar}'/>"
 																		class="img-fluid change-img-avatar"
 																		alt="Free Dashboards">
 
@@ -319,9 +319,11 @@
 																	<label class="form-label">Xã <span
 																		class="text-red">*</span></label> <input type="text"
 																		class="form-control" placeholder=""
-																		value="${wardName }" readonly>
+																		value="${customer.address.ward.name }" readonly>
+
 																</div>
 															</div>
+
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<!-- <label class="form-label">Customer District <span
@@ -335,9 +337,12 @@
 																	<label class="form-label">Huyện <span
 																		class="text-red">*</span></label> <input type="text"
 																		class="form-control" placeholder=""
-																		value="${districtName }" readonly>
+																		value="${customer.address.ward.district.name }"
+																		readonly>
+
 																</div>
 															</div>
+
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<!-- <label class="form-label">Customer Province <span
@@ -351,7 +356,9 @@
 																	<label class="form-label">Tỉnh <span
 																		class="text-red">*</span></label> <input type="text"
 																		class="form-control" placeholder=""
-																		value="${provinceName }" readonly>
+																		value="${customer.address.ward.district.province.name }"
+																		readonly>
+
 																</div>
 															</div>
 															<div class="col-sm-12 col-12">
@@ -363,21 +370,37 @@
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Status <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
-																</div>
-															</div>
+																			<div class="mb-3">
+																				<%-- <label class="form-label">Status <span
+																					class="text-red">*</span></label> <input type="text"
+																					class="form-control" value="${customer.status }"> --%>
+																				
+																					<c:choose>
+																					    <c:when test="${customer.status == true}">
+																					        <c:set var="statusText" value="Còn hoạt động" />
+																					    </c:when>
+																					    <c:when test="${customer.status == false}">
+																					        <c:set var="statusText" value="Ngừng hoạt động" />
+																					    </c:when>
+																					    <c:otherwise>
+																					        <c:set var="statusText" value="Trạng thái không xác định" />
+																					    </c:otherwise>
+																					</c:choose>
+																					<label class="form-label">Status <span class="text-red">*</span></label>
+																					<input type="text" class="form-control" value="${statusText}" readonly>
+																					
+																			</div>
+																		</div>
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Create At <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder="">
-																</div>
-															</div>
+																			<div class="mb-3">
+																				<label class="form-label">Create At <span
+																					class="text-red">*</span></label> <input type="text"
+																					class="form-control" placeholder=""
+																					value="${customer.createAt }" readonly>
+																			</div>
+																		</div>
 
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Provider <span
 																	class="text-red">*</span></label> <select class="form-control">
@@ -389,28 +412,28 @@
 																</select>
 															</div>
 														</div> -->
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Price <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-															<!-- 	<div class="col-sm-6 col-12">
+																		<!-- 	<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Quantity <span
 																	class="text-red">*</span></label> <input type="number"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Unit <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class=" mb-3">
 																<label class="form-label">Product Discount</label>
 																<div class="input-group">
@@ -420,7 +443,7 @@
 																</div>
 															</div>
 														</div> -->
-															<!-- 	<div class="col-sm-12 col-12">
+																		<!-- 	<div class="col-sm-12 col-12">
 															<div class="mb-0">
 																<label class="form-label">Staff Description <span
 																	class="text-red">*</span></label>
@@ -428,29 +451,33 @@
 																	placeholder="Enter Description"></textarea>
 															</div>
 														</div> -->
-														</div>
+																	</div>
+
+
+
 
 
 													</div>
 												</div>
+
 											</div>
-										</div>
-										<div class="col-sm-12 col-12">
-											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">
-													<a href="customerManagement.htm">Back</a>
-												</button>
-												<!-- Nút submit tương ứng với từng mode -->
-												<c:choose>
-													<c:when test="${mode == 'ADD'}">
-														<button type="submit" class="btn btn-success">Add
-															Staff</button>
-													</c:when>
-													<c:when test="${mode == 'EDIT'}">
-														<button type="submit" class="btn btn-primary">Update
-															Staff</button>
-													</c:when>
-												</c:choose>
+											<div class="col-sm-12 col-12">
+												<div class="custom-btn-group flex-end">
+													<button type="button" class="btn btn-light">
+														<a href="customerManagement.htm">Back</a>
+													</button>
+													<!-- Nút submit tương ứng với từng mode -->
+													<c:choose>
+														<c:when test="${mode == 'ADD'}">
+															<button type="submit" class="btn btn-success">Add
+																Staff</button>
+														</c:when>
+														<c:when test="${mode == 'EDIT'}">
+															<button type="submit" class="btn btn-primary">Update
+																Staff</button>
+														</c:when>
+													</c:choose>
+												</div>
 											</div>
 										</div>
 									</form>

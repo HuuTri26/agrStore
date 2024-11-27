@@ -37,7 +37,7 @@ public class RecaptchaVerification {
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			wr.writeBytes(postParams);
 			wr.flush();
-			wr.close();
+			//wr.close();
 			
 			Integer reponseCode = con.getResponseCode();
 			BufferedReader in = new BufferedReader(new InputStreamReader(

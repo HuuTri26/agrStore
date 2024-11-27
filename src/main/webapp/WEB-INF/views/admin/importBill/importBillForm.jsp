@@ -126,22 +126,28 @@
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Employee Name<span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="text-red">*</span></label> <input
+																	value="${importBill.account.fullName }" type="text"
+																	class="form-control" placeholder="" readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Total Price <span
-																	class="text-red">*</span></label> <input type="text"
-																	class="form-control" placeholder="">
+																	class="text-red">*</span></label> <input
+																	value="<fmt:formatNumber value="${importBill.totalPrice }"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" />"
+																	type="text" class="form-control" placeholder=""
+																	readonly>
 															</div>
 														</div>
 														<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Total Quantity <span
-																	class="text-red">*</span></label> <input type="number"
-																	class="form-control" placeholder="">
+																	class="text-red">*</span></label> <input
+																	value="${importBill.totalQuantity }" type=number
+																	class="form-control" placeholder="" readonly>
 															</div>
 														</div>
 													</div>
@@ -169,21 +175,40 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
+																	<c:forEach var="importBillDetail"
+																		items="${importBillDetails }">
+																		<tr>
+																		<td>${importBillDetail.importBillDetailId }</td>
+																		<td><div class="media-box">
+																				<img
+																					src="<c:url value='assets/admin/assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
+																					alt="Bootstrap Gallery">
+																			</div></td>
+																		<td>${importBillDetail.product.productName}</td>
+																		<td>${importBillDetail.quantity }</td>
+																		<td><fmt:formatNumber
+																				value="${importBillDetail.price }"
+																				pattern="#,###.## VND;VND -#,###.##" type="currency"
+																				currencySymbol="VND" /></td>
+
+																		</tr>
+																	</c:forEach>
+																	<%-- <tr>
 																		<td>1</td>
 																		<td><div class="media-box">
 																				<img
-																					src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																					src="<c:url
+																	value='assets/admin/assets/images/user2.png"
+																	class="media-avatar'/>"
 																					alt="Bootstrap Gallery">
 																			</div></td>
 																		<td>Táo</td>
 																		<td>10</td>
 																		<td><fmt:formatNumber value="85000"
-															pattern="#,###.## VND;VND -#,###.##" type="currency"
-															currencySymbol="VND" /></td>
-
-
-																	</tr>
+																				pattern="#,###.##
+																	VND;VND -#,###.##"
+																				type="currency" currencySymbol="VND" /></td>
+																	</tr> --%>
 																</tbody>
 															</table>
 														</div>

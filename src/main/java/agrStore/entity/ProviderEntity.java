@@ -30,6 +30,9 @@ public class ProviderEntity {
 	@Column(name = "status")
 	private Boolean status;
 	
+	@Column(name = "image")
+	private String image;
+	
 	@OneToMany(mappedBy = "provider", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<ProductEntity> productList;
@@ -38,12 +41,13 @@ public class ProviderEntity {
 		super();
 	}
 
-	public ProviderEntity(Integer id, String providerName, String phoneNumber, Boolean status) {
+	public ProviderEntity(Integer id, String providerName, String phoneNumber, Boolean status, String image) {
 		super();
 		this.id = id;
 		this.providerName = providerName;
 		this.phoneNumber = phoneNumber;
 		this.status = status;
+		this.image = image;
 	}
 
 	public Integer getId() {
@@ -76,6 +80,14 @@ public class ProviderEntity {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public List<ProductEntity> getProductList() {
