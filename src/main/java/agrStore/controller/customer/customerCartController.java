@@ -18,6 +18,7 @@ import agrStore.service.CartItemService;
 import agrStore.service.ProductService;
 
 @Controller
+@RequestMapping("/customer")
 public class customerCartController {
 
 	@Autowired

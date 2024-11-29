@@ -191,7 +191,7 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form:form action="providerManagement/provider.htm"
+									<form:form action="admin/providerManagement/provider.htm"
 										method="post" modelAttribute="provider">
 										<div class="row gx-3">
 											<div class="col-sm-6 col-12">

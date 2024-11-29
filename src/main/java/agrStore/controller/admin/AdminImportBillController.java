@@ -21,6 +21,7 @@ import agrStore.service.ImportBillDetailService;
 import agrStore.service.ImportBillService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminImportBillController {
 
 	@Autowired

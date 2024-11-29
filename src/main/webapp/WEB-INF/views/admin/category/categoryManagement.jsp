@@ -100,7 +100,7 @@ button {
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Category Management</div>
-									<a href="categoryManagement/category.htm?action=add">
+									<a href="admin/categoryManagement/category.htm?action=add">
 										<button type="button" class="btn btn-info add-category">
 											<i class="bi bi-plus-square"></i> Add
 										</button>
@@ -139,16 +139,16 @@ button {
 																	</a>
 																	<div class="dropdown-content">
 																		<a
-																			href="categoryManagement/category.htm?action=view&id=${category.categoryId}">
+																			href="admin/categoryManagement/category.htm?action=view&id=${category.categoryId}">
 																			<i class="bi bi-eye"></i>
 																		</a> <a
-																			href="categoryManagement/category.htm?action=edit&id=${category.categoryId}">
+																			href="admin/categoryManagement/category.htm?action=edit&id=${category.categoryId}">
 																			<i class="bi bi-pencil"></i>
 																		</a>
 																	</div>
 																</div>
 																<a
-																	href="categoryManagement/deleteCategory.htm?id=${category.categoryId}"
+																	href="admin/categoryManagement/deleteCategory.htm?id=${category.categoryId}"
 																	class="deleteRow"> <i class="bi bi-trash text-red"></i>
 																</a>
 															</div>

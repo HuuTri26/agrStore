@@ -147,12 +147,12 @@
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="feedbackManagement/feedback.htm?action=view&id=${feedback.id}">
+																		href="admin/feedbackManagement/feedback.htm?action=view&id=${feedback.id}">
 																		<i class="bi bi-eye"></i>
 																	</a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>
@@ -201,18 +201,18 @@
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="customerManagement/customer.htm?action=view&id=${customer.id}">
+																		href="admin/customerManagement/customer.htm?action=view&id=${customer.id}">
 																		<i class="bi bi-eye"></i>
 																	</a> <a
-																		href="customerManagement/customer.htm?action=edit&id=${customer.id}">
+																		href="admin/customerManagement/customer.htm?action=edit&id=${customer.id}">
 																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
+																	</a> <a href="admin/categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a> <a
-																		href="categoryActive.htm"><i
+																		href="admin/categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>

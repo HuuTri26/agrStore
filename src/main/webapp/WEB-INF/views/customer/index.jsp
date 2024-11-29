@@ -108,7 +108,7 @@
 							</div>
 							<div class="minicart-block">
 								<div class="minicart-contain">
-									<a href="customerCart.htm" class="link-to"> <span
+									<a href="customer/customerCart.htm" class="link-to"> <span
 										class="icon-qty-combine"> <i
 											class="icon-cart-mini biolife-icon"></i> <span class="qty">8</span>
 									</span> <span class="title">Giỏ hàng -</span> <span class="sub-total">0.00</span>
@@ -273,14 +273,14 @@
 									data-slick='{"rows":2 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":25 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":15}}]}'>
 									<c:forEach var="product" items="${randProducts }">
 
-										<li class="product-item">
+										<li class="product-item" href="productDetail.htm?productId=${product.productId}">
 											<div class="contain-product layout-default">
 												<div class="product-thumb">
-													<a href="#" class="link-to-product"> <img
+													<a href="productDetail.htm?productId=${product.productId}" class="link-to-product"> <img
 														src="<c:url value='/assets/product-images/${product.image }'/>"
 														alt="Vegetables" width="270" height="270"
 														class="product-thumnail">
-													</a> <a class="lookup btn_call_quickview" href="#"><i
+													</a> <a class="lookup " href="productDetail.htm?productId=${product.productId}"><i
 														class="biolife-icon icon-search"></i></a>
 												</div>
 												<div class="info">
@@ -332,7 +332,7 @@
 							<div class="tab-head tab-head__icon-top-layout icon-top-layout">
 								<ul class="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
 									<c:forEach var="category" items="${categories }">
-										<a href="showProductsBycId.htm?cId=${category.categoryId}"
+										<a href="customer/showProductsBycId.htm?cId=${category.categoryId}"
 											class="tab-element ${category.categoryId == selectedCategoryId ? 'active' : ''} ml-5 ">
 											<div class="icon-wrapper">
 												<span class="icon-category"
@@ -363,7 +363,7 @@
 									<c:forEach var="provider" items="${providers }">
 										<li>
 											<div class="biolife-brd-container">
-												<a href="showProductsBypId.htm?pId=${provider.id}" class="link">
+												<a href="customer/showProductsBypId.htm?pId=${provider.id}" class="link">
 													<figure>
 														<img
 															src="<c:url value='/assets/provider-images/${provider.image }'/>"

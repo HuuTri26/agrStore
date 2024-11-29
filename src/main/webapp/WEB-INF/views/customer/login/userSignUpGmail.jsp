@@ -51,7 +51,7 @@
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
 
-							<form:form action="userSignUpGmail.htm" name="frm-login"
+							<form:form action="user/userSignUpGmail.htm" name="frm-login"
 								method="post" modelAttribute="account">
 								<p class="form-row">
 									<label for="fid-name">Nhập Gmail sử dụng để đăng ký cho

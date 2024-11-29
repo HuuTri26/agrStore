@@ -98,7 +98,7 @@ button{
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Staff Management</div>
-									<a href="staffManagement/staff.htm?action=add">
+									<a href="admin/staffManagement/staff.htm?action=add">
 										<button type="button" class="btn btn-info add-category">
 											<i class="bi bi-plus-square"></i> Add
 										</button>
@@ -148,17 +148,17 @@ button{
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
+																		href="admin/staffManagement/staff.htm?action=view&id=${staff.id}">
 																		<i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
+																	</a> <a href="admin/categoryAdd.htm"><i
 																		class="bi bi-plus-circle"></i> </a> <a
-																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
+																		href="admin/staffManagement/staff.htm?action=edit&id=${staff.id}">
 																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
+																	</a> <a href="admin/categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>
@@ -192,17 +192,17 @@ button{
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
+																		href="admin/staffManagement/staff.htm?action=view&id=${staff.id}">
 																		<i class="bi bi-eye"></i>
 																	</a> <a href="categoryAdd.htm"><i
 																		class="bi bi-plus-circle"></i> </a> <a
-																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
+																		href="admin/staffManagement/staff.htm?action=edit&id=${staff.id}">
 																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
+																	</a> <a href="admin/categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>
@@ -236,17 +236,17 @@ button{
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="staffManagement/staff.htm?action=view&id=${staff.id}">
+																		href="admin/staffManagement/staff.htm?action=view&id=${staff.id}">
 																		<i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
+																	</a> <a href="admin/categoryAdd.htm"><i
 																		class="bi bi-plus-circle"></i> </a> <a
-																		href="staffManagement/staff.htm?action=edit&id=${staff.id}">
+																		href="admin/staffManagement/staff.htm?action=edit&id=${staff.id}">
 																		<i class="bi bi-pencil"></i>
-																	</a> <a href="categoryActive.htm"><i
+																	</a> <a href="admin/categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
-															<a href="categoryDelete.htm" class="deleteRow"> <i
+															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>

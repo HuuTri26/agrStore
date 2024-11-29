@@ -27,6 +27,7 @@ import agrStore.service.OrderBillDetailService;
 import agrStore.service.OrderBillService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminOrderController {
 
 	@Autowired

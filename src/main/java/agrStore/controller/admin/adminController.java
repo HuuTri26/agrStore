@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/admin")
 public class adminController {
 	@RequestMapping("/adminDashboard")
 	public String adminDashboard(HttpServletRequest request, HttpSession session, ModelMap model,

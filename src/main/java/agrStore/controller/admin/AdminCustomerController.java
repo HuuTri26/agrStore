@@ -25,6 +25,7 @@ import agrStore.entity.WardEntity;
 import agrStore.service.AccountService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminCustomerController {
 
 	@Autowired
@@ -110,7 +111,7 @@ public class AdminCustomerController {
 	@RequestMapping(value = "/customerManagement/customer", params = "btnCancel")
 	public String backToCustomerManagement() {
 		
-		return "redirect:/admin/customer/customerManagement";
+		return "redirect:/admin/customer/customerManagement.htm";
 	}
 	
 

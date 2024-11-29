@@ -464,7 +464,7 @@
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
 													<button type="button" class="btn btn-light">
-														<a href="customerManagement.htm">Back</a>
+														<a href="admin/customerManagement.htm">Back</a>
 													</button>
 													<!-- Nút submit tương ứng với từng mode -->
 													<c:choose>

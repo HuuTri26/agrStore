@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminStaffController {
 	@RequestMapping("/staffManagement")
 	public String staffManagement(HttpServletRequest request, HttpSession session,ModelMap model,

@@ -177,7 +177,7 @@ margin-bottom
 				<div class="row">
 					<div class="col-lg-3 order-lg-0 order-1">
 						<div class="dashboard__content-card-img">
-							<form action="customerProfile.htm" method="post"
+							<form action="customer/customerProfile.htm" method="post"
 								enctype="multipart/form-data" style="text-align: center">
 								<div class="dashboard__content-img-wrapper">
 									<div id="imagePreview"
@@ -197,7 +197,7 @@ margin-bottom
 					</div>
 					<div class="col-lg-9 order-lg-0 order-2">
 
-						<form action="customerProfile.htm" method="post">
+						<form action="customer/customerProfile.htm" method="post">
 							<div class="contact-form__content">
 								<div class="col-lg-6 order-lg-0 order-2">
 									<div class="contact-form-input">

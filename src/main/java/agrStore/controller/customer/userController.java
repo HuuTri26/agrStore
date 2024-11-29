@@ -38,6 +38,7 @@ import agrStore.service.RoleService;
 import agrStore.service.WardService;
 
 @Controller
+@RequestMapping("/user")
 public class userController {
 
 	@Autowired

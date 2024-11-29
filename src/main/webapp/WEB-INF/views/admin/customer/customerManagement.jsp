@@ -158,7 +158,7 @@ button {
 															</div> -->
 															<div class="actions">
 																<a
-																	href="customerManagement/customer.htm?action=view&id=${customer.accountId}">
+																	href="admin/customerManagement/customer.htm?action=view&id=${customer.accountId}">
 																	<i class="bi bi-eye text-green"></i>
 																</a>
 															</div>

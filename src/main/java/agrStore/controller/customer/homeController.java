@@ -76,4 +76,11 @@ public class homeController {
 		
 		return "customer/index";
 	}
+	
+	@RequestMapping(value = "/productDetail",method = RequestMethod.GET)
+	public String showProductDetail(Model model, @RequestParam(value = "productId") Integer productId) {
+		ProductEntity productById = productService.getProductById(productId);
+		model.addAttribute("productById",productById);
+	   return "customer/product/productDetail";
+	}
 }

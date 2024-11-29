@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminFeedbackController {
 	@RequestMapping("/feedbackManagement")
 	public String feedbackManagement(HttpServletRequest request, HttpSession session,ModelMap model,

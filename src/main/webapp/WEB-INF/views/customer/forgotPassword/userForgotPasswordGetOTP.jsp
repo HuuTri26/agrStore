@@ -130,7 +130,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	<!-- Main content -->
 
 
-	<form class="vefify-form" action="getOTPForgotPassword.htm"
+	<form class="vefify-form" action="user/getOTPForgotPassword.htm"
 		method="get">
 
 		<div
