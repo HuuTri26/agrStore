@@ -32,6 +32,7 @@ import agrStore.utility.Ultility;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
 import agrStore.service.CartService;
+import agrStore.service.DatabaseRoutingService;
 import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
@@ -67,6 +68,9 @@ public class userController {
 	
 	@Autowired
 	CartService cartService;
+	
+	@Autowired
+	DatabaseRoutingService databaseRoutingService;
 
 	@RequestMapping("/userLogin")
 	public String showUserLoginForm(Model model) {
@@ -624,6 +628,9 @@ public class userController {
 		 * request.getSession().invalidate();
 		 * System.out.println("==> Invalidate session's data");
 		 */
+		//Xóa khóa
+		databaseRoutingService.clearDataSourceKey();
+		
 		// Giải phóng dữ liệu của model attributes
 		sessionStatus.setComplete();
 		System.out.println("==> Clear model attributes");
