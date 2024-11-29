@@ -10,4 +10,5 @@ import agrStore.entity.RoleEntity;
 @Transactional
 public interface DatabaseRoutingService {
 	public void routingUserWithRole(RoleEntity role);
+	public void clearDataSourceKey();
 }

@@ -1,8 +1,12 @@
 package agrStore.interceptor;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -15,51 +19,50 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	DatabaseRoutingService databaseRoutingService;
 
+	private static final Set<String> PUBLIC_URIS = Set.of("/index.htm", "/user/userLogin.htm", "/user/userSignUp.htm",
+			"/user/userSignUpGmail.htm", "/getOTPSignUp.htm", "/changeForgotPassword.htm",
+			"/userForgotPasswordGetOTP.htm", "/forgotPass.htm");
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String uri = request.getRequestURI();
 
-		System.out.println("==> Interceptor check: " + uri);
-		// Không kiểm tra khi truy cập đến các trang không yêu cầu đăng nhập
-		if (uri.contains("index.htm") || uri.contains("userLogin.htm") || uri.contains("userSignUp.htm")
-				|| uri.contains("userSignUpGmail.htm") || uri.contains("getOTPSignUp.htm")
-				|| uri.contains("changeForgotPassword.htm") || uri.contains("userForgotPasswordGetOTP.htm")
-				|| uri.contains("forgotPass.htm")) {
-			// Định tuyến mặc định đến DEFAULT_AGENT
-			databaseRoutingService.routingUserWithRole(new RoleEntity("Default"));
+		String uri = request.getRequestURI();
+		System.out.println("==> UserInterceptor: Check uri: " + uri);
+
+		if (PUBLIC_URIS.stream().anyMatch(uri::contains)) {
 			return true;
 		}
 
-		// Kiểm tra người dùng đã đăng nhập hay chưa
+		// Check user authentication
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
-
 		if (loggedInUser == null) {
-			System.out.println("==> No permission, user intercepted! Using default database.");
-			// Định tuyến mặc định đến DEFAULT_AGENT nếu chưa đăng nhập
-			databaseRoutingService.routingUserWithRole(new RoleEntity("Default"));
-
-			// Chuyển hướng đến trang index
+			System.out.println("==> UserInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
-			return false; // Dừng request
+			databaseRoutingService.clearDataSourceKey();
+			return false;
 		}
 
-		// Khi người dùng đã đăng nhập, định tuyến database dựa trên role của user
-		if (loggedInUser.getRole() != null) {
-			System.out.println("==> Routing database for role: " + loggedInUser.getRole().getName());
-			databaseRoutingService.routingUserWithRole(loggedInUser.getRole());
-		} else {
-			System.out.println("==> Role not found, using default database!");
-			databaseRoutingService.routingUserWithRole(new RoleEntity("Default"));
+		// Routing based on user's role
+		RoleEntity userRole = loggedInUser.getRole();
+		if (userRole == null) {
+			System.out.println("==> UserInterceptor: Access denied! No role found for user.");
+			response.sendRedirect(request.getContextPath() + "/index.htm");
+			databaseRoutingService.clearDataSourceKey();
+			return false;
 		}
-		System.out.println(loggedInUser.getRole());
-		// Kiểm tra nếu người dùng không thuộc role "Customer" (id = 3)
-		/*
-		 * if (loggedInUser.getRole().getId() != 3) {
-		 * System.out.println("==> No permission, user intercepted! Role not allowed.");
-		 * response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
-		 * return false; }
-		 */
+
+		// Route to appropriate database based on user's role
+		try {
+			databaseRoutingService.routingUserWithRole(userRole);
+			System.out.println("==> UserInterceptor: Routing to DataSource for role: " + userRole.getName());
+		} catch (Exception e) {
+			System.out.println("==> UserInterceptor: DataSource routing failed for role:" + userRole.getName());
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/index.htm");
+			databaseRoutingService.clearDataSourceKey();
+			return false;
+		}
 
 		return true; // Tiếp tục xử lý request
 	}

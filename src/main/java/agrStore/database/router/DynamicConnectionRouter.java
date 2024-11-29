@@ -7,35 +7,35 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import agrStore.entity.RoleEntity;
 
 public class DynamicConnectionRouter extends AbstractRoutingDataSource {
-
-	private static final ThreadLocal<String> currentDataSourceKey = new ThreadLocal<String>();
+	// Make this static and ensure thread safety
+	private static final ThreadLocal<String> currentDataSourceKey = ThreadLocal.withInitial(() -> "defaultDataSource");
 
 	@Override
 	protected Object determineCurrentLookupKey() {
-		System.out.println(currentDataSourceKey.get());
-		return currentDataSourceKey.get();
-	}
-
-	public static void setDataSourceKey(String dataSourcKey) {
-		System.out.println(dataSourcKey);
-		currentDataSourceKey.set(dataSourcKey);
-	}
-
-	public void clearDataSourceKey() {
-		currentDataSourceKey.remove();
+		String key = currentDataSourceKey.get();
+		System.out.println("==> Retrieving DataSource Key: " + key);
+		return key;
 	}
 
 	public void route(RoleEntity role) {
-		// Bản đồ ánh xạ role -> data source key
-		Map<String, String> roleToDataSourceMap = Map.of(
-				"Admin", "ADMIN_DB", 
-				"Employee", "EMPLOYEE_DB", 
-				"Customer", "CUSTOMER_DB");
+		if (role == null) {
+			throw new IllegalArgumentException("==> Role cannot be null");
+		}
 
-		// Lấy data source key tương ứng với role, nếu không có thì dùng DEFAULT_DB
-		String dataSourceKey = roleToDataSourceMap.getOrDefault(role.getName(), "DEFAULT_DB");
-		System.out.println(dataSourceKey);
-		setDataSourceKey(dataSourceKey);
-		//System.out.println(dataSourceKey);
+		Map<String, String> roleToDataSourceMap = Map.of("Admin", "ADMIN_DB", "Employee", "EMPLOYEE_DB", "Customer",
+				"CUSTOMER_DB");
+
+		String dataSourceKey = roleToDataSourceMap.get(role.getName());
+		if (dataSourceKey == null) {
+			throw new IllegalArgumentException("==> No data source found for role: " + role.getName());
+		}
+
+		currentDataSourceKey.set(dataSourceKey);
+	}
+
+	// Add a method to clear the data source key after request
+	public void clearDataSourceKey() {
+		System.out.println("==> Clearing DataSource Key");
+		currentDataSourceKey.remove();
 	}
 }
