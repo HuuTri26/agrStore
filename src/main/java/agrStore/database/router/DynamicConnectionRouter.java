@@ -12,10 +12,12 @@ public class DynamicConnectionRouter extends AbstractRoutingDataSource {
 
 	@Override
 	protected Object determineCurrentLookupKey() {
+		System.out.println(currentDataSourceKey.get());
 		return currentDataSourceKey.get();
 	}
 
 	public static void setDataSourceKey(String dataSourcKey) {
+		System.out.println(dataSourcKey);
 		currentDataSourceKey.set(dataSourcKey);
 	}
 
@@ -33,5 +35,6 @@ public class DynamicConnectionRouter extends AbstractRoutingDataSource {
 		// Lấy data source key tương ứng với role, nếu không có thì dùng DEFAULT_DB
 		String dataSourceKey = roleToDataSourceMap.getOrDefault(role.getName(), "DEFAULT_DB");
 		setDataSourceKey(dataSourceKey);
+		//System.out.println(dataSourceKey);
 	}
 }

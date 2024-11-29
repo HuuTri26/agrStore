@@ -193,7 +193,7 @@
 											<div class="card-border">
 												<div class="card-border-title">Category Images</div>
 												<div class="card-border-body">
-													<form action="category/uploadImg.htm" method="post"
+													<form action="admin/category/uploadImg.htm" method="post"
 														enctype="multipart/form-data">
 														<c:choose>
 															<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
@@ -226,7 +226,7 @@
 												</div>
 											</div>
 										</div>
-										<form:form action="categoryManagement/category.htm"
+										<form:form action="admin/categoryManagement/category.htm"
 											method="post" modelAttribute="category">
 
 											<div class="col-sm-6 col-12">

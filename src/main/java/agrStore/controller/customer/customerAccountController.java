@@ -33,6 +33,7 @@ import agrStore.service.WardService;
 import agrStore.utility.Ultility;
 
 @Controller
+@RequestMapping("/customer")
 public class customerAccountController {
 
 	@Autowired

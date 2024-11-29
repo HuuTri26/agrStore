@@ -24,6 +24,7 @@ import agrStore.service.ProviderService;
 import agrStore.utility.Ultility;
 
 @Controller
+@RequestMapping("/admin")
 @SessionAttributes("provider")
 public class AdminProviderController {
 	@Autowired
@@ -123,7 +124,7 @@ public class AdminProviderController {
 
 				providerService.addProvider(newProvider);
 				System.out.println("==> New provider add successfully!");
-				return "redirect:/providerManagement.htm";
+				return "redirect:/admin/providerManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New provider add failed!");
@@ -160,7 +161,7 @@ public class AdminProviderController {
 
 				providerService.updateProvider(provider);
 				System.out.println("==>  provider update successfully!");
-				return "redirect:/providerManagement.htm";
+				return "redirect:/admin/providerManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New provider add failed!");
@@ -184,7 +185,7 @@ public class AdminProviderController {
 				e.printStackTrace();
 			}
 		
-			return "redirect:/providerManagement.htm";
+			return "redirect:/admin/providerManagement.htm";
 	}
 
 	/*

@@ -11,8 +11,7 @@ import agrStore.entity.AccountEntity;
 import agrStore.entity.RoleEntity;
 import agrStore.service.DatabaseRoutingService;
 
-public class CustomerInterceptor extends HandlerInterceptorAdapter {
-
+public class UserInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	DatabaseRoutingService databaseRoutingService;
 
@@ -23,15 +22,14 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 
 		System.out.println("==> Interceptor check: " + uri);
 		// Không kiểm tra khi truy cập đến các trang không yêu cầu đăng nhập
-		/*
-		 * if (uri.contains("index.htm") || uri.contains("userLogin.htm") ||
-		 * uri.contains("userSignUp.htm") || uri.contains("userSignUpGmail.htm") ||
-		 * uri.contains("getOTPSignUp.htm") || uri.contains("changeForgotPassword.htm")
-		 * || uri.contains("userForgotPasswordGetOTP.htm") ||
-		 * uri.contains("forgotPass.htm")) { // Định tuyến mặc định đến DEFAULT_AGENT
-		 * databaseRoutingService.routingUserWithRole(new RoleEntity("Default")); return
-		 * true; }
-		 */
+		if (uri.contains("index.htm") || uri.contains("userLogin.htm") || uri.contains("userSignUp.htm")
+				|| uri.contains("userSignUpGmail.htm") || uri.contains("getOTPSignUp.htm")
+				|| uri.contains("changeForgotPassword.htm") || uri.contains("userForgotPasswordGetOTP.htm")
+				|| uri.contains("forgotPass.htm")) {
+			// Định tuyến mặc định đến DEFAULT_AGENT
+			databaseRoutingService.routingUserWithRole(new RoleEntity("Default"));
+			return true;
+		}
 
 		// Kiểm tra người dùng đã đăng nhập hay chưa
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
@@ -56,11 +54,12 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 		}
 		System.out.println(loggedInUser.getRole());
 		// Kiểm tra nếu người dùng không thuộc role "Customer" (id = 3)
-		if (loggedInUser.getRole().getId() != 3) {
-			System.out.println("==> No permission, user intercepted! Role not allowed.");
-			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
-			return false;
-		}
+		/*
+		 * if (loggedInUser.getRole().getId() != 3) {
+		 * System.out.println("==> No permission, user intercepted! Role not allowed.");
+		 * response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
+		 * return false; }
+		 */
 
 		return true; // Tiếp tục xử lý request
 	}
@@ -76,5 +75,4 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 	}
-
 }

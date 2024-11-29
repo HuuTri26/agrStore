@@ -34,7 +34,7 @@
 
 	<!-- Sidebar brand starts -->
 	<div class="sidebar-brand">
-		<a href="adminDashboard.htm" class="logo"> <img
+		<a href="admin/adminDashboard.htm" class="logo"> <img
 			src="<c:url value='/assets/assets/images/logo-biolife-1.png'/>"
 			alt="Admin Dashboard" />
 		</a>
@@ -46,44 +46,44 @@
 		<div class="sidebarMenuScroll">
 			<ul>
 				<li class="sidebar-dropdown ${currentPage == 'dashboard' ? 'active' : ''}"><a
-					href="adminDashboard.htm"> <i class="bi bi-house-door"
+					href="admin/adminDashboard.htm"> <i class="bi bi-house-door"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Dashboard</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'category' ? 'active' : ''}"><a href="categoryManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'category' ? 'active' : ''}"><a href="admin/categoryManagement.htm">
 						<i class="bi bi-collection"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Category</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'product' ? 'active' : ''}"><a href="productManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'product' ? 'active' : ''}"><a href="admin/productManagement.htm">
 						<i class="bi bi-box" style="font-size: 1.2rem; margin-right: 8px;"></i>
 						<span class="menu-text">Product</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'importBill' ? 'active' : ''}"><a href="importBillManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'importBill' ? 'active' : ''}"><a href="admin/importBillManagement.htm">
 						<i class="bi bi-file-earmark-text"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Import Bill</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'order' ? 'active' : ''}"><a href="orderManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'order' ? 'active' : ''}"><a href="admin/orderManagement.htm">
 						<i class="bi bi-bag" style="font-size: 1.2rem; margin-right: 8px;"></i>
 						<span class="menu-text">Orders</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'staff' ? 'active' : ''}" ><a href="staffManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'staff' ? 'active' : ''}" ><a href="admin/staffManagement.htm">
 						<i class="bi bi-people"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Staffs</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'customer' ? 'active' : ''}"><a href="customerManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'customer' ? 'active' : ''}"><a href="admin/customerManagement.htm">
 						<i class="bi bi-person"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Customer</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'provider' ? 'active' : ''}"><a href="providerManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'provider' ? 'active' : ''}"><a href="admin/providerManagement.htm">
 						<i class="bi bi-truck"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Provider</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'feedback' ? 'active' : ''}"><a href="feedbackManagement.htm">
+				<li class="sidebar-dropdown ${currentPage == 'feedback' ? 'active' : ''}"><a href="admin/feedbackManagement.htm">
 						<i class="bi bi-chat-dots"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Feedback</span>

@@ -312,7 +312,7 @@
 
 									<button class="button button--lg w-100 checkout-btn"
 										type="submit">
-										<a href="customerOrderList.htm">Đặt hàng</a>
+										<a href="customer/customerOrderList.htm">Đặt hàng</a>
 									</button>
 								</form>
 							</div>

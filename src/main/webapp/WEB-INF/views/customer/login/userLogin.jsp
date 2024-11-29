@@ -49,7 +49,7 @@
 					<!--Form Sign In-->
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
-							<form:form action="userLogin.htm" name="frm-login" method="post"
+							<form:form action="user/userLogin.htm" name="frm-login" method="post"
 								modelAttribute="account">
 								<p class="form-row">
 									<label for="fid-name">Email:<span class="requite">*</span></label>
@@ -79,7 +79,7 @@
 								<p class="form-row wrap-btn">
 
 									<button class="btn btn-submit btn-bold" type="submit">Login</button>
-									<a href="forgotPass.htm" class="link-to-help">Quên mật khẩu</a>
+									<a href="user/forgotPass.htm" class="link-to-help">Quên mật khẩu</a>
 								</p>
 							</form:form>
 						</div>
@@ -96,7 +96,7 @@
 									<li>Nhập thông tin cho tiết</li>
 									<li>Tạo mk và xác nhận</li>
 								</ul>
-								<a href="userSignUpGmail.htm" class="btn btn-bold">Đăng ký
+								<a href="user/userSignUpGmail.htm" class="btn btn-bold">Đăng ký
 									ngay</a>
 							</div>
 						</div>

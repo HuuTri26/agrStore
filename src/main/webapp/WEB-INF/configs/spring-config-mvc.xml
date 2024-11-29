@@ -16,8 +16,24 @@
 	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
 
 	<!-- Cấu hình interceptor -->
-	<mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
-		class="agrStore.interceptor.CustomerInterceptor" /> </mvc:interceptor> </mvc:interceptors>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" />
+			<bean class="agrStore.interceptor.UserInterceptor" />
+		</mvc:interceptor>
+			<mvc:interceptor>
+			<mvc:mapping path="/customer/**" />
+			<bean class="agrStore.interceptor.CustomerInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="agrStore.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/staff/**" />
+			<bean class="agrStore.interceptor.StaffInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- Cấu hình view -->
 	<bean id="viewResolver" p:prefix="/WEB-INF/views/" p:suffix=".jsp"
@@ -28,13 +44,13 @@
 		<property name="basePath"
 			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
 	</bean>
-	
+
 	<bean id="product" class="agrStore.bean.UploadFile">
 		<property name="basePath"
 			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\product-images\" />
 	</bean>
 
-	
+
 	<bean id="category" class="agrStore.bean.UploadFile">
 		<property name="basePath"
 			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\category-images\" />

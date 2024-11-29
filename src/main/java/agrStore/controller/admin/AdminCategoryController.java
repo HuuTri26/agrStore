@@ -24,6 +24,7 @@ import agrStore.service.CategoryService;
 import agrStore.utility.Ultility;
 
 @Controller
+@RequestMapping("/admin")
 @SessionAttributes("category")
 public class AdminCategoryController {
 
@@ -106,7 +107,7 @@ public class AdminCategoryController {
 
 				categoryService.addCategory(category);
 				System.out.println("==> New category add successfully!");
-				return "redirect:/categoryManagement.htm";
+				return "redirect:/admin/categoryManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New category add failed!");
@@ -138,7 +139,7 @@ public class AdminCategoryController {
 				category.setDescript(ultility.standardize(category.getDescript()));
 
 				categoryService.updateCategory(category);
-				return "redirect:/categoryManagement.htm";
+				return "redirect:/admin/categoryManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New category update failed!");
@@ -163,7 +164,7 @@ public class AdminCategoryController {
 			System.out.println("==> Set category status to 'False' failed!");
 		}
 
-		return "redirect:/categoryManagement.htm";
+		return "redirect:/admin/categoryManagement.htm";
 	}
 
 	@RequestMapping(value = "category/uploadImg", method = RequestMethod.POST)

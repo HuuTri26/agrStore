@@ -112,7 +112,7 @@
                               dashboard__order-history-table-item
                               order-details
                             ">
-													<a href="customerOrderDetail.htm"> Xem chi tiết</a>
+													<a href="customer/customerOrderDetail.htm"> Xem chi tiết</a>
 												</td>
 											</tr>
 
@@ -153,7 +153,7 @@
                               dashboard__order-history-table-item
                               order-details
                             ">
-													<a href="customerOrderDetail.htm"> Xem chi tiết</a>
+													<a href="customer/customerOrderDetail.htm"> Xem chi tiết</a>
 												</td>
 											</tr>
 										</tbody>

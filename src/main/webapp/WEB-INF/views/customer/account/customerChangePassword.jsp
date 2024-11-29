@@ -49,7 +49,7 @@
 					<!--Form Sign In-->
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
-							<form action="changeForgotPassword.htm" name="frm-login"
+							<form action="customer/changeForgotPassword.htm" name="frm-login"
 								method="get">
 								<p class="form-row">
 									<label for="fid-name">Mật khẩu cũ:<span class="requite">*</span></label>
@@ -67,7 +67,7 @@
 										name="re-enter-new-pass" value="" class="txt-input">
 
 								</p>
-								<a href="userLogin.htm">
+								<a href="customer/userLogin.htm">
 									<button class="btn btn-submit btn-bold" type="submit">Xác
 										nhận</button>
 								</a>

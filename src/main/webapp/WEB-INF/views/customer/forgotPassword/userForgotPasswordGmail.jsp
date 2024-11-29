@@ -51,7 +51,7 @@
 					<!--Form Sign In-->
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
-							<form:form action="forgotPass.htm" name="frm-login" method="post"
+							<form:form action="user/forgotPass.htm" name="frm-login" method="post"
 								modelAttribute="account">
 								<p class="form-row">
 									<label for="fid-name">Hãy nhập Gmail liên kết với tài

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/customer")
 public class customerCartController {
 	@RequestMapping("/customerCart")
 	public String customerCartShow(HttpServletRequest request, HttpSession session,

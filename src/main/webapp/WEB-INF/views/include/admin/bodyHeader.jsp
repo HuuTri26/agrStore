@@ -31,9 +31,9 @@
 				<div class="dropdown-menu dropdown-menu-end"
 					aria-labelledby="userSettings">
 					<div class="header-profile-actions">
-						<a href="adminProfile.htm">Profile</a> <a
-							href="adminChangePassword.htm">ChangePassword</a> <a
-							href="logout.htm">Logout</a>
+						<a href="admin/adminProfile.htm">Profile</a> <a
+							href="admin/adminChangePassword.htm">ChangePassword</a> <a
+							href="user/logout.htm">Logout</a>
 					</div>
 				</div></li>
 		</ul>
