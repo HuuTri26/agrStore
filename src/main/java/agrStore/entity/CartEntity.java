@@ -43,6 +43,11 @@ public class CartEntity {
 		this.totalQuantity = totalQuantity;
 		this.account = account;
 	}
+	
+	public CartEntity(AccountEntity account) {
+		super();
+		this.account = account;
+	}
 
 	public Integer getCartId() {
 		return cartId;
