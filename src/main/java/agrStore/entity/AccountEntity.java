@@ -190,4 +190,36 @@ public class AccountEntity {
 		this.address = address;
 	}
 
+	public CartEntity getCart() {
+		return cart;
+	}
+
+	public void setCart(CartEntity cart) {
+		this.cart = cart;
+	}
+
+	public List<OrderBillEntity> getOrderBillList() {
+		return orderBillList;
+	}
+
+	public void setOrderBillList(List<OrderBillEntity> orderBillList) {
+		this.orderBillList = orderBillList;
+	}
+
+	public List<ImportBillEntity> getImportBillList() {
+		return importBillList;
+	}
+
+	public void setImportBillList(List<ImportBillEntity> importBillList) {
+		this.importBillList = importBillList;
+	}
+
+	public List<FeedbackEntity> getFeedbackList() {
+		return feedbackList;
+	}
+
+	public void setFeedbackList(List<FeedbackEntity> feedbackList) {
+		this.feedbackList = feedbackList;
+	}
+
 }

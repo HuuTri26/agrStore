@@ -22,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import agrStore.bean.Mailer;
 import agrStore.entity.AccountEntity;
 import agrStore.entity.AddressEntity;
+import agrStore.entity.CartEntity;
 import agrStore.entity.DistrictEntity;
 import agrStore.entity.ProvinceEntity;
 import agrStore.entity.RoleEntity;
@@ -30,6 +31,7 @@ import agrStore.recaptcha.RecaptchaVerification;
 import agrStore.utility.Ultility;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
+import agrStore.service.CartService;
 import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
@@ -62,6 +64,9 @@ public class userController {
 
 	@Autowired
 	AddressService addressService;
+	
+	@Autowired
+	CartService cartService;
 
 	@RequestMapping("/userLogin")
 	public String showUserLoginForm(Model model) {
@@ -568,6 +573,7 @@ public class userController {
 			RoleEntity customerRole = roleService.getRoleById(3);
 			if (customerRole != null) {
 				try {
+					
 					account.setPassword(accountUltility.getHashPassword(reEnterPassword));
 					account.setFullName(accountUltility.standardizeName(fullName));
 					account.setPhoneNumber(phoneNumber);
@@ -577,6 +583,12 @@ public class userController {
 					account.setRole(customerRole);
 
 					accountService.addAccount(account);
+					
+					System.out.println("==> Create new customer's cart!");
+					CartEntity cart = new CartEntity(account);
+					cartService.addCart(cart);
+					System.out.println("==> New customer's cart created successfuly!");
+					
 					System.out.println("==> User's account created successfully!");
 
 					return "redirect:/";

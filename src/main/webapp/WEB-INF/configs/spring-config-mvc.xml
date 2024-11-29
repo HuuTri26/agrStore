@@ -35,6 +35,7 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
+
 	<!-- Cấu hình view -->
 	<bean id="viewResolver" p:prefix="/WEB-INF/views/" p:suffix=".jsp"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver" />

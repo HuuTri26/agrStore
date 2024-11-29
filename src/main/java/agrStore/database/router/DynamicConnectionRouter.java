@@ -34,6 +34,7 @@ public class DynamicConnectionRouter extends AbstractRoutingDataSource {
 
 		// Lấy data source key tương ứng với role, nếu không có thì dùng DEFAULT_DB
 		String dataSourceKey = roleToDataSourceMap.getOrDefault(role.getName(), "DEFAULT_DB");
+		System.out.println(dataSourceKey);
 		setDataSourceKey(dataSourceKey);
 		//System.out.println(dataSourceKey);
 	}

@@ -21,8 +21,7 @@
 	<!-- Kết nối CSDL -->
 	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN;integratedSecurity=false;trustServerCertificate=true;" 
-		p:username="sa" p:password="123"> </bean> 
-
+		p:username="ADMIN_AGENT" p:password="Re$adRa5tOF2Edr51As@"> </bean> -->
 	<!-- Cấu hình DataSource động -->
 	<bean id="dynamicDataSource"
 		class="agrStore.database.router.DynamicConnectionRouter">
@@ -38,12 +37,18 @@
 	</bean>
 
 	<!-- DataSource mặc định -->
+	<!-- <bean id="defaultDataSource" class="com.zaxxer.hikari.HikariDataSource"> 
+		<property name="driverClassName" value="${db.driver}" /> <property name="jdbcUrl" 
+		value="${db.url}" /> <property name="username" value="${db.username}" /> 
+		<property name="password" value="${db.password}" /> <property name="maximumPoolSize" 
+		value="10" /> </bean> -->
+
 	<bean id="defaultDataSource"
 		class="com.zaxxer.hikari.HikariDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="jdbcUrl" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
+		<property name="username" value="CUSTOMER_AGENT" />
+		<property name="password" value="@UgaSw8PR@crEheCrutr" />
 		<property name="maximumPoolSize" value="10" />
 	</bean>
 
@@ -86,9 +91,8 @@
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<!-- <prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">validate</prop>
-				<prop key="hibernate.default_schema">dbo</prop> -->
+				<!-- <prop key="hibernate.format_sql">true</prop> <prop key="hibernate.hbm2ddl.auto">validate</prop> 
+					<prop key="hibernate.default_schema">dbo</prop> -->
 			</props>
 		</property>
 	</bean>
