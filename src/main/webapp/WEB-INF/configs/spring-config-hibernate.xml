@@ -25,6 +25,7 @@
 		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN;integratedSecurity=false;trustServerCertificate=true;"
 		p:username="ADMIN_AGENT" p:password="Re$adRa5tOF2Edr51As@">
 	</bean>
+
 	<!-- Cấu hình DataSource động -->
 	<bean id="dynamicDataSource"
 		class="agrStore.database.router.DynamicConnectionRouter">
