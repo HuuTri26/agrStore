@@ -1,5 +1,7 @@
 package agrStore.entity;
 
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "CartItem")
@@ -20,6 +23,9 @@ public class CartItemEntity {
 
 	@Column(name = "quantity")
 	private Integer quantity;
+	
+	@Transient
+	private Boolean isSelected;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "cartId")
@@ -31,9 +37,11 @@ public class CartItemEntity {
 
 	public CartItemEntity() {
 		super();
+		this.isSelected = Boolean.FALSE;
 	}
 
-	public CartItemEntity(Integer cartItemId, Integer quantity, CartEntity cart, ProductEntity product) {
+	public CartItemEntity(Integer cartItemId, Integer quantity, CartEntity cart, ProductEntity product,
+			Boolean isSelected) {
 		super();
 		this.cartItemId = cartItemId;
 		this.quantity = quantity;
@@ -51,6 +59,14 @@ public class CartItemEntity {
 
 	public Integer getQuantity() {
 		return quantity;
+	}
+	
+	public Boolean getIsSelected() {
+		return isSelected;
+	}
+
+	public void setIsSelected(Boolean isSelected) {
+		this.isSelected = isSelected;
 	}
 
 	public void setQuantity(Integer quantity) {
@@ -72,5 +88,20 @@ public class CartItemEntity {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    CartItemEntity that = (CartItemEntity) obj;
+	    return Objects.equals(cartItemId, that.cartItemId);
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(cartItemId);
+	}
+
+
 
 }

@@ -303,7 +303,7 @@
 															to ensure food safety.</p>
 														<div class="buttons">
 															<a href="#" class="btn wishlist-btn"><i
-																class="fa fa-heart" aria-hidden="true"></i></a> <a href="#"
+																class="fa fa-heart" aria-hidden="true"></i></a> <a href="addItemIntoCart.htm?pId=${product.productId }"
 																class="btn add-to-cart-btn"><i
 																class="fa fa-cart-arrow-down" aria-hidden="true"></i>Thêm
 																vào giỏ hàng</a> <a href="#" class="btn compare-btn"><i

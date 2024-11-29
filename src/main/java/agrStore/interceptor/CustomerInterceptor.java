@@ -48,6 +48,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 		// Khi người dùng đã đăng nhập, định tuyến database dựa trên role của user
 		if (loggedInUser.getRole() != null) {
 			System.out.println("==> Routing database for role: " + loggedInUser.getRole().getName());
+			System.out.println(loggedInUser.getRole());
 			databaseRoutingService.routingUserWithRole(loggedInUser.getRole());
 		} else {
 			System.out.println("==> Role not found, using default database!");
