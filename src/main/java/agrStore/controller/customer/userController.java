@@ -146,7 +146,7 @@ public class userController {
 			if(account_t.getRole().getId() == 1) {
 				return "admin/adminDashboard";
 			}else if(account_t.getRole().getId() == 2) {
-				return "redirect:/index.htm";
+				return "staff/staffDashboard";
 			}else {
 				return "redirect:/index.htm";
 			}
