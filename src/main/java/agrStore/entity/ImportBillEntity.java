@@ -59,6 +59,14 @@ public class ImportBillEntity {
 		this.createAt = createAt;
 	}
 
+	public ImportBillEntity(int totalPrice, int totalQuantity, Date createAt, AccountEntity account) {
+		super();
+		this.totalPrice = totalPrice;
+		this.totalQuantity = totalQuantity;
+		this.createAt = createAt;
+		this.account = account;
+	}
+
 	public Integer getImportBillId() {
 		return importBillId;
 	}

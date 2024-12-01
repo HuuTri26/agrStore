@@ -8,5 +8,6 @@ public interface ImportBillDAO {
 	
 	List<ImportBillEntity> getAllImportBill();
 	ImportBillEntity getImportBillById(Integer id);
+	public int addImportBill(ImportBillEntity importBill);
 
 }

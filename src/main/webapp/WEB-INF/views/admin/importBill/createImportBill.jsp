@@ -16,6 +16,7 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
 <style>
 .dropdown {
 	position: relative;
@@ -100,22 +101,47 @@
 											<!-- Chọn nhà cung cấp -->
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-group">
-														<label for="supplier" class="form-label">Chosse
-															Provider</label> <select class="form-select" id="supplier"
-															onchange="loadProducts()">
-															<option value="">Provider1</option>
-															<option value="">Provider2</option>
-															<%-- 	<c:forEach items="${suppliers}" var="supplier">
-																<option value="${supplier.id}">${supplier.name}</option>
-															</c:forEach> --%>
-														</select>
-													</div>
+
+													<form:form
+														action="importBillManagement/getProductsByProvider.htm"
+														method="POST">
+														<!-- Dropdown chọn nhà cung cấp -->
+														<div class="form-group">
+															<label for="supplier" class="form-label">Choose
+																Provider</label> <select name="providerId" id="supplier"
+																class="form-select" onchange="this.form.submit()">
+																<c:forEach items="${providers}" var="provider">
+																	<option value="${provider.id}"
+																		${provider.id == selectedProviderId ? 'selected' : ''}>
+																		${provider.providerName}</option>
+																</c:forEach>
+															</select>
+														</div>
+													</form:form>
+
+													<%-- <div class="form-group">
+															<label for="supplier" class="form-label">Choose
+																Provider</label> <select name="providerId" id="supplier"
+																class="form-select" onchange="getProductsByProvider()">
+																<c:forEach items="${providers}" var="provider">
+																	<option value="${provider.id}"
+																		${provider.id == selectedProviderId ? 'selected' : ''}>
+																		${provider.providerName}</option>
+																</c:forEach>
+															</select>
+														</div> --%>
 												</div>
 												<div class="col-md-6">
 													<label for="supplier" class="form-label">Staff Name</label>
 													<div class="form-group">
-														<input value="Bui Huu Tri" readOnly disabled="disabled" />
+														<%-- <input name="currentAccount"
+															value="${loggedInUser.accountId }" readOnly
+															disabled="disabled" hidden />  --%>
+														<input
+															name="currentAccountName"
+															value="${loggedInUser.fullName }" readOnly
+															disabled="disabled" />
+
 													</div>
 
 												</div>
@@ -125,21 +151,41 @@
 											<div class="table-container">
 												<h4>Product List From Provider</h4>
 
-												<table class="table table-bordered table-hover" border="1"
-													id="productTable">
-													<thead class="table-light">
-														<tr>
-															<th>Choose</th>
-															<th>ProductID</th>
-															<th>Product Image</th>
-															<th>ProductName</th>
-															<th>Import Price</th>
-															<th>Unit</th>
-														</tr>
-													</thead>
-													<tbody id="productList">
-														<!-- Dữ liệu mẫu -->
-														<tr>
+												<form:form id="productForm"
+													action="importBillManagement/getSelectedProducts.htm"
+													method="POST">
+													<table class="table table-bordered table-hover" border="1"
+														id="productTable">
+														<thead class="table-light">
+															<tr>
+																<th>Choose</th>
+																<th>ProductID</th>
+																<th>Product Image</th>
+																<th>ProductName</th>
+																<th>Selling Price</th>
+																<th>Unit</th>
+															</tr>
+														</thead>
+														<tbody id="productList">
+															<c:forEach items="${products }" var="product">
+																<tr>
+																	<td><input type="checkbox"
+																		name="selectedProductIds" value="${product.productId}" /></td>
+																	<td>${product.productId }</td>
+																	<td><div class="media-box">
+																			<img
+																				src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																				alt="Bootstrap Gallery">
+																		</div></td>
+																	<td>${product.productName }</td>
+																	<td><fmt:formatNumber value="${product.price }"
+																			pattern="#,###.## VND;VND -#,###.##" type="currency"
+																			currencySymbol="VND" /></td>
+																	<td>${product.unit }</td>
+																</tr>
+															</c:forEach>
+															<!-- Dữ liệu mẫu -->
+															<%-- <tr>
 															<td><input type="checkbox" /></td>
 															<td>SP001</td>
 															<td><div class="media-box">
@@ -152,35 +198,28 @@
 																	pattern="#,###.## VND;VND -#,###.##" type="currency"
 																	currencySymbol="VND" /></td>
 															<td>Cái</td>
-														</tr>
-														<tr>
-															<td><input type="checkbox" /></td>
-															<td>SP002</td>
-															<td><div class="media-box">
-																	<img
-																		src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																		alt="Bootstrap Gallery">
-																</div></td>
-															<td>Sản phẩm B</td>
-															<td><fmt:formatNumber value="85000"
-																	pattern="#,###.## VND;VND -#,###.##" type="currency"
-																	currencySymbol="VND" /></td>
-															<td>Cái</td>
-														</tr>
-														<!-- Sẽ được fill bằng JavaScript -->
-													</tbody>
-												</table>
-												<div class="row mt-3">
-													<div class="col-md-12 text-end">
-														<button class="btn btn-primary">Get</button>
+														</tr> --%>
+															<!-- Sẽ được fill bằng JavaScript -->
+														</tbody>
+													</table>
+													<%-- <form:form action="importBillManagement/getTempProducts.htm"
+													method="POST" id="formGetTempProducts"> --%>
+													<div class="row mt-3">
+														<div class="col-md-12 text-end">
+															<button id="btnGetSelectedProduct"
+																class="btn btn-primary">GET</button>
+														</div>
 													</div>
-												</div>
+													<%-- </form:form> --%>
+												</form:form>
 											</div>
 
 											<!-- Danh sách sản phẩm đã chọn -->
 											<div class="selected-products">
 												<h4>Product Chosen</h4>
-												<form id="importForm" action="/admin/import/save"
+												<!-- thêm ở đây -->
+												<form id="importForm"
+													action="importBillManagement/updateQuantityProduct.htm"
 													method="POST">
 													<table class="table table-bordered" border="1"
 														id="selectedTable">
@@ -192,33 +231,72 @@
 																<th>Unit</th>
 																<th>Import Price</th>
 																<th>Quantity</th>
-																<th>ToTal</th>
+																<!-- <th>ToTal</th> -->
 																<th>Delete</th>
 															</tr>
 														</thead>
 														<tbody id="selectedProducts">
-															<!-- Dữ liệu mẫu -->
-															<tr>
-																<td>SP001</td>
-																<td><div class="media-box">
-																		<img
-																			src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																			alt="Bootstrap Gallery">
-																	</div></td>
-																<td>Sản phẩm A</td>
-																<td>Cái</td>
-																<td><fmt:formatNumber value="85000"
-																		pattern="#,###.## VND;VND -#,###.##" type="currency"
-																		currencySymbol="VND" /></td>
-																<td class="product-quantity" data-title="Quantity">
-																	<input type="number" min="1" value="1" />
-																</td>
-																<td><fmt:formatNumber value="85000"
-																		pattern="#,###.## VND;VND -#,###.##" type="currency"
-																		currencySymbol="VND" /></td>
-																<td><button type="button">Delete</button></td>
-															</tr>
-															<tr>
+															<%-- <c:forEach items="${selectedProductList }"
+																var="selectedProduct">
+																<tr>
+																	<td><input type="hidden" name="productId"
+																		value="${selectedProduct.productId}" />${selectedProduct.productId }</td>
+																	<td><div class="media-box">
+																			<img
+																				src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																				alt="Bootstrap Gallery">
+																		</div></td>
+																	<td>${selectedProduct.productName }</td>
+																	<td>${selectedProduct.unit }</td>
+																	<td><fmt:formatNumber
+																			value="${selectedProduct.price }"
+																			pattern="#,###.## VND;VND -#,###.##" type="currency"
+																			currencySymbol="VND" /></td>
+																	<td class="product-quantity" data-title="Import price">
+																		<input type="text" name="importPrice" />
+																	</td>
+																	<td class="product-quantity" data-title="Quantity">
+																		<input type="number" min="1" value="1" name="quantity" />
+																	</td>
+																	<td><fmt:formatNumber value="85000"
+																			pattern="#,###.## VND;VND -#,###.##" type="currency"
+																			currencySymbol="VND" /></td>
+																	<td>
+																		<!-- <button type="button">Delete</button> --> <a
+																		href="importBillManagement/getSelectedProductsAfterDelete.htm?productId=${selectedProduct.productId}"
+																		class="btn btn-danger">Delete</a>
+																	</td>
+																</tr>
+															</c:forEach> --%>
+															<c:forEach items="${importBillDetailList }"
+																var="importBillDetail">
+																<tr>
+																	<td><input type="hidden" name="productId"
+																		value="${importBillDetail.product.productId}" />${importBillDetail.product.productId }</td>
+																	<td><div class="media-box">
+																			<img
+																				src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																				alt="Bootstrap Gallery">
+																		</div></td>
+																	<td>${importBillDetail.product.productName }</td>
+																	<td>${importBillDetail.product.unit }</td>
+																	<td class="product-quantity" data-title="Import price">
+																		<input type="number" name="importPrice"
+																		value="${importBillDetail.price }" />
+																	</td>
+																	<td class="product-quantity" data-title="Quantity">
+																		<input type="number" min="1"
+																		value="${importBillDetail.quantity }" name="quantity" />
+																	</td>
+																	<td>
+																		<!-- <button type="button">Delete</button> --> <a
+																		href="importBillManagement/getSelectedProductsAfterDelete.htm?productId=${importBillDetail.product.productId}"
+																		class="btn btn-danger">Delete</a>
+																	</td>
+																</tr>
+															</c:forEach>
+
+															<%-- <tr>
 																<td>SP002</td>
 																<td>
 																	<div class="media-box">
@@ -239,15 +317,14 @@
 																		pattern="#,###.## VND;VND -#,###.##" type="currency"
 																		currencySymbol="VND" /></td>
 																<td><button type="button">Delete</button></td>
-															</tr>
-															<!-- Thêm các sản phẩm khác từ cơ sở dữ liệu ở đây -->
-															<!-- Sẽ được fill bằng JavaScript -->
+															</tr> --%>
 														</tbody>
 														<tfoot>
 															<tr>
 																<td colspan="5" class="text-end"><strong>Total
-																		Import:</strong></td>
-																<td colspan="2"><fmt:formatNumber value="85000"
+																		import:</strong></td>
+																<td colspan="2" class="text-danger fw-bold fs-5"><fmt:formatNumber
+																		value="${totalImportPrice }"
 																		pattern="#,###.## VND;VND -#,###.##" type="currency"
 																		currencySymbol="VND" /></td>
 															</tr>
@@ -256,12 +333,20 @@
 
 													<div class="row mt-3">
 														<div class="col-md-12 text-end">
-															<button type="button" class="btn btn-secondary">Cancel</button>
-															<button type="submit" class="btn btn-primary">Confirm
-																Import</button>
+															<!-- <button type="button" class="btn btn-secondary">Cancel</button> -->
+															<button type="submit" class="btn btn btn-warning">Cập
+																nhật số lượng</button>
+															<!-- <button type="submit" class="btn btn-success">Confirm
+																Import</button> -->
 														</div>
 													</div>
 												</form>
+												<!-- thêm mới -->
+												<form:form id="successImportForm"
+													action="importBillManagement/successImportBill.htm">
+													<button type="submit" class="btn btn-success">CONFIRM IMPORT</button>
+												</form:form>
+
 											</div>
 										</div>
 
@@ -291,7 +376,11 @@
 
 
 	</div>
+
 	<%@include file="/WEB-INF/views/include/admin/footer.jsp"%>
+	<script type="text/javascript">
+		
+	</script>
 
 </body>
 </html>

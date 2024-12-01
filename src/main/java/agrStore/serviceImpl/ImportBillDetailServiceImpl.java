@@ -24,4 +24,10 @@ public class ImportBillDetailServiceImpl implements ImportBillDetailService{
 		return this.importBillDetailDAO.getImportBillDetailByImportBillId(importBillDetailId);
 	}
 
+	@Override
+	public void addImportBillDetail(ImportBillDetailEntity importBillDetail) {
+		// TODO Auto-generated method stub
+		this.importBillDetailDAO.addImportBillDetail(importBillDetail);
+	}
+
 }

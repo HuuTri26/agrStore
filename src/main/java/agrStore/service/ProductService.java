@@ -17,4 +17,8 @@ public interface ProductService {
 	public ProductEntity getProductById(Integer id);
 	public List<ProductEntity> getListProductByCategoryId(Integer cId);
 	public List<ProductEntity> getRandomListProductByLimit(List<ProductEntity> list, Integer limit);
+	public List<ProductEntity> getProductsByProviderId(Integer providerId);
+	
+	// hàm cập nhật số lượng sản phẩm khi nhập hàng
+	public void updateQuantityProduct(Integer productId, int quantity);
 }

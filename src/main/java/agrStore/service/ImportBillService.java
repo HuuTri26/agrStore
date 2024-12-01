@@ -8,5 +8,6 @@ public interface ImportBillService {
 	
 	public List<ImportBillEntity> getAllImportBill();
 	public ImportBillEntity getImportBillEntityById(Integer id);
+	public int addImportBill(ImportBillEntity importBillEntity);
 
 }

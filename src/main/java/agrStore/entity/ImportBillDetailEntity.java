@@ -44,6 +44,13 @@ public class ImportBillDetailEntity {
 		this.price = price;
 	}
 
+	public ImportBillDetailEntity(int quantity, int price, ProductEntity product) {
+		super();
+		this.quantity = quantity;
+		this.price = price;
+		this.product = product;
+	}
+
 	public Integer getImportBillDetailId() {
 		return importBillDetailId;
 	}
