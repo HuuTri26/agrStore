@@ -75,4 +75,16 @@ public class OrderBillDAOImpl implements OrderBillDAO{
 		return 1;
 	}
 
+	@Override
+	public long getNumberOrderBillForToday() {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "SELECT COUNT(*) "
+				+ "FROM OrderBillEntity o "
+				+ "WHERE CONVERT(DATE, o.orderTime) = CONVERT(DATE, GETDATE())";
+		Query query = session.createQuery(hql);
+		long result = (long) query.uniqueResult();
+		return result;
+	}
+
 }

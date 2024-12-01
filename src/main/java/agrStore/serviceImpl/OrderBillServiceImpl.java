@@ -38,4 +38,10 @@ public class OrderBillServiceImpl implements OrderBillService{
 		return this.orderBillDAO.updateOrderStatus(orderBillIdUpdate, newOrderStatus);
 	}
 
+	@Override
+	public long getNumberOrderBillForToday() {
+		// TODO Auto-generated method stub
+		return this.orderBillDAO.getNumberOrderBillForToday();
+	}
+
 }

@@ -69,4 +69,17 @@ public class ImportBillDAOImpl implements ImportBillDAO{
 		
 	}
 
+	@Override
+	public long getTotalCostImportInWeek() {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "SELECT SUM(i.totalPrice) "
+				+ "FROM ImportBillEntity i "
+				+ "WHERE YEAR(i.createAt) = YEAR(GETDATE()) "
+				+ "AND DATEPART(WEEK, i.createAt) = DATEPART(WEEK, GETDATE())";
+		Query query = session.createQuery(hql);
+		long result = (long) query.uniqueResult();
+		return result;
+	}
+
 }
