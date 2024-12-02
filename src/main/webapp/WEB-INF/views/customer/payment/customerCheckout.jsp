@@ -41,6 +41,14 @@
 .checkout-btn {
 	background-color: orange;
 }
+
+.payment-icon {
+	width: 35px;
+	height: auto;
+}
+
+.payment-option img {
+	vertical-align: middle;
 }
 </style>
 </head>
@@ -70,9 +78,9 @@
 	<div class="container">
 		<nav class="biolife-nav">
 			<ul>
-				<li class="nav-item"><a href="index.htm" class="permal-link">Trang
-						chủ</a></li>
-				<li class="nav-item"><span class="current-page">Đặt hàng</span></li>
+				<li class="nav-item"><a href="customer/customerCart.htm" class="permal-link">Giỏ
+						hàng</a></li>
+				<li class="nav-item"><span class="current-page">Chọn phương thức thanh toán</span></li>
 			</ul>
 		</nav>
 	</div>
@@ -91,74 +99,30 @@
 									<div class="contact-form__content-group">
 										<div class="contact-form-input">
 											<label for="lname2">FullName </label> <input type="text"
-												id="lname2" placeholder="Your last name" />
+												id="lname2" value="${loggedInUser.fullName }"
+												readonly="readonly" />
 										</div>
 									</div>
 
-
-
-									<div class="contact-form__content-group">
-										<!-- Country -->
-
-										<!-- states -->
-										<!-- <div class="contact-form-input">
-											<label for="province">Tỉnh </label> <select id="province"
-												class="contact-form-input__dropdown">
-												<option value="">Chọn Tỉnh/Thành phố</option>
-												<option value="01" selected>HCM</option>
-												<option value="02">HN</option>
-												<option value="03">DN</option>
-											</select>
-										</div>
-
-										<div class="contact-form-input">
-											<label for="district">Quận/Huyện</label> <select
-												id="district" class="contact-form-input__dropdown">
-												<option value="">Chọn Quận/Huyện</option>
-												Các option này sẽ được cập nhật động dựa trên lựa chọn Tỉnh/Thành phố
-											</select>
-										</div>
-
-										<div class="contact-form-input">
-											<label for="ward">Phường/Xã</label> <select id="ward"
-												class="contact-form-input__dropdown">
-												<option value="">Chọn Phường/Xã</option>
-												Các option này sẽ được cập nhật động dựa trên lựa chọn Quận/Huyện
-											</select>
-										</div> -->
-
-										<!-- zip -->
-										<!-- <div class="contact-form-input">
-											<label for="zip">Zip Code</label> <select id="zip"
-												class="contact-form-input__dropdown">
-												<option value="01">1216</option>
-												<option value="02">975</option>
-												<option value="03">880</option>
-												<option value="04">95</option>
-											</select>
-										</div> -->
-									</div>
+									<div class="contact-form__content-group"></div>
 									<div class="contact-form-input">
-										<label for="address">Address </label> <input type="text"
-											id="address" placeholder="Your Address" />
+										<label for="address">Address </label>
+										<textarea id="address" rows="2" readonly="readonly"
+											style="resize: none; width: 100%; font-size: 14px; padding: 10px; line-height: 1.5;">
+${loggedInUser.address.streetName}, ${loggedInUser.address.ward.name}, ${loggedInUser.address.ward.district.name}, ${loggedInUser.address.ward.district.province.name}
+                </textarea>
 									</div>
 									<div class="contact-form__content-group">
 										<div class="contact-form-input">
-											<label for="email"> email </label> <input type="text"
-												id="email" placeholder="Email Address" />
+											<label for="email"> Email </label> <input type="text"
+												id="email" value="${loggedInUser.gmail }"
+												readonly="readonly" />
 										</div>
 										<div class="contact-form-input">
-											<label for="phone"> Phone </label> <input type="number"
-												id="phone" placeholder="Phone number" />
+											<label for="phone"> Phone </label> <input type="text"
+												id="phone" value="${loggedInUser.phoneNumber }" />
 										</div>
 									</div>
-									<!-- 
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value=""
-											id="remember" /> <label
-											class="form-check-label font-body--md-400" for="remember">
-											Địa chỉ khác địa chỉ mặc định </label>
-									</div> -->
 								</div>
 							</form>
 						</div>
@@ -169,10 +133,10 @@
 						</div>
 						<div class="billing__content-card-body">
 							<div class="contact-form-input contact-form-textarea">
-								<label for="note">Ghi chú đơn hàng <span>...</span>
+								<label for="note">Ghi chú đơn hàng <span>(nếu có)</span>
 								</label>
-								<!-- <input type="text" id="fname1" placeholder="Your first name" /> -->
-								<textarea name="notes" id="note" placeholder="Ghi chú..."></textarea>
+								<textarea name="notes" id="note"
+									placeholder="Nhập địa chỉ nhận hàng nếu có. Nếu địa chỉ để trống hoặc không tồn tại, chúng tôi sẽ mặc định ship hàng tới địa chỉ mà bạn dùng làm đăng ký tài khoản."></textarea>
 							</div>
 						</div>
 					</div>
@@ -187,42 +151,31 @@
 							<div class="bill-card__body">
 								<!-- Product Info -->
 								<div class="bill-card__product">
-									<div class="bill-card__product-item">
-										<div class="bill-card__product-item-content">
-											<div class="img-wrapper">
-												<img
-													src="<c:url value='assets/cart/main/src/images/products/img-01.png'/>"
-													alt="product-img" />
+
+									<c:forEach var="cItem" items="${selectedCartItems }">
+
+										<div class="bill-card__product-item">
+											<div class="bill-card__product-item-content">
+												<div class="img-wrapper">
+													<img
+														src="<c:url value='/assets/product-images/${cItem.product.image }'/>"
+														alt="product-img" />
+												</div>
+												<h5 class="font-body--md-400">
+													${cItem.product.productName } <span class="quantity">
+														x${cItem.quantity }</span>
+												</h5>
 											</div>
-											<h5 class="font-body--md-400">
-												Green Apple <span class="quantity"> x5</span>
-											</h5>
+
+											<p class="bill-card__product-price font-body--md-500">
+												<fmt:formatNumber value="${cItem.product.price }"
+													pattern="#,###.## VND;VND -#,###.##" type="currency"
+													currencySymbol="VND" />
+											</p>
 										</div>
 
-										<p class="bill-card__product-price font-body--md-500">
-											<fmt:formatNumber value="85000"
-												pattern="#,###.## VND;VND -#,###.##" type="currency"
-												currencySymbol="VND" />
-										</p>
-									</div>
-									<div class="bill-card__product-item">
-										<div class="bill-card__product-item-content">
-											<div class="img-wrapper">
-												<img
-													src="<c:url value='/assets/cart/main/src/images/products/img-02.png'/>"
-													alt="product-img" />
-											</div>
-											<h5 class="font-body--md-400">
-												Orange <span class="quantity">x1</span>
-											</h5>
-										</div>
+									</c:forEach>
 
-										<p class="bill-card__product-price font-body--md-500">
-											<fmt:formatNumber value="85000"
-												pattern="#,###.## VND;VND -#,###.##" type="currency"
-												currencySymbol="VND" />
-										</p>
-									</div>
 								</div>
 								<!-- memo  -->
 								<div class="bill-card__memo">
@@ -230,7 +183,7 @@
 									<div class="bill-card__memo-item subtotal">
 										<p class="font-body--md-400">Tạm tính:</p>
 										<span class="font-body--md-500"><fmt:formatNumber
-												value="85000" pattern="#,###.## VND;VND -#,###.##"
+												value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
 												type="currency" currencySymbol="VND" /></span>
 									</div>
 									<!-- Shipping  -->
@@ -242,20 +195,21 @@
 									<div class="bill-card__memo-item total">
 										<p class="font-body--lg-400">Tổng tiền:</p>
 										<span class="font-body--xl-500"><fmt:formatNumber
-												value="85000" pattern="#,###.## VND;VND -#,###.##"
+												value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
 												type="currency" currencySymbol="VND" /></span>
 									</div>
 									<div class="biolife-progress-bar">
 										<table>
 											<tr>
 												<td class="first-position"><span class="index"><fmt:formatNumber
-															value="000000" pattern="#,###.## VND;VND -#,###.##"
-															type="currency" currencySymbol="VND" /></span></td>
+															value="${totalPrice }"
+															pattern="#,###.## VND;VND -#,###.##" type="currency"
+															currencySymbol="VND" /></span></td>
 												<td class="mid-position">
 													<div class="progress">
 														<div class="progress-bar" role="progressbar"
-															style="width: ${85000 * 100 / 1000000}%"
-															aria-valuenow="${85000 * 100 / 1000000}"
+															style="width: ${totalPrice * 100 / 1000000}%"
+															aria-valuenow="${totalPrice * 100 / 1000000}"
 															aria-valuemin="0" aria-valuemax="100"></div>
 													</div>
 												</td>
@@ -280,42 +234,52 @@
 								</div>
 							</div>
 							<div class="bill-card__body">
-								<form action="#">
-									<!-- Payment Methods  -->
+								<form action="customer/authPayment.htm" method="post">
+									<!-- Payment Methods -->
 									<div class="bill-card__payment-method">
+										<!-- Cash Payment -->
 										<div class="bill-card__payment-method-item">
-											<div class="form-check">
+											<div class="form-check payment-option">
 												<input class="form-check-input" type="radio" name="payment"
 													id="cash" checked /> <label
 													class="form-check-label font-body--400" for="cash">
-													Tiền mặt </label>
+													<img src="<c:url value='/assets/logos/cash.png'/>"
+													alt="Cash Icon" class="payment-icon" /> Tiền mặt
+												</label>
 											</div>
 										</div>
 
+										<!-- Paypal Payment -->
 										<div class="bill-card__payment-method-item">
-											<div class="form-check">
+											<div class="form-check payment-option">
 												<input class="form-check-input" type="radio" name="payment"
 													id="paypal" /> <label
 													class="form-check-label font-body--400" for="paypal">
-													Paypal </label>
+													<img src="<c:url value='/assets/logos/paypal.jpg'/>"
+													alt="Paypal Icon" class="payment-icon" /> Paypal
+												</label>
 											</div>
 										</div>
+
+										<!-- Momo Payment -->
 										<div class="bill-card__payment-method-item">
-											<div class="form-check">
+											<div class="form-check payment-option">
 												<input class="form-check-input" type="radio" name="payment"
-													id="amazon" /> <label
-													class="form-check-label font-body--400" for="amazon">
-													Momo </label>
+													id="momo" /> <label
+													class="form-check-label font-body--400" for="momo">
+													<img src="<c:url value='/assets/logos/momo.png'/>"
+													alt="Momo Icon" class="payment-icon" /> Momo
+												</label>
 											</div>
 										</div>
 									</div>
 
+									<!-- Checkout Button -->
 									<button class="button button--lg w-100 checkout-btn"
-										type="submit">
-										<a href="customerOrderList.htm">Đặt hàng</a>
-									</button>
+										type="submit">Đặt hàng</button>
 								</form>
 							</div>
+
 						</div>
 					</div>
 				</div>

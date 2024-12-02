@@ -56,7 +56,10 @@ margin-bottom
 
 
 
+
+
 :
+
 
 
 
@@ -64,7 +67,10 @@ margin-bottom
 
 
 
+
 20px
+
+
 
 
 
@@ -169,7 +175,8 @@ margin-bottom
 	</div>
 	<div class="container">
 		<!-- Account Settings  -->
-		<div class="dashboard__content-card">s
+		<div class="dashboard__content-card">
+			s
 			<div class="dashboard__content-card-header">
 				<h5 class="font-body--xxl-500">Profile</h5>
 			</div>
@@ -177,7 +184,7 @@ margin-bottom
 				<div class="row">
 					<div class="col-lg-3 order-lg-0 order-1">
 						<div class="dashboard__content-card-img">
-							<form action="customerProfile.htm" method="post"
+							<form action="customer/customerProfile.htm" method="post"
 								enctype="multipart/form-data" style="text-align: center">
 								<div class="dashboard__content-img-wrapper">
 									<div id="imagePreview"
@@ -197,7 +204,7 @@ margin-bottom
 					</div>
 					<div class="col-lg-9 order-lg-0 order-2">
 
-						<form action="customerProfile.htm" method="post">
+						<form action="customer/customerProfile.htm" method="post">
 							<div class="contact-form__content">
 								<div class="col-lg-6 order-lg-0 order-2">
 									<div class="contact-form-input">
@@ -217,9 +224,11 @@ margin-bottom
 									</div>
 									<div class="contact-form-input">
 										<label for="number1">Địa chỉ</label>
-										<textarea rows="5" cols="100" readonly="readonly">${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
+										<textarea rows="3" cols="100" readonly="readonly"
+											style="resize: none; width: 100%; font-size: 14px; padding: 10px; line-height: 1.5;">
+${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }
+										</textarea>
 									</div>
-
 
 								</div>
 								<div class="col-lg-3 order-lg-0 order-2">

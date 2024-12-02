@@ -106,7 +106,7 @@ button {
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Product Management</div>
-									<a href="productManagement/product.htm?action=add">
+									<a href="admin/productManagement/product.htm?action=add">
 										<button type="button" class="btn btn-info add-category">
 											<i class="bi bi-plus-square"></i> Add
 										</button>
@@ -159,15 +159,15 @@ button {
 																	</a>
 																	<div class="dropdown-content">
 																		<a
-																			href="productManagement/product.htm?action=view&id=${product.productId }"><i
+																			href="admin/productManagement/product.htm?action=view&id=${product.productId }"><i
 																			class="bi bi-eye"></i> </a> <a
-																			href="productManagement/product.htm?action=edit&id=${product.productId }"><i
+																			href="admin/productManagement/product.htm?action=edit&id=${product.productId }"><i
 																			class="bi bi-pencil"></i> </a> <a
-																			href="categoryActive.htm"><i
+																			href="admin/categoryActive.htm"><i
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
 																</div>
-																<a href="productManagement/deleteProduct.htm?id=${product.productId }" class="deleteRow"> <i
+																<a href="admin/productManagement/deleteProduct.htm?id=${product.productId }" class="deleteRow"> <i
 																	class="bi bi-trash text-red"></i>
 																</a>
 															</div>

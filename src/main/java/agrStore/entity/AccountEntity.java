@@ -33,19 +33,19 @@ public class AccountEntity {
 	@Column(name = "status")
 	private Boolean status;
 
-	@Column(name = "avatar")
+	@Column(name = "avatar", columnDefinition = "nvarchar")
 	private String avatar;
 
-	@Column(name = "gmail")
+	@Column(name = "gmail", columnDefinition = "nvarchar")
 	private String gmail;
 
-	@Column(name = "fullName")
+	@Column(name = "fullName", columnDefinition = "nvarchar")
 	private String fullName;
 
-	@Column(name = "phoneNumber")
+	@Column(name = "phoneNumber", columnDefinition = "nvarchar")
 	private String phoneNumber;
 
-	@Column(name = "password")
+	@Column(name = "password", columnDefinition = "nvarchar")
 	private String password;
 
 	@Temporal(TemporalType.DATE)
@@ -188,6 +188,38 @@ public class AccountEntity {
 
 	public void setAddress(AddressEntity address) {
 		this.address = address;
+	}
+
+	public CartEntity getCart() {
+		return cart;
+	}
+
+	public void setCart(CartEntity cart) {
+		this.cart = cart;
+	}
+
+	public List<OrderBillEntity> getOrderBillList() {
+		return orderBillList;
+	}
+
+	public void setOrderBillList(List<OrderBillEntity> orderBillList) {
+		this.orderBillList = orderBillList;
+	}
+
+	public List<ImportBillEntity> getImportBillList() {
+		return importBillList;
+	}
+
+	public void setImportBillList(List<ImportBillEntity> importBillList) {
+		this.importBillList = importBillList;
+	}
+
+	public List<FeedbackEntity> getFeedbackList() {
+		return feedbackList;
+	}
+
+	public void setFeedbackList(List<FeedbackEntity> feedbackList) {
+		this.feedbackList = feedbackList;
 	}
 
 }

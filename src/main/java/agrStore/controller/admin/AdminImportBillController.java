@@ -33,6 +33,7 @@ import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminImportBillController {
 
 	@Autowired

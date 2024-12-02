@@ -185,7 +185,7 @@
 								</div>
 								<div class="card-body">
 									<div class="row gx-3">
-										<form action="product/uploadImg.htm" method="post" enctype="multipart/form-data">
+										<form action="admin/product/uploadImg.htm" method="post" enctype="multipart/form-data">
 											<!-- Product Image Section -->
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
@@ -219,7 +219,7 @@
 
 										</form>
 
-										<form:form action="productManagement/product.htm"
+										<form:form action="admin/productManagement/product.htm"
 											method="post" modelAttribute="product">
 
 

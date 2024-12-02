@@ -97,7 +97,7 @@
 								<div class="card-header">
 									<div class="card-title">Import Bill Management</div>
 								</div>
-								<a href="importBillManagement/importBill.htm?action=create">
+								<a href="admin/importBillManagement/importBill.htm?action=create">
 									<button type="button" class="btn btn-info add-category">
 										<i class="bi bi-plus-square"></i> Create Import Bill
 									</button>
@@ -148,16 +148,18 @@
 																	</a>
 																	<div class="dropdown-content">
 																		<a
-																			href="importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
+																			href="admin/importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
 																			<i class="bi bi-eye"></i>
 																		</a> <a
-																			href="importBillManagement/importBill.htm?action=edit&id=${importBill.importBillId}">
+																			href="admin/importBillManagement/importBill.htm?action=edit&id=${importBill.importBillId}">
 																			<i class="bi bi-pencil"></i>
 																		</a> <a href="categoryActive.htm"><i
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
+
 																</div> --%>
 																<!-- <a href="categoryDelete.htm" class="deleteRow"> <i
+
 																	class="bi bi-trash text-red"></i>
 																</a> -->
 																<a

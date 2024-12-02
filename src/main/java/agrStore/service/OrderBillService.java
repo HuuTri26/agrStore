@@ -11,7 +11,8 @@ import agrStore.entity.OrderBillEntity;
 @Service
 @Transactional
 public interface OrderBillService {
-	
+	public void addOrderBill(OrderBillEntity orderBill);
+	public void updateOrderBill(OrderBillEntity orderBill);
 	public List<OrderBillEntity> getAllOrderBill();
 	public OrderBillEntity getOrderBillById(Integer id);
 	public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus);

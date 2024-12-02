@@ -114,15 +114,15 @@
 								class="biolife-icon icon-login"></i>${sessionScope.loggedInUser.gmail}
 							</a>
 							<div class="dropdown-content">
-								<a href="customerProfile.htm">Profile</a> <a
-									href="customerChangePassword.htm">Change Password</a> <a
-									href="customerOrderList.htm">Order List</a> <a
-									href="logout.htm">Log Out</a>
+								<a href="customer/customerProfile.htm">Profile</a> <a
+									href="customer/customerChangePassword.htm">Change Password</a> <a
+									href="customer/customerOrderList.htm">Order List</a> <a
+									href="user/logout.htm">Log Out</a>
 							</div>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<a href="userLogin.htm" class="login-link"> <i
+						<a href="user/userLogin.htm" class="login-link"> <i
 							class="biolife-icon icon-login"></i>Đăng nhập/Đăng Ký
 						</a>
 					</c:otherwise>

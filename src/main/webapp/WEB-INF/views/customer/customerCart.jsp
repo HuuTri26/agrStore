@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="agrStore.utility.UltilityImpl"%>
 <!DOCTYPE html>
 <html>
 <%@include file="/WEB-INF/views/include/customer/header.jsp"%>
+
+
 <head>
 <style>
 .orange-line {
@@ -94,7 +97,7 @@
 	</div>
 	<header id="header" class="header-area style-01 layout-03">
 		<div class="header-top bg-main hidden-xs">
-				<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
+			<%@include file="/WEB-INF/views/include/customer/bodyHeader.jsp"%>
 		</div>
 	</header>
 	<%-- <!-- HEADER -->
@@ -144,188 +147,84 @@
 					<div class="row">
 						<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
 							<h3 class="box-title">Các sản phẩm trong giỏ hàng</h3>
-							<form class="shopping-cart-form" action="#" method="post">
+							<form class="shopping-cart-form"
+								action="customer/customerCart.htm" method="get">
 								<div class="table-container">
 									<table class="shop_table cart-form">
 										<thead>
 											<tr>
 												<th class="product-name">Tên sản phẩm</th>
-												<th class="product-price">Giá</th>
+												<th class="product-price">Đơn giá</th>
 												<th class="product-quantity">Số lượng</th>
 												<th class="product-subtotal">Tổng tiền</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="cart_item">
-												<td class="product-thumbnail" data-title="Product Name">
-													<input type="checkbox" class="cart-checkbox" id="" name=""
-													value=""> <a class="prd-thumb" href="#">
-														<figure>
-															<img width="113" height="113"
-																src="<c:url value='/assets/assets/images/shippingcart/pr-01.jpg'/>"
-																alt="shipping cart">
-														</figure>
-												</a> <a class="prd-name" href="#">Trái cây</a>
-													<div class="action">
-														<a href="#" class="edit"><i class="fa fa-pencil"
-															aria-hidden="true"></i></a> <a href="#" class="remove"><i
-															class="fa fa-trash-o" aria-hidden="true"></i></a>
-													</div>
-												</td>
-												<td class="product-price" data-title="Price">
-													<div class="price price-contain">
-														<ins>
+											<c:forEach var="cItem" items="${cartItems }">
 
-															<span class="price-amount"> <!-- <span class="currencySymbol">$</span> -->
+												<tr class="cart_item">
+													<td class="product-thumbnail" data-title="Product Name">
+														<input type="checkbox" class="cart-checkbox"
+														name="selectedItemIds" value="${cItem.cartItemId}"
+														onclick="this.form.submit()"
+														${cItem.isSelected ? 'checked' : ''}> <a
+														class="prd-thumb">
+															<figure>
+																<img width="113" height="113"
+																	src="<c:url value='/assets/product-images/${cItem.product.image }'/>"
+																	alt="shipping cart">
+															</figure>
+													</a> <a class="prd-name" href="#">${cItem.product.productName }</a>
+														<div class="action"></div>
+													</td>
+													<td class="product-price" data-title="Price">
+														<div class="price price-contain">
+															<ins>
+
+																<span class="price-amount"> <!-- <span class="currencySymbol">$</span> -->
 
 
-																<fmt:formatNumber value="85000"
-																	pattern="#,###.## VND;VND -#,###.##" type="currency"
-																	currencySymbol="VND" /></span>
-														</ins>
-														<!-- <del>
+																	<fmt:formatNumber value="${cItem.product.price }"
+																		pattern="#,###.## VND;VND -#,###.##" type="currency"
+																		currencySymbol="VND" /></span>
+															</ins>
+															<!-- <del>
 														<span class="price-amount"><span
 															class="currencySymbol">£</span>95.00</span>
 													</del> -->
-													</div>
-												</td>
-												<td class="product-quantity" data-title="Quantity">
-													<div class="quantity-box type1">
-														<div class="qty-input">
-															<input type="text" name="qty12554" value="1"
-																data-max_value="20" data-min_value="1" data-step="1">
-															<a href="#" class="qty-btn btn-up"><i
-																class="fa fa-caret-up" aria-hidden="true"></i></a> <a
-																href="#" class="qty-btn btn-down"><i
-																class="fa fa-caret-down" aria-hidden="true"></i></a>
 														</div>
-													</div>
-												</td>
-												<td class="product-subtotal" data-title="Total">
-													<div class="price price-contain">
-														<ins>
-															<span class="price-amount"><fmt:formatNumber
-																	value="85000" pattern="#,###.## VND;VND -#,###.##"
-																	type="currency" currencySymbol="VND" /></span>
-														</ins>
-														<!-- <del>
-														<span class="price-amount"><span
-															class="currencySymbol">£</span>95.00</span>
-													</del> -->
-													</div>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="product-thumbnail" data-title="Product Name">
-													<input type="checkbox" class="cart-checkbox" id="" name=""
-													value="Bike"> <a class="prd-thumb" href="#">
-														<figure>
-															<img width="113" height="113"
-																src="<c:url value='/assets/assets/images/shippingcart/pr-02.jpg'/>"
-																alt="shipping cart">
-														</figure>
-												</a> <a class="prd-name" href="#">Trái cây</a>
-													<div class="action">
-														<a href="#" class="edit"><i class="fa fa-pencil"
-															aria-hidden="true"></i></a> <a href="#" class="remove"><i
-															class="fa fa-trash-o" aria-hidden="true"></i></a>
-													</div>
-												</td>
-												<td class="product-price" data-title="Price">
-													<div class="price price-contain">
-														<ins>
-															<span class="price-amount"><fmt:formatNumber
-																	value="85000" pattern="#,###.## VND;VND -#,###.##"
-																	type="currency" currencySymbol="VND" /></span>
-														</ins>
-														<!-- <del>
-														<span class="price-amount"><span
-															class="currencySymbol">£</span>95.00</span>
-													</del> -->
-													</div>
-												</td>
-												<td class="product-quantity" data-title="Quantity">
-													<div class="quantity-box type1">
-														<div class="qty-input">
-															<input type="text" name="qty12554" value="1"
-																data-max_value="20" data-min_value="1" data-step="1">
-															<a href="#" class="qty-btn btn-up"><i
-																class="fa fa-caret-up" aria-hidden="true"></i></a> <a
-																href="#" class="qty-btn btn-down"><i
-																class="fa fa-caret-down" aria-hidden="true"></i></a>
+													</td>
+													<td class="product-quantity" data-title="Quantity">
+														<div class="quantity-box type1">
+															<div class="qty-input">
+																<input type="text" name="quantity_${cItem.cartItemId }"
+																	value="${cItem.quantity }"
+																	data-max_value="${cItem.product.quantity }"
+																	data-min_value="1" data-step="1"> <a href="#"
+																	class="qty-btn btn-up"><i class="fa fa-caret-up"
+																	aria-hidden="true"></i></a> <a href="#"
+																	class="qty-btn btn-down"><i
+																	class="fa fa-caret-down" aria-hidden="true"></i></a>
+															</div>
 														</div>
-													</div>
-												</td>
-												<td class="product-subtotal" data-title="Total">
-													<div class="price price-contain">
-														<ins>
-															<span class="price-amount"><fmt:formatNumber
-																	value="85000" pattern="#,###.## VND;VND -#,###.##"
-																	type="currency" currencySymbol="VND" /></span>
-														</ins>
-														<!-- <del>
+													</td>
+													<td class="product-subtotal" data-title="Total">
+														<div class="price price-contain">
+															<ins>
+																<span class="price-amount"><fmt:formatNumber
+																		value="${cItem.product.price * cItem.quantity}"
+																		pattern="#,###.## VND;VND -#,###.##" type="currency"
+																		currencySymbol="VND" /></span>
+															</ins>
+															<!-- <del>
 														<span class="price-amount"><span
 															class="currencySymbol">£</span>95.00</span>
 													</del> -->
-													</div>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="product-thumbnail" data-title="Product Name">
-													<input type="checkbox" class="cart-checkbox" id="" name=""
-													value="Bike"> <a class="prd-thumb" href="#">
-														<figure>
-															<img width="113" height="113"
-																src="<c:url value='/assets/assets/images/shippingcart/pr-02.jpg'/>"
-																alt="shipping cart">
-														</figure>
-												</a> <a class="prd-name" href="#">Trái cây</a>
-													<div class="action">
-														<a href="#" class="edit"><i class="fa fa-pencil"
-															aria-hidden="true"></i></a> <a href="#" class="remove"><i
-															class="fa fa-trash-o" aria-hidden="true"></i></a>
-													</div>
-												</td>
-												<td class="product-price" data-title="Price">
-													<div class="price price-contain">
-														<ins>
-															<span class="price-amount"><fmt:formatNumber
-																	value="85000" pattern="#,###.## VND;VND -#,###.##"
-																	type="currency" currencySymbol="VND" /></span>
-														</ins>
-														<!-- <del>
-														<span class="price-amount"><span
-															class="currencySymbol">£</span>95.00</span>
-													</del> -->
-													</div>
-												</td>
-												<td class="product-quantity" data-title="Quantity">
-													<div class="quantity-box type1">
-														<div class="qty-input">
-															<input type="text" name="qty12554" value="1"
-																data-max_value="20" data-min_value="1" data-step="1">
-															<a href="#" class="qty-btn btn-up"><i
-																class="fa fa-caret-up" aria-hidden="true"></i></a> <a
-																href="#" class="qty-btn btn-down"><i
-																class="fa fa-caret-down" aria-hidden="true"></i></a>
 														</div>
-													</div>
-												</td>
-												<td class="product-subtotal" data-title="Total">
-													<div class="price price-contain">
-														<ins>
-															<span class="price-amount"><fmt:formatNumber
-																	value="85000" pattern="#,###.## VND;VND -#,###.##"
-																	type="currency" currencySymbol="VND" /></span>
-														</ins>
-														<!-- <del>
-														<span class="price-amount"><span
-															class="currencySymbol">£</span>95.00</span>
-													</del> -->
-													</div>
-												</td>
-											</tr>
+													</td>
+												</tr>
 
+											</c:forEach>
 
 										</tbody>
 									</table>
@@ -334,8 +233,19 @@
 									<div class="wrap-btn-control" colspan="4">
 										<a href="index.htm" class="btn back-to-shop">Trở về trang
 											chủ</a>
-										<button class="btn btn-update" type="submit" disabled>update</button>
-										<button class="btn btn-clear" type="reset">Xóa tất cả</button>
+										<button class="btn btn-update" name="update" type="submit">Cập
+											nhật số lượng</button>
+										<c:choose>
+											<c:when test="${UltilityImpl.hasUnselectedItems(cartItems)}">
+												<button class="btn btn-clear" name="selectedAll"
+													type="submit" value="selectedAll">Chọn tất cả</button>
+											</c:when>
+											<c:otherwise>
+												<button class="btn btn-clear" name="selectedAll"
+													type="submit" value="selectedAll">Bỏ chọn tất cả</button>
+											</c:otherwise>
+										</c:choose>
+										<button class="btn btn-clear" name="delete" type="submit">Xóa</button>
 									</div>
 								</div>
 							</form>
@@ -343,9 +253,9 @@
 						<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
 							<div class="shpcart-subtotal-block">
 								<div class="subtotal-line">
-									<b class="stt-name">Tổng tiền <span class="sub">(2
+									<b class="stt-name">Tổng tiền <span class="sub">(${selectedItemCount }
 											sản phẩm)</span></b> <span class="stt-price"><fmt:formatNumber
-											value="170000" pattern="#,###.## VND;VND -#,###.##"
+											value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
 											type="currency" currencySymbol="VND" /></span>
 								</div>
 								<div class="subtotal-line">
@@ -356,28 +266,28 @@
 								<div class="orange-line"></div>
 								<div class="subtotal-line">
 									<b class="stt-name">Thành tiền <span class="sub"> </span></b> <span
-										class="stt-price"><fmt:formatNumber value="170000"
-											pattern="#,###.## VND;VND -#,###.##" type="currency"
-											currencySymbol="VND" /></span>
+										class="stt-price"><fmt:formatNumber
+											value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
+											type="currency" currencySymbol="VND" /></span>
 								</div>
 								<!-- <div class="tax-fee">
 									<p class="title">Est. Taxes & Fees</p>
 									<p class="desc">Based on 56789</p>
 								</div> -->
 								<div class="btn-checkout">
-									<a href="customerCheckout.htm" class="btn checkout">Mua</a>
+									<a href="customer/customerCheckout.htm" class="btn checkout">Mua</a>
 								</div>
 								<div class="biolife-progress-bar">
 									<table>
 										<tr>
 											<td class="first-position"><span class="index"><fmt:formatNumber
-														value="000000" pattern="#,###.## VND;VND -#,###.##"
+														value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
 														type="currency" currencySymbol="VND" /></span></td>
 											<td class="mid-position">
 												<div class="progress">
 													<div class="progress-bar" role="progressbar"
-														style="width: ${170000 * 100 / 1000000}%"
-														aria-valuenow="${170000 * 100 / 1000000}"
+														style="width: ${totalPrice * 100 / 1000000}%"
+														aria-valuenow="${totalPrice * 100 / 1000000}"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</td>
@@ -397,6 +307,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- Shopping Cart Section End    -->
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>

@@ -53,6 +53,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+
 	public List<ProductEntity> getProductsByProviderId(Integer providerId) {
 		// TODO Auto-generated method stub
 		return this.ProductDAO.getProductsByProviderId(providerId);
@@ -62,6 +63,7 @@ public class ProductServiceImpl implements ProductService{
 	public void updateQuantityProduct(Integer productId, int quantity) {
 		// TODO Auto-generated method stub
 		this.ProductDAO.updateProductQuantity(productId, quantity);
+
 	}
 
 }

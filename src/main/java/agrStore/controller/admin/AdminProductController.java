@@ -31,6 +31,7 @@ import agrStore.utility.Ultility;
 
 
 @Controller
+@RequestMapping("/admin")
 @SessionAttributes("product")
 public class AdminProductController {
 
@@ -160,7 +161,7 @@ public class AdminProductController {
 
 				productService.addProduct(newProduct);
 				System.out.println("==> New product add successfully!");
-				return "redirect:/productManagement.htm";
+				return "redirect:/admin/productManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New product add failed!");
@@ -215,7 +216,7 @@ public class AdminProductController {
 
 				productService.updateProduct(product);
 				System.out.println("==> Product updated successfully!");
-				return "redirect:/productManagement.htm";
+				return "redirect:/admin/productManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: Product update failed!");
@@ -240,7 +241,7 @@ public class AdminProductController {
 				e.printStackTrace();
 			}
 		
-			return "redirect:/productManagement.htm";
+			return "redirect:/admin/productManagement.htm";
 	}
 	
 

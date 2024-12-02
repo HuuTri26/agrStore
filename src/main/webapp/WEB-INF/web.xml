@@ -20,18 +20,10 @@
 	</servlet-mapping>
 
 	<!-- Sitemesh -->
-	<!-- <filter>
-		<filter-name>sitemesh</filter-name>
-		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
-		<init-param>
-			<param-name>contextConfigLocaltion</param-name>
-			<param-value>/WEB-INF/configs/spring-config-mvc.xml</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>sitemesh</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	<!-- <filter> <filter-name>sitemesh</filter-name> <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class> 
+		<init-param> <param-name>contextConfigLocaltion</param-name> <param-value>/WEB-INF/configs/spring-config-mvc.xml</param-value> 
+		</init-param> </filter> <filter-mapping> <filter-name>sitemesh</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 	<!-- CharacterEncodingFilter -->
 	<filter>

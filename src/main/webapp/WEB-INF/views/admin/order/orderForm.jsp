@@ -168,7 +168,7 @@
 																	<label class="form-label">Status Order <span
 																		class="text-red">*</span></label>
 																	<form:form method="PUT" modelAttribute="orderBill"
-																		action="orderManagement/order.htm">
+																		action="admin/orderManagement/order.htm">
 																		<form:select path="statusOrder" class="form-control">
 																			<form:options items="${statusOrderMap}" />
 																		</form:select>
@@ -186,7 +186,7 @@
 															<div class="col-sm-12 col-12">
 																<div class="custom-btn-group flex-end">
 																	<button type="button" class="btn btn-light">
-																		<a href="orderManagement.htm">Cancel</a>
+																		<a href="admin/orderManagement.htm">Cancel</a>
 																	</button>
 																	<c:choose>
 																		<c:when test="${mode == 'ADD'}">

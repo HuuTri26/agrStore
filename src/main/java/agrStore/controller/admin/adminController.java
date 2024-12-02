@@ -13,6 +13,7 @@ import agrStore.service.ImportBillService;
 import agrStore.service.OrderBillService;
 
 @Controller
+@RequestMapping("/admin")
 public class adminController {
 	
 	@Autowired

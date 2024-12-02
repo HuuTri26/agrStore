@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import agrStore.bean.Mailer;
 import agrStore.entity.AccountEntity;
 import agrStore.entity.AddressEntity;
+import agrStore.entity.CartEntity;
 import agrStore.entity.DistrictEntity;
 import agrStore.entity.ProvinceEntity;
 import agrStore.entity.RoleEntity;
@@ -32,12 +31,15 @@ import agrStore.recaptcha.RecaptchaVerification;
 import agrStore.utility.Ultility;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
+import agrStore.service.CartService;
+import agrStore.service.DatabaseRoutingService;
 import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
 import agrStore.service.WardService;
 
 @Controller
+@RequestMapping("/user")
 public class userController {
 
 	@Autowired
@@ -63,6 +65,12 @@ public class userController {
 
 	@Autowired
 	AddressService addressService;
+	
+	@Autowired
+	CartService cartService;
+	
+	@Autowired
+	DatabaseRoutingService databaseRoutingService;
 
 	@RequestMapping("/userLogin")
 	public String showUserLoginForm(Model model) {
@@ -142,7 +150,7 @@ public class userController {
 			if(account_t.getRole().getId() == 1) {
 				return "admin/adminDashboard";
 			}else if(account_t.getRole().getId() == 2) {
-				return "redirect:/index.htm";
+				return "staff/staffDashboard";
 			}else {
 				return "redirect:/index.htm";
 			}
@@ -569,6 +577,7 @@ public class userController {
 			RoleEntity customerRole = roleService.getRoleById(3);
 			if (customerRole != null) {
 				try {
+					
 					account.setPassword(accountUltility.getHashPassword(reEnterPassword));
 					account.setFullName(accountUltility.standardizeName(fullName));
 					account.setPhoneNumber(phoneNumber);
@@ -578,6 +587,12 @@ public class userController {
 					account.setRole(customerRole);
 
 					accountService.addAccount(account);
+					
+					System.out.println("==> Create new customer's cart!");
+					CartEntity cart = new CartEntity(account);
+					cartService.addCart(cart);
+					System.out.println("==> New customer's cart created successfuly!");
+					
 					System.out.println("==> User's account created successfully!");
 
 					return "redirect:/";
@@ -613,6 +628,9 @@ public class userController {
 		 * request.getSession().invalidate();
 		 * System.out.println("==> Invalidate session's data");
 		 */
+		//Xóa khóa
+		databaseRoutingService.clearDataSourceKey();
+		
 		// Giải phóng dữ liệu của model attributes
 		sessionStatus.setComplete();
 		System.out.println("==> Clear model attributes");
