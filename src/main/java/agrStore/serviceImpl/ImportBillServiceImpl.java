@@ -30,4 +30,16 @@ public class ImportBillServiceImpl implements ImportBillService{
 		return this.importBillDAO.getImportBillById(id);
 	}
 
+	@Override
+	public int addImportBill(ImportBillEntity importBillEntity) {
+		// TODO Auto-generated method stub
+		return this.importBillDAO.addImportBill(importBillEntity);
+	}
+
+	@Override
+	public long getTotalCostImportInWeek() {
+		// TODO Auto-generated method stub
+		return this.importBillDAO.getTotalCostImportInWeek();
+	}
+
 }

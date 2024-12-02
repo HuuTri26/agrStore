@@ -10,5 +10,7 @@ public interface ProductDAO {
 	public List<ProductEntity> getListProduct();
 	public ProductEntity getProductById(Integer id);
 	public List<ProductEntity> getListProductByCategotyId(Integer cId);
-	public List<ProductEntity> getListProductByProviderId(Integer pId);
+	public List<ProductEntity> getProductsByProviderId(Integer providerId);
+	public void updateProductQuantity(Integer productId, int quantity);
+
 }

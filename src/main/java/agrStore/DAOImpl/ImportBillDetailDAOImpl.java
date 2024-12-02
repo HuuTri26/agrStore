@@ -31,4 +31,18 @@ public class ImportBillDetailDAOImpl implements ImportBillDetailDAO{
 		return importBillDetailEntities;
 	}
 
+	@Override
+	public void addImportBillDetail(ImportBillDetailEntity importBillDetail) {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		try {
+			session.save(importBillDetail);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		
+	}
+
 }

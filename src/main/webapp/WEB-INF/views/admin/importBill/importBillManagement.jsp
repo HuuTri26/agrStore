@@ -133,14 +133,15 @@
 														</td>
 
 														<td>${importBill.totalQuantity }</td>
-														<td><fmt:formatNumber value="85000"
+														<td><fmt:formatNumber
+																value="${importBill.totalPrice }"
 																pattern="#,###.## VND;VND -#,###.##" type="currency"
 																currencySymbol="VND" /></td>
 														<td>${importBill.createAt }</td>
 
 														<td>
 															<div class="actions">
-																<div class="dropdown">
+																<%-- <div class="dropdown">
 																	<a href="#" class="viewRow" data-bs-toggle="modal"
 																		data-bs-target="#viewRow"> <i
 																		class="bi bi-list text-green"></i>
@@ -155,9 +156,15 @@
 																		</a> <a href="categoryActive.htm"><i
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
-																</div>
-																<a href="admin/categoryDelete.htm" class="deleteRow"> <i
+
+																</div> --%>
+																<!-- <a href="categoryDelete.htm" class="deleteRow"> <i
+
 																	class="bi bi-trash text-red"></i>
+																</a> -->
+																<a
+																	href="importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
+																	<i class="bi bi-eye"></i>
 																</a>
 															</div>
 														</td>

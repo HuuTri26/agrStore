@@ -83,16 +83,35 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductEntity> getListProductByProviderId(Integer pId) {
+	public List<ProductEntity> getProductsByProviderId(Integer providerId) {
+		// TODO Auto-generated method stub
 		List<ProductEntity> products = null;
-
-		Session session = factory.getCurrentSession();
-		String hql = "FROM ProductEntity p WHERE p.provider.id = :pId";
+		Session session = this.factory.getCurrentSession();
+		/* String hql = "FROM ProductEntity p WHERE p.provider.id = :id"; */
+		String hql = "FROM ProductEntity p WHERE p.provider.id = :id AND p.status = true";
 		Query query = session.createQuery(hql);
-		query.setParameter("pId", pId);
+		query.setParameter("id", providerId);
 		products = query.list();
-
 		return products;
+	}
+
+	@Override
+	public void updateProductQuantity(Integer productId, int quantity) {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		try {
+			String hql = "UPDATE ProductEntity p SET p.quantity = p.quantity + :quantity WHERE p.productId = :id";
+			Query query = session.createQuery(hql);
+			query.setParameter("quantity", quantity);
+			query.setParameter("id", productId);
+			query.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+
 	}
 
 }

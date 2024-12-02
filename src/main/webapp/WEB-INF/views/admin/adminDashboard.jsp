@@ -52,7 +52,7 @@
 									<i class="bi bi-pie-chart"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-blue">189</h3>
+									<h4 class="text-blue">${totalCostInWeek }</h4>
 									<p>Tiền nhập hàng</p>
 								</div>
 								<div class="sale-graph">
@@ -66,7 +66,7 @@
 									<i class="bi bi-emoji-smile"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-yellow">240</h3>
+									<h4 class="text-yellow">240</h4>
 									<p>Doanh thu</p>
 								</div>
 								<div class="sale-graph">
@@ -80,8 +80,8 @@
 									<i class="bi bi-box-seam"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-red">150</h3>
-									<p>Oders</p>
+									<h4 class="text-red">${soDonHangTrongMotNgay }</h4>
+									<p>Số đơn hàng</p>
 								</div>
 								<div class="sale-graph">
 									<div id="sparklineLine3"></div>
@@ -94,7 +94,7 @@
 									<i class="bi bi-handbag"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-green">$150</h3>
+									<h4 class="text-green">$150</h4>
 									<p>Account sign up</p>
 								</div>
 								<div class="sale-graph">

@@ -7,5 +7,6 @@ import agrStore.entity.ImportBillDetailEntity;
 public interface ImportBillDetailDAO {
 	
 	List<ImportBillDetailEntity> getImportBillDetailByImportBillId(Integer importBillID);
+	void addImportBillDetail(ImportBillDetailEntity importBillDetail);
 
 }
