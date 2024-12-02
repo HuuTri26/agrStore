@@ -16,10 +16,35 @@ import agrStore.entity.OrderBillEntity;
 
 @Transactional
 @Repository
-public class OrderBillDAOImpl implements OrderBillDAO{
-	
+public class OrderBillDAOImpl implements OrderBillDAO {
+
 	@Autowired
 	SessionFactory factory;
+
+	@Override
+	public void addOrderBill(OrderBillEntity orderBill) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.save(orderBill);
+			 session.flush();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void updateOrderBill(OrderBillEntity orderBill) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.update(orderBill);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public List<OrderBillEntity> getAllOrderBill() {
@@ -61,15 +86,15 @@ public class OrderBillDAOImpl implements OrderBillDAO{
 				session.update(orderBill);
 				transaction.commit();
 			} else {
-	            System.out.println("OrderBillID: " + orderBillIdUpdate + " không tồn tại");
-	            return 0;
-	        }
+				System.out.println("OrderBillID: " + orderBillIdUpdate + " không tồn tại");
+				return 0;
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			transaction.rollback();
 			System.out.println("Error: " + e.toString());
 			return 0;
-		}finally {
+		} finally {
 			session.close();
 		}
 		return 1;

@@ -13,27 +13,27 @@ import agrStore.service.CartItemService;
 
 @Service
 @Transactional
-public class CartItemServiceImpl implements CartItemService{
-	
+public class CartItemServiceImpl implements CartItemService {
+
 	@Autowired
 	CartItemDAO CartItemDAO;
 
 	@Override
 	public void addCartItem(CartItemEntity cartItem) {
 		CartItemDAO.addCartItem(cartItem);
-		
+
 	}
 
 	@Override
 	public void updateCartItem(CartItemEntity cartItem) {
 		CartItemDAO.updateCartItem(cartItem);
-		
+
 	}
 
 	@Override
 	public void deleteCartItem(CartItemEntity cartItem) {
 		CartItemDAO.deleteCartItem(cartItem);
-		
+
 	}
 
 	@Override
@@ -47,18 +47,35 @@ public class CartItemServiceImpl implements CartItemService{
 	}
 
 	@Override
-	public void deleteSelectedCartItem(List<CartItemEntity> items) {
-		for (CartItemEntity i : items) {
-			if(i.getIsSelected()) {
-				CartItemDAO.deleteCartItem(i);
-			}
+	public void deleteCartItem(List<CartItemEntity> cartTtems) {
+		for (CartItemEntity item : cartTtems) {
+			CartItemDAO.deleteCartItem(item);
 		}
-			
+
 	}
 
 	@Override
 	public CartItemEntity getCartItemByProductIdAndCartId(Integer pId, Integer cId) {
 		return CartItemDAO.getCartItemByProductIdAndCartId(pId, cId);
+	}
+
+	@Override
+	public Double getTotalPriceofCartItems(List<CartItemEntity> cartItems) {
+		// Tính tổng tiền giỏ hàng (chỉ sản phẩm được chọn)
+		Double totalPrice = cartItems.stream().mapToDouble(cItem -> cItem.getProduct().getPrice() * cItem.getQuantity())
+				.sum();
+
+		return totalPrice;
+	}
+
+	@Override
+	public List<CartItemEntity> getSelectedCartItems(List<CartItemEntity> cartItems) {
+		return cartItems.stream().filter(CartItemEntity::getIsSelected).toList();
+	}
+
+	@Override
+	public Integer getTotalQuantityOfCartItems(List<CartItemEntity> cartItems) {
+		return cartItems.stream().mapToInt(cItem -> cItem.getQuantity()).sum();
 	}
 
 }

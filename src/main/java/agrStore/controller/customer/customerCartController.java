@@ -46,7 +46,16 @@ public class customerCartController {
 				}
 			}
 		}
+		
+		List<CartItemEntity> selectedCartItems = cartItemService.getSelectedCartItems(cartItems);
+		
+		Double totalPrice = cartItemService.getTotalPriceofCartItems(selectedCartItems);
+		Integer selectedItemCount = selectedCartItems.size();
+		
 		session.setAttribute("cartItems", cartItems);
+		session.setAttribute("totalPrice", totalPrice);
+		session.setAttribute("selectedCartItems", selectedCartItems);
+		model.addAttribute("selectedItemCount", selectedItemCount);
 		return "customer/customerCart";
 	}
 
@@ -81,30 +90,12 @@ public class customerCartController {
 		return "redirect:/index.htm";
 	}
 
-	@RequestMapping(value = "/removeItemFromCart", method = RequestMethod.GET)
-	public String removeItemFromCart(HttpServletRequest request, @RequestParam("id") Integer id) {
-		HttpSession session = request.getSession();
-		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
-
-		try {
-			CartItemEntity cart = cartItemService.getCartItemById(id);
-			cartItemService.deleteCartItem(cart);
-
-			System.out.println("==> Delete cart item successfully!");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error: Delete cart item ");
-		}
-
-		return "redirect:/customerCart.htm";
-	}
-
-	@RequestMapping(value = "customerCart", params = "delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/customerCart", params = "delete", method = RequestMethod.GET)
 	public String removeSelectedItemFromCart(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		List<CartItemEntity> cartItems = (List<CartItemEntity>) session.getAttribute("cartItems");
+		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
 		try {
-			cartItemService.deleteSelectedCartItem(cartItems);
+			cartItemService.deleteCartItem(selectedCartItems);
 
 			System.out.println("==> Delete all cart item successfully!");
 		} catch (Exception e) {
@@ -112,10 +103,10 @@ public class customerCartController {
 			System.out.println("Error: Delete all cart item failed!");
 		}
 
-		return "redirect:/customerCart.htm";
+		return "redirect:/customer/customerCart.htm";
 	}
 
-	@RequestMapping(value = "customerCart", params = "update", method = RequestMethod.GET)
+	@RequestMapping(value = "/customerCart", params = "update", method = RequestMethod.GET)
 	public String updateItemCartQuanity(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		List<CartItemEntity> cartItems = (List<CartItemEntity>) session.getAttribute("cartItems");
@@ -135,14 +126,14 @@ public class customerCartController {
 
 		session.setAttribute("cartItems", cartItems);
 
-		return "redirect:/customerCart.htm";
+		return "redirect:/customer/customerCart.htm";
 	}
 
-	@RequestMapping(value = "customerCart", params = "selectedAll", method = RequestMethod.GET)
-	public String toggleSelectAllItems(HttpServletRequest request) {
+	@RequestMapping(value = "/customerCart", params = "selectedAll", method = RequestMethod.GET)
+	public String toggleSelectAllItems(ModelMap model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		List<CartItemEntity> cartItems = (List<CartItemEntity>) session.getAttribute("cartItems");
-
+		
 		// Kiểm tra xem có bất kỳ item nào chưa được chọn không
 		boolean hasUnselected = cartItems.stream().anyMatch(item -> !item.getIsSelected());
 		System.out.println("Has unselected items: " + hasUnselected);
@@ -151,9 +142,14 @@ public class customerCartController {
 		for (CartItemEntity item : cartItems) {
 			item.setIsSelected(hasUnselected); // Đảo trạng thái của tất cả các item
 		}
+		Double totalPrice = cartItemService.getTotalPriceofCartItems(cartItems);
+		Integer selectedItemCount = cartItems.size();
+		
 
 		session.setAttribute("cartItems", cartItems);
-
+		session.setAttribute("totalPrice", totalPrice);
+		model.addAttribute("selectedItemCount", selectedItemCount);
+		session.setAttribute("selectedCartItems", cartItems);
 		return "customer/customerCart";
 	}
 
