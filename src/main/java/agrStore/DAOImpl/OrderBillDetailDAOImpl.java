@@ -15,10 +15,35 @@ import agrStore.entity.OrderBillDetailEntity;
 
 @Transactional
 @Repository
-public class OrderBillDetailDAOImpl implements OrderBillDetailDAO{
-	
+public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
+
 	@Autowired
 	SessionFactory factory;
+
+	@Override
+	public void addOrderBillDetail(OrderBillDetailEntity orderBilldt) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.save(orderBilldt);
+			 session.flush();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void updateOrderBillDetail(OrderBillDetailEntity orderBilldt) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.update(orderBilldt);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public List<OrderBillDetailEntity> getOrderBillDetailByOderBillId(Integer id) {

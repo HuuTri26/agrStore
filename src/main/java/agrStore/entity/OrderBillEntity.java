@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,10 +41,10 @@ public class OrderBillEntity {
 	private int totalQuantity;
 
 	@Column(name = "totalPrice")
-	private int totalPrice;
+	private double totalPrice;
 
-	@Column(name = "employeeId")
-	private int employeeId;
+	@Column(name = "employeeId", nullable = true)
+	private Integer employeeId;
 
 	@ManyToOne()
 	@JoinColumn(name = "accountId")
@@ -57,8 +58,8 @@ public class OrderBillEntity {
 		super();
 	}
 
-	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, int totalPrice,
-			int employeeId) {
+	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, double totalPrice,
+			Integer employeeId) {
 		super();
 		this.orderBillId = orderBillId;
 		this.statusOrder = statusOrder;
@@ -100,19 +101,19 @@ public class OrderBillEntity {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public int getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public int getEmployeeId() {
+	public Integer getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
 

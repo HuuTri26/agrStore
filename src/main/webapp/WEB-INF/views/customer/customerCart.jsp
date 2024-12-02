@@ -147,8 +147,8 @@
 					<div class="row">
 						<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
 							<h3 class="box-title">Các sản phẩm trong giỏ hàng</h3>
-							<form class="shopping-cart-form" action="customerCart.htm"
-								method="get">
+							<form class="shopping-cart-form"
+								action="customer/customerCart.htm" method="get">
 								<div class="table-container">
 									<table class="shop_table cart-form">
 										<thead>
@@ -168,20 +168,14 @@
 														name="selectedItemIds" value="${cItem.cartItemId}"
 														onclick="this.form.submit()"
 														${cItem.isSelected ? 'checked' : ''}> <a
-														class="prd-thumb" href="#">
+														class="prd-thumb">
 															<figure>
 																<img width="113" height="113"
 																	src="<c:url value='/assets/product-images/${cItem.product.image }'/>"
 																	alt="shipping cart">
 															</figure>
 													</a> <a class="prd-name" href="#">${cItem.product.productName }</a>
-														<div class="action">
-															<a href="#" class="edit"><i class="fa fa-pencil"
-																aria-hidden="true"></i></a> <a
-																href="removeItemFromCart.htm?id=${cItem.cartItemId }"
-																class="remove"><i class="fa fa-trash-o"
-																aria-hidden="true"></i></a>
-														</div>
+														<div class="action"></div>
 													</td>
 													<td class="product-price" data-title="Price">
 														<div class="price price-contain">
@@ -259,9 +253,9 @@
 						<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
 							<div class="shpcart-subtotal-block">
 								<div class="subtotal-line">
-									<b class="stt-name">Tổng tiền <span class="sub">(2
+									<b class="stt-name">Tổng tiền <span class="sub">(${selectedItemCount }
 											sản phẩm)</span></b> <span class="stt-price"><fmt:formatNumber
-											value="170000" pattern="#,###.## VND;VND -#,###.##"
+											value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
 											type="currency" currencySymbol="VND" /></span>
 								</div>
 								<div class="subtotal-line">
@@ -272,9 +266,9 @@
 								<div class="orange-line"></div>
 								<div class="subtotal-line">
 									<b class="stt-name">Thành tiền <span class="sub"> </span></b> <span
-										class="stt-price"><fmt:formatNumber value="170000"
-											pattern="#,###.## VND;VND -#,###.##" type="currency"
-											currencySymbol="VND" /></span>
+										class="stt-price"><fmt:formatNumber
+											value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
+											type="currency" currencySymbol="VND" /></span>
 								</div>
 								<!-- <div class="tax-fee">
 									<p class="title">Est. Taxes & Fees</p>
@@ -287,13 +281,13 @@
 									<table>
 										<tr>
 											<td class="first-position"><span class="index"><fmt:formatNumber
-														value="000000" pattern="#,###.## VND;VND -#,###.##"
+														value="${totalPrice }" pattern="#,###.## VND;VND -#,###.##"
 														type="currency" currencySymbol="VND" /></span></td>
 											<td class="mid-position">
 												<div class="progress">
 													<div class="progress-bar" role="progressbar"
-														style="width: ${170000 * 100 / 1000000}%"
-														aria-valuenow="${170000 * 100 / 1000000}"
+														style="width: ${totalPrice * 100 / 1000000}%"
+														aria-valuenow="${totalPrice * 100 / 1000000}"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</td>

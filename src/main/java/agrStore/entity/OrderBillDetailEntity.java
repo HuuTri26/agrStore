@@ -22,7 +22,7 @@ public class OrderBillDetailEntity {
 	private int quantity;
 	
 	@Column(name = "price")
-	private int price;
+	private double price;
 	
 	@ManyToOne()
 	@JoinColumn(name="orderBillId")
@@ -36,7 +36,7 @@ public class OrderBillDetailEntity {
 		super();
 	}
 
-	public OrderBillDetailEntity(Integer orderBillDetailId, int quantity, int price) {
+	public OrderBillDetailEntity(Integer orderBillDetailId, int quantity, double price) {
 		super();
 		this.orderBillDetailId = orderBillDetailId;
 		this.quantity = quantity;
@@ -59,11 +59,11 @@ public class OrderBillDetailEntity {
 		this.quantity = quantity;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

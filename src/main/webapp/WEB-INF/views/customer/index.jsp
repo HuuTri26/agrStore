@@ -303,7 +303,7 @@
 															to ensure food safety.</p>
 														<div class="buttons">
 															<a href="#" class="btn wishlist-btn"><i
-																class="fa fa-heart" aria-hidden="true"></i></a> <a href="addItemIntoCart.htm?pId=${product.productId }"
+																class="fa fa-heart" aria-hidden="true"></i></a> <a href="customer/addItemIntoCart.htm?pId=${product.productId }"
 																class="btn add-to-cart-btn"><i
 																class="fa fa-cart-arrow-down" aria-hidden="true"></i>Thêm
 																vào giỏ hàng</a> <a href="#" class="btn compare-btn"><i
@@ -332,7 +332,7 @@
 							<div class="tab-head tab-head__icon-top-layout icon-top-layout">
 								<ul class="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
 									<c:forEach var="category" items="${categories }">
-										<a href="customer/showProductsBycId.htm?cId=${category.categoryId}"
+										<a href="showProductsBycId.htm?cId=${category.categoryId}"
 											class="tab-element ${category.categoryId == selectedCategoryId ? 'active' : ''} ml-5 ">
 											<div class="icon-wrapper">
 												<span class="icon-category"
@@ -363,7 +363,7 @@
 									<c:forEach var="provider" items="${providers }">
 										<li>
 											<div class="biolife-brd-container">
-												<a href="customer/showProductsBypId.htm?pId=${provider.id}" class="link">
+												<a href="showProductsBypId.htm?pId=${provider.id}" class="link">
 													<figure>
 														<img
 															src="<c:url value='/assets/provider-images/${provider.image }'/>"

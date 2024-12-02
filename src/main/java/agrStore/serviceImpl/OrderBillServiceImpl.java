@@ -13,10 +13,22 @@ import agrStore.service.OrderBillService;
 
 @Transactional
 @Service
-public class OrderBillServiceImpl implements OrderBillService{
-	
+public class OrderBillServiceImpl implements OrderBillService {
+
 	@Autowired
 	private OrderBillDAO orderBillDAO;
+
+	@Override
+	public void addOrderBill(OrderBillEntity orderBill) {
+		orderBillDAO.addOrderBill(orderBill);
+
+	}
+
+	@Override
+	public void updateOrderBill(OrderBillEntity orderBill) {
+		orderBillDAO.updateOrderBill(orderBill);
+
+	}
 
 	@Override
 	public List<OrderBillEntity> getAllOrderBill() {
