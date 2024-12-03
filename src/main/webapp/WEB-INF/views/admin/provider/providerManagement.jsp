@@ -115,8 +115,9 @@ button {
 											<thead>
 												<tr>
 													<th>Id</th>
+													<th>Image</th>
 													<th>Provider Name</th>
-													<th>Status</th>
+													 <th>Status</th> 
 													<th>Phonenumber</th>
 													<th>Action</th>
 												</tr>
@@ -125,11 +126,20 @@ button {
 												<c:forEach var="provider" items="${providers}">
 													<tr>
 														<td>${provider.id}</td>
+														<td><div class="media-box">
+																<img src="/assets/provider-images/${provider.image }"
+																	class="media-avatar rounded-circle img-fluid"
+																	alt=""
+																	style="width: 45px; height: 45px; object-fit: cover;" />
+																<!-- 	<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p> -->
+															</div></td>
 														<td>${provider.providerName}</td>
 														<td>
 															<button
 																class="badge ${provider.status == 'true' ? 'shade-green' : 'shade-red'} min-70">
-																${provider.status}</button>
+																${provider.status ? 'Còn kinh doanh' :'Ngừng kinh doanh' }</button>
 														</td>
 														<td>${provider.phoneNumber}</td>
 														<td>
@@ -146,16 +156,17 @@ button {
 																		</a> <a
 																			href="admin/providerManagement/provider.htm?action=edit&id=${provider.id}">
 																			<i class="bi bi-pencil"></i>
-																		</a> <a href="admin/providerActive.htm?id=${provider.id}"> <i
-																			class="bi bi-check-circle active-icon"></i>
+																		</a> <a href="admin/providerActive.htm?id=${provider.id}">
+																			<i class="bi bi-check-circle active-icon"></i>
 																		</a>
 																	</div>
 																</div>
-																<a href="admin/providerManagement/deleteProvider.htm?id=${provider.id }" class="deleteRow"> <i
-																	class="bi bi-trash text-red"></i>
+																<a
+																	href="admin/providerManagement/deleteProvider.htm?id=${provider.id }"
+																	class="deleteRow"> <i class="bi bi-trash text-red"></i>
 																</a>
 															</div>
-															
+
 														</td>
 													</tr>
 												</c:forEach>

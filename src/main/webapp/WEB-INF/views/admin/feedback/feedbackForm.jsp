@@ -185,7 +185,8 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form>
+										<form:form action="admin/feedbackManagement/feedback.htm"
+											method="post" modelAttribute="feedback">
 										<div class="row gx-3">
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
@@ -264,14 +265,16 @@
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Customer Name <span
-																		class="text-red">*</span></label> <input type="text"
+																		class="text-red">*</span></label> <input type="text" disabled="${mode == 
+																		'VIEW'}" value="${feedback.account.fullName}"
 																		class="form-control" placeholder="">
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Customer Phone <span
-																		class="text-red">*</span></label> <input type="text"
+																		class="text-red">*</span></label> <input type="text" disabled="${mode == 
+																		'VIEW'}" value="${ feedback.account.phoneNumber}"
 																		class="form-control" placeholder="">
 																</div>
 															</div>
@@ -280,7 +283,8 @@
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Star <span
-																		class="text-red">*</span></label> <input type="text"
+																		class="text-red">*</span></label> <input type="text" disabled="${mode == 
+																		'VIEW'}" value="${ feedback.star}"
 																		class="form-control" placeholder="">
 																</div>
 															</div>
@@ -298,7 +302,8 @@
 																<div class="mb-0">
 																	<label class="form-label">Comment <span
 																		class="text-red">*</span></label>
-																	<textarea rows="4" class="form-control" placeholder=""></textarea>
+																	<textarea rows="4" class="form-control" placeholder="" disabled="${mode == 
+																		'VIEW'}" value="${ feedback.account.fullName}">${ feedback.comment}</textarea>
 																</div>
 															</div>
 														</div>
@@ -323,7 +328,7 @@
 												</div>
 											</div>
 										</div>
-									</form>
+									</form:form>
 								</div>
 							</div>
 						</div>

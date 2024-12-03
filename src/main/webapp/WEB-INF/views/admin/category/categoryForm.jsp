@@ -244,7 +244,7 @@
 																		class="text-red">*</span></label>
 																	<form:input type="text" path="categoryName"
 																		class="form-control"
-																		placeholder="Enter product category"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="categoryName" />
 																</div>
@@ -256,7 +256,7 @@
 																	</label>
 																	<form:textarea rows="4" class="form-control"
 																		path="descript"
-																		placeholder="Enter category description"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>

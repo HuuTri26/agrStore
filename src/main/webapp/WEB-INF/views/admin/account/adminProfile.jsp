@@ -108,116 +108,158 @@
 							<!-- Card start -->
 							<div class="card">
 								<div class="card-body">
+									<form action="admin/adminProfile.htm" method="post">
+										<!-- Row start -->
+										<div class="row gx-3">
+											<div
+												class="col-xxl-8 col-xl-12 col-lg-7 col-md-6 col-sm-12 col-12">
+												<div class="row gx-3">
 
-									<!-- Row start -->
-									<div class="row gx-3">
-										<div
-											class="col-xxl-8 col-xl-12 col-lg-7 col-md-6 col-sm-12 col-12">
-											<div class="row gx-3">
-
-												<div class="col-sm-6 col-12">
-													<div class="d-flex flex-row">
-														<img
-															src="<c:url value='/assets/admin/assets/images/user.png'/>"
-															class="img-fluid change-img-avatar" alt="Free Dashboards">
-														<div id="dropzone" class="dropzone-dark">
+													<div class="col-sm-6 col-12">
+														<div class="d-flex flex-row">
+															<img
+																src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																class="img-fluid change-img-avatar"
+																alt="Free Dashboards">
+															<div id="dropzone" class="dropzone-dark">
 
 
-															<div class="input_file_cate">
+																<div class="input_file_cate">
 
-																<input type="file" class="dz-button" />
-																<!-- <br> <span class="note needsclick">(This is
+																	<input type="file" class="dz-button" />
+																	<!-- <br> <span class="note needsclick">(This is
 																	just a demo dropzone. Selected files are <strong>not</strong>
 																	actually uploaded.)
 																</span> -->
-															</div>
-															<!-- <div class="dz-message needsclick button-container">
+																</div>
+																<!-- <div class="dz-message needsclick button-container">
 																<button class="upload-btn">Upload ảnh</button>
 															</div> -->
 
 
 
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<div class="row gx-3">
-												<div class="col-xxl-4 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="fullName" class="form-label">Full Name</label>
-														<input type="text" class="form-control" placeholder="">
+												<div class="row gx-3">
+													<div class="col-xxl-4 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="fullName" class="form-label">Full
+																Name</label> <input name="fullName"
+																value="${loggedInUser.fullName }" type="text"
+																class="form-control" placeholder=""> ${nameErr }
+														</div>
 													</div>
-												</div>
-												<div class="col-xxl-4 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="email" class="form-label">Gmail</label> <input
-															type="email" disabled="disabled" class="form-control"
-															id="email" placeholder="">
+													<div class="col-xxl-4 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="email" class="form-label">Gmail</label> <input
+																type="email" disabled="disabled" class="form-control"
+																id="gmail" placeholder="" name="gmail"
+																value="${loggedInUser.gmail }">
+														</div>
 													</div>
-												</div>
-												<div class="col-xxl-4 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="phoneNo" class="form-label">Phone</label> <input
-															type="text" class="form-control" placeholder="">
+													<div class="col-xxl-4 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="phoneNo" class="form-label">Phone</label> <input
+																type="text" class="form-control" placeholder=""
+																name="phoneNumber" value="${loggedInUser.phoneNumber }">${phoneErr }
+														</div>
 													</div>
-												</div>
+													<div class="col-xxl-2 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="status" class="form-label">Status</label> <input
+																type="text" disabled="disabled" class="form-control" name="status"
+																id="status" placeholder="" value="${loggedInUser.status }">
+														</div>
+													</div>
+													<div class="col-xxl-2 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="status" class="form-label">Create At</label> <input
+																type="text" disabled="disabled" class="form-control" name="createAt"
+																id="createAt" placeholder="" value="${loggedInUser.createAt }">
+														</div>
+													</div>
+													<div class="col-xxl-2 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="status" class="form-label">Update At</label> <input
+																type="text" disabled="disabled" class="form-control" name="status"
+																id="status" placeholder="" value="${loggedInUser.updateAt }">
+														</div>
+													</div>
 
 
-												<div class="col-xxl-4 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="country" class="form-label">Province</label> <select
-															class="form-control" id="province">
-															<option selected="selected">TP HCM</option>
-															<option>Cần Thơ</option>
-															<option>Hải Phòng</option>
-														</select>
+													<div class="col-xxl-4 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="country" class="form-label">Province</label>
+															<select id="province" name="provinceId"
+																class="form-select" onchange="this.form.submit()">
+																<option value="">Chọn Tỉnh/Thành phố</option>
+																<c:forEach var="province" items="${provinces}">
+																	<option value="${province.id}"
+																		${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
+																</c:forEach>
+															</select> <input type="text" id="provinceText" readonly
+																value="${selectedProvince.name}"
+																placeholder="Tỉnh/Thành phố đã chọn" />
+														</div>
 													</div>
-												</div>
-												<div class="col-xxl-4 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="country" class="form-label">District</label> <select
-															class="form-control" id="district">
-															<option selected="selected">TP HCM</option>
-															<option>Cần Thơ</option>
-															<option>Hải Phòng</option>
-
-														</select>
+													<div class="col-xxl-4 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="country" class="form-label">District</label>
+															<select id="district" name="districtId"
+																class="form-select" onchange="this.form.submit()">
+																<option value="">Chọn Quận/Huyện</option>
+																<c:forEach var="district" items="${districts}">
+																	<option value="${district.id}"
+																		${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
+																</c:forEach>
+															</select> <input type="text" id="districtText" readonly
+																value="${selectedDistrict.name}"
+																placeholder="Quận/Huyện đã chọn" />
+														</div>
 													</div>
-												</div>
-												<div class="col-xxl-4 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="country" class="form-label">Ward</label> <select
-															class="form-control" id="ward">
-															<option selected="selected">TP HCM</option>
-															<option>Cần Thơ</option>
-															<option>Hải Phòng</option>
-
-														</select>
+													<div class="col-xxl-4 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="country" class="form-label">Ward</label> <select
+																id="ward" name="wardId" class="form-select"
+																onchange="this.form.submit()">
+																<option value="">Chọn Xã/Phường</option>
+																<c:forEach var="ward" items="${wards}">
+																	<option value="${ward.id}">${ward.name}</option>
+																</c:forEach>
+															</select> <input type="text" id="wardText" readonly
+																value="${selectedWard.name}"
+																placeholder="Xã/Phường đã chọn" />
+														</div>
 													</div>
-												</div>
-												<div class="col-xxl-8 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="address" class="form-label">Address</label> <input
-															type="text" disabled="disabled" class="form-control"
-															id="address" placeholder="">
+													<div class="col-xxl-8 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="address" class="form-label">StreetName</label>
+															<input type="text" id="streetName" name="streetName"
+																placeholder="Nhập tên đường cụ thể"
+																class="txt-input w-5"> ${streetErr }
+														</div>
 													</div>
-												</div>
-												<div class="col-xxl-2 col-sm-6 col-12">
-													<!-- Form Field Start -->
-													<div class="mb-3">
-														<label for="status" class="form-label">Status</label> <input
-															type="text" disabled="disabled" class="form-control"
-															id="status" placeholder="">
+													<div class="col-xxl-8 col-sm-6 col-12">
+														<!-- Form Field Start -->
+														<div class="mb-3">
+															<label for="address" class="form-label">Address</label>
+															<textarea rows="5" cols="100" readonly="readonly">${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
+														</div>
 													</div>
-												</div>
-												<!-- <div class="col-xxl-4 col-sm-6 col-12">
+													
+													<!-- <div class="col-xxl-4 col-sm-6 col-12">
 													Form Field Start
 													<div class="mb-3">
 														<label for="enterPassword" class="form-label">Password</label>
@@ -225,15 +267,15 @@
 															id="enterPassword" placeholder="Enter Password">
 													</div>
 												</div> -->
+												</div>
+											</div>
+											<div class="col-sm-12 col-12">
+												<hr>
+												<button class="btn btn-info" name="save" type="submit">Save</button>
 											</div>
 										</div>
-										<div class="col-sm-12 col-12">
-											<hr>
-											<button class="btn btn-info">Save</button>
-										</div>
-									</div>
-									<!-- Row end -->
-
+										<!-- Row end -->
+									</form>
 								</div>
 							</div>
 							<!-- Card end -->

@@ -52,4 +52,17 @@ public class AccountServiceImpl implements AccountService{
 		return this.AccountDAO.getAccountById(id);
 	}
 
+	@Override
+	public List<AccountEntity> getAllStaff() {
+		// TODO Auto-generated method stub
+		return this.AccountDAO.getAllStaff();
+	}
+	
+	@Override
+	public boolean isExistAccount(String gmail, String password) {
+		// TODO Auto-generated method stub
+		return this.AccountDAO.isExistAccount(gmail, password);
+	}
+	
+
 }
