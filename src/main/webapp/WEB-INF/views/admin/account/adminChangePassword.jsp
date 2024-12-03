@@ -33,7 +33,8 @@
 
 									<!-- Row start -->
 									<div class="row gx-3">
-										<form>
+										<form:form action="admin/adminChangePassword.htm"
+											method="post" modelAttribute="changePass">
 											<div
 												class="col-xxl-8 col-xl-12 col-lg-7 col-md-6 col-sm-12 col-12">
 												<div class="row gx-3">
@@ -41,25 +42,29 @@
 													<div class="col-xxl-4 col-sm-12 col-12">
 														<!-- Form Field Start -->
 														<div class="mb-3">
-															<label for="" class="form-label">Mật khẩu
-																cũ</label> <input type="password" class="form-control"
-																placeholder="">
+															<label for="" class="form-label">Mật khẩu cũ</label>
+															<form:input path="password" type="password"
+																class="form-control" id="currentPassword" />
+															<form:errors path="password" />
+															${wrongPass }
 														</div>
 													</div>
 													<div class="col-xxl-4 col-sm-12 col-12">
 														<!-- Form Field Start -->
 														<div class="mb-3">
-															<label for="" class="form-label">Mật khẩu
-																mới</label> <input type="password" class="form-control"
-																placeholder="">
+															<label for="" class="form-label">Mật khẩu mới</label> <input
+																name="new-password" type="password" class="form-control"
+																id="newPassword">
+															${newPass }
 														</div>
 													</div>
 													<div class="col-xxl-4 col-sm-12 col-12">
 														<!-- Form Field Start -->
 														<div class="mb-3">
-															<label for="" class="form-label">Nhập lại
-																mật khẩu mới </label> <input type="password"
-																class="form-control" placeholder="">
+															<label for="" class="form-label">Nhập lại mật
+																khẩu mới </label> <input name="re-enter-new-password"
+																type="password" class="form-control" id="renewPassword">
+															${reNewPass }
 														</div>
 													</div>
 
@@ -67,9 +72,9 @@
 											</div>
 											<div class="col-sm-12 col-12">
 												<hr>
-												<button class="btn btn-info">Save</button>
+												<button class="btn btn-info" type="submit">ChangePassword</button>
 											</div>
-										</form>
+										</form:form>
 									</div>
 
 									<!-- Row end -->

@@ -108,7 +108,7 @@ button {
 													<th>Gmail</th>
 													<th>Phone Number</th>
 													<th>Address</th>
-													<!-- <th>Status</th> -->
+													<th>Status</th>
 													<th>Create At</th>
 													<th>Action</th>
 												</tr>
@@ -131,8 +131,9 @@ button {
 														<td>${customer.phoneNumber }</td>
 														<td>${customer.address.streetName }</td>
 
-														<%-- <td><span class="badge shade-green min-70">${customer.status }</span>
-														</td> --%>
+														<td><span class="badge min-70"
+															style="background-color: ${customer.status ? 'green' : 'red'}; color: white;">
+																${customer.status ? 'Active' : 'Disable'} </span></td>
 
 														<td>${customer.createAt }</td>
 														<td>
@@ -160,6 +161,10 @@ button {
 																<a
 																	href="admin/customerManagement/customer.htm?action=view&id=${customer.accountId}">
 																	<i class="bi bi-eye text-green"></i>
+																</a> <a
+																	href="admin/customerManagement/disableCustomer.htm?id=${customer.accountId }"
+																	class="deleteRow"> <i
+																	class="bi ${customer.status ? 'bi-x-circle  inactive-icon' : 'bi-check-circle active-icon'}"></i>
 																</a>
 															</div>
 														</td>

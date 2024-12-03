@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -230,13 +233,64 @@ public class customerAccountController {
 
 		return "customer/account/customerProfile";
 	}
-
+	
 	@RequestMapping("/customerChangePassword")
 	public String customerChangePassword(HttpServletRequest request, HttpSession session,
-			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
+			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail, ModelMap model) {
 		// code
-
+		  model.addAttribute("changePass", new AccountEntity()); // Khởi tạo changePass
+		//model.addAttribute("account", new AccountEntity());
+		System.out.println("==> Open an customer change password session");
 		return "customer/account/customerChangePassword";
+	}
+
+	@RequestMapping(value="/customerChangePassword", method = RequestMethod.POST)
+	public String customerChangePassword(HttpServletRequest request, @ModelAttribute("changePass") AccountEntity changePass,
+			BindingResult errors,ModelMap model) {
+		// code
+		Boolean isValidPass = Boolean.TRUE;
+
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+		String newPass = request.getParameter("new-password");
+		String reEnterNewPass = request.getParameter("re-enter-new-password");
+
+		System.out.println(loggedInUser.getRole().getName());
+
+		if (changePass.getPassword().isEmpty()) {
+			errors.rejectValue("password", "changePass", "Vui lòng nhập mật khẩu hiện tại!");
+			isValidPass = Boolean.FALSE;
+		} else if (newPass.isEmpty()) {
+			model.addAttribute("newPass","Vui lòng nhập mật khẩu mới");
+			isValidPass = Boolean.FALSE;
+		} else if (reEnterNewPass.isEmpty()) {
+			model.addAttribute("reNewPass","Vui lòng nhập lại mật khẩu mới");
+			isValidPass = Boolean.FALSE;
+		}
+
+		if (!accountService.isExistAccount(loggedInUser.getGmail(),
+				accountUltility.getHashPassword(changePass.getPassword())) && !changePass.getPassword().isEmpty()) {
+			model.addAttribute("wrongPass","Sai mật khẩu !Vui lòng nhập lại mật khẩu mới");
+			isValidPass = Boolean.FALSE;
+		} else if (!newPass.equals(reEnterNewPass)) {
+			model.addAttribute("reNewPass","Vui lòng nhập lại mật khẩu mới");
+			isValidPass = Boolean.FALSE;
+		}
+
+		if (isValidPass) {
+			try {
+				loggedInUser.setPassword(accountUltility.getHashPassword(newPass));
+				accountService.updateAccount(loggedInUser);
+				System.out.println("==> Customer account password updated successfully!");
+			} catch (Exception e) {
+				System.out.println("Error: Customer account password updated unsuccessfully!");
+			}
+		} else {
+			System.out.println("Error: Customer account password updated unsuccessfully!");
+			 return "customer/account/customerChangePassword";
+		}
+
+		return "redirect:/index.htm";
 	}
 
 	@RequestMapping("/customerOrderList")

@@ -107,15 +107,16 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
+											<c:forEach var="feedback" items="${feedbacks }">
+											   <tr>
+													<td>${feedback.feedbackId}</td>
 													<td>
 														<div class="media-box">
 															<img
 																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
 																alt="Bootstrap Gallery">
 															<div class="media-box-body">
-																<a href="#" class="text-truncate">Huu tri</a>
+																<a href="#" class="text-truncate">${feedback.account.fullName }</a>
 															</div>
 														</div>
 													</td>
@@ -125,19 +126,17 @@
 																src="<c:url value='assets/admin/assets/images/food/img1.jpg'/>"
 																class="media-avatar-lg" alt="Product">
 															<div class="media-box-body">
-																<a href="#" class="text-truncate">Tao</a>
-																<p>ID: 1</p>
+																<a href="#" class="text-truncate">${feedback.orderBillDetail.product.productName }</a>
+																<p>ID: ${feedback.orderBillDetail.product.productId }</p>
 																<div class="rating-block">
 																	<div class="rate2"></div>
 																</div>
 															</div>
 														</div>
 													</td>
-													<td>4</td>
-													<td>2011/12/06</td>
-													<td>Great Product. Very happy with the purchase and
-														will surely shop for more with Leather Villa in the time
-														to come.</td>
+													<td>${feedback.star}</td>
+													<td>${feedback.createAt }</td>
+													<td>${feedback.comment }</td>
 													<td>
 														<div class="actions">
 															<div class="dropdown">
@@ -147,12 +146,12 @@
 																</a>
 																<div class="dropdown-content">
 																	<a
-																		href="admin/feedbackManagement/feedback.htm?action=view&id=${feedback.id}">
+																		href="admin/feedbackManagement/feedback.htm?action=view&id=${feedback.feedbackId}">
 																		<i class="bi bi-eye"></i>
 																	</a>
 																</div>
 															</div>
-															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
+															<a href="admin/feedbackManagement/deleteFeedback.htm?id=${feedback.feedbackId}" class="deleteRow"> <i
 																class="bi bi-trash text-red"></i>
 															</a>
 														</div>
@@ -160,66 +159,8 @@
 
 
 												</tr>
-												<tr>
-													<td>1</td>
-													<td>
-														<div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																alt="Bootstrap Gallery">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Huu tri</a>
-															</div>
-														</div>
-													</td>
-													<td>
-														<div class="media-box">
-															<img
-																src="<c:url value='assets/admin/assets/images/food/img1.jpg'/>"
-																class="media-avatar-lg" alt="Product">
-															<div class="media-box-body">
-																<a href="#" class="text-truncate">Tao</a>
-																<p>ID: 1</p>
-																<div class="rating-block">
-																	<div class="rate2"></div>
-																</div>
-															</div>
-														</div>
-													</td>
-													<td>4</td>
-													<td>2011/12/06</td>
-
-													<td>Great Product. Very happy with the purchase and
-														will surely shop for more with Leather Villa in the time
-														to come.</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="admin/customerManagement/customer.htm?action=view&id=${customer.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a
-																		href="admin/customerManagement/customer.htm?action=edit&id=${customer.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="admin/categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a> <a
-																		href="admin/categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
+											</c:forEach>
+												
 											</tbody>
 										</table>
 									</div>

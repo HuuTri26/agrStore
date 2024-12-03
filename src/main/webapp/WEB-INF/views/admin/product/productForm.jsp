@@ -236,7 +236,7 @@
 																	<label class="form-label">Product Name <span
 																		class="text-red">*</span></label>
 																	<form:input path="productName" class="form-control"
-																		placeholder="Enter product name"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="productName" />
 																</div>
@@ -247,7 +247,7 @@
 																		class="text-red">*</span></label>
 																	<form:select path="category.categoryId"
 																		class="form-control" disabled="${mode == 'VIEW'}">
-																		<form:option value="">-- Select Product Category --</form:option>
+																		<form:option value="${product.category.categoryId}">${product.category.categoryName}</form:option>
 																		<c:forEach var="category" items="${categories}">
 																			<form:option value="${category.categoryId}">${category.categoryName}</form:option>
 																		</c:forEach>
@@ -260,7 +260,7 @@
 																	<label class="form-label">Product Price <span
 																		class="text-red">*</span></label>
 																	<form:input path="price" class="form-control"
-																		type="number" readonly="${mode == 'VIEW'}" />
+																		type="number" min="0" step="1000"  readonly="${mode == 'VIEW'}" />
 																	<form:errors path="price" />
 																</div>
 															</div>
@@ -269,7 +269,7 @@
 																	<label class="form-label">Product Unit <span
 																		class="text-red">*</span></label>
 																	<form:input path="unit" class="form-control"
-																		placeholder="Enter product unit"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="unit" />
 																</div>
@@ -288,7 +288,7 @@
 																	<label class="form-label">Quantity <span
 																		class="text-red">*</span></label>
 																	<form:input path="quantity" class="form-control"
-																		placeholder="Enter quantity"
+																		placeholder="" type="number"
 																		readonly="${mode == 'VIEW'}" />
 																</div>
 															</div>
@@ -298,7 +298,7 @@
 																		class="text-red">*</span></label>
 																	<form:select path="provider.id" class="form-control"
 																		disabled="${mode == 'VIEW'}">
-																		<form:option value="">-- Select Provider --</form:option>
+																		<form:option value="${product.provider.id}">${product.provider.providerName}</form:option>
 																		<c:forEach var="provider" items="${providers}">
 																			<form:option value="${provider.id}">${provider.providerName}</form:option>
 																		</c:forEach>
@@ -319,7 +319,7 @@
 																		class="text-red">*</span></label>
 																	<form:textarea path="descript" rows="4"
 																		class="form-control"
-																		placeholder="Enter product description"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>

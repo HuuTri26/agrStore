@@ -38,4 +38,80 @@ public class FeedbackEntity {
 	@ManyToOne()
 	@JoinColumn(name="accountId")
 	private AccountEntity account;
+	
+	@ManyToOne()
+	@JoinColumn(name="orderBillDetailId")
+	private OrderBillDetailEntity orderBillDetail;
+
+	public FeedbackEntity(Integer feedbackId, String comment, int star, Date createAt, AccountEntity account,
+			OrderBillDetailEntity orderBillDetail) {
+		super();
+		this.feedbackId = feedbackId;
+		this.comment = comment;
+		this.star = star;
+		this.createAt = createAt;
+		this.account = account;
+		this.orderBillDetail = orderBillDetail;
+	}
+
+	public FeedbackEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getFeedbackId() {
+		return feedbackId;
+	}
+
+	public void setFeedbackId(Integer feedbackId) {
+		this.feedbackId = feedbackId;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public int getStar() {
+		return star;
+	}
+
+	public void setStar(int star) {
+		this.star = star;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public AccountEntity getAccount() {
+		return account;
+	}
+
+	public void setAccount(AccountEntity account) {
+		this.account = account;
+	}
+
+	public OrderBillDetailEntity getOrderBillDetail() {
+		return orderBillDetail;
+	}
+
+	public void setOrderBillDetail(OrderBillDetailEntity orderBillDetail) {
+		this.orderBillDetail = orderBillDetail;
+	}
+
+	@Override
+	public String toString() {
+		return "FeedbackEntity [feedbackId=" + feedbackId + ", comment=" + comment + ", star=" + star + ", createAt="
+				+ createAt + ", account=" + account + ", orderBillDetail=" + orderBillDetail + "]";
+	}
+	
+	
 }

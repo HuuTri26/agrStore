@@ -145,7 +145,7 @@ public class AdminProviderController {
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Provider Name field empty!");
 		}  else if (provider.getPhoneNumber() == null || ultility.isValidPhoneNumber(provider.getPhoneNumber()) == false) {
-			errors.rejectValue("providerPhone", "provider", "Số điện thoại doanh nghiệp không được để trống!");
+			errors.rejectValue("phoneNumber", "provider", "Số điện thoại doanh nghiệp không được để trống!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Provider phone field empty!");
 		}
