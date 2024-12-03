@@ -41,7 +41,7 @@ public class OrderBillEntity {
 	private int totalQuantity;
 
 	@Column(name = "totalPrice")
-	private double totalPrice;
+	private Double totalPrice;
 
 	@Column(name = "employeeId", nullable = true)
 	private Integer employeeId;
@@ -58,7 +58,7 @@ public class OrderBillEntity {
 		super();
 	}
 
-	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, double totalPrice,
+	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, Double totalPrice,
 			Integer employeeId) {
 		super();
 		this.orderBillId = orderBillId;
@@ -101,11 +101,11 @@ public class OrderBillEntity {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public double getTotalPrice() {
+	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(double totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

@@ -26,7 +26,7 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		Session session = factory.getCurrentSession();
 		try {
 			session.save(orderBill);
-			 session.flush();
+			session.flush();
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
@@ -39,6 +39,21 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		Session session = factory.getCurrentSession();
 		try {
 			session.update(orderBill);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void deleteOrderBill(OrderBillEntity orderBill) {
+		Session session = factory.getCurrentSession();
+		try {
+			if (!session.contains(orderBill)) {
+				orderBill = (OrderBillEntity) session.merge(orderBill);
+			}
+			session.delete(orderBill);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
@@ -104,12 +119,28 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	public long getNumberOrderBillForToday() {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
-		String hql = "SELECT COUNT(*) "
-				+ "FROM OrderBillEntity o "
+		String hql = "SELECT COUNT(*) " + "FROM OrderBillEntity o "
 				+ "WHERE CONVERT(DATE, o.orderTime) = CONVERT(DATE, GETDATE())";
 		Query query = session.createQuery(hql);
 		long result = (long) query.uniqueResult();
 		return result;
+	}
+
+	@Override
+	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
+		List<OrderBillEntity> orderBills = null;
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM OrderBillEntity o WHERE o.account.accountId = :aId AND o.statusOrder = :status";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("aId", aId);
+			query.setParameter("status", status);
+			orderBills = (List<OrderBillEntity>) query.list();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		return orderBills;
 	}
 
 }
