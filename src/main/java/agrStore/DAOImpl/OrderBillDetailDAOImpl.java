@@ -25,7 +25,7 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 		Session session = factory.getCurrentSession();
 		try {
 			session.save(orderBilldt);
-			 session.flush();
+			session.flush();
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
@@ -38,6 +38,18 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 		Session session = factory.getCurrentSession();
 		try {
 			session.update(orderBilldt);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void deleteOrderBillDetail(OrderBillDetailEntity orderBilldt) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.delete(orderBilldt);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();

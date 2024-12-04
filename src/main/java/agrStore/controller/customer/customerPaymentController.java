@@ -3,6 +3,7 @@ package agrStore.controller.customer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -51,8 +52,43 @@ public class customerPaymentController {
 		return "customer/payment/customerCheckout";
 	}
 
+	private void cleanUpDuplicateOrderBills(AccountEntity loggedInUser, Double totalPrice,
+			List<CartItemEntity> selectedCartItems) {
+		// Tìm các OrderBill pending của người dùng
+		List<OrderBillEntity> pendingOrderBills = orderBillService
+				.getPendingOrderBillByAccountId(loggedInUser.getAccountId(), 1);
+
+		if (pendingOrderBills != null && !pendingOrderBills.isEmpty()) {
+			// Lọc và xóa các OrderBill trùng lặp
+			List<OrderBillEntity> duplicateOrderBills = pendingOrderBills.stream().filter(bill ->
+			// Kiểm tra trùng lặp dựa trên các tiêu chí:
+			bill.getTotalPrice().equals(totalPrice)
+					&& bill.getTotalQuantity() == cartItemService.getTotalQuantityOfCartItems(selectedCartItems))
+					.collect(Collectors.toList());
+
+			if (!duplicateOrderBills.isEmpty()) {
+				System.out.println("==> Found " + duplicateOrderBills.size() + " duplicate pending orderBills");
+				try {
+					// Xóa các OrderBill trùng lặp
+					orderBillService.deleteListOrderBill(duplicateOrderBills);
+					System.out.println("==> Successfully deleted duplicate pending orderBills");
+				} catch (Exception e) {
+					System.err.println("==> Error deleting duplicate pending orderBills: " + e.getMessage());
+					// Có thể log lỗi vào hệ thống log chuyên nghiệp
+				}
+			}
+		}
+	}
+
 	@RequestMapping("/paymentError")
-	public String showPaymentError(Model model) {
+	public String showPaymentError(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
+		Double totalPrice = (Double) session.getAttribute("totalPrice");
+		
+		cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
+		
 		System.out.println("==> Error: Could not process payment!");
 		model.addAttribute("error-message",
 				"Không thể thực hiện giao dịch, vui lòng thử lại hoặc liên hệ với chúng tôi để được nhận hỗ trợ!");
@@ -62,13 +98,18 @@ public class customerPaymentController {
 	@RequestMapping("/cancelPayment")
 	public String showCancelPayment(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
+		Double totalPrice = (Double) session.getAttribute("totalPrice");
 		
+		cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
+
 		System.out.println("==> Cancel payment!");
 		OrderBillEntity orderBill = (OrderBillEntity) session.getAttribute("orderBill");
 		orderBill.setStatusOrder(6);
 		orderBillService.updateOrderBill(orderBill);
 		System.out.println("==> Set orderBill status to 'Canceled'!");
-		
+
 		return "customer/payment/cancel";
 	}
 
@@ -78,7 +119,9 @@ public class customerPaymentController {
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
 		Double totalPrice = (Double) session.getAttribute("totalPrice");
-
+		
+		cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
+		
 		OrderBillEntity orderBill = new OrderBillEntity();
 		try {
 			// Tạo OrderBill
@@ -148,20 +191,32 @@ public class customerPaymentController {
 	public String executePayment(HttpServletRequest request, ModelMap model, @RequestParam("paymentId") String payemtId,
 			@RequestParam("PayerID") String payerId) {
 		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
+		Double totalPrice = (Double) session.getAttribute("totalPrice");
+
 		try {
 			System.out.println("==> Execute payment");
 			Payment payment = palPaymentService.executePayment(payemtId, payerId);
 			PayerInfo payerInfo = payment.getPayer().getPayerInfo();
 			Transaction transaction = payment.getTransactions().get(0);
-			
+
 			OrderBillEntity orderBill = (OrderBillEntity) session.getAttribute("orderBill");
 			orderBill.setStatusOrder(2);
 			orderBillService.updateOrderBill(orderBill);
 			System.out.println("==> Set order status to 'Confirmed'!");
-			
+
 			model.addAttribute("payerInfo", payerInfo);
 			model.addAttribute("transaction", transaction);
 			
+			cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
+			
+			System.out.println("==> Delete all selected cartItems in cart");
+			cartItemService.deleteCartItem(selectedCartItems);
+			
+			session.removeAttribute("selectedCartItems");
+			session.removeAttribute("totalPrice");
+
 			return "customer/payment/receipt";
 
 		} catch (PayPalRESTException e) {

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import agrStore.DAO.OrderBillDAO;
+import agrStore.DAO.OrderBillDetailDAO;
+import agrStore.entity.OrderBillDetailEntity;
 import agrStore.entity.OrderBillEntity;
 import agrStore.service.OrderBillService;
 
@@ -17,6 +19,9 @@ public class OrderBillServiceImpl implements OrderBillService {
 
 	@Autowired
 	private OrderBillDAO orderBillDAO;
+
+	@Autowired
+	OrderBillDetailDAO orderBillDetailDAO;
 
 	@Override
 	public void addOrderBill(OrderBillEntity orderBill) {
@@ -54,6 +59,33 @@ public class OrderBillServiceImpl implements OrderBillService {
 	public long getNumberOrderBillForToday() {
 		// TODO Auto-generated method stub
 		return this.orderBillDAO.getNumberOrderBillForToday();
+	}
+
+	@Override
+	public void deleteOrderBill(OrderBillEntity orderBill) {
+		orderBillDAO.deleteOrderBill(orderBill);
+
+	}
+
+	@Override
+	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
+		return orderBillDAO.getPendingOrderBillByAccountId(aId, status);
+	}
+
+	@Override
+	public void deleteListOrderBill(List<OrderBillEntity> orderBills) {
+		System.out.println("==> Delete {0} orderBills".formatted(orderBills.size()));
+		for (OrderBillEntity order : orderBills) {
+			List<OrderBillDetailEntity> details = orderBillDetailDAO.getOrderBillDetailByOderBillId(order.getOrderBillId());
+			System.out.println("==> Delete {0} orderBillDetails".formatted(details.size()));
+			for (OrderBillDetailEntity detail : details) {
+				orderBillDetailDAO.deleteOrderBillDetail(detail);
+				System.out.println("==> Delete orderBillDetail successfully!");
+			}
+			deleteOrderBill(order);
+			System.out.println("==> Delete orderBill successfully!");
+		}
+
 	}
 
 }

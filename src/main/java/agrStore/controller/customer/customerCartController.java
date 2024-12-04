@@ -142,14 +142,16 @@ public class customerCartController {
 		for (CartItemEntity item : cartItems) {
 			item.setIsSelected(hasUnselected); // Đảo trạng thái của tất cả các item
 		}
-		Double totalPrice = cartItemService.getTotalPriceofCartItems(cartItems);
+		Double totalPrice = Double.valueOf(0);
+		if(hasUnselected) {
+			totalPrice = cartItemService.getTotalPriceofCartItems(cartItems);
+		}
 		Integer selectedItemCount = cartItems.size();
 		
-
 		session.setAttribute("cartItems", cartItems);
 		session.setAttribute("totalPrice", totalPrice);
-		model.addAttribute("selectedItemCount", selectedItemCount);
 		session.setAttribute("selectedCartItems", cartItems);
+		model.addAttribute("selectedItemCount", selectedItemCount);
 		return "customer/customerCart";
 	}
 
