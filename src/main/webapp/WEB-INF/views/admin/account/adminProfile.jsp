@@ -88,111 +88,6 @@
 .upload-btn:active {
 	transform: translateY(1px);
 }
-
-/* /* Đặt khoảng cách giữa các hàng và cột */
-/* .row {
-	row-gap: 20px;
-	column-gap: 15px;
-} */
-
-/* Căn chỉnh card */
-/* .card {
-	border-radius: 10px;
-	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-} */ */
-
-/* Căn chỉnh input và select */
-input[type="text"], input[type="email"], input[type="file"], select,
-	textarea {
-	width: 100%;
-	padding: 10px 15px;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	font-size: 14px;
-	transition: border-color 0.3s;
-}
-
-input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus,
-	select:focus, textarea:focus {
-	border-color: #007bff;
-	outline: none;
-}
-
-/* Style cho label */
-.form-label {
-	font-size: 14px;
-	font-weight: 600;
-	color: #555;
-	margin-bottom: 5px;
-}
-
-/* Căn chỉnh hình ảnh */
-.img-fluid.change-img-avatar {
-	max-width: 80px;
-	max-height: 80px;
-	border-radius: 50%;
-	margin-right: 15px;
-}
-
-/* Style cho button */
-button {
-	padding: 10px 20px;
-	font-size: 14px;
-	font-weight: 600;
-	border: none;
-	border-radius: 8px;
-	background-color: #007bff;
-	color: #fff;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-button:hover {
-	background-color: #0056b3;
-}
-
-/* Căn chỉnh select dropdown */
-.form-select {
-	appearance: none;
-	background-color: #fff;
-	background-image:
-		url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 5\'%3E%3Cpath fill=\'%23007bff\' d=\'M2 0L0 2h4z\'/%3E%3C/svg%3E');
-	background-repeat: no-repeat;
-	background-position: right 10px center;
-	background-size: 10px 10px;
-}
-
-/* Style cho textarea */
-textarea {
-	resize: none;
-	padding: 10px;
-}
-
-/* Dropzone */
-#dropzone {
-	border: 2px dashed #007bff;
-	border-radius: 8px;
-	padding: 10px;
-	text-align: center;
-	font-size: 14px;
-	color: #007bff;
-}
-
-#dropzone:hover {
-	background-color: #f0f8ff;
-}
-
-/* Responsive adjustments */
-@media ( max-width : 768px) {
-	.img-fluid.change-img-avatar {
-		max-width: 60px;
-		max-height: 60px;
-	}
-	button {
-		width: 100%;
-	}
-}
 </style>
 </head>
 <body>
@@ -278,27 +173,24 @@ textarea {
 														<!-- Form Field Start -->
 														<div class="mb-3">
 															<label for="status" class="form-label">Status</label> <input
-																type="text" disabled="disabled" class="form-control"
-																name="status" id="status" placeholder=""
-																value="${loggedInUser.status }">
+																type="text" disabled="disabled" class="form-control" name="status"
+																id="status" placeholder="" value="${loggedInUser.status }">
 														</div>
 													</div>
 													<div class="col-xxl-2 col-sm-6 col-12">
 														<!-- Form Field Start -->
 														<div class="mb-3">
-															<label for="status" class="form-label">Create At</label>
-															<input type="text" disabled="disabled"
-																class="form-control" name="createAt" id="createAt"
-																placeholder="" value="${loggedInUser.createAt }">
+															<label for="status" class="form-label">Create At</label> <input
+																type="text" disabled="disabled" class="form-control" name="createAt"
+																id="createAt" placeholder="" value="${loggedInUser.createAt }">
 														</div>
 													</div>
 													<div class="col-xxl-2 col-sm-6 col-12">
 														<!-- Form Field Start -->
 														<div class="mb-3">
-															<label for="status" class="form-label">Update At</label>
-															<input type="text" disabled="disabled"
-																class="form-control" name="status" id="status"
-																placeholder="" value="${loggedInUser.updateAt }">
+															<label for="status" class="form-label">Update At</label> <input
+																type="text" disabled="disabled" class="form-control" name="status"
+																id="status" placeholder="" value="${loggedInUser.updateAt }">
 														</div>
 													</div>
 
@@ -355,18 +247,18 @@ textarea {
 														<div class="mb-3">
 															<label for="address" class="form-label">StreetName</label>
 															<input type="text" id="streetName" name="streetName"
-																placeholder="Nhập tên đường cụ thể" class="form-control"
+																placeholder="Nhập tên đường cụ thể"
 																class="txt-input w-5"> ${streetErr }
 														</div>
 													</div>
-													<div class="col-xxl-8 col-sm-8 col-12">
+													<div class="col-xxl-8 col-sm-6 col-12">
 														<!-- Form Field Start -->
 														<div class="mb-3">
 															<label for="address" class="form-label">Address</label>
 															<textarea rows="5" cols="100" readonly="readonly">${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
 														</div>
 													</div>
-
+													
 													<!-- <div class="col-xxl-4 col-sm-6 col-12">
 													Form Field Start
 													<div class="mb-3">

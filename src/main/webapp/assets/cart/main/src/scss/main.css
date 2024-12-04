@@ -7848,7 +7848,7 @@ body.overlay::after {
 }
 
 .noUi-connect {
-  background: important;
+  background: !important;
 }
 
 .noUi-connects {

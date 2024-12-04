@@ -413,7 +413,7 @@ public class AdminImportBillController {
 		session.setAttribute("totalImportQuantity", totalImportQuantity);
 		model.addAttribute("totalImportQuantity", totalImportQuantity);
 
-		return "redirect:/admin/importBillManagement.htm"; // Redirect về trang quản lý importBill
+		return "redirect:/importBillManagement.htm"; // Redirect về trang quản lý importBill
 	}
 
 	@RequestMapping(value = "/importBillManagement/importBill", method = RequestMethod.POST)

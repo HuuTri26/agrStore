@@ -188,46 +188,46 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form:form action="admin/categoryManagement/category.htm"
-										method="post" modelAttribute="category">
-										<div class="row gx-3">
-											<div class="col-sm-6 col-12">
-												<div class="card-border">
-													<div class="card-border-title">Category Images</div>
-													<div class="card-border-body">
-														<form action="admin/category/uploadImg.htm" method="post"
-															enctype="multipart/form-data">
-															<c:choose>
-																<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
-																	<!-- Hiển thị form thêm mới -->
-																	<div id="dropzone" class="dropzone-dark">
+									<div class="row gx-3">
+										<div class="col-sm-6 col-12">
+											<div class="card-border">
+												<div class="card-border-title">Category Images</div>
+												<div class="card-border-body">
+													<form action="admin/category/uploadImg.htm" method="post"
+														enctype="multipart/form-data">
+														<c:choose>
+															<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
+																<!-- Hiển thị form thêm mới -->
+																<div id="dropzone" class="dropzone-dark">
 
 
-																		<div class="input_file_cate">
+																	<div class="input_file_cate">
 
-																			<input name="image" type="file" class="dz-button" />
-																		</div>
-																		<div class="dz-message needsclick button-container">
-																			<button class="upload-btn" type="submit">Upload
-																				ảnh</button>
-																		</div>
+																		<input name="image" type="file" class="dz-button" />
 																	</div>
+																	<div class="dz-message needsclick button-container">
+																		<button class="upload-btn" type="submit">Upload
+																			ảnh</button>
+																	</div>
+																</div>
 																${imgError}
 															</c:when>
 
-																<c:when test="${mode == 'VIEW'}">
-																	<!-- Hiển thị thông tin chi tiết -->
-																	<img
-																		src="<c:url value='/assets/category-images/${category.image }'/>"
-																		class="img-fluid change-img-avatar"
-																		alt="Free Dashboards">
-																</c:when>
+															<c:when test="${mode == 'VIEW'}">
+																<!-- Hiển thị thông tin chi tiết -->
+																<img
+																	src="<c:url value='/assets/category-images/${category.image }'/>"
+																	class="img-fluid change-img-avatar"
+																	alt="Free Dashboards">
+															</c:when>
 
-															</c:choose>
-														</form>
-													</div>
+														</c:choose>
+													</form>
 												</div>
 											</div>
+										</div>
+										<form:form action="admin/categoryManagement/category.htm"
+											method="post" modelAttribute="category">
 
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
@@ -243,7 +243,8 @@
 																	<label class="form-label">Category Name <span
 																		class="text-red">*</span></label>
 																	<form:input type="text" path="categoryName"
-																		class="form-control" placeholder=""
+																		class="form-control"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="categoryName" />
 																</div>
@@ -254,7 +255,8 @@
 																		<span class="text-red">*</span>
 																	</label>
 																	<form:textarea rows="4" class="form-control"
-																		path="descript" placeholder=""
+																		path="descript"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>
@@ -281,29 +283,29 @@
 													</c:choose>
 												</div>
 											</div>
-										</div>
 
-									</form:form>
+										</form:form>
+
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- Row end -->
+
 				</div>
-				<!-- Row end -->
+				<!-- Content wrapper end -->
+				<!-- App Footer start -->
+				<div class="app-footer">
+					<span>Nhom10</span>
+				</div>
+				<!-- App footer end -->
 
 			</div>
-			<!-- Content wrapper end -->
-			<!-- App Footer start -->
-			<div class="app-footer">
-				<span>Nhom10</span>
-			</div>
-			<!-- App footer end -->
-
 		</div>
-	</div>
-	<!-- Content wrapper scroll end -->
+		<!-- Content wrapper scroll end -->
 
-	<!-- *************
+		<!-- *************
 				************ Main container end *************
 			************* -->
 

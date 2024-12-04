@@ -184,50 +184,43 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form:form action="admin/productManagement/product.htm"
-										method="post" modelAttribute="product">
-										<div class="row gx-3">
-											<form action="admin/product/uploadImg.htm" method="post"
-												enctype="multipart/form-data">
-												<!-- Product Image Section -->
-												<div class="col-sm-6 col-12">
-													<div class="card-border">
-														<div class="card-border-title">Product Images</div>
-														<div class="card-border-body">
-
-															<c:choose>
-																<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
-																	<div id="dropzone" class="dropzone-dark">
-																		<div class="input_file_cate">
-																			<input name="image" type="file" class="dz-button" />
-																		</div>
-																		<div class="dz-message needsclick button-container">
-
-																			<button type="submit" class="upload-btn">Upload
-
-																				Image</button>
-																		</div>
-																		${imgError}
+									<div class="row gx-3">
+										<form action="admin/product/uploadImg.htm" method="post" enctype="multipart/form-data">
+											<!-- Product Image Section -->
+											<div class="col-sm-6 col-12">
+												<div class="card-border">
+													<div class="card-border-title">Product Images</div>
+													<div class="card-border-body">
+														<c:choose>
+															<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
+																<div id="dropzone" class="dropzone-dark">
+																	<div class="input_file_cate">
+																		<input name="image" type="file" class="dz-button" />
 																	</div>
-																</c:when>
-																<c:when test="${mode == 'VIEW'}">
-																	<img
-																		src="<c:url value='/assets/product-images/${product.image }'/>"
-																		class="img-fluid change-img-avatar"
-																		alt="Product Image">
-																</c:when>
-															</c:choose>
-														</div>
+																	<div class="dz-message needsclick button-container">
+
+																		<button type="submit" class="upload-btn">Upload
+
+																			Image</button>
+																	</div>
+																	${imgError}
+																</div>
+															</c:when>
+															<c:when test="${mode == 'VIEW'}">
+																<img
+																	src="<c:url value='/assets/product-images/${product.image }'/>"
+
+																	class="img-fluid change-img-avatar" alt="Product Image">
+															</c:when>
+														</c:choose>
 													</div>
 												</div>
-											</form>
+											</div>
 
+										</form>
 
-
-
-
-											<%-- <form:form action="admin/productManagement/product.htm"
-											method="post" modelAttribute="product"> --%>
+										<form:form action="admin/productManagement/product.htm"
+											method="post" modelAttribute="product">
 
 
 											<!-- Product Details Section -->
@@ -243,7 +236,8 @@
 																	<label class="form-label">Product Name <span
 																		class="text-red">*</span></label>
 																	<form:input path="productName" class="form-control"
-																		placeholder="" readonly="${mode == 'VIEW'}" />
+																		placeholder=""
+																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="productName" />
 																</div>
 															</div>
@@ -266,8 +260,7 @@
 																	<label class="form-label">Product Price <span
 																		class="text-red">*</span></label>
 																	<form:input path="price" class="form-control"
-																		type="number" min="0" step="1000"
-																		readonly="${mode == 'VIEW'}" />
+																		type="number" min="0" step="1000"  readonly="${mode == 'VIEW'}" />
 																	<form:errors path="price" />
 																</div>
 															</div>
@@ -276,7 +269,8 @@
 																	<label class="form-label">Product Unit <span
 																		class="text-red">*</span></label>
 																	<form:input path="unit" class="form-control"
-																		placeholder="" readonly="${mode == 'VIEW'}" />
+																		placeholder=""
+																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="unit" />
 																</div>
 															</div>
@@ -322,10 +316,10 @@
 															<div class="col-sm-12 col-12">
 																<div class="mb-0">
 																	<label class="form-label">Product Description <span
-																		class="text-red">*</span>
-																	</label>
+																		class="text-red">*</span></label>
 																	<form:textarea path="descript" rows="4"
-																		class="form-control" placeholder=""
+																		class="form-control"
+																		placeholder=""
 																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>
@@ -348,34 +342,34 @@
 													</div>
 												</div>
 											</div>
-										</div>
-									</form:form>
+										</form:form>
+
+									</div>
 								</div>
 							</div>
+
+
+
+
 						</div>
-
-
-
 
 					</div>
 
+					<!-- Row end -->
+
 				</div>
-
-				<!-- Row end -->
+				<!-- Content wrapper end -->
+				<!-- App Footer start -->
+				<div class="app-footer">
+					<span>Nhom10</span>
+				</div>
+				<!-- App footer end -->
 
 			</div>
-			<!-- Content wrapper end -->
-			<!-- App Footer start -->
-			<div class="app-footer">
-				<span>Nhom10</span>
-			</div>
-			<!-- App footer end -->
-
 		</div>
-	</div>
-	<!-- Content wrapper scroll end -->
+		<!-- Content wrapper scroll end -->
 
-	<!-- *************
+		<!-- *************
 				************ Main container end *************
 			************* -->
 

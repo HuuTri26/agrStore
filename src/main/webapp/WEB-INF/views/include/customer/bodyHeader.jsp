@@ -102,7 +102,7 @@
 		<ul class="horizontal-menu">
 			<li><a href="#" class="biolife-logo"><img
 					src="<c:url value='/assets/assets/images/organic-2.png'/>"
-					alt="biolife logo" width="135"  height="34"></a></li>
+					alt="biolife logo" width="135" height="34"></a></li>
 		</ul>
 	</div>
 	<div class="top-bar right">

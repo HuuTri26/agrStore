@@ -370,39 +370,37 @@
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<%-- <label class="form-label">Status <span
+																			<div class="mb-3">
+																				<%-- <label class="form-label">Status <span
 																					class="text-red">*</span></label> <input type="text"
 																					class="form-control" value="${customer.status }"> --%>
-
-																	<c:choose>
-																		<c:when test="${customer.status == true}">
-																			<c:set var="statusText" value="Còn hoạt động" />
-																		</c:when>
-																		<c:when test="${customer.status == false}">
-																			<c:set var="statusText" value="Ngừng hoạt động" />
-																		</c:when>
-																		<c:otherwise>
-																			<c:set var="statusText"
-																				value="Trạng thái không xác định" />
-																		</c:otherwise>
-																	</c:choose>
-																	<label class="form-label">Status <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" value="${statusText}" readonly>
-
-																</div>
-															</div>
+																				
+																					<c:choose>
+																					    <c:when test="${customer.status == true}">
+																					        <c:set var="statusText" value="Còn hoạt động" />
+																					    </c:when>
+																					    <c:when test="${customer.status == false}">
+																					        <c:set var="statusText" value="Ngừng hoạt động" />
+																					    </c:when>
+																					    <c:otherwise>
+																					        <c:set var="statusText" value="Trạng thái không xác định" />
+																					    </c:otherwise>
+																					</c:choose>
+																					<label class="form-label">Status <span class="text-red">*</span></label>
+																					<input type="text" class="form-control" value="${statusText}" readonly>
+																					
+																			</div>
+																		</div>
 															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Create At <span
-																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" placeholder=""
-																		value="${customer.createAt }" readonly>
-																</div>
-															</div>
+																			<div class="mb-3">
+																				<label class="form-label">Create At <span
+																					class="text-red">*</span></label> <input type="text"
+																					class="form-control" placeholder=""
+																					value="${customer.createAt }" readonly>
+																			</div>
+																		</div>
 
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Provider <span
 																	class="text-red">*</span></label> <select class="form-control">
@@ -414,28 +412,28 @@
 																</select>
 															</div>
 														</div> -->
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Price <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-															<!-- 	<div class="col-sm-6 col-12">
+																		<!-- 	<div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Quantity <span
 																	class="text-red">*</span></label> <input type="number"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class="mb-3">
 																<label class="form-label">Product Unit <span
 																	class="text-red">*</span></label> <input type="text"
 																	class="form-control" placeholder="Enter Product Price">
 															</div>
 														</div> -->
-															<!-- <div class="col-sm-6 col-12">
+																		<!-- <div class="col-sm-6 col-12">
 															<div class=" mb-3">
 																<label class="form-label">Product Discount</label>
 																<div class="input-group">
@@ -445,7 +443,7 @@
 																</div>
 															</div>
 														</div> -->
-															<!-- 	<div class="col-sm-12 col-12">
+																		<!-- 	<div class="col-sm-12 col-12">
 															<div class="mb-0">
 																<label class="form-label">Staff Description <span
 																	class="text-red">*</span></label>
@@ -453,7 +451,7 @@
 																	placeholder="Enter Description"></textarea>
 															</div>
 														</div> -->
-														</div>
+																	</div>
 
 
 

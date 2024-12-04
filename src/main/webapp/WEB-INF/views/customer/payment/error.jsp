@@ -4,99 +4,50 @@
 <html>
 <%@include file="/WEB-INF/views/include/customer/header.jsp"%>
 <head>
+<meta charset="UTF-8">
+<title>Payment Error</title>
 <style>
-.address-form {
-	max-width: 400px;
-	margin: 20px auto;
-}
-
-.address-form label {
-	display: block;
-	margin: 10px 0 5px;
-}
-
-.address-form .form-select, .address-form .form-control {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
-	border-radius: 5px;
-	border: 1px solid #ccc;
-}
-
-.signin-container .form-row .btn-submit {
-	float: right;
-	width: 500px;
-}
-
-/* Căn chỉnh và điều chỉnh layout cho phần form */
-.col-lg-6 {
-	padding: 15px; /* Thêm khoảng cách giữa các cột */
-}
-
-/* Cải thiện giao diện của form */
-.form-row {
-	margin-bottom: 15px; /* Khoảng cách giữa các dòng */
-}
-
-/* Cải thiện form */
-.address-form {
-	display: flex;
-	flex-direction: column;
-}
-
-/* Các input và select có chiều dài 100%, padding và border */
-.address-form select, .address-form input {
-	width: 100%; /* Đảm bảo các ô nhập chiếm toàn bộ chiều rộng */
-	padding: 8px 12px; /* Điều chỉnh padding để ô nhập không quá to */
-	margin-bottom: 10px; /* Khoảng cách giữa các ô nhập */
-	border: 1px solid #ccc; /* Đường viền ô nhập */
-	border-radius: 4px; /* Bo góc cho ô nhập */
-	font-size: 14px; /* Điều chỉnh kích thước font */
-	line-height: 1.4; /* Chiều cao dòng */
-	box-sizing: border-box;
-	/* Đảm bảo padding và border được tính trong chiều rộng */
-}
-
-/* Định dạng cho các label */
-.address-form label {
-	margin-bottom: 5px; /* Khoảng cách giữa label và ô nhập */
-	font-weight: bold; /* Làm đậm label */
-	font-size: 14px; /* Kích thước chữ */
-}
-
-/* Tạo hiệu ứng khi hover vào các ô input */
-.address-form input:focus, .address-form select:focus {
-	border-color: #007bff; /* Màu viền khi focus */
-	outline: none; /* Loại bỏ outline mặc định */
-}
-
-/* Định dạng cho input readonly */
-.address-form input[readonly] {
-	background-color: #f0f0f0; /* Màu nền cho ô nhập readonly */
-	cursor: not-allowed; /* Đổi con trỏ khi hover vào ô nhập readonly */
-}
-
-/* Nút submit */
-.wrap-btn {
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f9f9f9;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.error-container {
+	text-align: center;
+	background-color: #fff;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-container h1 {
+	color: #d9534f;
+	font-size: 36px;
+}
+
+.error-container h3 {
+	color: #5a5a5a;
+}
+
+.error-container a {
+	display: inline-block;
 	margin-top: 20px;
+	padding: 10px 20px;
+	color: #fff;
+	background-color: #0275d8;
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 16px;
 }
 
-.btn-submit {
-	padding: 10px 20px; /* Điều chỉnh kích thước nút */
-	background-color: #007bff; /* Màu nền của nút */
-	color: white;
-	border: none;
-	border-radius: 4px; /* Bo góc cho nút */
-	font-size: 16px; /* Kích thước chữ */
-	cursor: pointer; /* Con trỏ khi hover vào nút */
-	transition: background-color 0.3s ease;
-	/* Hiệu ứng chuyển màu nền khi hover */
-}
-
-.btn-submit:hover {
-	background-color: #0056b3; /* Màu nền khi hover */
+.error-container a:hover {
+	background-color: #025aa5;
 }
 </style>
 </head>
@@ -126,37 +77,16 @@
 	<div class="container">
 		<nav class="biolife-nav">
 			<ul>
-				<li class="nav-item"><a href="#" class="permal-link">Trang
-						chủ</a></li>
-				<li class="nav-item"><span class="current-page">Error</span></li>
+				<li class="nav-item"><a href="customer/customerCheckout.htm"
+					class="permal-link">Chọn phương thức thanh toán</a></li>
+				<li class="nav-item"><span class="current-page">Lỗi giao dịch</span></li>
 			</ul>
 		</nav>
 	</div>
-
-	<!--Navigation section-->
-	<div class="page-contain login-page">
-
-		<!-- Main content -->
-		<div id="main-content" class="main-content">
-			<div class="container">
-
-				<div class="row">
-					<nav class="biolife-nav">
-						<ul>
-							<li class="nav-item"><a href="customer/customerCheckout.htm"
-								class="permal-link">Chọn phương thức thanh toán</a></li>
-							<li class="nav-item"><span class="current-page">Lỗi
-									giao dịch</span></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="error-container">
-					<h1>Thực hiện giao dịch thất bại</h1>
-					<h3>${error-message}</h3>
-					<a href="customer/customerCheckout.htm">Quay lại</a>
-				</div>
-			</div>
-		</div>
+	<div class="error-container">
+		<h1>Thực hiện giao dịch thất bại</h1>
+		<h3>${error-message}</h3>
+		<a href="customer/customerCheckout.htm">Quay lại</a>
 	</div>
 
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>

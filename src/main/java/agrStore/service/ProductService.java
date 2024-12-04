@@ -16,6 +16,7 @@ public interface ProductService {
 	public List<ProductEntity> getListProduct();
 	public ProductEntity getProductById(Integer id);
 	public List<ProductEntity> getListProductByCategoryId(Integer cId);
+	public List<ProductEntity> getListProductByProviderId(Integer pId);
 	public List<ProductEntity> getRandomListProductByLimit(List<ProductEntity> list, Integer limit);
 	public List<ProductEntity> getProductsByProviderId(Integer providerId);
 	

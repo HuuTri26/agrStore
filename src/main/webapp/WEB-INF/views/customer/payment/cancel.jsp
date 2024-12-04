@@ -4,8 +4,19 @@
 <html>
 <%@include file="/WEB-INF/views/include/customer/header.jsp"%>
 <head>
+<meta charset="UTF-8">
+<title>Payment Cancelled</title>
 <style>
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	margin-top: 20%;
+	background-color: #f9f9f9;
+}
 
+h1 {
+	color: #ff4d4d;
+}
 </style>
 </head>
 <body class="biolife-body">
@@ -31,31 +42,20 @@
 	</div>
 
 	<!--Navigation section-->
-	<!--Navigation section-->
-	<div class="page-contain login-page">
-
-		<!-- Main content -->
-		<div id="main-content" class="main-content">
-			<div class="container">
-
-				<div class="row">
-					<nav class="biolife-nav">
-						<ul>
-							<li class="nav-item"><a href="customer/customerCheckout.htm"
-								class="permal-link">Chọn phương thức thanh toán</a></li>
-							<li class="nav-item"><span class="current-page">Hủy
-									giao dịch</span></li>
-						</ul>
-					</nav>
-				</div>
-				<h1>Hủy bỏ giao dịch</h1>
-				<p>Giao dịch của bạn đã được hủy bỏ thành công PayPal sẽ tự động
-					hoàn tiền cho bạn</p>
-				<a href="index.htm">Quay lại</a>
-
-			</div>
-		</div>
+	<div class="container">
+		<nav class="biolife-nav">
+			<ul>
+				<li class="nav-item"><a href="customer/customerCheckout.htm"
+					class="permal-link">Chọn phương thức thanh toán</a></li>
+				<li class="nav-item"><span class="current-page">Hủy giao
+						dịch</span></li>
+			</ul>
+		</nav>
 	</div>
+	<h1>Hủy bỏ giao dịch</h1>
+	<p>Giao dịch của bạn đã được hủy bỏ thành công PayPal sẽ tự động
+		hoàn tiền cho bạn</p>
+	<a href="index.htm">Quay lại</a>
 </body>
 <%@include file="/WEB-INF/views/include/customer/footer.jsp"%>
 
