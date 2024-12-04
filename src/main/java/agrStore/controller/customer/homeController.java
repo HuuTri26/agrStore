@@ -68,7 +68,7 @@ public class homeController {
 	@RequestMapping(value = "/showProductsBypId", method = RequestMethod.GET)
 	public String showProductByProviderId(Model model, @RequestParam(value = "pId") Integer pId) {
 		
-		List<ProductEntity> products = productService.getListProductByProviderId(pId);
+		List<ProductEntity> products = productService.getProductsByProviderId(pId);
 		List<ProductEntity> randProducts = productService.getRandomListProductByLimit(products, 12);
 		
 		model.addAttribute("randProducts", randProducts);

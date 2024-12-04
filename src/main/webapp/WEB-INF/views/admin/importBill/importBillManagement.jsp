@@ -163,7 +163,7 @@
 																	class="bi bi-trash text-red"></i>
 																</a> -->
 																<a
-																	href="importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
+																	href="admin/importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
 																	<i class="bi bi-eye"></i>
 																</a>
 															</div>
