@@ -194,7 +194,7 @@
 													<div class="card-border-title">Staff Images</div>
 													<div class="card-border-body">
 														<form>
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${mode == 'ADD'}">
 																	<!-- Hiển thị form thêm mới -->
 																	<div id="dropzone" class="dropzone-dark">
@@ -216,8 +216,8 @@
 
 																	</div>
 																</c:when>
-
-																<c:when test="${mode == 'VIEW'}">
+ --%>
+																<%-- <c:when test="${mode == 'VIEW'}">
 																	<!-- Hiển thị thông tin chi tiết -->
 
 
@@ -249,11 +249,11 @@
 
 
 																	<!-- Disable các input field -->
-																	<%-- <input type="text" class="form-control"
-												value="${category.name}" disabled> --%>
-																</c:when>
+																	<input type="text" class="form-control"
+												value="${category.name}" disabled>
+																</c:when> --%>
 
-																<c:when test="${mode == 'EDIT'}">
+																<%-- <c:when test="${mode == 'EDIT'}"> --%>
 																	<!-- Hiển thị form chỉnh sửa -->
 																	<div id="dropzone" class="dropzone-dark">
 
@@ -277,8 +277,8 @@
 																	<!-- Populate dữ liệu vào form -->
 																	<%-- <input type="text" class="form-control"
 												value="${category.name}"> --%>
-																</c:when>
-															</c:choose>
+																<%-- </c:when>
+															</c:choose> --%>
 														</form>
 
 													</div>
@@ -320,9 +320,8 @@
 																<div class="mb-3">
 																	<label class="form-label">Staff Province <span
 																		class="text-red">*</span></label> <select id="province"
-																		disabled="${mode == 'VIEW'}" name="provinceId"
-																		class="form-select" onchange="this.form.submit()"
-																		class="form-control">
+																		name="provinceId" class="form-select"
+																		onchange="this.form.submit()" class="form-control">
 																		<option
 																			value="${staff.address.ward.district.province.id}">${staff.address.ward.district.province.name }</option>
 																		<c:forEach var="province" items="${provinces}">
@@ -339,9 +338,8 @@
 																<div class="mb-3">
 																	<label class="form-label">Staff District <span
 																		class="text-red">*</span></label> <select id="district"
-																		disabled="${mode == 'VIEW'}" name="districtId"
-																		class="form-select" onchange="this.form.submit()"
-																		class="form-control">
+																		name="districtId" class="form-select"
+																		onchange="this.form.submit()" class="form-control">
 																		<option value="${staff.address.ward.district.id}">${staff.address.ward.district.name }</option>
 																		<c:forEach var="district" items="${districts}">
 																			<option value="${district.id}"
@@ -373,9 +371,8 @@
 																<div class="mb-3">
 																	<label class="form-label">Staff Ward <span
 																		class="text-red">*</span></label> <select id="ward"
-																		disabled="${mode == 'VIEW'}" name="wardId"
-																		class="form-select" onchange="this.form.submit()"
-																		class="form-control">
+																		name="wardId" class="form-select"
+																		onchange="this.form.submit()" class="form-control">
 																		<option value="${staff.address.ward.id}">${staff.address.ward.name }</option>
 																		<c:forEach var="ward" items="${wards}">
 																			<option value="${ward.id}"
@@ -390,8 +387,9 @@
 																<div class="mb-3">
 																	<label class="form-label">Staff Address Street
 																		<span class="text-red">*</span>
-																	</label> <input type="text" id="streetName" name="streetName" value="${staff.address.streetName}"
-																		placeholder="vd: Số 23, Đường Lê Văn Việt" 
+																	</label> <input type="text" id="streetName" name="streetName"
+																		value="${staff.address.streetName}"
+																		placeholder="vd: Số 23, Đường Lê Văn Việt"
 																		class="txt-input w-5">
 																</div>
 																${streetErr }
@@ -401,16 +399,7 @@
 																	<label class="form-label">Staff streetname
 																		Address <span class="text-red">*</span>
 																	</label>
-																	<textarea rows="5" cols="100" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${staff.address.ward.district.province.name }</textarea>
-																</div>
-															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Status <span
-																		class="text-red">*</span></label> <input type="text"
-																		name="status" value="${staff.status }"
-																		class="form-control" placeholder="" readonly />
-
+																	<textarea rows="5" cols="60" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${staff.address.ward.district.province.name }</textarea>
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
@@ -431,6 +420,16 @@
 
 																</div>
 															</div>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Status <span
+																		class="text-red">*</span></label> <input type="text"
+																		name="status" value="${staff.status }"
+																		class="form-control" placeholder="" readonly />
+
+																</div>
+															</div>
+
 														</div>
 
 													</div>
@@ -463,16 +462,13 @@
 												<div class="custom-btn-group flex-end">
 													<button type="button" class="btn btn-light">Cancel</button>
 													<!-- Nút submit tương ứng với từng mode -->
-													<c:choose>
-														<c:when test="${mode == 'ADD'}">
-															<button type="submit" name="${mode}"
-																class="btn btn-success">Add Staff</button>
-														</c:when>
-														<c:when test="${mode == 'EDIT'}">
-															<button type="submit" name="${mode}"
+													
+					
+													
+															<button type="submit" name="edit-staff"
 																class="btn btn-primary">Update Staff</button>
-														</c:when>
-													</c:choose>
+														
+													
 												</div>
 											</div>
 										</div>

@@ -168,11 +168,11 @@ button {
 															</div> -->
 															<div class="actions">
 																<a
-																	href="admin/staffManagement/staff.htm?action=view&id=${staff.accountId}">
+																	href="admin/staffManagement/staff.htm?id=${staff.accountId}">
 																	<i class="bi bi-eye text-green"></i>
 																</a> 
 																<a
-																	href="admin/staffManagement/staff.htm?action=edit&id=${staff.accountId}">
+																	href="admin/staffManagement/staff.htm?id=${staff.accountId}">
 																	<i class="bi bi-pencil text-green"></i>
 																</a>
 																<a

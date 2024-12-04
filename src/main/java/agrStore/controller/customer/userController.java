@@ -635,6 +635,10 @@ public class userController {
 		sessionStatus.setComplete();
 		System.out.println("==> Clear model attributes");
 		session.removeAttribute("loggedInUser");
+		session.removeAttribute("selectedProvince");
+		session.removeAttribute("selectedDistrict");
+		session.removeAttribute("selectedWard");
+        session.removeAttribute("staff");
 		System.out.println("==> Log out");
 		return "redirect:/index.htm";
 	}

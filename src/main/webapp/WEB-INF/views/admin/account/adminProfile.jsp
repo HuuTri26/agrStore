@@ -309,7 +309,7 @@ textarea {
 															<label for="country" class="form-label">Province</label>
 															<select id="province" name="provinceId"
 																class="form-select" onchange="this.form.submit()">
-																<option value="">Chọn Tỉnh/Thành phố</option>
+																<option value="">${loggedInUser.address.ward.district.province.name }</option>
 																<c:forEach var="province" items="${provinces}">
 																	<option value="${province.id}"
 																		${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
@@ -325,7 +325,7 @@ textarea {
 															<label for="country" class="form-label">District</label>
 															<select id="district" name="districtId"
 																class="form-select" onchange="this.form.submit()">
-																<option value="">Chọn Quận/Huyện</option>
+																<option value="">${loggedInUser.address.ward.district.name }</option>
 																<c:forEach var="district" items="${districts}">
 																	<option value="${district.id}"
 																		${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
@@ -341,7 +341,7 @@ textarea {
 															<label for="country" class="form-label">Ward</label> <select
 																id="ward" name="wardId" class="form-select"
 																onchange="this.form.submit()">
-																<option value="">Chọn Xã/Phường</option>
+																<option value="">${loggedInUser.address.ward.name }</option>
 																<c:forEach var="ward" items="${wards}">
 																	<option value="${ward.id}">${ward.name}</option>
 																</c:forEach>

@@ -90,7 +90,6 @@ public class AdminStaffController {
 
 	@RequestMapping("/staffManagement/staff")
 	public String adminProfile(HttpServletRequest request,
-			@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "provinceId", required = false) Integer provinceId,
 			@RequestParam(value = "districtId", required = false) Integer districtId,
 			@RequestParam(value = "wardId", required = false) Integer wardId,
@@ -138,39 +137,22 @@ public class AdminStaffController {
 			// Lưu phường vừa chọn vào session
 			session.setAttribute("selectedWard", selectedWard);
 		}
-		if (action != null) {
-			switch (action) {
-			case "view":
-				if (id != null) {
-					// Category category = categoryService.getCategoryById(id);
-					System.out.println("==> View Staff mode");
-					model.addAttribute("mode", "VIEW");
-					model.addAttribute("staff", staff);
-					//session.setAttribute("staff", staff);
-					// model.addAttribute("category", category);
-				}
-				break;
 
-			case "edit":
-				if (id != null) {
-					// Category category = categoryService.getCategoryById(id);
-					System.out.println("==> Edit Staff mode");
-					model.addAttribute("mode", "EDIT");
-				
-					session.setAttribute("staff", staff);
-					// model.addAttribute("category", category);
-				}
-				break;
-			}
+		if (id != null) {
+			// Category category = categoryService.getCategoryById(id);
+			System.out.println("==> Edit Staff mode");
+			model.addAttribute("mode", "EDIT");
+
+			session.setAttribute("staff", staff);
+			// model.addAttribute("category", category);
 		}
 
-	
-		//model.addAttribute("staff", staff);
+		// model.addAttribute("staff", staff);
 		return "admin/staff/staffForm";
 	}
 
 	//
-	@RequestMapping(value = "/staffManagement/staff", params = "EDIT", method = RequestMethod.POST)
+	@RequestMapping(value = "/staffManagement/staff",params = "edit-staff", method = RequestMethod.POST)
 	public String editProfile(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
 
 		HttpSession session = request.getSession();

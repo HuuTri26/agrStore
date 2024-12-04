@@ -196,6 +196,11 @@
 	background-color: #007bff;
 	color: #fff;
 }
+ .nice-select .current {
+    color: black !important; /* Ghi đè màu */
+    font-size:18px;
+}
+
 </style>
 
 </head>
@@ -297,7 +302,7 @@ ${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${logge
 									<label for="province">Tỉnh/Thành phố:</label> <select
 										id="province" name="provinceId" class="form-select"
 										onchange="this.form.submit()">
-										<option value="">Chọn Tỉnh/Thành phố</option>
+										<option value="" >${loggedInUser.address.ward.district.province.name }</option>
 										<c:forEach var="province" items="${provinces}">
 											<option value="${province.id}"
 												${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
@@ -307,7 +312,7 @@ ${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${logge
 										placeholder="Tỉnh/Thành phố đã chọn" /> <label for="district">Quận/Huyện:</label>
 									<select id="district" name="districtId" class="form-select"
 										onchange="this.form.submit()">
-										<option value="">Chọn Quận/Huyện</option>
+										<option value="">${loggedInUser.address.ward.district.name }</option>
 										<c:forEach var="district" items="${districts}">
 											<option value="${district.id}"
 												${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
@@ -317,14 +322,14 @@ ${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${logge
 										placeholder="Quận/Huyện đã chọn" /> <label for="ward">Xã/Phường:</label>
 									<select id="ward" name="wardId" class="form-select"
 										onchange="this.form.submit()">
-										<option value="">Chọn Xã/Phường</option>
+										<option value="">${loggedInUser.address.ward.name }</option>
 										<c:forEach var="ward" items="${wards}">
 											<option value="${ward.id}">${ward.name}</option>
 										</c:forEach>
 									</select> <input type="text" id="wardText" readonly
 										value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
 									<label for="fid-name">Tên đường:<span class="requite">*</span>
-									</label> <input type="text" id="streetName" name="streetName"
+									</label> <input value="${loggedInUser.address.streetName }" type="text" id="streetName" name="streetName"
 										placeholder="Nhập tên đường cụ thể" class="txt-input w-5">
 									${streetErr }
 								</div>
