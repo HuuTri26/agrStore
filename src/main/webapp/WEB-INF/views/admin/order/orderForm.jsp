@@ -124,14 +124,14 @@
 																		value="${orderBill.account.fullName }" readonly>
 																</div>
 															</div>
-															<div class="col-sm-6 col-12">
+															<%-- <div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Employee Name<span
 																		class="text-red">*</span></label> <input type="text"
 																		class="form-control" value="${employee.fullName }"
 																		readonly>
 																</div>
-															</div>
+															</div> --%>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<%-- <label class="form-label">Total Price <span
@@ -180,7 +180,8 @@
 																<div class="mb-3">
 																	<label class="form-label">Order Time <span
 																		class="text-red">*</span></label> <input type="text"
-																		class="form-control" value="${orderBill.orderTime }" readOnly>
+																		class="form-control" value="${orderBill.orderTime }"
+																		readOnly>
 																</div>
 															</div>
 															<div class="col-sm-12 col-12">
@@ -231,7 +232,8 @@
 																	<tr>
 																		<td>${status.index + 1}</td>
 																		<td><div class="media-box">
-																				<img src="/assets/product-images/${orderBillDetail.product.image}"
+																				<img
+																					src="<c:url value='/assets/product-images/${orderBillDetail.product.image }'/>"
 																					class="media-avatar rounded-circle img-fluid"
 																					alt="User Avatar"
 																					style="width: 45px; height: 45px; object-fit: cover;" />

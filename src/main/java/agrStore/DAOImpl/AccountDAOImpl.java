@@ -1,6 +1,5 @@
 package agrStore.DAOImpl;
 
-
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -18,7 +17,7 @@ import agrStore.entity.AccountEntity;
 @Transactional
 @Repository
 public class AccountDAOImpl implements AccountDAO {
-	
+
 	@Autowired
 	SessionFactory factory;
 
@@ -26,27 +25,28 @@ public class AccountDAOImpl implements AccountDAO {
 	public void addAccount(AccountEntity acc) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
-		
+
 		try {
 			session.save(acc);
 			t.commit();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			t.rollback();
-			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public void updateAccount(AccountEntity acc) {
 		Session session = factory.getCurrentSession();
-	    try {
-	        session.update(acc);
-	    } catch (Exception e) {
-	        System.out.println("Error: " + e.toString() + "\nStacktrace:");
-	        e.printStackTrace();
-	    }
-		
+		try {
+			session.update(acc);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -57,31 +57,32 @@ public class AccountDAOImpl implements AccountDAO {
 		try {
 			Query query = session.createQuery(hql);
 			query.setParameter("gmail", gmail);
-			
+
 			account = (AccountEntity) query.uniqueResult();
-		}catch (Exception e) {
-			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
 		}
 		return account;
 	}
 
 	@Override
 	public Long countAccountByAddressId(Integer id) {
-	    Session session = factory.getCurrentSession();
-	    String hql = "SELECT COUNT(a) FROM AccountEntity a WHERE a.address.id = :id";
-	    Long count = 0L;
-	    try {
-	        Query query = session.createQuery(hql);
-	        query.setParameter("id", id);
-	        count = (Long) query.uniqueResult();
-	        if (count == null) {
-	            count = 0L;
-	        }
-	    } catch (Exception e) {
-	        System.out.println("Error: " + e.toString());
-	        e.printStackTrace();
-	    }
-	    return count;
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT COUNT(a) FROM AccountEntity a WHERE a.address.id = :id";
+		Long count = 0L;
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("id", id);
+			count = (Long) query.uniqueResult();
+			if (count == null) {
+				count = 0L;
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString());
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	@Override
@@ -113,6 +114,20 @@ public class AccountDAOImpl implements AccountDAO {
 		return account;
 	}
 
-
+	@Override
+	public int countAccountByRole(int role) {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "SELECT COUNT(a) FROM AccountEntity a WHERE a.role.id = :roleId";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("roleId", role);
+			Long count = (long) query.uniqueResult();
+			return count != null ? count.intValue() : 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0; // Trả về 0 nếu xảy ra lỗi
+		}
+	}
 
 }

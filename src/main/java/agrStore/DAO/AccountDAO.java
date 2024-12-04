@@ -11,5 +11,6 @@ public interface AccountDAO {
 	public Long countAccountByAddressId(Integer id);
 	public List<AccountEntity> getAllCustomer();
 	public AccountEntity getAccountById(Integer id);
+	public int countAccountByRole(int role);
 
 }

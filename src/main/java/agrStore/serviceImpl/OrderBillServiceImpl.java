@@ -56,4 +56,16 @@ public class OrderBillServiceImpl implements OrderBillService {
 		return this.orderBillDAO.getNumberOrderBillForToday();
 	}
 
+	@Override
+	public long getTodayRevenue() {
+		// TODO Auto-generated method stub
+		return this.orderBillDAO.getTodayRevenue();
+	}
+
+	@Override
+	public List<OrderBillEntity> getOrderBillToday() {
+		// TODO Auto-generated method stub
+		return this.orderBillDAO.getOrderBillForToday();
+	}
+
 }

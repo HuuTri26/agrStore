@@ -123,7 +123,7 @@
 														<td>
 															<div class="media-box">
 																<img
-																	src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																	src="<c:url value='assets/user-images/${importBill.account.avatar }" class="media-avatar'/>"
 																	alt="Bootstrap Gallery">
 																<div class="media-box-body">
 																	<a href="#" class="text-truncate">${importBill.account.fullName }</a>
@@ -163,7 +163,7 @@
 																	class="bi bi-trash text-red"></i>
 																</a> -->
 																<a
-																	href="importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
+																	href="admin/importBillManagement/importBill.htm?action=view&id=${importBill.importBillId}">
 																	<i class="bi bi-eye"></i>
 																</a>
 															</div>

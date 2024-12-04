@@ -66,4 +66,16 @@ public class ProductServiceImpl implements ProductService{
 
 	}
 
+	@Override
+	public List<ProductEntity> getListProductByProviderId(Integer pId) {
+		// TODO Auto-generated method stub
+		return ProductDAO.getListProductByCategotyId(pId);
+	}
+
+	@Override
+	public List<Object[]> getTheMostPurchasedProduct() {
+		// TODO Auto-generated method stub
+		return this.ProductDAO.getTheMostPurchasedProduct();
+	}
+
 }

@@ -17,5 +17,7 @@ public interface OrderBillService {
 	public OrderBillEntity getOrderBillById(Integer id);
 	public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus);
 	public long getNumberOrderBillForToday();
+	public long getTodayRevenue();
+	public List<OrderBillEntity> getOrderBillToday();
 
 }

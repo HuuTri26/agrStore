@@ -12,5 +12,6 @@ public interface ProductDAO {
 	public List<ProductEntity> getListProductByCategotyId(Integer cId);
 	public List<ProductEntity> getProductsByProviderId(Integer providerId);
 	public void updateProductQuantity(Integer productId, int quantity);
+	public List<Object[]> getTheMostPurchasedProduct();
 
 }

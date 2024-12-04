@@ -43,8 +43,9 @@ public class OrderBillEntity {
 	@Column(name = "totalPrice")
 	private double totalPrice;
 
-	@Column(name = "employeeId", nullable = true)
-	private Integer employeeId;
+	/*
+	 * @Column(name = "employeeId", nullable = true) private Integer employeeId;
+	 */
 
 	@ManyToOne()
 	@JoinColumn(name = "accountId")
@@ -58,15 +59,16 @@ public class OrderBillEntity {
 		super();
 	}
 
-	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, double totalPrice,
-			Integer employeeId) {
+	public OrderBillEntity(Integer orderBillId, int statusOrder, Date orderTime, int totalQuantity, double totalPrice
+			) {
+		// Integer employeeId
 		super();
 		this.orderBillId = orderBillId;
 		this.statusOrder = statusOrder;
 		this.orderTime = orderTime;
 		this.totalQuantity = totalQuantity;
 		this.totalPrice = totalPrice;
-		this.employeeId = employeeId;
+		// this.employeeId = employeeId;
 	}
 
 	public Integer getOrderBillId() {
@@ -109,13 +111,12 @@ public class OrderBillEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
+	/*
+	 * public Integer getEmployeeId() { return employeeId; }
+	 * 
+	 * public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId;
+	 * }
+	 */
 
 	public AccountEntity getAccount() {
 		return account;

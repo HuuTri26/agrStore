@@ -26,7 +26,7 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		Session session = factory.getCurrentSession();
 		try {
 			session.save(orderBill);
-			 session.flush();
+			session.flush();
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
@@ -104,12 +104,54 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	public long getNumberOrderBillForToday() {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
-		String hql = "SELECT COUNT(*) "
-				+ "FROM OrderBillEntity o "
+		String hql = "SELECT COUNT(*) " + "FROM OrderBillEntity o "
 				+ "WHERE CONVERT(DATE, o.orderTime) = CONVERT(DATE, GETDATE())";
 		Query query = session.createQuery(hql);
 		long result = (long) query.uniqueResult();
 		return result;
+	}
+
+	@Override
+	public long getTodayRevenue() {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		/*
+		 * String hql = "SELECT SUM(o.totalPrice) " + "FROM OrderBillEntity o " +
+		 * "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
+		 */
+		/*
+		 * String hql = "SELECT COALESCE(SUM(o.totalPrice), 0) " + // Sử dụng COALESCE
+		 * để thay NULL bằng 0 "FROM OrderBillEntity o " +
+		 * "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
+		 */
+		String hql = "SELECT SUM(o.totalPrice) " + "FROM OrderBillEntity o "
+				+ "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
+		try {
+			Query query = session.createQuery(hql);
+			Double result = (Double) query.uniqueResult();
+			return result != null ? result.longValue() : 0L; // Chuyển Double về long
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return 0L; // Trả về 0 nếu có lỗi
+		}
+
+	}
+
+	@Override
+	public List<OrderBillEntity> getOrderBillForToday() {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM OrderBillEntity o " +
+                "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
+		try {
+			Query query = session.createQuery(hql);
+			List<OrderBillEntity> result = query.list();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+	        return null; // Trả về danh sách rỗng nếu xảy ra lỗi
+		}
 	}
 
 }

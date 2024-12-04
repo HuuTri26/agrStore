@@ -111,7 +111,22 @@ public class ProductDAOImpl implements ProductDAO {
 			e.printStackTrace();
 		}
 
+	}
 
+	@Override
+	public List<Object[]> getTheMostPurchasedProduct() {
+		Session session = this.factory.getCurrentSession();
+		String hql = "SELECT p.productId, p.productName, SUM(d.quantity) AS totalQuantity " + "FROM OrderBillDetailEntity d "
+				+ "JOIN d.product p " + "GROUP BY p.productId, p.productName " + "ORDER BY SUM(d.quantity) DESC";
+		try {
+			Query query = session.createQuery(hql);
+			query.setFirstResult(0); // OFFSET
+			query.setMaxResults(5); // FETCH NEXT 5 ROWS ONLY
+			return query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null; // Trả về null nếu có lỗi
+		}
 	}
 
 }

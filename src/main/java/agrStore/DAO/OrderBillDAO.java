@@ -11,5 +11,7 @@ public interface OrderBillDAO {
 	public OrderBillEntity getOrderBillById(Integer id);
 	public int updateOrderStatus(Integer orderBillIdUpdate, int newOrderStatus);
 	public long getNumberOrderBillForToday();
+	public long getTodayRevenue();
+	public List<OrderBillEntity> getOrderBillForToday();
 
 }

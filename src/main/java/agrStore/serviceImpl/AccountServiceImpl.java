@@ -52,4 +52,10 @@ public class AccountServiceImpl implements AccountService{
 		return this.AccountDAO.getAccountById(id);
 	}
 
+	@Override
+	public int countAccountByRole(int role) {
+		// TODO Auto-generated method stub
+		return this.AccountDAO.countAccountByRole(role);
+	}
+
 }
