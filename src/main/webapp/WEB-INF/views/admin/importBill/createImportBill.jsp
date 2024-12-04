@@ -103,7 +103,7 @@
 												<div class="col-md-6">
 
 													<form:form
-														action="importBillManagement/getProductsByProvider.htm"
+														action="admin/importBillManagement/getProductsByProvider.htm"
 														method="POST">
 														<!-- Dropdown chọn nhà cung cấp -->
 														<div class="form-group">
@@ -152,7 +152,7 @@
 												<h4>Product List From Provider</h4>
 
 												<form:form id="productForm"
-													action="importBillManagement/getSelectedProducts.htm"
+													action="admin/importBillManagement/getSelectedProducts.htm"
 													method="POST">
 													<table class="table table-bordered table-hover" border="1"
 														id="productTable">
@@ -219,7 +219,7 @@
 												<h4>Product Chosen</h4>
 												<!-- thêm ở đây -->
 												<form id="importForm"
-													action="importBillManagement/updateQuantityProduct.htm"
+													action="admin/importBillManagement/updateQuantityProduct.htm"
 													method="POST">
 													<table class="table table-bordered" border="1"
 														id="selectedTable">
@@ -290,7 +290,7 @@
 																	</td>
 																	<td>
 																		<!-- <button type="button">Delete</button> --> <a
-																		href="importBillManagement/getSelectedProductsAfterDelete.htm?productId=${importBillDetail.product.productId}"
+																		href="admin/importBillManagement/getSelectedProductsAfterDelete.htm?productId=${importBillDetail.product.productId}"
 																		class="btn btn-danger">Delete</a>
 																	</td>
 																</tr>
@@ -343,7 +343,7 @@
 												</form>
 												<!-- thêm mới -->
 												<form:form id="successImportForm"
-													action="importBillManagement/successImportBill.htm">
+													action="admin/importBillManagement/successImportBill.htm">
 													<button type="submit" class="btn btn-success">CONFIRM IMPORT</button>
 												</form:form>
 
