@@ -21,6 +21,42 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 	SessionFactory factory;
 
 	@Override
+	public void addFeedback(FeedbackEntity feedback) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.save(feedback);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void updateFeedback(FeedbackEntity feedback) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.update(feedback);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void mergeFeedback(FeedbackEntity feedback) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.merge(feedback);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
 	public List<FeedbackEntity> getListFeedback() {
 		List<FeedbackEntity> feedbacks = null;
 
@@ -31,19 +67,19 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 
 		return feedbacks;
 	}
-	
+
 	@Override
-	public FeedbackEntity  getFeedbackById(Integer id) {
+	public FeedbackEntity getFeedbackById(Integer id) {
 		FeedbackEntity feedback = null;
 
 		Session session = factory.getCurrentSession();
 		String hql = "FROM FeedbackEntity f WHERE f.feedbackId = :feedbackId";
 		Query query = session.createQuery(hql);
 		query.setParameter("feedbackId", id);
-		feedback =(FeedbackEntity) query.uniqueResult();
+		feedback = (FeedbackEntity) query.uniqueResult();
 		return feedback;
 	}
-	
+
 	@Override
 	public Boolean deleteFeedback(FeedbackEntity feedback) {
 		Boolean isSucess = Boolean.FALSE;
@@ -56,6 +92,32 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 			e.printStackTrace();
 		}
 		return isSucess;
+	}
+
+	@Override
+	public List<FeedbackEntity> getListFeedBackByProductId(Integer pId) {
+		List<FeedbackEntity> feedbacks = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM FeedbackEntity f WHERE f.orderBillDetail.product.productId = :pId";
+		Query query = session.createQuery(hql);
+		query.setParameter("pId", pId);
+
+		feedbacks = query.list();
+
+		return feedbacks;
+	}
+
+	@Override
+	public FeedbackEntity getFeedbackByOrderBillDetailId(Integer oDtId) {
+		FeedbackEntity feedback = null;
+
+		Session session = factory.getCurrentSession();
+		String hql = "FROM FeedbackEntity f WHERE f.orderBillDetail.orderBillDetailId = :oDtId";
+		Query query = session.createQuery(hql);
+		query.setParameter("oDtId", oDtId);
+		feedback = (FeedbackEntity) query.uniqueResult();
+
+		return feedback;
 	}
 
 }

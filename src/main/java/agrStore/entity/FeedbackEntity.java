@@ -18,29 +18,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "Feedback")
 public class FeedbackEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "feedbackId")
 	private Integer feedbackId;
-	
+
 	@Column(name = "comment")
 	private String comment;
-	
+
 	@Column(name = "star")
-	private int star;
-	
+	private Integer star;
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "createAt")
 	private Date createAt;
-	
+
 	@ManyToOne()
-	@JoinColumn(name="accountId")
+	@JoinColumn(name = "accountId")
 	private AccountEntity account;
-	
+
 	@ManyToOne()
-	@JoinColumn(name="orderBillDetailId")
+	@JoinColumn(name = "orderBillDetailId")
 	private OrderBillDetailEntity orderBillDetail;
 
 	public FeedbackEntity(Integer feedbackId, String comment, int star, Date createAt, AccountEntity account,
@@ -75,8 +75,12 @@ public class FeedbackEntity {
 		this.comment = comment;
 	}
 
-	public int getStar() {
+	public Integer getStar() {
 		return star;
+	}
+
+	public int getStarPercentage() {
+		return (int) ((this.star / 5.0) * 100);
 	}
 
 	public void setStar(int star) {
@@ -112,6 +116,5 @@ public class FeedbackEntity {
 		return "FeedbackEntity [feedbackId=" + feedbackId + ", comment=" + comment + ", star=" + star + ", createAt="
 				+ createAt + ", account=" + account + ", orderBillDetail=" + orderBillDetail + "]";
 	}
-	
 	
 }

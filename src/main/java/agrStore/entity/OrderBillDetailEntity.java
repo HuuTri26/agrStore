@@ -91,6 +91,14 @@ public class OrderBillDetailEntity {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
+
+	public List<FeedbackEntity> getFeedbackList() {
+		return feedbackList;
+	}
+
+	public void setFeedbackList(List<FeedbackEntity> feedbackList) {
+		this.feedbackList = feedbackList;
+	}
 	
 	
 }

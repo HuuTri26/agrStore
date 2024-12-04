@@ -92,6 +92,9 @@
 .tab-element:hover .icon-wrapper {
 	transform: translateY(-5px);
 }
+.stars .btn-rating.active i {
+    color: gold;
+}
 </style>
 </head>
 <!-- HEADER -->

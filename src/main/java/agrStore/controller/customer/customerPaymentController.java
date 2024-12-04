@@ -29,6 +29,7 @@ import agrStore.paypal.PayPalPaymentService;
 import agrStore.service.CartItemService;
 import agrStore.service.OrderBillDetailService;
 import agrStore.service.OrderBillService;
+import agrStore.service.ProductService;
 
 @Controller
 @RequestMapping("/customer")
@@ -45,6 +46,9 @@ public class customerPaymentController {
 
 	@Autowired
 	PayPalPaymentService palPaymentService;
+	
+	@Autowired
+	ProductService productService;
 
 	@RequestMapping("/customerCheckout")
 	public String showCustomerCheckout() {
@@ -113,7 +117,7 @@ public class customerPaymentController {
 		return "customer/payment/cancel";
 	}
 
-	@RequestMapping("/authPayment")
+	@RequestMapping(value = "/authPayment", params = "PayPal")
 	public String authorizePayment(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
@@ -210,6 +214,8 @@ public class customerPaymentController {
 			model.addAttribute("transaction", transaction);
 			
 			cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
+			
+			productService.updateProductQuantityAfterPayment(selectedCartItems);
 			
 			System.out.println("==> Delete all selected cartItems in cart");
 			cartItemService.deleteCartItem(selectedCartItems);
