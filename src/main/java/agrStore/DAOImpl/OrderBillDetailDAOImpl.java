@@ -68,4 +68,31 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 		return orderBillDetailEntities;
 	}
 
+	@Override
+	public List<OrderBillDetailEntity> getOrderBillDetailByProductIdAndAccountId(Integer pId, Integer aId) {
+		List<OrderBillDetailEntity> orderBillDetails = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM OrderBillDetailEntity o WHERE o.product.productId = :pId AND o.orderBill.account.accountId = :aId";
+		Query query = session.createQuery(hql);
+		query.setParameter("pId", pId);
+		query.setParameter("aId", aId);
+		
+		orderBillDetails = query.list();
+		
+		return orderBillDetails;
+	}
+
+	@Override
+	public OrderBillDetailEntity getOrderBillDetailById(Integer id) {
+		OrderBillDetailEntity orderBillDetail = null;
+		
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM OrderBillDetailEntity WHERE orderBillDetailId = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		
+		orderBillDetail = (OrderBillDetailEntity) query.uniqueResult();
+		return orderBillDetail;
+	}
+
 }

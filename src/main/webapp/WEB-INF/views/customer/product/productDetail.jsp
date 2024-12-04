@@ -56,30 +56,31 @@
 						<ul class="biolife-carousel slider-for"
 							data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
 							<li><img
-								src="<c:url value='/assets/product-images/${productById.image}'/>"
+								src="<c:url value='/assets/product-images/${product.image}'/>"
 								alt="" width="500" height="500"></li>
 						</ul>
 					</div>
 					<div class="product-attribute">
-						<h3 class="title">${productById.productName}</h3>
+						<h3 class="title">${product.productName}</h3>
 						<div class="rating">
 							<p class="star-rating">
-								<span class="width-80percent"></span>
+								<span class="width-${avgPercent }percent"></span>
 							</p>
-							<span class="review-count">(04 Reviews)</span>
+							<span class="review-count">(${feedbackCount } Reviews)</span>
 						</div>
 						<div>
-							<span class="quantity">Số lượng: <b>${productById.quantity}</b></span>
+							<span class="quantity">Số lượng: <b>${product.quantity}</b></span>
 						</div>
 						<div>
-							<span class="provider">Nhà cung cấp:
-								<b>${productById.provider.providerName}</b></span>
+							<span class="provider">Nhà cung cấp: <b>${product.provider.providerName}</b></span>
 						</div>
-						<p class="excerpt">Description: <b>${productById.descript}</b></p>
+						<p class="excerpt">
+							Description: <b>${product.descript}</b>
+						</p>
 						<div class="price">
 							<ins>
 								<span class="price-amount"><span class="currencySymbol">Đơn
-										giá</span> <fmt:formatNumber value="${productById.price }"
+										giá</span> <fmt:formatNumber value="${product.price }"
 										pattern="#,###.## VND;VND -#,###.##" type="currency"
 										currencySymbol="VND" /></span>
 							</ins>
@@ -88,76 +89,63 @@
 							</del> -->
 						</div>
 					</div>
-					<div class="action-form">
+					<form class="action-form" action="customer/addItemIntoCart.htm"
+						method="get">
 						<div class="quantity-box">
-							<span class="title">Số lượng:</span>
+							<span class="title">Đặt với Số lượng:</span>
 							<div class="qty-input">
-								<input type="text" name="qty12554" value="1" data-max_value="20"
-									data-min_value="1" data-step="1"> <a href="#"
-									class="qty-btn btn-up"><i class="fa fa-caret-up"
-									aria-hidden="true"></i></a> <a href="#" class="qty-btn btn-down"><i
-									class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<input type="text" name="quantity" value="1"
+									data-max_value="${product.quantity}" data-min_value="1"
+									data-step="1"> <a href="#" class="qty-btn btn-up"><i
+									class="fa fa-caret-up" aria-hidden="true"></i></a> <a href="#"
+									class="qty-btn btn-down"><i class="fa fa-caret-down"
+									aria-hidden="true"></i></a> <input type="hidden" name="pId"
+									value="${product.productId }">
 							</div>
 						</div>
 						<div class="total-price-contain">
 							<span class="title">Total Price:</span>
-							<p class="price"><fmt:formatNumber value="${productById.price }"
-										pattern="#,###.## VND;VND -#,###.##" type="currency"
-										currencySymbol="VND" /></p>
+							<p class="price">
+								<fmt:formatNumber value="${product.price }"
+									pattern="#,###.## VND;VND -#,###.##" type="currency"
+									currencySymbol="VND" />
+							</p>
 						</div>
 						<div class="buttons">
-							<a href="#" class="btn add-to-cart-btn">add to cart</a>
-							<!-- <p class="pull-row">
-								<a href="#" class="btn wishlist-btn">wishlist</a> <a href="#"
-									class="btn compare-btn">compare</a>
-							</p> -->
+							<!-- <a class="btn add-to-cart-btn">Thêm vào giỏ hàng</a> -->
+							<button type="submit" class="btn add-to-cart-btn">Thêm
+								vào giỏ hàng</button>
 						</div>
-						<!-- <div class="location-shipping-to">
-							<span class="title">Chọn Phương thức thanh toán:</span> <select
-								name="shipping_to" class="country">
-								<option value="-1">Select Country</option>
-								<option value="cast">Tiền mặt</option>
-								<option value="banking">Banking</option>
-								<option value="paypal">Paypal</option>
-								<option value="vnPay">VNPay</option>
-							</select>
-						</div> -->
 
-						<div class="buttons">
-							<a href="customer/customerCheckout.htm" class="btn add-to-cart-btn">Đặt hàng</a>
-							<!-- <p class="pull-row">
-								<a href="#" class="btn wishlist-btn">wishlist</a> <a href="#"
-									class="btn compare-btn">compare</a>
-							</p> -->
-						</div>
+						<!-- 		<div class="buttons">
+							<a href="customer/customerCheckout.htm"
+								class="btn add-to-cart-btn">Đặt hàng</a>
+						</div> -->
 						<div class="acepted-payment-methods">
 							<ul class="payment-methods">
 								<li><img
-									src="<c:url value='assets/assets/images/card1.jpg'/>" alt="" width="51'"
-									height="36"></li>
-								<li><img src="<c:url value='assets/assets/images/card2.jpg'/>" alt="" width="51"
-									height="36"></li>
-								<li><img src="<c:url value='assets/assets/images/card3.jpg'/>" alt="" width="51"
-									height="36"></li>
-								<li><img src="<c:url value='assets/assets/images/card4.jpg'/>" alt="" width="51"
-									height="36"></li>
+									src="<c:url value='assets/assets/images/card1.jpg'/>" alt=""
+									width="51'" height="36"></li>
+								<li><img
+									src="<c:url value='assets/assets/images/card2.jpg'/>" alt=""
+									width="51" height="36"></li>
+								<li><img
+									src="<c:url value='assets/assets/images/card3.jpg'/>" alt=""
+									width="51" height="36"></li>
+								<li><img
+									src="<c:url value='assets/assets/images/card4.jpg'/>" alt=""
+									width="51" height="36"></li>
 							</ul>
 						</div>
-					</div>
+					</form>
 				</div>
 
 				<!-- Tab info -->
 				<div class="product-tabs single-layout biolife-tab-contain">
 					<div class="tab-head">
 						<ul class="tabs">
-							<!-- <li class="tab-element active"><a href="#tab_1st"
-								class="tab-link">Products Descriptions</a></li>
-							<li class="tab-element"><a href="#tab_2nd" class="tab-link">Addtional
-									information</a></li>
-							<li class="tab-element"><a href="#tab_3rd" class="tab-link">Shipping
-									& Delivery</a></li> -->
-							<li class="tab-element active"><a href="#tab_4th" class="tab-link">Customer
-									Reviews <sup>(3)</sup>
+							<li class="tab-element active"><a href="#tab_4th"
+								class="tab-link">Customer Reviews <sup>(${feedbackCount })</sup>
 							</a></li>
 						</ul>
 					</div>
@@ -168,53 +156,53 @@
 									<div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
 										<div class="rating-info">
 											<p class="index">
-												<strong class="rating">4.4</strong>out of 5
+												<strong class="rating">${avgStar }</strong>out of 5
 											</p>
 											<div class="rating">
 												<p class="star-rating">
-													<span class="width-80percent"></span>
+													<span class="width-${avgPercent }percent"></span>
 												</p>
 											</div>
-											<p class="see-all">See all 68 reviews</p>
+											<p class="see-all">See all ${feedbackCount } reviews</p>
 											<ul class="options">
 												<li>
 													<div class="detail-for">
 														<span class="option-name">5stars</span> <span
 															class="progres"> <span class="line-100percent"><span
-																class="percent width-90percent"></span></span>
-														</span> <span class="number">90</span>
+																class="percent width-${percent_5 }percent"></span></span>
+														</span> <span class="number">${star_5 }</span>
 													</div>
 												</li>
 												<li>
 													<div class="detail-for">
 														<span class="option-name">4stars</span> <span
 															class="progres"> <span class="line-100percent"><span
-																class="percent width-30percent"></span></span>
-														</span> <span class="number">30</span>
+																class="percent width-${percent_4 }percent"></span></span>
+														</span> <span class="number">${star_4 }</span>
 													</div>
 												</li>
 												<li>
 													<div class="detail-for">
 														<span class="option-name">3stars</span> <span
 															class="progres"> <span class="line-100percent"><span
-																class="percent width-40percent"></span></span>
-														</span> <span class="number">40</span>
+																class="percent width-${percent_3 }percent"></span></span>
+														</span> <span class="number">${star_3 }</span>
 													</div>
 												</li>
 												<li>
 													<div class="detail-for">
 														<span class="option-name">2stars</span> <span
 															class="progres"> <span class="line-100percent"><span
-																class="percent width-20percent"></span></span>
-														</span> <span class="number">20</span>
+																class="percent width-${percent_2 }percent"></span></span>
+														</span> <span class="number">${star_2 }</span>
 													</div>
 												</li>
 												<li>
 													<div class="detail-for">
 														<span class="option-name">1star</span> <span
 															class="progres"> <span class="line-100percent"><span
-																class="percent width-10percent"></span></span>
-														</span> <span class="number">10</span>
+																class="percent width-${percent_1 }percent"></span></span>
+														</span> <span class="number">${star_1 }</span>
 													</div>
 												</li>
 											</ul>
@@ -223,39 +211,57 @@
 									<div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
 										<div class="review-form-wrapper">
 											<span class="title">Submit your review</span>
-											<form action="#" name="frm-review" method="post">
+											<form:form action="customer/feedbackForm.htm"
+												name="frm-review" method="post" modelAttribute="feedback">
 												<div class="comment-form-rating">
 													<label>1. Your rating of this products:</label>
 													<p class="stars">
-														<span> <a class="btn-rating" data-value="star-1"
-															href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-															<a class="btn-rating" data-value="star-2" href="#"><i
-																class="fa fa-star-o" aria-hidden="true"></i></a> <a
-															class="btn-rating" data-value="star-3" href="#"><i
-																class="fa fa-star-o" aria-hidden="true"></i></a> <a
-															class="btn-rating" data-value="star-4" href="#"><i
-																class="fa fa-star-o" aria-hidden="true"></i></a> <a
-															class="btn-rating" data-value="star-5" href="#"><i
-																class="fa fa-star-o" aria-hidden="true"></i></a>
-														</span>
+														<a class="btn-rating" data-value="1" href="#"
+															onclick="setStar(1)"><i class="fa fa-star-o"
+															aria-hidden="true"></i></a> <a class="btn-rating"
+															data-value="2" href="#" onclick="setStar(2)"><i
+															class="fa fa-star-o" aria-hidden="true"></i></a> <a
+															class="btn-rating" data-value="3" href="#"
+															onclick="setStar(3)"><i class="fa fa-star-o"
+															aria-hidden="true"></i></a> <a class="btn-rating"
+															data-value="4" href="#" onclick="setStar(4)"><i
+															class="fa fa-star-o" aria-hidden="true"></i></a> <a
+															class="btn-rating" data-value="5" href="#"
+															onclick="setStar(5)"><i class="fa fa-star-o"
+															aria-hidden="true"></i></a>
 													</p>
 												</div>
+												<!-- Các thuộc tính ẩn này phục vụ chức năng update -->
+												<form:hidden path="feedbackId" />
+												<form:hidden path="createAt" />
+												<input type="hidden" name="orderBillDtId"
+													value="${orderBillDtId }" />
+
+												<!-- Thuộc tính này dùng cho cả add và update -->
+												<input type="hidden" name="star" value="${star}">
+
 												<p class="form-row wide-half">
-													<input type="text" name="name" value=""
-														placeholder="Your name">
+													<input type="text" name="fullName" readonly="readonly"
+														value="${loggedInUser.fullName }"
+														placeHolder="Tên của bạn" />
 												</p>
 												<p class="form-row wide-half">
-													<input type="email" name="email" value=""
-														placeholder="Email address">
+													<input type="text" name="Gmail" readonly="readonly"
+														value="${loggedInUser.gmail }" placeHolder="Gmail của bạn" />
 												</p>
 												<p class="form-row">
-													<textarea name="comment" id="txt-comment" cols="30"
-														rows="10" placeholder="Write your review here..."></textarea>
+													<form:textarea path="comment" id="txt-comment" cols="30"
+														rows="10"
+														placeholder="Bạn chỉ có thể thêm hoặc sửa đánh giá sau khi đã mua sản phẩm. Hãy đăng đăng nhập hoặc đăng ký để có thể mua đc sản phẩm này"></form:textarea>
 												</p>
 												<p class="form-row">
-													<button type="submit" name="submit">submit review</button>
+													<c:if test="${loggedInUser != null}">
+														<button type="submit" name="${btnMode }">
+															${btnMode == 'add' ? 'Thêm' : 'Cập nhật'}</button>
+													</c:if>
 												</p>
-											</form>
+
+											</form:form>
 										</div>
 									</div>
 								</div>
@@ -263,26 +269,31 @@
 									<ol class="commentlist">
 										<li class="review">
 											<div class="comment-container">
-												<div class="row">
-													<div
-														class="comment-content col-lg-12 col-md-9 col-sm-8 col-xs-12">
-														<p class="comment-in">
-												<!-- 			<span class="post-name">Quality is our way of life</span> -->
-															<span
-																class="post-date">01/04/2018</span>
-														</p>
-														<div class="rating">
-															<p class="star-rating">
-																<span class="width-80percent"></span>
+
+												<c:forEach var="feedback" items="${feedbacks }">
+
+													<div class="row">
+														<div
+															class="comment-content col-lg-12 col-md-9 col-sm-8 col-xs-12">
+															<p class="comment-in">
+																<!-- 			<span class="post-name">Quality is our way of life</span> -->
+																<span class="post-date">${feedback.createAt }</span>
 															</p>
+															<div class="rating">
+																<p class="star-rating">
+																	<span class="width-${feedback.starPercentage }percent"></span>
+																</p>
+															</div>
+															<p class="author">
+																by: <b>${feedback.account.fullName }</b>
+															</p>
+															<p class="comment-text">${feedback.comment }</p>
 														</div>
-														<p class="author">
-															by: <b>Huu Tri</b>
-														</p>
-														<p class="comment-text">Ăn ngon</p>
+
 													</div>
-		
-												</div>
+
+												</c:forEach>
+
 											</div>
 										</li>
 									</ol>
@@ -298,7 +309,7 @@
 										</ul>
 										<div class="result-count">
 											<p class="txt-count">
-												<b>1-5</b> of <b>126</b> reviews
+												<b>1-5</b> of <b>${feedbackCount }</b> reviews
 											</p>
 											<a href="#" class="link-to">See all<i
 												class="fa fa-caret-right" aria-hidden="true"></i></a>
@@ -321,52 +332,71 @@
 						class="products-list biolife-carousel nav-center-02 nav-none-on-mobile"
 						data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 
-						<li class="product-item">
-							<div class="contain-product layout-default">
-								<div class="product-thumb">
-									<a href="#" class="link-to-product"> <img
-										src="<c:url value='/assets/product-images/${productById.image}'/>" alt="dd" width="270"
-										height="270" class="product-thumnail">
-									</a>
-								</div>
-								<div class="info">
-									<b class="categories">Rau củ</b>
-									<h4 class="product-title">
-										<a href="#" class="pr-name">Khoai tây</a>
-									</h4>
-									<div class="price">
-										<ins>
-											<span class="price-amount"><span
-												class="currencySymbol"><fmt:formatNumber value="${productById.price }"
-										pattern="#,###.## VND;VND -#,###.##" type="currency"
-										currencySymbol="VND" /></span></span>
-										</ins>
-										<!-- <del>
+
+						<c:forEach var="pd" items="${relatedProucts }">
+
+							<li class="product-item">
+								<div class="contain-product layout-default">
+									<div class="product-thumb">
+										<a href="#" class="link-to-product"> <img
+											src="<c:url value='/assets/product-images/${pd.image}'/>"
+											alt="dd" width="270" height="270" class="product-thumnail">
+										</a>
+									</div>
+									<div class="info">
+										<b class="categories">Rau củ</b>
+										<h4 class="product-title">
+											<a href="#" class="pr-name">Khoai tây</a>
+										</h4>
+										<div class="price">
+											<ins>
+												<span class="price-amount"><span
+													class="currencySymbol"><fmt:formatNumber
+															value="${pd.price }" pattern="#,###.## VND;VND -#,###.##"
+															type="currency" currencySymbol="VND" /></span></span>
+											</ins>
+											<!-- <del>
 											<span class="price-amount"><span
 												class="currencySymbol">£</span>95.00</span>
 										</del> -->
-									</div>
-									<div class="slide-down-box">
-										<p class="message">~~</p>
-										<div class="buttons">
-											<a href="#" class="btn wishlist-btn"><i
-												class="fa fa-heart" aria-hidden="true"></i></a> <a href="#"
-												class="btn add-to-cart-btn"><i
-												class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to
-												cart</a> <a href="#" class="btn compare-btn"><i
-												class="fa fa-random" aria-hidden="true"></i></a>
+										</div>
+										<div class="slide-down-box">
+											<p class="message">~~</p>
+											<div class="buttons">
+												<a href="#" class="btn wishlist-btn"><i
+													class="fa fa-heart" aria-hidden="true"></i></a> <a
+													href="customer/addItemIntoCart.htm?pId=${pd.productId }"
+													class="btn add-to-cart-btn"><i
+													class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to
+													cart</a> <a href="#" class="btn compare-btn"><i
+													class="fa fa-random" aria-hidden="true"></i></a>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</li>
+							</li>
+
+						</c:forEach>
+
 					</ul>
 				</div>
 
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+	function setStar(value) {
+	    document.querySelector('input[name="star"]').value = value;
+	    const stars = document.querySelectorAll('.btn-rating');
+	    stars.forEach((star, index) => {
+	        if (index < value) {
+	            star.classList.add('active');
+	        } else {
+	            star.classList.remove('active');
+	        }
+	    });
+	}
+	</script>
 	<!-- FOOTER -->
 	<!-- FOOTER -->
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>

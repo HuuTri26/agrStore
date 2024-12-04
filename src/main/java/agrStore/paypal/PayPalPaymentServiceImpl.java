@@ -89,10 +89,10 @@ public class PayPalPaymentServiceImpl implements PayPalPaymentService {
 
 	@Override
 	public List<Transaction> getTransactionInfomation(List<OrderBillDetailEntity> orderItems) {
-		// Tính tổng giá trị của các order detail
-		Double finalPrice = orderBillDetailService.geTotalPriceOfOrderBillDetails(orderItems);
+		// Tính subtotal của các order detail
+		double subtotal = 0.0;
 
-		// Khởi tạo một danh sách giao dịch (chỉ cần một giao dịch duy nhất)
+		// Khởi tạo danh sách giao dịch
 		List<Transaction> transactions = new ArrayList<>();
 
 		ItemList itemList = new ItemList();
@@ -103,18 +103,31 @@ public class PayPalPaymentServiceImpl implements PayPalPaymentService {
 			Item item = new Item();
 			item.setCurrency("USD");
 			item.setName(orderDetail.getProduct().getProductName());
-			item.setPrice(convertNumberFromGermanToUSFormat(String.valueOf(orderDetail.getPrice())));
-			item.setQuantity(String.valueOf(orderDetail.getQuantity()));
+
+			// Lấy giá và số lượng
+			String price = convertNumberFromGermanToUSFormat(String.valueOf(orderDetail.getPrice()));
+			String quantity = String.valueOf(orderDetail.getQuantity());
+
+			item.setPrice(price);
+			item.setQuantity(quantity);
+
+			// Tính toán subtotal
+			subtotal += Double.parseDouble(price) * Integer.parseInt(quantity);
+
 			items.add(item);
 		}
 
 		// Cập nhật itemList với danh sách items
 		itemList.setItems(items);
 
+		// Tạo đối tượng Amount
 		Amount amount = new Amount();
 		amount.setCurrency("USD");
-		amount.setTotal(convertNumberFromGermanToUSFormat(String.valueOf(finalPrice)));
 
+		// Đảm bảo total khớp với subtotal
+		amount.setTotal(convertNumberFromGermanToUSFormat(String.valueOf(subtotal)));
+
+		// Tạo transaction
 		Transaction transaction = new Transaction();
 		transaction.setAmount(amount);
 		transaction.setItemList(itemList);

@@ -38,17 +38,46 @@
 	display: block;
 }
 
-.checkout-btn {
-	background-color: orange;
+.bill-card__payment-buttons {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	margin: 20px 0;
 }
 
-.payment-icon {
-	width: 35px;
-	height: auto;
+.payment-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+	border: 2px solid #ccc;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
-.payment-option img {
-	vertical-align: middle;
+.payment-button:hover {
+	border-color: #007bff;
+	background-color: #eef7ff;
+}
+
+.payment-button img {
+	width: 50px;
+	height: 50px;
+	margin-bottom: 10px;
+}
+
+.payment-button span {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.payment-button.active {
+	border-color: #28a745;
+	background-color: #eaffea;
 }
 </style>
 </head>
@@ -78,9 +107,10 @@
 	<div class="container">
 		<nav class="biolife-nav">
 			<ul>
-				<li class="nav-item"><a href="customer/customerCart.htm" class="permal-link">Giỏ
-						hàng</a></li>
-				<li class="nav-item"><span class="current-page">Chọn phương thức thanh toán</span></li>
+				<li class="nav-item"><a href="customer/customerCart.htm"
+					class="permal-link">Giỏ hàng</a></li>
+				<li class="nav-item"><span class="current-page">Chọn
+						phương thức thanh toán</span></li>
 			</ul>
 		</nav>
 	</div>
@@ -228,59 +258,38 @@ ${loggedInUser.address.streetName}, ${loggedInUser.address.ward.name}, ${loggedI
 						</div>
 						<div class="bill-card__content">
 							<div class="bill-card__header">
-								<div class="bill-card__header">
-									<h2 class="bill-card__header-title font-body--xxl-500">
-										Phương thức thanh toán</h2>
-								</div>
+								<h2 class="bill-card__header-title font-body--xxl-500">Phương
+									thức thanh toán</h2>
 							</div>
 							<div class="bill-card__body">
-								<form action="customer/authPayment.htm" method="post">
-									<!-- Payment Methods -->
-									<div class="bill-card__payment-method">
-										<!-- Cash Payment -->
-										<div class="bill-card__payment-method-item">
-											<div class="form-check payment-option">
-												<input class="form-check-input" type="radio" name="payment"
-													id="cash" checked /> <label
-													class="form-check-label font-body--400" for="cash">
-													<img src="<c:url value='/assets/logos/cash.png'/>"
-													alt="Cash Icon" class="payment-icon" /> Tiền mặt
-												</label>
-											</div>
-										</div>
-
-										<!-- Paypal Payment -->
-										<div class="bill-card__payment-method-item">
-											<div class="form-check payment-option">
-												<input class="form-check-input" type="radio" name="payment"
-													id="paypal" /> <label
-													class="form-check-label font-body--400" for="paypal">
-													<img src="<c:url value='/assets/logos/paypal.jpg'/>"
-													alt="Paypal Icon" class="payment-icon" /> Paypal
-												</label>
-											</div>
-										</div>
-
-										<!-- Momo Payment -->
-										<div class="bill-card__payment-method-item">
-											<div class="form-check payment-option">
-												<input class="form-check-input" type="radio" name="payment"
-													id="momo" /> <label
-													class="form-check-label font-body--400" for="momo">
-													<img src="<c:url value='/assets/logos/momo.png'/>"
-													alt="Momo Icon" class="payment-icon" /> Momo
-												</label>
-											</div>
-										</div>
+								<form action="customer/authPayment.htm" method="post"
+									id="payment-form">
+									<!-- Payment Buttons -->
+									<div class="bill-card__payment-buttons">
+										<!-- Cash Button -->
+										<button type="submit" class="payment-button" name="cash"
+											data-payment="cash">
+											<img src="<c:url value='/assets/logos/cash.png'/>"
+												alt="Cash Icon" class="payment-icon" /> <span>Tiền
+												mặt</span>
+										</button>
+										<!-- Paypal Button -->
+										<button type="submit" class="payment-button" name="PayPal"
+											data-payment="paypal">
+											<img src="<c:url value='/assets/logos/paypal.jpg'/>"
+												alt="Paypal Icon" class="payment-icon" /> <span>Paypal</span>
+										</button>
+										<!-- Momo Button -->
+										<button type="button" class="payment-button"
+											data-payment="momo">
+											<img src="<c:url value='/assets/logos/momo.png'/>"
+												alt="Momo Icon" class="payment-icon" /> <span>Momo</span>
+										</button>
 									</div>
-
-									<!-- Checkout Button -->
-									<button class="button button--lg w-100 checkout-btn"
-										type="submit">Đặt hàng</button>
 								</form>
 							</div>
-
 						</div>
+
 					</div>
 				</div>
 			</div>

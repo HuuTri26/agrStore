@@ -43,4 +43,14 @@ public class OrderBillDetailServiceImpl implements OrderBillDetailService {
 		return orderBillDetails.stream().mapToDouble(oBillDt -> oBillDt.getPrice()).sum();
 	}
 
+	@Override
+	public List<OrderBillDetailEntity> getOrderBillDetailByProductIdAndAccountId(Integer pId, Integer aId) {
+		return orderBillDetailDAO.getOrderBillDetailByProductIdAndAccountId(pId, aId);
+	}
+
+	@Override
+	public OrderBillDetailEntity getOrderBillDetailById(Integer id) {
+		return orderBillDetailDAO.getOrderBillDetailById(id);
+	}
+
 }
