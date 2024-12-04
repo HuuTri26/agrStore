@@ -67,10 +67,10 @@ public class ProductServiceImpl implements ProductService{
 
 	}
 
-	@Override
-	public List<ProductEntity> getListProductByProviderId(Integer pId) {
-		return ProductDAO.getProductsByProviderId(pId);
-	}
+	/*
+	 * @Override public List<ProductEntity> getListProductByProviderId(Integer pId)
+	 * { return ProductDAO.getProductsByProviderId(pId); }
+	 */
 
 	@Override
 	public void updateProductQuantityAfterPayment(List<CartItemEntity> selectedItems) {

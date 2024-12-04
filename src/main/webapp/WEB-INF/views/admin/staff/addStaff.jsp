@@ -318,7 +318,7 @@
 																	<label class="form-label">Staff Province <span
 																		class="text-red">*</span></label> <select id="province"
 																		name="provinceId" class="form-select"
-																		onchange="this.form.submit()" class="form-control" disabled=${mode =='VIEW' }>
+																		onchange="this.form.submit()" class="form-control">
 																		<option value=""></option>
 																		<c:forEach var="province" items="${provinces}">
 																			<option value="${province.id}"
@@ -333,7 +333,7 @@
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff District <span
-																		class="text-red">*</span></label> <select id="district" disabled=${mode =='VIEW' }
+																		class="text-red">*</span></label> <select id="district"
 																		name="districtId" class="form-select"
 																		onchange="this.form.submit()" class="form-control">
 																		<option value=""></option>
@@ -366,7 +366,7 @@
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Ward <span
-																		class="text-red">*</span></label> <select id="ward" disabled=${mode =='VIEW' }
+																		class="text-red">*</span></label> <select id="ward"
 																		name="wardId" class="form-select"
 																		onchange="this.form.submit()" class="form-control">
 																		<option value=""></option>
@@ -378,25 +378,26 @@
 																		value="${selectedWard.name}"
 																		placeholder="Phường/Xã đã chọn" />
 																</div>
-																<div class="col-sm-12 col-12">
-																	<div class="mb-3">
-																		<label class="form-label">Staff Address Street
-																			<span class="text-red">*</span>
-																		</label> <input type="text" id="streetName" name="streetName"
-																			placeholder="vd: Số 23, Đường Lê Văn Việt"
-																			class="txt-input w-5">
-																	</div>
-																	${streetErr }
-																</div>
-																<div class="col-sm-12 col-12">
-																	<!-- Form Field Start -->
-																	<div class="mb-3">
-																		<label for="address" class="form-label">Address</label>
-																		<textarea rows="5" cols="100" readonly="readonly">${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
-																	</div>
-																</div>
-
 															</div>
+															<div class="col-sm-12 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Staff Address Street
+																		<span class="text-red">*</span>
+																	</label> <input type="text" id="streetName" name="streetName"
+																		placeholder="vd: Số 23, Đường Lê Văn Việt"
+																		class="txt-input w-5">
+																</div>
+																${streetErr }
+															</div>
+															<div class="col-sm-12 col-12">
+																<!-- Form Field Start -->
+																<div class="mb-3">
+																	<label for="address" class="form-label">Address</label>
+																	<textarea rows="5" cols="60" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
+																</div>
+															</div>
+
+
 
 														</div>
 														<%-- <div class="col-sm-6 col-12">
