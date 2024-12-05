@@ -132,6 +132,7 @@ public class AccountDAOImpl implements AccountDAO {
 			e.printStackTrace();
 			return 0; // Trả về 0 nếu xảy ra lỗi
 		}
+	}
 
 	public List<AccountEntity> getAllStaff() {
 		// TODO Auto-generated method stub

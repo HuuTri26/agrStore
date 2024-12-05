@@ -72,6 +72,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 	public List<OrderBillEntity> getOrderBillToday() {
 		// TODO Auto-generated method stub
 		return this.orderBillDAO.getOrderBillForToday();
+	}
 
 	public void deleteOrderBill(OrderBillEntity orderBill) {
 		orderBillDAO.deleteOrderBill(orderBill);

@@ -168,6 +168,7 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 			e.printStackTrace();
 	        return null; // Trả về danh sách rỗng nếu xảy ra lỗi
 		}
+	}
 	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
 		List<OrderBillEntity> orderBills = null;
 		Session session = this.factory.getCurrentSession();
