@@ -13,11 +13,17 @@ import agrStore.entity.OrderBillEntity;
 public interface OrderBillService {
 	public void addOrderBill(OrderBillEntity orderBill);
 	public void updateOrderBill(OrderBillEntity orderBill);
+	public void deleteOrderBill(OrderBillEntity orderBill);
+	public void deleteListOrderBill(List<OrderBillEntity> orderBills);
 	public List<OrderBillEntity> getAllOrderBill();
 	public OrderBillEntity getOrderBillById(Integer id);
 	public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus);
 	public long getNumberOrderBillForToday();
+
 	public long getTodayRevenue();
 	public List<OrderBillEntity> getOrderBillToday();
+
+	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status);
+
 
 }

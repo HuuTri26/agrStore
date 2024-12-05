@@ -23,123 +23,184 @@
 
 
 <style>
-.address-form {
-	max-width: 400px;
-	margin: 20px auto;
+/* Container Styling */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
 }
 
-.address-form label {
-	display: block;
-	margin: 10px 0 5px;
+/* Card Styling */
+.dashboard__content-card {
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin-bottom: 20px;
 }
 
-.address-form .form-select, .address-form .form-control {
+.dashboard__content-card-header h5 {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+/* Image Upload Styling */
+.dashboard__content-card-img {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.dashboard__content-img-wrapper {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin: 0 auto 10px;
+	background-color: #f0f0f0;
+}
+
+.dashboard__content-img-wrapper #imagePreview {
 	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	border: 1px solid #ddd;
+}
+
+.upload-image {
+	margin: 10px 0;
+}
+
+.upload-image input[type="file"] {
+	display: none;
+}
+
+.upload-image label {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #007bff;
+	color: #fff;
 	border-radius: 5px;
-	border: 1px solid #ccc;
+	cursor: pointer;
+	font-size: 14px;
 }
 
-.signin-container .form-row .btn-submit {
-	float: right;
-	width: 500px;
+.upload-image button {
+	background-color: #28a745;
+	color: #fff;
+	border: none;
+	padding: 8px 16px;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
-/* Cải thiện layout cho phần address-form * /
-.col-lg-3 {
-	padding: 15px; /* Khoảng cách giữa các cột */
-margin-bottom
-
-
-
-
-
-
-
-
-:
-
-
-
-
- 
-
-
-
-
-20px
-
-
-
-
-
-
-
-
-; /* Khoảng cách phía dưới */
+/* Form Styling */
+.contact-form__content {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
 }
 
-/* Form address */
+.contact-form-input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.contact-form-input label {
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.contact-form-input input, .contact-form-input textarea,
+	.contact-form-input select {
+	width: 100%;
+	padding: 10px 12px;
+	font-size: 14px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	outline: none;
+	transition: all 0.3s ease;
+}
+
+.contact-form-input input:focus, .contact-form-input textarea:focus,
+	.contact-form-input select:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.contact-form-input textarea {
+	resize: none;
+	font-family: inherit;
+	line-height: 1.5;
+}
+
 .address-form {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 15px;
 }
 
-/* Các input, select có chiều dài 100%, padding và border */
-.address-form select, .address-form input {
-	width: 100%; /* Đảm bảo chiều rộng của ô nhập/select là 100% */
-	padding: 8px 12px; /* Padding cho các ô nhập */
-	margin-bottom: 10px; /* Khoảng cách giữa các ô nhập */
-	border: 1px solid #ccc; /* Đường viền ô nhập */
-	border-radius: 4px; /* Bo góc cho ô nhập */
-	font-size: 14px; /* Kích thước chữ */
-	line-height: 1.4; /* Chiều cao dòng */
-	box-sizing: border-box;
-	/* Đảm bảo padding và border được tính vào chiều rộng */
-}
-
-/* Định dạng cho các label */
 .address-form label {
-	margin-bottom: 5px; /* Khoảng cách giữa label và ô nhập */
-	font-weight: bold; /* Làm đậm label */
-	font-size: 14px; /* Kích thước chữ */
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 5px;
+	width: 100%;
 }
 
-/* Hiệu ứng khi hover vào input */
+.address-form input, .address-form select {
+	width: 100%;
+	padding: 10px 12px;
+	font-size: 14px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	outline: none;
+}
+
 .address-form input:focus, .address-form select:focus {
-	border-color: #007bff; /* Màu viền khi focus */
-	outline: none; /* Loại bỏ outline mặc định */
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Input readonly với màu nền khác */
-.address-form input[readonly] {
-	background-color: #f0f0f0; /* Màu nền cho ô nhập readonly */
-	cursor: not-allowed; /* Đổi con trỏ khi hover vào ô nhập readonly */
-}
-
-/* Nút submit */
-.contact-form-btn {
-	display: flex;
-	justify-content: center; /* Căn giữa nút */
-	margin-top: 20px;
+/* Button Styling */
+.button {
+	display: inline-block;
+	padding: 10px 16px;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+	cursor: pointer;
 }
 
 .button--md {
-	padding: 10px 20px; /* Điều chỉnh kích thước nút */
-	background-color: #007bff; /* Màu nền của nút */
-	color: white;
+	background-color: #007bff;
+	color: #fff;
 	border: none;
-	border-radius: 4px; /* Bo góc cho nút */
-	font-size: 16px; /* Kích thước chữ */
-	cursor: pointer; /* Con trỏ khi hover vào nút */
-	transition: background-color 0.3s ease;
-	/* Hiệu ứng chuyển màu nền khi hover */
 }
 
 .button--md:hover {
-	background-color: #0056b3; /* Màu nền khi hover */
+	background-color: #0056b3;
 }
+
+.button--outline {
+	background-color: transparent;
+	color: #007bff;
+	border: 1px solid #007bff;
+}
+
+.button--outline:hover {
+	background-color: #007bff;
+	color: #fff;
+}
+ .nice-select .current {
+    color: black !important; /* Ghi đè màu */
+    font-size:18px;
+}
+
 </style>
 
 </head>
@@ -176,113 +237,118 @@ margin-bottom
 	<div class="container">
 		<!-- Account Settings  -->
 		<div class="dashboard__content-card">
-			s
 			<div class="dashboard__content-card-header">
 				<h5 class="font-body--xxl-500">Profile</h5>
 			</div>
 			<div class="dashboard__content-card-body">
-				<div class="row">
-					<div class="col-lg-3 order-lg-0 order-1">
-						<div class="dashboard__content-card-img">
-							<form action="customer/customerProfile.htm" method="post"
-								enctype="multipart/form-data" style="text-align: center">
-								<div class="dashboard__content-img-wrapper">
-									<div id="imagePreview"
-										style="background-image: url('<c:url value='/assets/user-images/${loggedInUser.avatar}' />');"></div>
+				<form action="customer/customerProfile.htm" method="post">
+					<div class="row gx-3">
+						<div class="row gx-3">
+							<div class="col-sm-6 col-12">
+								<div class="dashboard__content-card-img">
+									<form:form action="customer/customerProfile.htm" method="post"
+										enctype="multipart/form-data" style="text-align: center">
+										<div class="dashboard__content-img-wrapper">
+											<div id="imagePreview"
+												style="background-image: url('<c:url value='/assets/user-images/${loggedInUser.avatar}' />');"></div>
+										</div>
+										<div class="upload-image button button--outline">
+											<input name="avatar" type='file' id="imageUpload"
+												accept=".png, .jpg, .jpeg" id="imageUpload" /> <label
+												for="imageUpload">Chọn ảnh</label>
+										</div>
+										<div class="upload-image button button--outline">
+											<button name="upload-img">Upload</button>
+										</div>
+										${avatarErr }
+									</form:form>
 								</div>
-								<div class="upload-image button button--outline">
-									<input name="avatar" type='file' id="imageUpload"
-										accept=".png, .jpg, .jpeg" id="imageUpload" /> <label
-										for="imageUpload">Chọn ảnh</label>
-								</div>
-								<div class="upload-image button button--outline">
-									<button name="upload-img">Upload</button>
-								</div>
-								${avatarErr }
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-9 order-lg-0 order-2">
 
-						<form action="customer/customerProfile.htm" method="post">
-							<div class="contact-form__content">
-								<div class="col-lg-6 order-lg-0 order-2">
-									<div class="contact-form-input">
-										<label for="fname1">FullName </label> <input type="text"
-											name="fullName" id="fname1" value="${loggedInUser.fullName }" />
-										${nameErr }
-									</div>
-									<div class="contact-form-input">
-										<label for="email1">Email </label> <input type="text"
-											id="email1" value="${loggedInUser.gmail }"
-											readonly="readonly" />
-									</div>
-									<div class="contact-form-input">
-										<label for="number1">Phone Number</label> <input type="number"
-											name="phoneNumber" id="number1"
-											value="${loggedInUser.phoneNumber }" /> ${phoneErr }
-									</div>
-									<div class="contact-form-input">
-										<label for="number1">Địa chỉ</label>
-										<textarea rows="3" cols="100" readonly="readonly"
-											style="resize: none; width: 100%; font-size: 14px; padding: 10px; line-height: 1.5;">
+							</div>
+						</div>
+
+						<div class="row gx-3">
+
+							<div class="col-sm-6 col-12 contact-form__content">
+
+
+
+								<div class="contact-form-input">
+									<label for="fname1">FullName </label> <input type="text"
+										name="fullName" id="fname1" value="${loggedInUser.fullName }" />
+									${nameErr }
+								</div>
+								<div class="contact-form-input">
+									<label for="email1">Email </label> <input type="text"
+										id="email1" value="${loggedInUser.gmail }" readonly="readonly" />
+								</div>
+								<div class="contact-form-input">
+									<label for="number1">Phone Number</label> <input type="number"
+										name="phoneNumber" id="number1"
+										value="${loggedInUser.phoneNumber }" /> ${phoneErr }
+								</div>
+								<div class="contact-form-input">
+									<label for="number1">Địa chỉ</label>
+									<textarea rows="3" cols="100" readonly="readonly"
+										style="resize: none; width: 100%; font-size: 14px; padding: 10px; line-height: 1.5;">
 ${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${loggedInUser.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }
 										</textarea>
-									</div>
-
 								</div>
-								<div class="col-lg-3 order-lg-0 order-2">
-									<div class="address-form">
-										<label for="province">Tỉnh/Thành phố:</label> <select
-											id="province" name="provinceId" class="form-select"
-											onchange="this.form.submit()">
-											<option value="">Chọn Tỉnh/Thành phố</option>
-											<c:forEach var="province" items="${provinces}">
-												<option value="${province.id}"
-													${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
-											</c:forEach>
-										</select> <input type="text" id="provinceText" readonly
-											value="${selectedProvince.name}"
-											placeholder="Tỉnh/Thành phố đã chọn" /> <label
-											for="district">Quận/Huyện:</label> <select id="district"
-											name="districtId" class="form-select"
-											onchange="this.form.submit()">
-											<option value="">Chọn Quận/Huyện</option>
-											<c:forEach var="district" items="${districts}">
-												<option value="${district.id}"
-													${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
-											</c:forEach>
-										</select> <input type="text" id="districtText" readonly
-											value="${selectedDistrict.name}"
-											placeholder="Quận/Huyện đã chọn" /> <label for="ward">Xã/Phường:</label>
-										<select id="ward" name="wardId" class="form-select"
-											onchange="this.form.submit()">
-											<option value="">Chọn Xã/Phường</option>
-											<c:forEach var="ward" items="${wards}">
-												<option value="${ward.id}">${ward.name}</option>
-											</c:forEach>
-										</select> <input type="text" id="wardText" readonly
-											value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
-										<label for="fid-name">Tên đường:<span class="requite">*</span></label>
-										<input type="text" id="streetName" name="streetName"
-											placeholder="Nhập tên đường cụ thể" class="txt-input w-5">
-										${streetErr }
-									</div>
-									<div class="contact-form-btn">
-										<button class="button button--md" name="save">Lưu
-											thay đổi</button>
-									</div>
+
+
+							</div>
+							<div class="col-sm-6 col-12">
+								<div class="address-form">
+									<label for="province">Tỉnh/Thành phố:</label> <select
+										id="province" name="provinceId" class="form-select"
+										onchange="this.form.submit()">
+										<option value="" >${loggedInUser.address.ward.district.province.name }</option>
+										<c:forEach var="province" items="${provinces}">
+											<option value="${province.id}"
+												${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
+										</c:forEach>
+									</select> <input type="text" id="provinceText" readonly
+										value="${selectedProvince.name}"
+										placeholder="Tỉnh/Thành phố đã chọn" /> <label for="district">Quận/Huyện:</label>
+									<select id="district" name="districtId" class="form-select"
+										onchange="this.form.submit()">
+										<option value="">${loggedInUser.address.ward.district.name }</option>
+										<c:forEach var="district" items="${districts}">
+											<option value="${district.id}"
+												${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
+										</c:forEach>
+									</select> <input type="text" id="districtText" readonly
+										value="${selectedDistrict.name}"
+										placeholder="Quận/Huyện đã chọn" /> <label for="ward">Xã/Phường:</label>
+									<select id="ward" name="wardId" class="form-select"
+										onchange="this.form.submit()">
+										<option value="">${loggedInUser.address.ward.name }</option>
+										<c:forEach var="ward" items="${wards}">
+											<option value="${ward.id}">${ward.name}</option>
+										</c:forEach>
+									</select> <input type="text" id="wardText" readonly
+										value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
+									<label for="fid-name">Tên đường:<span class="requite">*</span>
+									</label> <input value="${loggedInUser.address.streetName }" type="text" id="streetName" name="streetName"
+										placeholder="Nhập tên đường cụ thể" class="txt-input w-5">
+									${streetErr }
 								</div>
 
 							</div>
 
-						</form>
+						</div>
+						<div class="contact-form-btn">
+							<button class="button button--md" name="save">Lưu thay
+								đổi</button>
+						</div>
 					</div>
-
-				</div>
+				</form>
 			</div>
+
 		</div>
 	</div>
+
+
 	<%@include file="/WEB-INF/views/include/customer/footer.jsp"%>
 
 	<!--Footer For Mobile-->

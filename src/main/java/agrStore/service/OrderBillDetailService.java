@@ -9,4 +9,6 @@ public interface OrderBillDetailService {
 	public void updateOrderBillDetail(OrderBillDetailEntity orderBilldt);
 	public List<OrderBillDetailEntity> getAllOrderBillDetailByOrderBillID(Integer id);
 	public Double geTotalPriceOfOrderBillDetails(List<OrderBillDetailEntity> orderBillDetails);
+	public List<OrderBillDetailEntity> getOrderBillDetailByProductIdAndAccountId(Integer pId, Integer aId);
+	public OrderBillDetailEntity getOrderBillDetailById(Integer id);
 }

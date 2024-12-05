@@ -47,6 +47,21 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	}
 
 	@Override
+	public void deleteOrderBill(OrderBillEntity orderBill) {
+		Session session = factory.getCurrentSession();
+		try {
+			if (!session.contains(orderBill)) {
+				orderBill = (OrderBillEntity) session.merge(orderBill);
+			}
+			session.delete(orderBill);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
 	public List<OrderBillEntity> getAllOrderBill() {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
@@ -112,6 +127,7 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	}
 
 	@Override
+
 	public long getTodayRevenue() {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
@@ -152,6 +168,21 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 			e.printStackTrace();
 	        return null; // Trả về danh sách rỗng nếu xảy ra lỗi
 		}
+	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
+		List<OrderBillEntity> orderBills = null;
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM OrderBillEntity o WHERE o.account.accountId = :aId AND o.statusOrder = :status";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("aId", aId);
+			query.setParameter("status", status);
+			orderBills = (List<OrderBillEntity>) query.list();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		return orderBills;
+
 	}
 
 }

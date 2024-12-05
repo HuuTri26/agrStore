@@ -46,12 +46,12 @@ public class customerCartController {
 				}
 			}
 		}
-		
+
 		List<CartItemEntity> selectedCartItems = cartItemService.getSelectedCartItems(cartItems);
-		
+
 		Double totalPrice = cartItemService.getTotalPriceofCartItems(selectedCartItems);
 		Integer selectedItemCount = selectedCartItems.size();
-		
+
 		session.setAttribute("cartItems", cartItems);
 		session.setAttribute("totalPrice", totalPrice);
 		session.setAttribute("selectedCartItems", selectedCartItems);
@@ -60,15 +60,22 @@ public class customerCartController {
 	}
 
 	@RequestMapping(value = "/addItemIntoCart", method = RequestMethod.GET)
-	public String addItemToCart(HttpServletRequest request, @RequestParam("pId") Integer pId) {
+	public String addItemToCart(HttpServletRequest request, @RequestParam("pId") Integer pId,
+			@RequestParam(value = "quantity", required = false) Integer quantity) {
 		HttpSession session = request.getSession();
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 
 		try { // Kiểm tra sản phẩm thêm vào có tồn tại trong giỏ hàng hay chưa?
 			CartItemEntity item_t = cartItemService.getCartItemByProductIdAndCartId(pId,
 					loggedInUser.getCart().getCartId());
-			if (item_t != null) { // Nếu tồn tại, tiếm hành tăng số lượng sản phẩm lên 1
-				item_t.setQuantity(item_t.getQuantity() + 1);
+
+			if (item_t != null) { // Nếu tồn tại, tiếm hành tăng số lượng sản phẩm lên theo 
+				if(quantity != null) {
+					item_t.setQuantity(item_t.getQuantity() + quantity);
+				}else {
+					item_t.setQuantity(item_t.getQuantity() + 1);
+				}
+				
 				cartItemService.updateCartItem(item_t);
 
 			} else { // Nếu không tồn tại thì tạo mới
@@ -76,7 +83,11 @@ public class customerCartController {
 				CartItemEntity item = new CartItemEntity();
 				item.setCart(loggedInUser.getCart());
 				item.setProduct(product);
-				item.setQuantity(1);
+				if(quantity != null) {
+					item.setQuantity(quantity);
+				}else {
+					item.setQuantity(1);
+				}
 
 				cartItemService.addCartItem(item);
 			}
@@ -133,7 +144,7 @@ public class customerCartController {
 	public String toggleSelectAllItems(ModelMap model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		List<CartItemEntity> cartItems = (List<CartItemEntity>) session.getAttribute("cartItems");
-		
+
 		// Kiểm tra xem có bất kỳ item nào chưa được chọn không
 		boolean hasUnselected = cartItems.stream().anyMatch(item -> !item.getIsSelected());
 		System.out.println("Has unselected items: " + hasUnselected);
@@ -142,14 +153,16 @@ public class customerCartController {
 		for (CartItemEntity item : cartItems) {
 			item.setIsSelected(hasUnselected); // Đảo trạng thái của tất cả các item
 		}
-		Double totalPrice = cartItemService.getTotalPriceofCartItems(cartItems);
+		Double totalPrice = Double.valueOf(0);
+		if (hasUnselected) {
+			totalPrice = cartItemService.getTotalPriceofCartItems(cartItems);
+		}
 		Integer selectedItemCount = cartItems.size();
-		
 
 		session.setAttribute("cartItems", cartItems);
 		session.setAttribute("totalPrice", totalPrice);
-		model.addAttribute("selectedItemCount", selectedItemCount);
 		session.setAttribute("selectedCartItems", cartItems);
+		model.addAttribute("selectedItemCount", selectedItemCount);
 		return "customer/customerCart";
 	}
 

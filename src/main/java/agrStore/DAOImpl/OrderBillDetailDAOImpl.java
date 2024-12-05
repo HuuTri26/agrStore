@@ -25,7 +25,7 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 		Session session = factory.getCurrentSession();
 		try {
 			session.save(orderBilldt);
-			 session.flush();
+			session.flush();
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:");
 			e.printStackTrace();
@@ -46,6 +46,18 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 	}
 
 	@Override
+	public void deleteOrderBillDetail(OrderBillDetailEntity orderBilldt) {
+		Session session = factory.getCurrentSession();
+		try {
+			session.delete(orderBilldt);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
 	public List<OrderBillDetailEntity> getOrderBillDetailByOderBillId(Integer id) {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
@@ -54,6 +66,33 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 		query.setParameter("id", id);
 		List<OrderBillDetailEntity> orderBillDetailEntities = query.list();
 		return orderBillDetailEntities;
+	}
+
+	@Override
+	public List<OrderBillDetailEntity> getOrderBillDetailByProductIdAndAccountId(Integer pId, Integer aId) {
+		List<OrderBillDetailEntity> orderBillDetails = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM OrderBillDetailEntity o WHERE o.product.productId = :pId AND o.orderBill.account.accountId = :aId";
+		Query query = session.createQuery(hql);
+		query.setParameter("pId", pId);
+		query.setParameter("aId", aId);
+		
+		orderBillDetails = query.list();
+		
+		return orderBillDetails;
+	}
+
+	@Override
+	public OrderBillDetailEntity getOrderBillDetailById(Integer id) {
+		OrderBillDetailEntity orderBillDetail = null;
+		
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM OrderBillDetailEntity WHERE orderBillDetailId = :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		
+		orderBillDetail = (OrderBillDetailEntity) query.uniqueResult();
+		return orderBillDetail;
 	}
 
 }

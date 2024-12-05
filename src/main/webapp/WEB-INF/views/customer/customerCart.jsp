@@ -275,7 +275,7 @@
 									<p class="desc">Based on 56789</p>
 								</div> -->
 								<div class="btn-checkout">
-									<a href="customer/customerCheckout.htm" class="btn checkout">Mua</a>
+									<a href="customer/customerCheckout.htm" class="btn checkout">Đặt hàng</a>
 								</div>
 								<div class="biolife-progress-bar">
 									<table>

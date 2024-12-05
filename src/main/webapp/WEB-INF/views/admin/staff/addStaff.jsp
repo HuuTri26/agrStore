@@ -187,14 +187,14 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<form action="admin/staffManagement/staff.htm" method="post">
+									<form action="admin/staffManagement/addStaff.htm" method="post">
 										<div class="row gx-3">
 											<div class="col-sm-6 col-12">
 												<div class="card-border">
 													<div class="card-border-title">Staff Images</div>
 													<div class="card-border-body">
 														<form>
-															<%-- <c:choose>
+															<c:choose>
 																<c:when test="${mode == 'ADD'}">
 																	<!-- Hiển thị form thêm mới -->
 																	<div id="dropzone" class="dropzone-dark">
@@ -216,8 +216,8 @@
 
 																	</div>
 																</c:when>
- --%>
-																<%-- <c:when test="${mode == 'VIEW'}">
+
+																<c:when test="${mode == 'VIEW'}">
 																	<!-- Hiển thị thông tin chi tiết -->
 
 
@@ -249,11 +249,11 @@
 
 
 																	<!-- Disable các input field -->
-																	<input type="text" class="form-control"
-												value="${category.name}" disabled>
-																</c:when> --%>
+																	<%-- <input type="text" class="form-control"
+												value="${category.name}" disabled> --%>
+																</c:when>
 
-																<%-- <c:when test="${mode == 'EDIT'}"> --%>
+																<c:when test="${mode == 'EDIT'}">
 																	<!-- Hiển thị form chỉnh sửa -->
 																	<div id="dropzone" class="dropzone-dark">
 
@@ -277,8 +277,8 @@
 																	<!-- Populate dữ liệu vào form -->
 																	<%-- <input type="text" class="form-control"
 												value="${category.name}"> --%>
-																<%-- </c:when>
-															</c:choose> --%>
+																</c:when>
+															</c:choose>
 														</form>
 
 													</div>
@@ -294,26 +294,23 @@
 																<div class="mb-3">
 																	<label class="form-label">Staff Name <span
 																		class="text-red">*</span></label> <input required type="text"
-																		id="fid-name" name="fullName"
-																		value="${staff.fullName }" class="txt-input">
-																	${nameErr }
+																		id="fid-name" name="full-name" value=""
+																		class="txt-input"> ${nameErr }
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Phone <span
 																		class="text-red">*</span></label> <input required type="text"
-																		id="fid-pass" name="phoneNumber"
-																		value="${staff.phoneNumber }" class="txt-input">
-																	${phoneErr }
+																		id="fid-pass" name="phone-number" value=""
+																		class="txt-input"> ${phoneErr }
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Gmail <span
 																		class="text-red">*</span></label> <input type="text"
-																		id="fid-name" name="gmail" disabled="disabled"
-																		value="${staff.gmail }" class="txt-input">${gmailErr}
+																		id="fid-name" name="gmail" value="" class="txt-input">${gmailErr}
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
@@ -322,8 +319,7 @@
 																		class="text-red">*</span></label> <select id="province"
 																		name="provinceId" class="form-select"
 																		onchange="this.form.submit()" class="form-control">
-																		<option
-																			value="${staff.address.ward.district.province.id}">${staff.address.ward.district.province.name }</option>
+																		<option value=""></option>
 																		<c:forEach var="province" items="${provinces}">
 																			<option value="${province.id}"
 																				${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
@@ -340,7 +336,7 @@
 																		class="text-red">*</span></label> <select id="district"
 																		name="districtId" class="form-select"
 																		onchange="this.form.submit()" class="form-control">
-																		<option value="${staff.address.ward.district.id}">${staff.address.ward.district.name }</option>
+																		<option value=""></option>
 																		<c:forEach var="district" items="${districts}">
 																			<option value="${district.id}"
 																				${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
@@ -350,14 +346,14 @@
 																		placeholder="Huyện/Quận đã chọn" />
 																</div>
 															</div>
-															<%-- <div class="col-sm-6 col-12">
+															<%-- 	<div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff District <span
 																		class="text-red">*</span></label> <select id="district"
 																		name="districtId" class="form-select"
 																		onchange="this.form.submit()"
 																	 class="form-control">
-																		<option value="${staff.address.ward.district.id}">${staff.address.ward.district.name }</option>
+																		<option value=""></option>
 																		<c:forEach var="district" items="${districts}">
 																			<option value="${district.id}"
 																				${district.id == selectedDistrictId ? 'selected' : ''}>${district.name}</option>
@@ -373,7 +369,7 @@
 																		class="text-red">*</span></label> <select id="ward"
 																		name="wardId" class="form-select"
 																		onchange="this.form.submit()" class="form-control">
-																		<option value="${staff.address.ward.id}">${staff.address.ward.name }</option>
+																		<option value=""></option>
 																		<c:forEach var="ward" items="${wards}">
 																			<option value="${ward.id}"
 																				${ward.id == selectedWardId ? 'selected' : ''}>${ward.name}</option>
@@ -388,87 +384,95 @@
 																	<label class="form-label">Staff Address Street
 																		<span class="text-red">*</span>
 																	</label> <input type="text" id="streetName" name="streetName"
-																		value="${staff.address.streetName}"
 																		placeholder="vd: Số 23, Đường Lê Văn Việt"
 																		class="txt-input w-5">
 																</div>
 																${streetErr }
 															</div>
 															<div class="col-sm-12 col-12">
+																<!-- Form Field Start -->
 																<div class="mb-3">
-																	<label class="form-label">Staff streetname
-																		Address <span class="text-red">*</span>
-																	</label>
-																	<textarea rows="5" cols="60" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${staff.address.ward.district.province.name }</textarea>
+																	<label for="address" class="form-label">Address</label>
+																	<textarea rows="5" cols="60" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
 																</div>
 															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Create At <span
-																		class="text-red">*</span></label> <input type="text"
-																		name="createAt" value="${staff.createAt }"
-																		class="form-control" placeholder="" readonly />
 
-																</div>
-															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Update At <span
-																		class="text-red">*</span></label> <input type="text"
-																		name="updateAt" value="${staff.updateAt }"
-																		class="form-control" placeholder="" readonly />
 
-																</div>
-															</div>
-															<div class="col-sm-6 col-12">
-																<div class="mb-3">
-																	<label class="form-label">Status <span
-																		class="text-red">*</span></label> <input type="text"
-																		name="status" value="${staff.status }"
-																		class="form-control" placeholder="" readonly />
-
-																</div>
-															</div>
 
 														</div>
-
-													</div>
-													<%--  <div class="col-sm-6 col-12">
+														<%-- <div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Staff Ward <span
 																		class="text-red">*</span></label>
-																	<select  name="wardId"
+																	<form:select path="address.ward.id" name="wardId"
 																		disabled="${mode == 'VIEW'}" class="form-control">
-																		<option value="${staff.address.ward.id}">${staff.address.ward.name }</option>
+																		<form:option value="${staff.address.ward.id}">${staff.address.ward.name }</form:option>
 																		<c:forEach var="ward" items="${wards}">
-																			<option value="${ward.id}"
-																				selected="${ward.id == selectedWardId}">${ward.name}</option>
+																			<form:option value="${ward.id}"
+																				selected="${ward.id == selectedWardId}">${ward.name}</form:option>
 																		</c:forEach>
-																	</select>
-																	
+																	</form:select>
+																	<form:errors path="address.ward.id" />
 																</div>
-															</div> 
- --%>
+															</div> --%>
 
+														<%-- <div class="col-sm-12 col-12">
+															<div class="mb-3">
+																<label class="form-label">Staff streetname
+																	Address <span class="text-red">*</span>
+																</label> <input type="text" class="form-control" placeholder=""
+																	readonly="${mode == 'VIEW'}" />
+																<form:errors path="address.streetName" />
+															</div>
+														</div>
+														<div class="col-sm-6 col-12">
+															<div class="mb-3">
+																<label class="form-label">Status <span
+																	class="text-red">*</span></label>
 
+																<form:input type="text" path="status"
+																	class="form-control" placeholder=""
+																	readonly="${mode == 'VIEW'}" />
+																<form:errors path="status" />
+															</div>
+														</div>
+														<div class="col-sm-6 col-12">
+															<div class="mb-3">
+																<label class="form-label">Create At <span
+																	class="text-red">*</span></label>
+
+																<form:input type="text" path="createAt"
+																	class="form-control" placeholder=""
+																	readonly="${mode == 'VIEW'}" />
+																<form:errors path="createAt" />
+															</div>
+														</div>
+														<div class="col-sm-6 col-12">
+															<div class="mb-3">
+																<label class="form-label">Update At <span
+																	class="text-red">*</span></label>
+
+																<form:input type="text" path="updateAt"
+																	class="form-control" placeholder=""
+																	readonly="${mode == 'VIEW'}" />
+																<form:errors path="updateAt" />
+															</div>
+														</div> --%>
+
+													</div>
 
 												</div>
-
 											</div>
-
 
 
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
 													<button type="button" class="btn btn-light">Cancel</button>
 													<!-- Nút submit tương ứng với từng mode -->
-													
-					
-													
-															<button type="submit" name="edit-staff"
-																class="btn btn-primary">Update Staff</button>
-														
-													
+
+													<button type="submit" class="btn btn-success"
+														name="add-staff">Add Staff</button>
+
 												</div>
 											</div>
 										</div>

@@ -49,29 +49,33 @@
 					<!--Form Sign In-->
 					<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
 						<div class="signin-container">
-							<form action="customer/changeForgotPassword.htm" name="frm-login"
-								method="get">
+							<form:form action="customer/customerChangePassword.htm"
+								method="post" modelAttribute="changePass">
 								<p class="form-row">
 									<label for="fid-name">Mật khẩu cũ:<span class="requite">*</span></label>
-									<input type="password" id="fid-name" name="last-pass" value=""
-										class="txt-input">
+									<form:input path="password" type="password"
+										class="form-control" id="currentPassword" />
+									<form:errors path="password" />
+									${wrongPass }
 								</p>
 								<p class="form-row">
 									<label for="fid-name">Mật khẩu mới:<span
-										class="requite">*</span></label> <input type="password" id="fid-name"
-										name="new-pass" value="" class="txt-input">
+										class="requite">*</span></label> <input name="new-password"
+										type="password" class="form-control" id="newPassword">
+									${newPass }
 								</p>
 								<p class="form-row">
 									<label for="fid-name">Nhập lại mật khẩu mới:<span
-										class="requite">*</span></label> <input type="password" id="fid-name"
-										name="re-enter-new-pass" value="" class="txt-input">
+										class="requite">*</span></label> <input name="re-enter-new-password"
+										type="password" class="form-control" id="renewPassword">
+									${reNewPass }
 
 								</p>
-								<a href="customer/userLogin.htm">
+							    <a href="customer/userLogin.htm">
 									<button class="btn btn-submit btn-bold" type="submit">Xác
 										nhận</button>
 								</a>
-							</form>
+							</form:form>
 						</div>
 					</div>
 

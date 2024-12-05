@@ -19,6 +19,7 @@ import agrStore.DAO.DistrictDAO;
 import agrStore.DAO.ProvinceDAO;
 import agrStore.DAO.WardDAO;
 import agrStore.entity.AccountEntity;
+import agrStore.entity.CategoryEntity;
 import agrStore.entity.DistrictEntity;
 import agrStore.entity.ProvinceEntity;
 import agrStore.entity.WardEntity;
@@ -60,7 +61,7 @@ public class AdminCustomerController {
 //		int provinceID = huyen.getProvince().getId();
 //		System.out.println("Tỉnh ID: " + provinceID);
 //		ProvinceEntity tinh = this.provinceDAO.getProvinceById(provinceID);
-		
+
 		if (action != null) {
 			switch (action) {
 			case "add":
@@ -77,7 +78,7 @@ public class AdminCustomerController {
 //					model.addAttribute("wardName", xa.getName());
 //					model.addAttribute("districtName", huyen.getName());
 //					model.addAttribute("provinceName", tinh.getName());
-					
+
 				}
 				break;
 
@@ -110,9 +111,31 @@ public class AdminCustomerController {
 
 	@RequestMapping(value = "/customerManagement/customer", params = "btnCancel")
 	public String backToCustomerManagement() {
-		
+
 		return "redirect:/admin/customer/customerManagement.htm";
 	}
-	
+
+	@RequestMapping(value = "/customerManagement/disableCustomer", method = RequestMethod.GET)
+	public String disableCustomer(@RequestParam("id") Integer id) {
+
+		AccountEntity customer = accountService.getAccountById(id);
+
+		try {
+			if(customer.getStatus()  == Boolean.TRUE) {
+			customer.setStatus(Boolean.FALSE);
+			}else {
+				customer.setStatus(Boolean.TRUE);
+				
+			}
+
+			accountService.updateAccount(customer);
+			System.out.println("==> Switch customer status to  successfully!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("==> Switch customer status to  failed!");
+		}
+
+		return "redirect:/admin/customerManagement.htm";
+	}
 
 }

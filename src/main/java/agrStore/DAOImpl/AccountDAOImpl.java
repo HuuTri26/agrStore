@@ -1,5 +1,8 @@
 package agrStore.DAOImpl;
 
+
+import java.awt.desktop.QuitEvent;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -115,6 +118,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
+
 	public int countAccountByRole(int role) {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
@@ -128,6 +132,42 @@ public class AccountDAOImpl implements AccountDAO {
 			e.printStackTrace();
 			return 0; // Trả về 0 nếu xảy ra lỗi
 		}
+
+	public List<AccountEntity> getAllStaff() {
+		// TODO Auto-generated method stub
+		List<AccountEntity> staffs = null;
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM AccountEntity a WHERE a.role.id = :roleId";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("roleId", 2);
+			staffs = query.list();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		return staffs;
+	}
+	
+	@Override
+	public boolean isExistAccount(String gmail, String password) {
+		AccountEntity account = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM AccountEntity WHERE gmail = :gmail AND password = :password";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("gmail", gmail);
+			query.setParameter("password", password);
+			
+			account = (AccountEntity) query.uniqueResult();
+			
+		}catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
+		}
+		return (account != null)? true : false;
+
 	}
 
 }

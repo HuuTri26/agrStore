@@ -73,8 +73,9 @@
 	float: right;
 	font-size: 10px;
 }
-button{
-	border:none;
+
+button {
+	border: none;
 }
 </style>
 </head>
@@ -98,7 +99,7 @@ button{
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Staff Management</div>
-									<a href="admin/staffManagement/staff.htm?action=add">
+									<a href="admin/staffManagement/addStaff.htm">
 										<button type="button" class="btn btn-info add-category">
 											<i class="bi bi-plus-square"></i> Add
 										</button>
@@ -122,138 +123,69 @@ button{
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
+												<c:forEach var="staff" items="${staffs }">
+													<tr>
+														<td>${staff.accountId }</td>
+														<td><div class="media-box">
+																<img src="/assets/user-images/${staff.avatar}"
+																	class="media-avatar rounded-circle img-fluid"
+																	alt="User Avatar"
+																	style="width: 45px; height: 45px; object-fit: cover;" />
+																<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
 																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
+															</div></td>
+														<td>${staff.fullName }</td>
+														<td>${staff.gmail }</td>
+														<td>${staff.phoneNumber }</td>
+														<td>${staff.address.streetName }</td>
 
-													<td><button class="badge shade-green min-70">Active</button>
-													</td>
+														<td><span class="badge min-70"
+															style="background-color: ${staff.status ? 'green' : 'red'}; color: white;">
+																${staff.status ? 'Active' : 'Disable'} </span></td>
 
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
-																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="admin/staffManagement/staff.htm?action=view&id=${staff.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a href="admin/categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="admin/staffManagement/staff.htm?action=edit&id=${staff.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="admin/categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
+														<td>${staff.createAt }</td>
+														<td>
+															<!-- <div class="actions">
+																<div class="dropdown">
+																	<a href="#" class="viewRow" data-bs-toggle="modal"
+																		data-bs-target="#viewRow"> <i
+																		class="bi bi-list text-green"></i>
+																	</a>
+																	<div class="dropdown-content">
+																		<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																		<a href="customerManagement/customerDetail.htm"><i class="bi bi-eye"></i>
+																		</a> <a href="categoryAdd.htm"><i
+																			class="bi bi-plus-circle"></i> </a> <a
+																			href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
+																			class="bi bi-check-circle active-icon"></i> </a>
+																	</div>
 																</div>
-															</div>
-															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><button class="badge shade-yellow min-70">Active</button>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
+																<a href="categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
 																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="admin/staffManagement/staff.htm?action=view&id=${staff.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="admin/staffManagement/staff.htm?action=edit&id=${staff.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="admin/categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
-															</div>
-															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
-
-
-												</tr>
-												<tr>
-													<td>1</td>
-													<td><div class="media-box">
-															<img src="assets/images/user3.png" class="media-avatar" />
-															<!-- 	<div class="media-box-body">
-																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p> -->
-														</div></td>
-													<td>Hữu Trí</td>
-													<td>huutri@gmail.com</td>
-													<td>090399335
-													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
-
-													<td><button class="badge shade-red min-70">Block</button>
-													</td>
-
-													<td>2011/12/06</td>
-													<td>
-														<div class="actions">
-															<div class="dropdown">
-																<a href="#" class="viewRow" data-bs-toggle="modal"
-																	data-bs-target="#viewRow"> <i
-																	class="bi bi-list text-green"></i>
+															</div> -->
+															<div class="actions">
+																<a
+																	href="admin/staffManagement/staff.htm?id=${staff.accountId}">
+																	<i class="bi bi-eye text-green"></i>
+																</a> 
+																<a
+																	href="admin/staffManagement/staff.htm?id=${staff.accountId}">
+																	<i class="bi bi-pencil text-green"></i>
 																</a>
-																<div class="dropdown-content">
-																	<a
-																		href="admin/staffManagement/staff.htm?action=view&id=${staff.id}">
-																		<i class="bi bi-eye"></i>
-																	</a> <a href="admin/categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="admin/staffManagement/staff.htm?action=edit&id=${staff.id}">
-																		<i class="bi bi-pencil"></i>
-																	</a> <a href="admin/categoryActive.htm"><i
-																		class="bi bi-check-circle active-icon"></i> </a>
-																</div>
+																<a
+																	href="admin/staffManagement/disableStaff.htm?id=${staff.accountId }"
+																	class="deleteRow"> <i
+																	class="bi ${staff.status ? 'bi-x-circle  inactive-icon' : 'bi-check-circle active-icon'}"></i>
+																</a>
 															</div>
-															<a href="admin/categoryDelete.htm" class="deleteRow"> <i
-																class="bi bi-trash text-red"></i>
-															</a>
-														</div>
-													</td>
+														</td>
 
 
-												</tr>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>

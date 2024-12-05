@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import agrStore.DAO.ProductDAO;
+import agrStore.entity.CartItemEntity;
 import agrStore.entity.ProductEntity;
 import agrStore.service.ProductService;
 
@@ -66,6 +67,7 @@ public class ProductServiceImpl implements ProductService{
 
 	}
 
+
 	@Override
 	public List<ProductEntity> getListProductByProviderId(Integer pId) {
 		// TODO Auto-generated method stub
@@ -76,6 +78,24 @@ public class ProductServiceImpl implements ProductService{
 	public List<Object[]> getTheMostPurchasedProduct() {
 		// TODO Auto-generated method stub
 		return this.ProductDAO.getTheMostPurchasedProduct();
+
+	/*
+	 * @Override public List<ProductEntity> getListProductByProviderId(Integer pId)
+	 * { return ProductDAO.getProductsByProviderId(pId); }
+	 */
+
+	@Override
+	public void updateProductQuantityAfterPayment(List<CartItemEntity> selectedItems) {
+		System.out.println("==> Update {0} products after complete payment!".formatted(selectedItems.size()));
+		for (CartItemEntity item : selectedItems) {
+			ProductEntity product = ProductDAO.getProductById(item.getProduct().getProductId());
+			product.setQuantity(product.getQuantity() - item.getQuantity());
+			
+			ProductDAO.updateProduct(product);
+			System.out.println("==> Product updated successfully!");
+		}
+		
+
 	}
 
 }
