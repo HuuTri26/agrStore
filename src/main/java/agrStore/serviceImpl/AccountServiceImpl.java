@@ -53,6 +53,12 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
+
+	public int countAccountByRole(int role) {
+		// TODO Auto-generated method stub
+		return this.AccountDAO.countAccountByRole(role);
+	}
+
 	public List<AccountEntity> getAllStaff() {
 		// TODO Auto-generated method stub
 		return this.AccountDAO.getAllStaff();
@@ -64,5 +70,6 @@ public class AccountServiceImpl implements AccountService{
 		return this.AccountDAO.isExistAccount(gmail, password);
 	}
 	
+
 
 }

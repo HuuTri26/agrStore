@@ -134,7 +134,7 @@ public class customerPaymentController {
 			orderBill.setTotalPrice(totalPrice);
 			orderBill.setTotalQuantity(cartItemService.getTotalQuantityOfCartItems(selectedCartItems));
 			orderBill.setStatusOrder(1);
-			orderBill.setEmployeeId(null);
+			// orderBill.setEmployeeId(null);
 
 			System.out.println("==> Create new orderBill!");
 			orderBillService.addOrderBill(orderBill);

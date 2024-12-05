@@ -1,6 +1,8 @@
 package agrStore.DAOImpl;
 
+
 import java.awt.desktop.QuitEvent;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -116,6 +118,21 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
+
+	public int countAccountByRole(int role) {
+		// TODO Auto-generated method stub
+		Session session = this.factory.getCurrentSession();
+		String hql = "SELECT COUNT(a) FROM AccountEntity a WHERE a.role.id = :roleId";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("roleId", role);
+			Long count = (long) query.uniqueResult();
+			return count != null ? count.intValue() : 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0; // Trả về 0 nếu xảy ra lỗi
+		}
+
 	public List<AccountEntity> getAllStaff() {
 		// TODO Auto-generated method stub
 		List<AccountEntity> staffs = null;
@@ -150,6 +167,7 @@ public class AccountDAOImpl implements AccountDAO {
 			System.out.println("Error: " + e.toString() + "\nStacktrace:"); e.printStackTrace();
 		}
 		return (account != null)? true : false;
+
 	}
 
 }

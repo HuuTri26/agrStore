@@ -306,7 +306,9 @@ select.btn-status {
 															</c:choose></td> --%>
 														<td>
 															<!-- Form để cập nhật trạng thái của đơn hàng -->
-															<form action="admin/orderManagement/order/updateOrderStatus.htm" method="post">
+															<form
+																action="admin/orderManagement/order/updateOrderStatus.htm"
+																method="post">
 																<input type="hidden" name="orderBillId"
 																	value="${orderBill.orderBillId}" /> <select
 																	name="statusOrder" onchange="this.form.submit()">
@@ -322,7 +324,7 @@ select.btn-status {
 																	<option value="4"
 																		${orderBill.statusOrder == 4 ? 'selected' : ''}>Hoàn
 																		thành</option>
-																	
+
 																</select>
 																<!-- <button type="submit">Cập nhật</button> -->
 															</form>
@@ -331,7 +333,7 @@ select.btn-status {
 
 														<td>
 															<div class="actions">
-																<div class="dropdown">
+																<%-- <div class="dropdown">
 																	<a href="#" class="viewRow" data-bs-toggle="modal"
 																		data-bs-target="#viewRow"> <i
 																		class="bi bi-list text-green"></i>
@@ -346,10 +348,15 @@ select.btn-status {
 																		</a> <a href="categoryActive.htm"><i
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
-																</div>
-																<a href="admin/categoryDelete.htm" class="deleteRow"> <i
-																	class="bi bi-trash text-red"></i>
+																	
+																</div> --%>
+																<a
+																	href="admin/orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
+																	<i class="bi bi-eye"></i>
 																</a>
+																<!-- <a href="admin/categoryDelete.htm" class="deleteRow"> <i
+																	class="bi bi-trash text-red"></i>
+																</a> -->
 															</div>
 														</td>
 

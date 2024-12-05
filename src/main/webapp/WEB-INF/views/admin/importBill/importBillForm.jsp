@@ -191,7 +191,7 @@
 																			<td>${status.index + 1}</td>
 																			<td><div class="media-box">
 																					<img
-																						src="<c:url value='assets/admin/assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
+																						src="<c:url value='/assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
 																						alt="Bootstrap Gallery">
 																				</div></td>
 																			<td>${importBillDetail.product.productName}</td>
