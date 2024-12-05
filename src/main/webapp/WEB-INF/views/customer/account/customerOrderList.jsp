@@ -75,48 +75,41 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<!-- Order Id  -->
-												<td class="dashboard__order-history-table-item order-id">
-													#738</td>
-												<!-- Date  -->
-												<td
-													class="
-                              dashboard__order-history-table-item
-                              order-date
-                            ">
-													8 Sep, 20220</td>
-												<!-- Total  -->
-												<td
-													class="
-                              dashboard__order-history-table-item
-                              order-total
-                            ">
-													<p class="order-total-price">
-														<fmt:formatNumber value="85000"
-															pattern="#,###.## VND;VND -#,###.##" type="currency"
-															currencySymbol="VND" />
-														<span class="quantity"> (5 Products)</span>
-													</p>
-												</td>
-												<!-- Status -->
-												<td
-													class="
-                              dashboard__order-history-table-item
-                              order-status
-                            ">
-													Processing</td>
-												<!-- Details page  -->
-												<td
-													class="
-                              dashboard__order-history-table-item
-                              order-details
-                            ">
-													<a href="customer/customerOrderDetail.htm"> Xem chi tiết</a>
-												</td>
-											</tr>
 
-											<tr>
+											<c:forEach var="orderBill" items="${orderBills }">
+
+												<tr>
+													<!-- Order Id  -->
+													<td class="dashboard__order-history-table-item order-id">
+														${orderBill.orderBillId }</td>
+													<!-- Date  -->
+													<td class="dashboard__order-history-table-item order-date">
+														${orderBill.orderTime }</td>
+													<!-- Total  -->
+													<td class="dashboard__order-history-table-item order-total">
+														<p class="order-total-price">
+															<fmt:formatNumber value="85000"
+																pattern="#,###.## VND;VND -#,###.##" type="currency"
+																currencySymbol="VND" />
+															<span class="quantity"> (${orderBill.totalQuantity })</span>
+														</p>
+													</td>
+													<!-- Status -->
+													<td
+														class="dashboard__order-history-table-item order-status">
+														${orderBill.status }</td>
+													<!-- Details page  -->
+													<td
+														class="dashboard__order-history-table-item order-details">
+														<a
+														href="customer/customerOrderDetail.htm?oId=${orderBill.orderBillId }">
+															Xem chi tiết</a>
+													</td>
+												</tr>
+
+											</c:forEach>
+
+											<%-- <tr>
 												<!-- Order Id  -->
 												<td class="dashboard__order-history-table-item order-id">
 													#130</td>
@@ -153,9 +146,10 @@
                               dashboard__order-history-table-item
                               order-details
                             ">
-													<a href="customer/customerOrderDetail.htm"> Xem chi tiết</a>
+													<a href="customer/customerOrderDetail.htm"> Xem chi
+														tiết</a>
 												</td>
-											</tr>
+											</tr> --%>
 										</tbody>
 									</table>
 								</div>

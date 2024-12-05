@@ -92,8 +92,29 @@
 .tab-element:hover .icon-wrapper {
 	transform: translateY(-5px);
 }
+
 .stars .btn-rating.active i {
-    color: gold;
+	color: gold;
+}
+
+.progress__bar-item-ball {
+	position: relative;
+}
+
+.check-mark {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+}
+
+.progress__bar-item.active .check-mark {
+	display: block;
+}
+
+.progress__bar-item.active .count-number {
+	visibility: hidden; 
 }
 </style>
 </head>
@@ -105,7 +126,7 @@
 		<ul class="horizontal-menu">
 			<li><a href="#" class="biolife-logo"><img
 					src="<c:url value='/assets/assets/images/organic-2.png'/>"
-					alt="biolife logo" width="135"  height="34"></a></li>
+					alt="biolife logo" width="135" height="34"></a></li>
 		</ul>
 	</div>
 	<div class="top-bar right">
@@ -118,8 +139,8 @@
 							</a>
 							<div class="dropdown-content">
 								<a href="customer/customerProfile.htm">Profile</a> <a
-									href="customer/customerChangePassword.htm">Change Password</a> <a
-									href="customer/customerOrderList.htm">Order List</a> <a
+									href="customer/customerChangePassword.htm">Change Password</a>
+								<a href="customer/customerOrderList.htm">Order List</a> <a
 									href="user/logout.htm">Log Out</a>
 							</div>
 						</div>
