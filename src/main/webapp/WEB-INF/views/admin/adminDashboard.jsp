@@ -185,7 +185,7 @@
 										<tr>
 											<th>ID</th>
 											<th>CustomerName</th>
-											<th>StaffName</th>
+											<!-- <th>StaffName</th> -->
 
 											<th>Total Quantity</th>
 											<th>Total Price</th>
@@ -199,7 +199,7 @@
 											<tr>
 												<td>${orderBill.orderBillId }</td>
 												<td>${orderBill.account.fullName }</td>
-												<td>${employeeNameMap[orderBill.employeeId]}</td>
+												<%-- <td>${employeeNameMap[orderBill.employeeId]}</td> --%>
 												<td>${orderBill.totalQuantity }</td>
 												<td><fmt:formatNumber value="${orderBill.totalPrice}"
 														pattern="#,##0" /></td>

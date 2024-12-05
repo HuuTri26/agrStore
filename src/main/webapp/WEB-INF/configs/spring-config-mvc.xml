@@ -43,18 +43,18 @@
 	<!-- Cấu hình Upload File -->
 	<bean id="user" class="agrStore.bean.UploadFile">
 		<property name="basePath"
-			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
+			value="E:\\SpringMVCPtit\\agrStore\\src\\main\\webapp\\assets\\user-images\" />
 	</bean>
 
 	<bean id="product" class="agrStore.bean.UploadFile">
 		<property name="basePath"
-			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\product-images\" />
+			value="E:\\SpringMVCPtit\\agrStore\\src\\main\\webapp\\assets\\product-images\" />
 	</bean>
 
 
 	<bean id="category" class="agrStore.bean.UploadFile">
 		<property name="basePath"
-			value="C:\\Users\\Windows\\OneDrive\\Desktop\\DeAnChoCa3Mon\\agrStore\\src\\main\\webapp\\assets\\category-images\" />
+			value="E:\\SpringMVCPtit\\agrStore\\src\\main\\webapp\\assets\\category-images\" />
 	</bean>
 
 
