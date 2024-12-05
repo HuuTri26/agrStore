@@ -26,11 +26,15 @@ import agrStore.bean.UploadFile;
 import agrStore.entity.AccountEntity;
 import agrStore.entity.AddressEntity;
 import agrStore.entity.DistrictEntity;
+import agrStore.entity.OrderBillDetailEntity;
+import agrStore.entity.OrderBillEntity;
 import agrStore.entity.ProvinceEntity;
 import agrStore.entity.WardEntity;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
 import agrStore.service.DistrictService;
+import agrStore.service.OrderBillDetailService;
+import agrStore.service.OrderBillService;
 import agrStore.service.ProvinceService;
 import agrStore.service.WardService;
 import agrStore.utility.Ultility;
@@ -56,6 +60,12 @@ public class customerAccountController {
 
 	@Autowired
 	Ultility accountUltility;
+	
+	@Autowired
+	OrderBillService orderBillService;
+	
+	@Autowired
+	OrderBillDetailService orderBillDetailService;
 
 	@Autowired
 	@Qualifier("user")
@@ -294,17 +304,24 @@ public class customerAccountController {
 	}
 
 	@RequestMapping("/customerOrderList")
-	public String customerOderList(HttpServletRequest request, HttpSession session,
-			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
-		// code
+	public String customerOderList(HttpServletRequest request, ModelMap model) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+		
+		List<OrderBillEntity> orderBills = orderBillService.getOrderBillsByAccountId(loggedInUser.getAccountId());
+		model.addAttribute("orderBills", orderBills);
 
 		return "customer/account/customerOrderList";
 	}
 
 	@RequestMapping("/customerOrderDetail")
-	public String customerOrderDetail(HttpServletRequest request, HttpSession session,
-			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
-		// code
+	public String customerOrderDetail(@RequestParam("oId") Integer oId, HttpServletRequest request, ModelMap model) {
+		
+		OrderBillEntity orderBill = orderBillService.getOrderBillById(oId);
+		model.addAttribute("orderBill", orderBill);
+		
+		List<OrderBillDetailEntity> orderBillDts = orderBillDetailService.getAllOrderBillDetailByOrderBillID(oId);
+		model.addAttribute("orderBillDts", orderBillDts);
 
 		return "customer/account/customerOrderDetail";
 	}
