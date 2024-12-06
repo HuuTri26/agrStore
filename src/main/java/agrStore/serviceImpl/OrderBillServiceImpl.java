@@ -101,4 +101,9 @@ public class OrderBillServiceImpl implements OrderBillService {
 
 	}
 
+	@Override
+	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId) {
+		return orderBillDAO.getOrderBillsByAccountId(aId);
+	}
+
 }

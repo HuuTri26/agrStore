@@ -141,8 +141,8 @@ public class PayPalPaymentServiceImpl implements PayPalPaymentService {
 	@Override
 	public RedirectUrls getRedirectUrls() {
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl("http://localhost:8080/agrStoreManagement/customer/cancelPayment.htm");
-		redirectUrls.setReturnUrl("http://localhost:8080/agrStoreManagement/customer/reviewPayment.htm");
+		redirectUrls.setCancelUrl("http://argstoreptithcm.com/agrStoreManagement/customer/cancelPayment.htm");
+		redirectUrls.setReturnUrl("http://argstoreptithcm.com/agrStoreManagement/customer/reviewPayment.htm");
 		return redirectUrls;
 	}
 
