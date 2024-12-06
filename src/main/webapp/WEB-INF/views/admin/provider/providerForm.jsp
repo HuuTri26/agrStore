@@ -216,7 +216,7 @@
 																</c:when>
 																<c:when test="${mode == 'VIEW'}">
 																	<img
-																		src="<c:url value='/assets/provider-images/${provider.image }'/>"
+																		src="<c:url value='/assets/user-images/${provider.image }'/>"
 																		class="img-fluid change-img-avatar"
 																		alt="Product Image">
 																</c:when>
