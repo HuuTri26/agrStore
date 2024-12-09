@@ -68,6 +68,7 @@
 	font-size: 1.5em;
 	margin-bottom: 4px;
 }
+
 </style>
 </head>
 <body>
@@ -113,7 +114,7 @@
 													<td>
 														<div class="media-box">
 															<img
-																src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
+																src="<c:url value='/assets/user-images/${feedback.account.avatar }' />" class="media-avatar rounded-circle img-fluid'/>"
 																alt="Bootstrap Gallery">
 															<div class="media-box-body">
 																<a href="#" class="text-truncate">${feedback.account.fullName }</a>
@@ -123,7 +124,7 @@
 													<td>
 														<div class="media-box">
 															<img
-																src="<c:url value='assets/admin/assets/images/food/img1.jpg'/>"
+																src="<c:url value='assets/product-images/${feedback.orderBillDetail.product.image }'/>"
 																class="media-avatar-lg" alt="Product">
 															<div class="media-box-body">
 																<a href="#" class="text-truncate">${feedback.orderBillDetail.product.productName }</a>

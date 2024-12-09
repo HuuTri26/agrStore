@@ -223,7 +223,7 @@ textarea {
 													<div class="col-sm-6 col-12">
 														<div class="d-flex flex-row">
 															<img
-																src="<c:url value='/assets/admin/assets/images/user.png'/>"
+																src="<c:url value='/assets/user-images/${loggedInUser.avatar }'/>"
 																class="img-fluid change-img-avatar"
 																alt="Free Dashboards">
 															<div id="dropzone" class="dropzone-dark">

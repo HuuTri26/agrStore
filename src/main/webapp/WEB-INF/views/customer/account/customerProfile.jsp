@@ -196,11 +196,11 @@
 	background-color: #007bff;
 	color: #fff;
 }
- .nice-select .current {
-    color: black !important; /* Ghi đè màu */
-    font-size:18px;
-}
 
+.nice-select .current {
+	color: black !important; /* Ghi đè màu */
+	font-size: 18px;
+}
 </style>
 
 </head>
@@ -241,27 +241,26 @@
 				<h5 class="font-body--xxl-500">Profile</h5>
 			</div>
 			<div class="dashboard__content-card-body">
-				<form action="customer/customerProfile.htm" method="post">
+				<form action="customer/customerProfile.htm" method="post"
+					enctype="multipart/form-data">
 					<div class="row gx-3">
 						<div class="row gx-3">
 							<div class="col-sm-6 col-12">
 								<div class="dashboard__content-card-img">
-									<form:form action="customer/customerProfile.htm" method="post"
-										enctype="multipart/form-data" style="text-align: center">
-										<div class="dashboard__content-img-wrapper">
-											<div id="imagePreview"
-												style="background-image: url('<c:url value='/assets/user-images/${loggedInUser.avatar}' />');"></div>
-										</div>
-										<div class="upload-image button button--outline">
-											<input name="avatar" type='file' id="imageUpload"
-												accept=".png, .jpg, .jpeg" id="imageUpload" /> <label
-												for="imageUpload">Chọn ảnh</label>
-										</div>
-										<div class="upload-image button button--outline">
-											<button name="upload-img">Upload</button>
-										</div>
-										${avatarErr }
-									</form:form>
+
+									<div class="dashboard__content-img-wrapper">
+										<div id="imagePreview"
+											style="background-image: url('<c:url value='/assets/user-images/${loggedInUser.avatar}' />');"></div>
+									</div>
+									<div class="upload-image button button--outline">
+										<input name="avatar" type='file' id="imageUpload"
+											accept=".png, .jpg, .jpeg" id="imageUpload" /> <label
+											for="imageUpload">Chọn ảnh</label>
+									</div>
+									<div class="upload-image button button--outline">
+										<button name="upload-img">Upload</button>
+									</div>
+									${avatarErr }
 								</div>
 
 							</div>
@@ -302,7 +301,7 @@ ${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${logge
 									<label for="province">Tỉnh/Thành phố:</label> <select
 										id="province" name="provinceId" class="form-select"
 										onchange="this.form.submit()">
-										<option value="" >${loggedInUser.address.ward.district.province.name }</option>
+										<option value="">${loggedInUser.address.ward.district.province.name }</option>
 										<c:forEach var="province" items="${provinces}">
 											<option value="${province.id}"
 												${province.id == selectedProvinceId ? 'selected' : ''}>${province.name}</option>
@@ -329,7 +328,8 @@ ${loggedInUser.address.streetName }, ${loggedInUser.address.ward.name }, ${logge
 									</select> <input type="text" id="wardText" readonly
 										value="${selectedWard.name}" placeholder="Xã/Phường đã chọn" />
 									<label for="fid-name">Tên đường:<span class="requite">*</span>
-									</label> <input value="${loggedInUser.address.streetName }" type="text" id="streetName" name="streetName"
+									</label> <input value="${loggedInUser.address.streetName }" type="text"
+										id="streetName" name="streetName"
 										placeholder="Nhập tên đường cụ thể" class="txt-input w-5">
 									${streetErr }
 								</div>

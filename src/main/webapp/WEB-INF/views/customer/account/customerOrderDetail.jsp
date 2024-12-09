@@ -195,11 +195,11 @@
 
 								<!-- Đã xác nhận -->
 								<div
-									class="progress__bar-item ${orderBill.statusOrder >= 4 ? 'active' : ''}">
+									class="progress__bar-item ${orderBill.statusOrder >= 3 ? 'active' : ''}">
 									<div class="progress__bar-item-ball">
 										<p class="font-body--md-400 count-number">03</p>
 										<span
-											class="check-mark ${orderBill.statusOrder == 4 ? 'visible' : ''}">
+											class="check-mark ${orderBill.statusOrder == 3 ? 'visible' : ''}">
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none"
 												xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -209,16 +209,16 @@
                 </svg>
 										</span>
 									</div>
-									<h2 class="font-body--md-400">Đã giao hàng</h2>
+									<h2 class="font-body--md-400">Chờ giao hàng</h2>
 								</div>
 
 								<!-- Hoàn thành -->
 								<div
-									class="progress__bar-item ${orderBill.statusOrder == 5 ? 'active' : ''}">
+									class="progress__bar-item ${orderBill.statusOrder == 4 ? 'active' : ''}">
 									<div class="progress__bar-item-ball">
 										<p class="font-body--md-400 count-number">04</p>
 										<span
-											class="check-mark ${orderBill.statusOrder == 5 ? 'visible' : ''}">
+											class="check-mark ${orderBill.statusOrder == 4 ? 'visible' : ''}">
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none"
 												xmlns="http://www.w3.org/2000/svg">
                     <path

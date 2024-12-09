@@ -1,5 +1,6 @@
 package agrStore.paypal;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paypal.api.payments.Amount;
+import com.paypal.api.payments.Details;
 import com.paypal.api.payments.Item;
 import com.paypal.api.payments.ItemList;
 import com.paypal.api.payments.Links;
@@ -84,13 +86,29 @@ public class PayPalPaymentServiceImpl implements PayPalPaymentService {
 
 	@Override
 	public String convertNumberFromGermanToUSFormat(String germanNum) {
-		return germanNum.replace(',', '.');
+		try {
+			// Loại bỏ dấu chấm ngăn cách hàng nghìn
+			germanNum = germanNum.replace(".", "");
+			// Thay thế dấu phẩy bằng dấu chấm
+			germanNum = germanNum.replace(",", ".");
+
+			// Parse và format lại với 2 chữ số thập phân
+			DecimalFormat df = new DecimalFormat("#0.00");
+			double parsedNumber = Double.parseDouble(germanNum);
+			return df.format(parsedNumber);
+		} catch (Exception e) {
+			// Log lỗi hoặc xử lý ngoại lệ
+			System.err.println("Lỗi chuyển đổi số: " + germanNum);
+			return "0.00";
+		}
 	}
 
 	@Override
 	public List<Transaction> getTransactionInfomation(List<OrderBillDetailEntity> orderItems) {
 		// Tính subtotal của các order detail
 		double subtotal = 0.0;
+		double shipping = 0.00; // Phí vận chuyển
+		double tax = 0.00; // Thuế
 
 		// Khởi tạo danh sách giao dịch
 		List<Transaction> transactions = new ArrayList<>();
@@ -124,8 +142,16 @@ public class PayPalPaymentServiceImpl implements PayPalPaymentService {
 		Amount amount = new Amount();
 		amount.setCurrency("USD");
 
-		// Đảm bảo total khớp với subtotal
-		amount.setTotal(convertNumberFromGermanToUSFormat(String.valueOf(subtotal)));
+		// Tạo Details
+		Details details = new Details();
+		details.setSubtotal(String.format("%.2f", subtotal));
+		details.setShipping(String.format("%.2f", shipping));
+		details.setTax(String.format("%.2f", tax));
+
+		// Tính toán tổng
+		double total = subtotal + shipping + tax;
+		amount.setTotal(String.format("%.2f", total));
+		amount.setDetails(details);
 
 		// Tạo transaction
 		Transaction transaction = new Transaction();

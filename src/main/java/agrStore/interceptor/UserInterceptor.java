@@ -21,7 +21,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 
 	private static final Set<String> PUBLIC_URIS = Set.of("/index.htm", "/user/userLogin.htm", "/user/userSignUp.htm",
 			"/user/userSignUpGmail.htm", "/getOTPSignUp.htm", "/changeForgotPassword.htm",
-			"/userForgotPasswordGetOTP.htm", "/forgotPass.htm");
+			"/userForgotPasswordGetOTP.htm", "/forgotPass.htm", "/getOTPForgotPassword.htm");
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

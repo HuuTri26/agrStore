@@ -127,7 +127,7 @@ button {
 													<tr>
 														<td>${provider.id}</td>
 														<td><div class="media-box">
-																<img src="/assets/provider-images/${provider.image }"
+																<img src="<c:url value='/assets/provider-images/${provider.image}' />"
 																	class="media-avatar rounded-circle img-fluid"
 																	alt=""
 																	style="width: 45px; height: 45px; object-fit: cover;" />
