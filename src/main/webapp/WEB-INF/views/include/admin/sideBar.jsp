@@ -35,8 +35,9 @@
 	<!-- Sidebar brand starts -->
 	<div class="sidebar-brand">
 		<a href="admin/adminDashboard.htm" class="logo"> <img
-			<%-- src="<c:url value='/assets/assets/images/logo-biolife-1.png'/>" --%>
-			src="<c:url value='/assets/logos/BioLife.png'/>"
+
+			src="<c:url value='/assets/assets/images/logo-biolife-1.png'/>"
+
 			alt="Admin Dashboard" />
 		</a>
 	</div>

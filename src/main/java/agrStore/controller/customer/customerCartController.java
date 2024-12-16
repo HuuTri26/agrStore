@@ -65,40 +65,56 @@ public class customerCartController {
 		HttpSession session = request.getSession();
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 
-		try { // Kiểm tra sản phẩm thêm vào có tồn tại trong giỏ hàng hay chưa?
-			CartItemEntity item_t = cartItemService.getCartItemByProductIdAndCartId(pId,
-					loggedInUser.getCart().getCartId());
+		try {
+			// Mặc định set bằng 1 nếu ko có tham số truyền vào
+			int itemQuantity = (quantity != null && quantity > 0) ? quantity : 1;
 
-			if (item_t != null) { // Nếu tồn tại, tiếm hành tăng số lượng sản phẩm lên theo 
-				if(quantity != null) {
-					item_t.setQuantity(item_t.getQuantity() + quantity);
-				}else {
-					item_t.setQuantity(item_t.getQuantity() + 1);
-				}
-				
-				cartItemService.updateCartItem(item_t);
-
-			} else { // Nếu không tồn tại thì tạo mới
-				ProductEntity product = productService.getProductById(pId);
-				CartItemEntity item = new CartItemEntity();
-				item.setCart(loggedInUser.getCart());
-				item.setProduct(product);
-				if(quantity != null) {
-					item.setQuantity(quantity);
-				}else {
-					item.setQuantity(1);
-				}
-
-				cartItemService.addCartItem(item);
+			ProductEntity product = productService.getProductById(pId);
+			if (product == null) {
+				session.setAttribute("errorMessage", "Product not found.");
+				return "redirect:/index.htm";
 			}
 
-			System.out.println("==> Add selected product to cart successfully!");
+			if (itemQuantity > product.getQuantity()) {
+//	        	session.setAttribute("errorMessage", "Insufficient product quantity in stock.");
+				System.out.println("Error: Insufficient product quantity in stock!");
+				return "redirect:/index.htm";
+			}
+
+			CartItemEntity existingCartItem = cartItemService.getCartItemByProductIdAndCartId(pId,
+					loggedInUser.getCart().getCartId());
+
+			if (existingCartItem != null) {
+				int newQuantity = existingCartItem.getQuantity() + itemQuantity;
+
+				if (newQuantity > product.getQuantity()) {
+//					session.setAttribute("errorMessage", "Cannot add more items than available in stock.");
+					System.out.println("Error: Cannot add more items than available in stock!");
+					return "redirect:/index.htm";
+				}
+
+				existingCartItem.setQuantity(newQuantity);
+				cartItemService.updateCartItem(existingCartItem);
+			} else {
+				CartItemEntity newCartItem = new CartItemEntity();
+				newCartItem.setCart(loggedInUser.getCart());
+				newCartItem.setProduct(product);
+				newCartItem.setQuantity(itemQuantity);
+
+				cartItemService.addCartItem(newCartItem);
+			}
+
+			System.out.println("==> Product added to cart successfully!");
+			return "redirect:/index.htm";
+
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error: Add selected product to cart failed!");
+			// Log the actual exception for debugging
+			System.err.println("Error: product add to cart failed!");
+
+			session.setAttribute("errorMessage", "An error occurred while adding the product to cart.");
+			return "redirect:/index.htm";
 		}
 
-		return "redirect:/index.htm";
 	}
 
 	@RequestMapping(value = "/customerCart", params = "delete", method = RequestMethod.GET)
@@ -121,14 +137,22 @@ public class customerCartController {
 	public String updateItemCartQuanity(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		List<CartItemEntity> cartItems = (List<CartItemEntity>) session.getAttribute("cartItems");
-
+		
+		
 		for (CartItemEntity cartItem : cartItems) {
 			String quantityParam = request.getParameter("quantity_" + cartItem.getCartItemId());
 			if (quantityParam != null) {
 				try {
 					int quantity = Integer.parseInt(quantityParam);
+					ProductEntity product = productService.getProductById(cartItem.getProduct().getProductId());
 					cartItem.setQuantity(quantity);
-					cartItemService.updateCartItem(cartItem);
+					
+					if(quantity > 0 && quantity <= product.getQuantity()) {
+						cartItemService.updateCartItem(cartItem);
+					}else {
+						System.out.println("Error: Insufficient product quantity in stock!");
+					}
+					
 				} catch (NumberFormatException e) {
 					System.out.println("Error: Invalid quantity for cartItemId: " + cartItem.getCartItemId());
 				}

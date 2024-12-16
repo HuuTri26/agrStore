@@ -86,7 +86,6 @@ public class homeController {
 	@RequestMapping(value = "/showProductsBypId", method = RequestMethod.GET)
 	public String showProductByProviderId(Model model, @RequestParam(value = "pId") Integer pId) {
 
-		
 		List<ProductEntity> products = productService.getProductsByProviderId(pId);
 
 		List<ProductEntity> randProducts = productService.getRandomListProductByLimit(products, 12);
@@ -161,7 +160,7 @@ public class homeController {
 			Integer totalStar = 0;
 			for (int i = 1; i <= 5; i++) {
 				Long star_i = feedbackService.countFeedbackByStar(feedbacks, i);
-				Integer percent_i = (int) ((star_i / feedbackCount) * 100);
+				Integer percent_i = (int) ((star_i * 100.0) / feedbackCount);
 				totalStar += (int) (star_i * i);
 				model.addAttribute("star_" + i, star_i);
 				model.addAttribute("percent_" + i, percent_i);
@@ -170,6 +169,14 @@ public class homeController {
 			Double avgStar = (totalStar * 1.0) / feedbackCount;
 			model.addAttribute("avgStar", avgStar);
 			model.addAttribute("avgPercent", (int) ((avgStar / 5.0) * 100));
+			
+		} else {
+			model.addAttribute("avgStar", 0.0);
+			model.addAttribute("avgPercent", 0);
+			for (int i = 1; i <= 5; i++) {
+				model.addAttribute("star_" + i, 0L);
+				model.addAttribute("percent_" + i, 0);
+			}
 		}
 
 		List<ProductEntity> relatedProucts = productService

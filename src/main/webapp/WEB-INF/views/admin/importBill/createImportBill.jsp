@@ -174,7 +174,7 @@
 																	<td>${product.productId }</td>
 																	<td><div class="media-box">
 																			<img
-																				src="<c:url value='assets/product-images/${product.image }" class="media-avatar'/>"
+																				src="<c:url value='/assets/product-images/${product.image }" class="media-avatar'/>"
 																				alt="Bootstrap Gallery">
 																		</div></td>
 																	<td>${product.productName }</td>
@@ -275,7 +275,9 @@
 																		value="${importBillDetail.product.productId}" />${importBillDetail.product.productId }</td>
 																	<td><div class="media-box">
 																			<img
-																				src="<c:url value='assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
+
+																				src="<c:url value='/assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
+
 																				alt="Bootstrap Gallery">
 																		</div></td>
 																	<td>${importBillDetail.product.productName }</td>

@@ -135,7 +135,7 @@ button {
 													<tr>
 														<td>${product.productId }</td>
 														<td><div class="media-box">
-																<img src="<c:url value='/assets/product-images/${product.image }' />" class="media-avatar" />
+																<img src="<c:url value='/assets/product-images/${product.image}' />" class="media-avatar" />
 																<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
 																<p>ID: #Max00987</p>

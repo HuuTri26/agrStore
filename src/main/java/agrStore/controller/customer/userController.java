@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,10 +66,10 @@ public class userController {
 
 	@Autowired
 	AddressService addressService;
-	
+
 	@Autowired
 	CartService cartService;
-	
+
 	@Autowired
 	DatabaseRoutingService databaseRoutingService;
 
@@ -146,15 +147,15 @@ public class userController {
 		if (isValid) {
 			System.out.println("==> Login successfully! End login session");
 			session.setAttribute("loggedInUser", account_t);
-			
-			if(account_t.getRole().getId() == 1) {
+
+			if (account_t.getRole().getId() == 1) {
 				return "admin/adminDashboard";
-			}else if(account_t.getRole().getId() == 2) {
+			} else if (account_t.getRole().getId() == 2) {
 				return "staff/staffDashboard";
-			}else {
+			} else {
 				return "redirect:/index.htm";
 			}
-			
+
 		} else {
 			System.out.println("==> Login failed!");
 			return "customer/login/userLogin";
@@ -246,8 +247,28 @@ public class userController {
 			return "customer/forgotPassword/userForgotPasswordGmail";
 		}
 	}
+	
+	@RequestMapping(value = "/getOTPForgotPassword", params = "send-again", method = RequestMethod.POST)
+	public String sendAgainForgotPassOTP(ModelMap model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity account_t = (AccountEntity) session.getAttribute("account_t");
+		
+		
+		String otp = accountUltility.generateOTP().toUpperCase();
+		System.out.println("==> New generated OTP using for this session is: " + otp);
+		if(account_t != null) {
+			// Ghi đè lại OTP
+			session.setAttribute("otp", otp);
+			mailer.sendMailAsync("AgrStore", account_t.getGmail(), "OTP Forgot Password", "Mã OTP của bạn là: " + otp);
+			model.addAttribute("message", "Mã OTP đã được gửi lại hãy kiểm tra lại gmail của bạn!");
+			
+			return "customer/forgotPassword/userForgotPasswordGetOTP";
+		}else {
+			return "customer/forgotPassword/userForgotPasswordGmail";
+		}
+	}
 
-	@RequestMapping(value = "/getOTPForgotPassword", params = "verify", method = RequestMethod.GET)
+	@RequestMapping(value = "/getOTPForgotPassword", params = "verify", method = RequestMethod.POST)
 	public String getOTPForgotPassword(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 
@@ -274,6 +295,7 @@ public class userController {
 			return "customer/forgotPassword/userForgotPasswordGetOTP";
 		}
 	}
+
 
 	@RequestMapping(value = "/changeForgotPassword", method = RequestMethod.GET)
 	public String changeForgotPassword(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
@@ -405,6 +427,26 @@ public class userController {
 
 	}
 	
+	@RequestMapping(value = "/getOTPSignUp", params = "send-again", method = RequestMethod.POST)
+	public String sendAgainSignUpOTP(ModelMap model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity account = (AccountEntity) session.getAttribute("account");
+		
+		String otp = accountUltility.generateOTP().toUpperCase();
+		System.out.println("==> New generated OTP using for this session is: " + otp);
+		
+		if(account != null) {
+			// Ghi đè lại OTP
+			session.setAttribute("otp", otp);
+			mailer.sendMailAsync("AgrStore", account.getGmail(), "OTP Đăng ký tài khoản", "Mã OTP của bạn là: " + otp);
+			model.addAttribute("message", "Mã OTP đã được gửi lại hãy kiểm tra lại gmail của bạn!");
+			return "customer/login/userSignUpGmailGetOTP";
+		}else {
+			return "customer/login/userSignUpGmail";
+		}
+		
+	}
+
 	@RequestMapping(value = "/getOTPSignUp", params = "verify", method = RequestMethod.POST)
 	public String usergetOTPSignUp(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
@@ -535,38 +577,39 @@ public class userController {
 			model.addAttribute("phoneErr", "Số điện thoại bạn nhập không hợp lệ, vui lòng nhập lại!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Phone number invalid!");
-		}else if(streetName.isEmpty()) {
+		} else if (streetName.isEmpty()) {
 			model.addAttribute("streetErr", "Tên đường không được phép để trống!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Street name field empty!");
-		}else if(!accountUltility.isValidStreetName(streetName)) {
+		} else if (!accountUltility.isValidStreetName(streetName)) {
 			model.addAttribute("streetErr", "Tên đường không hợp lệ, vui lòng nhập lại!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Street name invalid!");
 		}
 
 		if (isValid) {
-			AddressEntity address = addressService.getAddressByStreetAndWard(accountUltility.standardizeStreetName(streetName), selectedWard.getId()); 
-			
-			//Kiểm tra address này đã tồn tại trong hệ thống hay ko?
-			if(address != null) {
-				//Nếu có tìm thấy gán address_t này cho account
+			AddressEntity address = addressService
+					.getAddressByStreetAndWard(accountUltility.standardizeStreetName(streetName), selectedWard.getId());
+
+			// Kiểm tra address này đã tồn tại trong hệ thống hay ko?
+			if (address != null) {
+				// Nếu có tìm thấy gán address_t này cho account
 				System.out.println("==> Existing address found, set this address to user's account!");
 				account.setAddress(address);
-			}else {
-				//Nếu ko tìm thấy, tạo address mới cho user's account
+			} else {
+				// Nếu ko tìm thấy, tạo address mới cho user's account
 				System.out.println("==> Address not found, create new address for user's account!");
 				try {
 					AddressEntity newAddr = new AddressEntity();
-					
+
 					newAddr.setWard(selectedWard);
 					newAddr.setStreetName(accountUltility.standardizeStreetName(streetName));
 
 					addressService.addAddress(newAddr);
-					
+
 					account.setAddress(newAddr);
 					System.out.println("==> User's address created successfully!");
-					
+
 				} catch (Exception e) {
 					System.out.println("Error: User's address created failed!");
 				}
@@ -577,7 +620,7 @@ public class userController {
 			RoleEntity customerRole = roleService.getRoleById(3);
 			if (customerRole != null) {
 				try {
-					
+
 					account.setPassword(accountUltility.getHashPassword(reEnterPassword));
 					account.setFullName(accountUltility.standardizeName(fullName));
 					account.setPhoneNumber(phoneNumber);
@@ -587,12 +630,12 @@ public class userController {
 					account.setRole(customerRole);
 
 					accountService.addAccount(account);
-					
+
 					System.out.println("==> Create new customer's cart!");
 					CartEntity cart = new CartEntity(account);
 					cartService.addCart(cart);
 					System.out.println("==> New customer's cart created successfuly!");
-					
+
 					System.out.println("==> User's account created successfully!");
 
 					return "redirect:/";
@@ -628,9 +671,9 @@ public class userController {
 		 * request.getSession().invalidate();
 		 * System.out.println("==> Invalidate session's data");
 		 */
-		//Xóa khóa
+		// Xóa khóa
 		databaseRoutingService.clearDataSourceKey();
-		
+
 		// Giải phóng dữ liệu của model attributes
 		sessionStatus.setComplete();
 		System.out.println("==> Clear model attributes");
@@ -638,7 +681,7 @@ public class userController {
 		session.removeAttribute("selectedProvince");
 		session.removeAttribute("selectedDistrict");
 		session.removeAttribute("selectedWard");
-        session.removeAttribute("staff");
+		session.removeAttribute("staff");
 		System.out.println("==> Log out");
 		return "redirect:/index.htm";
 	}
