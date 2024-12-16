@@ -117,7 +117,7 @@ button {
 													<th>Id</th>
 													<th>Image</th>
 													<th>Provider Name</th>
-													 <th>Status</th> 
+													<th>Status</th>
 													<th>Phonenumber</th>
 													<th>Action</th>
 												</tr>
@@ -127,9 +127,11 @@ button {
 													<tr>
 														<td>${provider.id}</td>
 														<td><div class="media-box">
+
 																<img src="<c:url value='/assets/provider-images/${provider.image}' />"
 																	class="media-avatar rounded-circle img-fluid"
 																	alt=""
+
 																	style="width: 45px; height: 45px; object-fit: cover;" />
 																<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
