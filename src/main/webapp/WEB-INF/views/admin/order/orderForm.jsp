@@ -163,7 +163,7 @@
 																class="form-control" placeholder="">
 														</div>
 													</div> -->
-															<div class="col-sm-6 col-12">
+															<%-- <div class="col-sm-6 col-12">
 																<div class="mb-3">
 																	<label class="form-label">Status Order <span
 																		class="text-red">*</span></label>
@@ -173,6 +173,35 @@
 																			<form:options items="${statusOrderMap}" />
 																		</form:select>
 																	</form:form>
+																</div>
+															</div> --%>
+															<div class="col-sm-6 col-12">
+																<div class="mb-3">
+																	<label class="form-label">Status Order <span
+																		class="text-red">*</span></label>
+																	<c:choose>
+																		<c:when test="${orderBill.statusOrder == 1}">
+																			<c:set var="statusText" value="Chưa xác nhận" />
+																		</c:when>
+																		<c:when test="${orderBill.statusOrder == 2}">
+																			<c:set var="statusText" value="Đã xác nhận" />
+																		</c:when>
+																		<c:when test="${orderBill.statusOrder == 3}">
+																			<c:set var="statusText" value="Chờ giao hàng" />
+																		</c:when>
+																		<c:when test="${orderBill.statusOrder == 4}">
+																			<c:set var="statusText" value="Hoàn thành" />
+																		</c:when>
+																		<c:when test="${orderBill.statusOrder == 5}">
+																			<c:set var="statusText" value="Hủy" />
+																		</c:when>
+																		<c:otherwise>
+																			<c:set var="statusText" value="Không rõ trạng thái" />
+																		</c:otherwise>
+																	</c:choose>
+																	<input type="text" class="form-control"
+																		style="text-align: left" value="${statusText}"
+																		readonly />
 																</div>
 															</div>
 

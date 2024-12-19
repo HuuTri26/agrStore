@@ -77,8 +77,7 @@ public class OrderBillEntity {
 	@JoinColumn(name = "accountId")
 	private AccountEntity account;
 
-	@OneToMany(mappedBy = "orderBill", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "orderBill", fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
 	private List<OrderBillDetailEntity> orderBillDetailList;
 
 	public OrderBillEntity() {

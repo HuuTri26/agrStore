@@ -25,6 +25,8 @@ public interface OrderBillService {
 	
 	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId);
 	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status);
+	
+	public int deleteOrderBillUnconfirmedById(Integer orderBillId);
 
 
 }

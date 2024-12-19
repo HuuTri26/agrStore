@@ -260,6 +260,7 @@ select.btn-status {
 								<div class="card-header">
 									<div class="card-title">Order Management</div>
 								</div>
+								<h5 class="text-danger small">${notification }</h5>
 								<div class="card-body">
 
 									<div class="table-responsive">
@@ -324,6 +325,8 @@ select.btn-status {
 																	<option value="4"
 																		${orderBill.statusOrder == 4 ? 'selected' : ''}>Hoàn
 																		thành</option>
+																	<option value="5"
+																		${orderBill.statusOrder == 5 ? 'selected' : ''}>Hủy</option>
 
 																</select>
 																<!-- <button type="submit">Cập nhật</button> -->
@@ -353,10 +356,10 @@ select.btn-status {
 																<a
 																	href="admin/orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
 																	<i class="bi bi-eye"></i>
+																</a> <a
+																	href="admin/orderManagement/deleteOrderBillUnConfirm.htm?orderBillId=${orderBill.orderBillId}"
+																	class="deleteRow"> <i class="bi bi-trash text-red"></i>
 																</a>
-																<!-- <a href="admin/categoryDelete.htm" class="deleteRow"> <i
-																	class="bi bi-trash text-red"></i>
-																</a> -->
 															</div>
 														</td>
 

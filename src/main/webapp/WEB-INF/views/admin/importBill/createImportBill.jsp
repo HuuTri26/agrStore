@@ -332,6 +332,7 @@
 															</tr>
 														</tfoot>
 													</table>
+													<h5 class="text-danger small">${errors}</h5>
 
 													<div class="row mt-3">
 														<div class="col-md-12 text-end">

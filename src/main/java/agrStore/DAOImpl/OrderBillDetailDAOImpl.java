@@ -94,5 +94,5 @@ public class OrderBillDetailDAOImpl implements OrderBillDetailDAO {
 		orderBillDetail = (OrderBillDetailEntity) query.uniqueResult();
 		return orderBillDetail;
 	}
-
+	
 }
