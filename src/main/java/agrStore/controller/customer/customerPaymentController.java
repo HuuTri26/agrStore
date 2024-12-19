@@ -46,7 +46,7 @@ public class customerPaymentController {
 
 	@Autowired
 	PayPalPaymentService palPaymentService;
-	
+
 	@Autowired
 	ProductService productService;
 
@@ -90,9 +90,9 @@ public class customerPaymentController {
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
 		Double totalPrice = (Double) session.getAttribute("totalPrice");
-		
+
 		cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
-		
+
 		System.out.println("==> Error: Could not process payment!");
 		model.addAttribute("error-message",
 				"Không thể thực hiện giao dịch, vui lòng thử lại hoặc liên hệ với chúng tôi để được nhận hỗ trợ!");
@@ -105,7 +105,7 @@ public class customerPaymentController {
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
 		Double totalPrice = (Double) session.getAttribute("totalPrice");
-		
+
 		cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
 
 		System.out.println("==> Cancel payment!");
@@ -123,9 +123,9 @@ public class customerPaymentController {
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
 		Double totalPrice = (Double) session.getAttribute("totalPrice");
-		
+
 		cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
-		
+
 		OrderBillEntity orderBill = new OrderBillEntity();
 		try {
 			// Tạo OrderBill
@@ -160,7 +160,7 @@ public class customerPaymentController {
 			}
 			// Bắt đầu thanh toán bằng PalPay
 			session.setAttribute("orderBill", orderBill);
-			session.setAttribute("orderItems", orderItems);
+			/* session.setAttribute("orderItems", orderItems); */
 			String approvalLink = palPaymentService.authorizePayment(loggedInUser, orderItems);
 			return "redirect:" + approvalLink;
 
@@ -205,6 +205,13 @@ public class customerPaymentController {
 			PayerInfo payerInfo = payment.getPayer().getPayerInfo();
 			Transaction transaction = payment.getTransactions().get(0);
 
+			System.out.println("Transaction Details:");
+			System.out.println("Total: " + transaction.getAmount().getTotal());
+			System.out.println("Currency: " + transaction.getAmount().getCurrency());
+			System.out.println("Subtotal: " + transaction.getAmount().getDetails().getSubtotal());
+			System.out.println("Shipping: " + transaction.getAmount().getDetails().getShipping());
+			System.out.println("Tax: " + transaction.getAmount().getDetails().getTax());
+
 			OrderBillEntity orderBill = (OrderBillEntity) session.getAttribute("orderBill");
 			orderBill.setStatusOrder(2);
 			orderBillService.updateOrderBill(orderBill);
@@ -212,16 +219,19 @@ public class customerPaymentController {
 
 			model.addAttribute("payerInfo", payerInfo);
 			model.addAttribute("transaction", transaction);
-			
+
+			System.out.println("==> Clean duplicate order bills!");
 			cleanUpDuplicateOrderBills(loggedInUser, totalPrice, selectedCartItems);
-			
+
+			System.out.println("==> Update product after payment!");
 			productService.updateProductQuantityAfterPayment(selectedCartItems);
-			
+
 			System.out.println("==> Delete all selected cartItems in cart");
 			cartItemService.deleteCartItem(selectedCartItems);
-			
+
 			session.removeAttribute("selectedCartItems");
 			session.removeAttribute("totalPrice");
+			session.removeAttribute("orderBill");
 
 			return "customer/payment/receipt";
 

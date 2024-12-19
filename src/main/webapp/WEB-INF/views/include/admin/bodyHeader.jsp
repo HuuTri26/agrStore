@@ -24,7 +24,7 @@
 				class="user-settings" data-toggle="dropdown" aria-haspopup="true">
 					<span class="user-name d-none d-md-block">Tri</span> <span
 					class="avatar"> <img
-						src="<c:url value='/assets/admin/assets/images/user3.png'/>"
+						src="<c:url value='/assets/user-images/${loggedInUser.avatar }'/>"
 						alt="Free Admin Templates"> <span class="status busy"></span>
 				</span>
 			</a>

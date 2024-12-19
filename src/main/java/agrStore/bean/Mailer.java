@@ -34,11 +34,20 @@ public class Mailer {
 	}
 
 	public void sendMailAsync(String from, String to, String subject, String body) {
-
-		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		executorService.submit(() -> {
-			send(from, to, subject, body);
-		});
+		try {
+			ExecutorService executorService = Executors.newSingleThreadExecutor();
+			executorService.submit(() -> {
+				try {
+					send(from, to, subject, body);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			});
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

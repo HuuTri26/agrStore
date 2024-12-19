@@ -42,6 +42,32 @@ public class OrderBillEntity {
 
 	@Column(name = "totalPrice")
 	private Double totalPrice;
+	
+	private enum Status {
+		PENDING(1, "Pending"), CONFIRMED(2, "Confirmed"), NOT_SHIPPED(3, "Not Shipped"), SHIPPED(4, "Shipped"),
+		COMPLETED(5, "Completed"), CANCELED(6, "Canceled");
+
+		private final int code;
+		private final String description;
+
+		Status(int code, String description) {
+			this.code = code;
+			this.description = description;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public static String getDescriptionByCode(int code) {
+			for (Status status : Status.values()) {
+				if (status.code == code) {
+					return status.description;
+				}
+			}
+			return "Unknown Status";
+		}
+	}
 
 	/*
 	 * @Column(name = "employeeId", nullable = true) private Integer employeeId;
@@ -132,5 +158,9 @@ public class OrderBillEntity {
 	public void setOrderBillDetailList(List<OrderBillDetailEntity> orderBillDetailList) {
 		this.orderBillDetailList = orderBillDetailList;
 	}
+
+	public String getStatus() {
+        return Status.getDescriptionByCode(this.statusOrder);
+    }
 
 }

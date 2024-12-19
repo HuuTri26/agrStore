@@ -192,6 +192,7 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	}
 
 	@Override
+  
 	public int deleteOrderBillUnConfirmedById(Integer orderBillId) {
 		// hàm này ta sẽ set OrderBill status thành 6 -> tức đã xóa
 		// TODO Auto-generated method stub
@@ -234,6 +235,20 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		} finally {
 			session.close();
 		}
+
+	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId) {
+		List<OrderBillEntity> orderBills = null;
+		Session session = this.factory.getCurrentSession();
+		String hql = "FROM OrderBillEntity o WHERE o.account.accountId = :aId";
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("aId", aId);
+			orderBills = (List<OrderBillEntity>) query.list();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString() + "\nStacktrace:");
+			e.printStackTrace();
+		}
+		return orderBills;
 	}
 
 }

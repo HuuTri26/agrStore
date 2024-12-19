@@ -16,7 +16,7 @@ public interface OrderBillDAO {
 	public long getTodayRevenue();
 	public List<OrderBillEntity> getOrderBillForToday();
 
-
+	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId);
 	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status);
 	
 	public int deleteOrderBillUnConfirmedById(Integer ordeBillId);
