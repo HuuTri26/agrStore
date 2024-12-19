@@ -101,4 +101,10 @@ public class OrderBillServiceImpl implements OrderBillService {
 
 	}
 
+	@Override
+	public int deleteOrderBillUnconfirmedById(Integer orderBillId) {
+		// TODO Auto-generated method stub
+		return this.orderBillDAO.deleteOrderBillUnConfirmedById(orderBillId);
+	}
+
 }

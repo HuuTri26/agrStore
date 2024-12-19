@@ -62,12 +62,14 @@ public class AdminOrderController {
 	public String handleOrder(@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "id", required = false) Integer id, Model model) {
 		OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
-		// AccountEntity employee = this.accountService.getAccountById(orderBill.getEmployeeId());
+		// AccountEntity employee =
+		// this.accountService.getAccountById(orderBill.getEmployeeId());
 		Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
 		statusOrderMap.put(1, "Chờ xác nhận");
 		statusOrderMap.put(2, "Đã xác nhận");
 		statusOrderMap.put(3, "Chờ giao hàng");
 		statusOrderMap.put(4, "Hoàn thành");
+		statusOrderMap.put(5, "Hủy");
 		List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService
 				.getAllOrderBillDetailByOrderBillID(id);
 
@@ -156,8 +158,8 @@ public class AdminOrderController {
 			@RequestParam("statusOrder") int statusOrder, ModelMap model) {
 		System.out.println(orderBillId);
 		System.out.println(statusOrder);
-		int kq =  this.orderBillService.updateOrderBillStatus(orderBillId, statusOrder);
-		if(kq == 1) {
+		int kq = this.orderBillService.updateOrderBillStatus(orderBillId, statusOrder);
+		if (kq == 1) {
 			List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
 			/*
 			 * Map<Integer, String> employeeNameMap = new HashMap<>(); for (OrderBillEntity
@@ -169,12 +171,34 @@ public class AdminOrderController {
 
 			model.addAttribute("orderBills", orderBills);
 			// model.addAttribute("employeeNameMap", employeeNameMap);
-		}
-		else {
+		} else {
 			System.out.println("Update thất bại");
 		}
-		
 
+		return "admin/order/orderManagement";
+	}
+
+	@RequestMapping(value = "/orderManagement/deleteOrderBillUnConfirm", method = RequestMethod.GET)
+	public String deleteOrderBillUnConfirm(@RequestParam("orderBillId") Integer orderBillId, ModelMap model) {
+		try {
+			// System.out.println(orderBillId);
+			int result = this.orderBillService.deleteOrderBillUnconfirmedById(orderBillId);
+			if (result == 1) {
+				List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
+				model.addAttribute("orderBills", orderBills);
+				model.addAttribute("notification", "Đã xóa thành công hóa đơn mua hàng");
+				System.out.println("Đã xóa hóa đơn mua hàng thành công");
+			}
+			else {
+				List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
+				model.addAttribute("orderBills", orderBills);
+				model.addAttribute("notification", "Chỉ được xóa các orderBill Chưa xác nhận");
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		return "admin/order/orderManagement";
 	}
 }

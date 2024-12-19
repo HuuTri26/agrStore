@@ -18,5 +18,7 @@ public interface OrderBillDAO {
 
 
 	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status);
+	
+	public int deleteOrderBillUnConfirmedById(Integer ordeBillId);
 
 }

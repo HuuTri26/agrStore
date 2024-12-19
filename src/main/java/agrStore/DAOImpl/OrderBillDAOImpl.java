@@ -64,8 +64,13 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	@Override
 	public List<OrderBillEntity> getAllOrderBill() {
 		// TODO Auto-generated method stub
+//		Session session = this.factory.getCurrentSession();
+//		String hql = "FROM OrderBillEntity";
+//		Query query = session.createQuery(hql);
+//		List<OrderBillEntity> orderBills = query.list();
+//		return orderBills;
 		Session session = this.factory.getCurrentSession();
-		String hql = "FROM OrderBillEntity";
+		String hql = "FROM OrderBillEntity ob WHERE ob.statusOrder != 6"; // Thêm điều kiện lọc
 		Query query = session.createQuery(hql);
 		List<OrderBillEntity> orderBills = query.list();
 		return orderBills;
@@ -158,17 +163,17 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	public List<OrderBillEntity> getOrderBillForToday() {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
-		String hql = "FROM OrderBillEntity o " +
-                "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
+		String hql = "FROM OrderBillEntity o " + "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
 		try {
 			Query query = session.createQuery(hql);
 			List<OrderBillEntity> result = query.list();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
-	        return null; // Trả về danh sách rỗng nếu xảy ra lỗi
+			return null; // Trả về danh sách rỗng nếu xảy ra lỗi
 		}
 	}
+
 	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
 		List<OrderBillEntity> orderBills = null;
 		Session session = this.factory.getCurrentSession();
@@ -184,6 +189,51 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		}
 		return orderBills;
 
+	}
+
+	@Override
+	public int deleteOrderBillUnConfirmedById(Integer orderBillId) {
+		// hàm này ta sẽ set OrderBill status thành 6 -> tức đã xóa
+		// TODO Auto-generated method stub
+//		Session session = this.factory.getCurrentSession();
+//		String hql = "DELETE FROM OrderBillEntity ob WHERE ob.statusOrder = 1 AND ob.orderBillId = :orderBillId";
+//		try {
+//			Query query = session.createQuery(hql);
+//			query.setParameter("orderBillId", orderBillId);
+//			query.executeUpdate();
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+		// TODO Auto-generated method stub
+		Session session = this.factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			OrderBillEntity orderBill = (OrderBillEntity) session.get(OrderBillEntity.class, orderBillId);
+
+			if (orderBill != null) {
+				// Kiểm tra nếu statusOrder == 1
+				if (orderBill.getStatusOrder() == 1) {
+					orderBill.setStatusOrder(6); // Đặt trạng thái thành 6 (đã xóa)
+					session.update(orderBill);
+					transaction.commit();
+					return 1; // Trả về 1 nếu cập nhật thành công
+				} else {
+					System.out.println("OrderBillID: " + orderBillId + " không thể sửa vì statusOrder != 1");
+					return -1; // Trả về -1 nếu không thỏa điều kiện
+				}
+			} else {
+				System.out.println("OrderBillID: " + orderBillId + " không tồn tại");
+				return 0; // Trả về 0 nếu OrderBill không tồn tại
+			}
+		} catch (Exception e) {
+			transaction.rollback();
+			System.out.println("Error: " + e.toString());
+			return 0; // Trả về 0 nếu xảy ra lỗi
+		} finally {
+			session.close();
+		}
 	}
 
 }
