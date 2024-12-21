@@ -27,7 +27,7 @@ public class CartItemEntity {
 	@Transient
 	private Boolean isSelected;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne()
 	@JoinColumn(name = "cartId")
 	private CartEntity cart;
 

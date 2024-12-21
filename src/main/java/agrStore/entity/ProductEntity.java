@@ -58,24 +58,22 @@ public class ProductEntity {
 	@Column(name = "updateAt")
 	private Date updateAt;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+//	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne()
 	@JoinColumn(name = "categoryId")
 	private CategoryEntity category;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne()
 	@JoinColumn(name = "providerId")
 	private ProviderEntity provider;
 
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<CartItemEntity> cartItems;
 
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<OrderBillDetailEntity> orderBillDetailList;
 
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<ImportBillDetailEntity> importBillDetailList;
 
 	public ProductEntity() {

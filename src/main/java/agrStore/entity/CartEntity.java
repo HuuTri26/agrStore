@@ -29,8 +29,7 @@ public class CartEntity {
 	@JoinColumn(name = "accountId")
 	private AccountEntity account;
 
-	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
 	private List<CartItemEntity> cartItemList;
 
 	public CartEntity() {

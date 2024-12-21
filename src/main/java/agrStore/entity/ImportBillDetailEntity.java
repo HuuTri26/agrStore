@@ -25,7 +25,7 @@ public class ImportBillDetailEntity {
 	@Column(name = "price")
 	private int price;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToOne()
 	@JoinColumn(name="importBillId")
 	private ImportBillEntity importBill;
 	
