@@ -16,6 +16,9 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.owasp.encoder.Encode;
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
 import org.springframework.stereotype.Service;
 
 import agrStore.entity.CartItemEntity;
@@ -186,6 +189,33 @@ public class UltilityImpl implements Ultility {
 
 	public static Boolean hasUnselectedItems(List<CartItemEntity> cartItems) {
 		return cartItems.stream().anyMatch(item -> !item.getIsSelected());
+	}
+
+	@Override
+	public String XSSSanitizeHTML(String input) {
+		PolicyFactory policy =  Sanitizers.FORMATTING.and(Sanitizers.LINKS);
+		return policy.sanitize(input);
+	}
+	
+	public static String XSSEscape4HTML(String input) {
+	    return input == null ? null : Encode.forHtml(input);
+	}
+
+	public static String XSSEscape4JS(String input) {
+		return input == null ? null : Encode.forJavaScript(input);
+		
+	}
+
+	public static String XSSEscape4Url(String input) {
+		return input == null ? null : Encode.forUriComponent(input);
+	}
+
+	public static String XSSEscape4CSS(String input) {
+		return input == null ? null :Encode.forCssString(input);
+	}
+
+	public static String XSSEscape4XML(String input) {
+		return input == null ? null : Encode.forXml(input);
 	}
 
 }

@@ -33,19 +33,19 @@ public class AccountEntity {
 	@Column(name = "status")
 	private Boolean status;
 
-	@Column(name = "avatar", columnDefinition = "nvarchar")
+	@Column(name = "avatar")
 	private String avatar;
 
-	@Column(name = "gmail", columnDefinition = "nvarchar")
+	@Column(name = "gmail")
 	private String gmail;
 
-	@Column(name = "fullName", columnDefinition = "nvarchar")
+	@Column(name = "fullName")
 	private String fullName;
 
-	@Column(name = "phoneNumber", columnDefinition = "nvarchar")
+	@Column(name = "phoneNumber")
 	private String phoneNumber;
 
-	@Column(name = "password", columnDefinition = "nvarchar")
+	@Column(name = "password")
 	private String password;
 
 	@Temporal(TemporalType.DATE)

@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page import="agrStore.utility.UltilityImpl"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -287,7 +288,7 @@
 															<p class="author">
 																by: <b>${feedback.account.fullName }</b>
 															</p>
-															<p class="comment-text">${feedback.comment }</p>
+															<p class="comment-text"><c:out value="${UltilityImpl.XSSEscape4HTML(feedback.comment)}" /></p>
 														</div>
 
 													</div>

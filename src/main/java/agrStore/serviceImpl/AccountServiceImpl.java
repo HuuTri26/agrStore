@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import agrStore.DAO.AccountDAO;
 import agrStore.entity.AccountEntity;
 import agrStore.service.AccountService;
+import agrStore.utility.Ultility;
 
 @Transactional
 @Service
@@ -17,15 +18,22 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
 	AccountDAO AccountDAO;
-
+	
+	@Autowired
+	Ultility ultility;
+	
 	@Override
 	public void addAccount(AccountEntity acc) {
+		acc.setFullName(ultility.XSSSanitizeHTML(acc.getFullName()));
+		
 		AccountDAO.addAccount(acc);
 		
 	}
 
 	@Override
 	public void updateAccount(AccountEntity acc) {
+		acc.setFullName(ultility.XSSSanitizeHTML(acc.getFullName()));
+		
 		AccountDAO.updateAccount(acc);
 		
 	}

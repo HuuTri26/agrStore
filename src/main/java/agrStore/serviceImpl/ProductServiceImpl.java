@@ -12,6 +12,7 @@ import agrStore.DAO.ProductDAO;
 import agrStore.entity.CartItemEntity;
 import agrStore.entity.ProductEntity;
 import agrStore.service.ProductService;
+import agrStore.utility.Ultility;
 
 @Service
 @Transactional
@@ -19,14 +20,23 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	ProductDAO ProductDAO;
+	
+	@Autowired
+	Ultility ultility;
 
 	@Override
 	public void addProduct(ProductEntity product) {
+		product.setProductName(ultility.XSSSanitizeHTML(product.getProductName()));
+		product.setDescript(ultility.XSSSanitizeHTML(product.getDescript()));
+		
 		ProductDAO.addProduct(product);
 	}
 
 	@Override
 	public void updateProduct(ProductEntity product) {
+		product.setProductName(ultility.XSSSanitizeHTML(product.getProductName()));
+		product.setDescript(ultility.XSSSanitizeHTML(product.getDescript()));
+		
 		ProductDAO.updateProduct(product);
 	}
 
