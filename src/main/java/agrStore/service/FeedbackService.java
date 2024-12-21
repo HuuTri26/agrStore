@@ -20,4 +20,5 @@ public interface FeedbackService {
 	public FeedbackEntity getFeedbackByOrderBillDetailId(Integer oDtId);
 	public Boolean isValidFeeback(FeedbackEntity feedback);
 	public Long countFeedbackByStar(List<FeedbackEntity> feedbacks, Integer star);
+	
 }

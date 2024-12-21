@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import agrStore.DAO.AddressDAO;
 import agrStore.entity.AddressEntity;
 import agrStore.service.AddressService;
+import agrStore.utility.Ultility;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class AddressServiceImpl implements AddressService{
 	AddressDAO AddressDAO;
 
 	@Override
-	public void addAddress(AddressEntity addr) {
+	public void addAddress(AddressEntity addr) {	
 		AddressDAO.addAddress(addr);
 		
 	}

@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +28,8 @@ import agrStore.service.FeedbackService;
 import agrStore.service.OrderBillDetailService;
 import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
+import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 
 @Controller
 public class homeController {
@@ -47,6 +48,9 @@ public class homeController {
 
 	@Autowired
 	OrderBillDetailService orderBillDetailService;
+	
+	@Autowired
+	Ultility ultility;
 
 	@ModelAttribute("categories")
 	public List<CategoryEntity> loadListCategory() {
@@ -131,6 +135,9 @@ public class homeController {
 
 		// If existing feedback found, update model for update mode
 		if (existingFeedback != null) {
+			//Escape comment để chống XSS
+			existingFeedback.setComment(UltilityImpl.XSSEscape4HTML(existingFeedback.getComment()));
+			
 			model.addAttribute("feedback", existingFeedback);
 			model.addAttribute("orderBillDtId", existingFeedback.getOrderBillDetail().getOrderBillDetailId());
 			model.addAttribute("btnMode", "update");
@@ -141,7 +148,7 @@ public class homeController {
 		}
 	}
 
-	@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
+	@RequestMapping(value = "productDetail", method = RequestMethod.GET)
 	public String showProductDetail(HttpServletRequest request, ModelMap model,
 			@RequestParam(value = "productId") Integer productId) {
 		ProductEntity product = productService.getProductById(productId);

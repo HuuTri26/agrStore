@@ -1,12 +1,8 @@
 package agrStore.utility;
 
-import java.util.List;
-
 import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Service;
-
-import agrStore.entity.CartItemEntity;
 
 @Service
 public interface Ultility {
@@ -18,9 +14,13 @@ public interface Ultility {
 	public String generateOTP();
 	public String standardizeStreetName(String name);
 	public Boolean isValidStreetName(String name);
+	
 	public void encryptFile(String inFile, String outFile, SecretKey key) throws Exception;
 	public void decryptFile(String inFile, String outFile, SecretKey key) throws Exception;
 	public SecretKey generateKey() throws Exception;
 	public void saveKeyToKeyStore(SecretKey key, String alias, char[] keyStorePwd, String keyStorePath) throws Exception;
 	public SecretKey loadKeyFromKeyStore(String alias, char[] keyStorePwd, String ketStorePath) throws Exception;
+	
+	public String XSSSanitizeHTML(String input);
+	
 }

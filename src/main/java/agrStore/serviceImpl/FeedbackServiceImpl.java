@@ -1,6 +1,8 @@
 package agrStore.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,22 +10,29 @@ import org.springframework.transaction.annotation.Transactional;
 import agrStore.DAO.FeedbackDAO;
 import agrStore.entity.FeedbackEntity;
 import agrStore.service.FeedbackService;
+import agrStore.utility.Ultility;
 
 @Service
 @Transactional
 public class FeedbackServiceImpl implements FeedbackService {
 	@Autowired
 	FeedbackDAO feedbackDAO;
+	
+	@Autowired
+	Ultility ultility;
 
 	@Override
 	public void addFeedBack(FeedbackEntity feedback) {
+		feedback.setComment(ultility.XSSSanitizeHTML(feedback.getComment()));
 		feedbackDAO.addFeedback(feedback);
 
 	}
 
 	@Override
 	public void updateFeedBack(FeedbackEntity feeback) {
-		if (feeback != null || !isValidFeeback(feeback)) {
+		if (feeback != null && !isValidFeeback(feeback)) {
+			feeback.setComment(ultility.XSSSanitizeHTML(feeback.getComment()));
+			
 			feedbackDAO.updateFeedback(feeback);
 		}
 		feedbackDAO.mergeFeedback(feeback);
