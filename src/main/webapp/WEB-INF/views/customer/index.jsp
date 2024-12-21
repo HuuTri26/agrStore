@@ -184,58 +184,31 @@
 									class="fa fa-caret-up" aria-hidden="true"></i></span>
 							</div>
 							<div class="wrap-menu">
-								<ul class="menu clone-main-menu">
-									<li class="menu-item menu-item-has-children has-megamenu">
-										<a href="#" class="menu-name" data-title="Fruit & Nut Gifts"><i
-											class="biolife-icon icon-fruits"></i>Trái cây</a>
-									</li>
-									<li class="menu-item menu-item-has-children has-megamenu">
-										<a href="#" class="menu-name" data-title="Vegetables"><i
-											class="biolife-icon icon-broccoli-1"></i>Rau củ</a>
-									</li>
-									<li class="menu-item menu-item-has-children has-megamenu">
-										<a href="#" class="menu-name" data-title="Fresh Berries"><i
-											class="biolife-icon icon-grape"></i>Thực phẩm tươi sống</a>
-									</li>
-									<li class="menu-item"><a href="#" class="menu-name"
-										data-title="Ocean Foods"><i class="biolife-icon icon-fish"></i>Hải
-											sản</a></li>
-									<li class="menu-item menu-item-has-children has-child"><a
-										href="#" class="menu-name" data-title="Butter & Eggs"><i
-											class="biolife-icon icon-honey"></i>Thực phẩm đống hộp</a></li>
-									<li class="menu-item"><a href="#" class="menu-title"><i
-											class="biolife-icon icon-fast-food"></i>Thức ăn nhanh</a></li>
-									<li class="menu-item"><a href="#" class="menu-title"><i
-											class="biolife-icon icon-beef"></i>Thịt tươi</a></li>
-
-									<li class="menu-item"><a href="#" class="menu-title"><i
-											class="biolife-icon icon-avocado"></i>Snack</a></li>
-
-								</ul>
-							</div>
+    <ul class="menu clone-main-menu">
+        <!-- Duyệt qua các danh mục -->
+        <c:forEach var="category" items="${categories}">
+            <li class="menu-item menu-item-has-children has-megamenu">
+                <a href="showProductsBycId.htm?cId=${category.categoryId}" class="menu-name" data-title="${category.categoryName}">
+                    <!-- Biểu tượng cho từng danh mục -->
+                    <i class="biolife-icon icon-fruits"></i>${category.categoryName}
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 						</div>
 					</div>
-					<div class="col-lg-9 col-md-8 padding-top-2px">
-						<div class="header-search-bar layout-01">
-							<form action="#" class="form-search" name="desktop-seacrh"
-								method="get">
-								<input type="text" name="s" class="input-text" value=""
-									placeholder="Search here..."> <select name="category">
-									<option value="-1" selected>Tất cả</option>
-									<option value="vegetables">Rau củ</option>
-									<option value="fresh_berries">Thực phẩm sống</option>
-									<option value="ocean_foods">Hải sản</option>
-									<option value="butter_eggs">Butter & Eggs</option>
-									<option value="fastfood">Thức ăn nhanh</option>
-
-									<option value="papaya_crisps">Snack</option>
-									<option value="oatmeal">khác</option>
-								</select>
-								<button type="submit" class="btn-submit">
-									<i class="biolife-icon icon-search"></i>
-								</button>
-							</form>
+												<div class="header-search-bar layout-01">
+						    <form action="/agrStoreManagement/showProductsBySearch.htm" class="form-search" method="get">
+						        <input type="text" name="search" class="input-text" value=""
+						               placeholder="Search here..">
+						              
+						        <button type="submit" class="btn-submit">
+						            <i class="biolife-icon icon-search"></i>
+						        </button>
+						    </form>
 						</div>
+
 						<div class="live-info">
 							<p class="telephone">
 								<i class="fa fa-phone" aria-hidden="true"></i><b

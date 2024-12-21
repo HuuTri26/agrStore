@@ -62,7 +62,7 @@ public class homeController {
 	public String indexShow(HttpServletRequest request, Model model) {
 
 		// Load dữ liệu mặc định với id = 1
-		List<ProductEntity> products = productService.getListProductByCategoryId(1);
+		List<ProductEntity> products = productService.getListProduct();
 		List<ProductEntity> randProducts = productService.getRandomListProductByLimit(products, 12);
 		model.addAttribute("randProducts", randProducts);
 
@@ -71,7 +71,43 @@ public class homeController {
 
 		return "customer/index";
 	}
+	@RequestMapping(value = "/searchProduct", method = RequestMethod.GET)
+	public String searchProductByName(Model model, @RequestParam(value = "search") String search) {
+	    
+	    List<ProductEntity> products = productService.searchProductByName(search);
 
+	    
+	    model.addAttribute("products", products);
+
+	    return "customer/index"; 
+	}
+	@RequestMapping(value = "/showProductsBySearch", method = RequestMethod.GET)
+	public String showProductsBySearch(Model model, @RequestParam(value = "search") String search) {
+	    
+	    List<ProductEntity> products = productService.searchProductByName(search);
+
+	    
+	    List<ProductEntity> randProducts = productService.getRandomListProductByLimit(products, 12);
+
+	   
+	    model.addAttribute("randProducts", randProducts);
+	    model.addAttribute("searchKeyword", search);
+
+	  
+	    return "customer/index";
+	}
+
+	 @RequestMapping(value = "/categories", method = RequestMethod.GET)
+	    public String showCategories(Model model) {
+	        // Lấy danh sách các danh mục từ service
+	        List<CategoryEntity> categories = categoryService.getListCategory();
+
+	        // Thêm danh sách vào model
+	        model.addAttribute("categories", categories);
+
+	        return "customer/index"; // Trả về trang JSP
+	    }
+	 
 	@RequestMapping(value = "/showProductsBycId", method = RequestMethod.GET)
 	public String showProductByCategoryId(Model model, @RequestParam(value = "cId") Integer cId) {
 

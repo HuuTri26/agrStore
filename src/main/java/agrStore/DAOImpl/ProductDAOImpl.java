@@ -128,5 +128,17 @@ public class ProductDAOImpl implements ProductDAO {
 			return null; // Trả về null nếu có lỗi
 		}
 	}
+	@Override
+	public List<ProductEntity> searchProductByName(String productName) {
+	    Session session = this.factory.getCurrentSession();
+	    if (productName == null || productName.isEmpty()) {
+	        return List.of(); // Trả về danh sách rỗng nếu tên sản phẩm không hợp lệ
+	    }
+	    String hql = "FROM ProductEntity p WHERE p.productName LIKE :productName";
+	    Query query = session.createQuery(hql);
+	    query.setParameter("productName", "%" + productName + "%");
+	    return query.list();
+	}
+
 
 }

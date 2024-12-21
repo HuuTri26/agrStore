@@ -97,5 +97,8 @@ public class ProductServiceImpl implements ProductService{
 		
 
 	}
-
+	@Override
+	public List<ProductEntity> searchProductByName(String productName) {
+	    return ProductDAO.searchProductByName(productName);
+	}
 }

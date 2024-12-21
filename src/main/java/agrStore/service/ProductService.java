@@ -24,4 +24,5 @@ public interface ProductService {
 	// hàm cập nhật số lượng sản phẩm khi nhập hàng
 	public void updateQuantityProduct(Integer productId, int quantity);
 	public List<Object[]> getTheMostPurchasedProduct();
+	public List<ProductEntity> searchProductByName(String productName);
 }
