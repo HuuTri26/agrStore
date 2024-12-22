@@ -37,8 +37,7 @@ public class OrderBillDetailEntity {
 	@JoinColumn(name="productId")
 	private ProductEntity product;
 	
-	@OneToMany(mappedBy = "orderBillDetail", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "orderBillDetail", fetch = FetchType.LAZY)
 	private List<FeedbackEntity> feedbackList;
 
 	public OrderBillDetailEntity() {

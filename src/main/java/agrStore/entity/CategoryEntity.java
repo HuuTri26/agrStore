@@ -33,8 +33,7 @@ public class CategoryEntity {
 	@Column(name = "descript")
 	private String descript;
 	
-	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private List<ProductEntity> productList;
 
 	public CategoryEntity() {

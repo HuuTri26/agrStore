@@ -43,8 +43,7 @@ public class ImportBillEntity {
 	@JoinColumn(name="accountId")
 	private AccountEntity account;
 	
-	@OneToMany(mappedBy = "importBill", fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "importBill", fetch = FetchType.LAZY)
 	private List<ImportBillDetailEntity> importBillDetailList;
 
 	public ImportBillEntity() {

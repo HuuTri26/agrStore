@@ -43,17 +43,9 @@ public class AdminOrderController {
 		// code
 		model.addAttribute("currentPage", "order");
 		List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
-		// Map<Integer, String> employeeNameMap = new HashMap<>();
-		/*
-		 * for (OrderBillEntity orderBill : orderBills) { int employeeID =
-		 * orderBill.getEmployeeId(); if (!employeeNameMap.containsKey(employeeID)) {
-		 * String employeeName =
-		 * this.accountService.getAccountById(employeeID).getFullName();
-		 * employeeNameMap.put(employeeID, employeeName); } }
-		 */
-
+		
 		model.addAttribute("orderBills", orderBills);
-		// model.addAttribute("employeeNameMap", employeeNameMap);
+		
 
 		return "admin/order/orderManagement";
 	}
@@ -62,8 +54,7 @@ public class AdminOrderController {
 	public String handleOrder(@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "id", required = false) Integer id, Model model) {
 		OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
-		// AccountEntity employee =
-		// this.accountService.getAccountById(orderBill.getEmployeeId());
+		
 		Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
 		statusOrderMap.put(1, "Chờ xác nhận");
 		statusOrderMap.put(2, "Đã xác nhận");
@@ -75,83 +66,66 @@ public class AdminOrderController {
 
 		if (action != null) {
 			switch (action) {
-			case "add":
-				model.addAttribute("mode", "ADD");
-				// model.addAttribute("category", new Category());
-				break;
+//			case "add":
+//				model.addAttribute("mode", "ADD");
+//				
+//				break;
 
 			case "view":
 				if (id != null) {
-					// Category category = categoryService.getCategoryById(id);
+					
 					model.addAttribute("mode", "VIEW");
-//					OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
-//					AccountEntity employee = this.accountService.getAccountById(orderBill.getEmployeeId());
-//					Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
-//					statusOrderMap.put(1, "Chờ xác nhận");
-//					statusOrderMap.put(2, "Đã xác nhận");
-//					statusOrderMap.put(3, "Chờ giao hàng");
-//					statusOrderMap.put(4, "Hoàn thành");
-//					List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService
-//							.getAllOrderBillDetailByOrderBillID(id);
+
 					model.addAttribute("orderBill", orderBill);
-					// model.addAttribute("employee", employee);
+					
 					model.addAttribute("statusOrderMap", statusOrderMap);
 					model.addAttribute("orderBillDetailEntities", orderBillDetailEntities);
 				}
 				break;
 
-			case "edit":
-				if (id != null) {
-					// Category category = categoryService.getCategoryById(id);
-					model.addAttribute("mode", "EDIT");
-//					OrderBillEntity orderBill = this.orderBillService.getOrderBillById(id);
-//					AccountEntity employee = this.accountService.getAccountById(orderBill.getEmployeeId());
-//					Map<Integer, String> statusOrderMap = new LinkedHashMap<>();
-//					statusOrderMap.put(1, "Chờ xác nhận");
-//					statusOrderMap.put(2, "Đã xác nhận");
-//					statusOrderMap.put(3, "Chờ giao hàng");
-//					statusOrderMap.put(4, "Hoàn thành");
-//					List<OrderBillDetailEntity> orderBillDetailEntities = this.orderBillDetailService
-//							.getAllOrderBillDetailByOrderBillID(id);
-					model.addAttribute("orderBill", orderBill);
-					// model.addAttribute("employee", employee);
-					model.addAttribute("statusOrderMap", statusOrderMap);
-					model.addAttribute("orderBillDetailEntities", orderBillDetailEntities);
-				}
-				break;
+//			case "edit":
+//				if (id != null) {
+//					
+//					model.addAttribute("mode", "EDIT");
+//
+//					model.addAttribute("orderBill", orderBill);
+//					model.addAttribute("statusOrderMap", statusOrderMap);
+//					model.addAttribute("orderBillDetailEntities", orderBillDetailEntities);
+//				}
+//				break;
 			}
 		}
 
 		return "admin/order/orderForm"; // Trả về cùng một trang JSP
 	}
 
-	@RequestMapping(value = "/orderManagement/order", method = RequestMethod.POST)
-	public String processCategory(@ModelAttribute("orderBill") @RequestParam("mode") String mode) {
-		System.out.println("mode: " + mode);
-		if ("ADD".equals(mode)) {
-			// categoryService.addCategory(category);
-		} else if ("EDIT".equals(mode)) {
-			// categoryService.updateCategory(category);
-		}
+//	@RequestMapping(value = "/orderManagement/order", method = RequestMethod.POST)
+//	public String processCategory(@ModelAttribute("orderBill") @RequestParam("mode") String mode) {
+//		System.out.println("mode: " + mode);
+//		if ("ADD".equals(mode)) {
+//			
+//		} else if ("EDIT".equals(mode)) {
+//			
+//		}
+//
+//		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý
+//	}
 
-		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý
-	}
-
-	@RequestMapping(value = "/orderManagement/order", method = RequestMethod.PUT)
-	public String updateStatusOrderBill(@ModelAttribute("orderBill") String statusOrder,
-			@RequestParam("mode") String mode) {
-		System.out.println("mode: " + mode);
-		System.out.println("statusOrder: " + statusOrder);
-
-		if ("ADD".equals(mode)) {
-			// categoryService.addCategory(category);
-		} else if ("EDIT".equals(mode)) {
-			// categoryService.updateCategory(category);
-			System.out.println(mode);
-		}
-
-		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý
-	}
+//	@RequestMapping(value = "/orderManagement/order", method = RequestMethod.PUT)
+//	public String updateStatusOrderBill(@ModelAttribute("orderBill") String statusOrder,
+//			@RequestParam("mode") String mode) {
+//		System.out.println("mode: " + mode);
+//		System.out.println("statusOrder: " + statusOrder);
+//
+//		if ("ADD".equals(mode)) {
+//			
+//		} else if ("EDIT".equals(mode)) {
+//			
+//			System.out.println(mode);
+//		}
+//
+//		return "redirect:/admin/order/orderManagement.htm"; // Redirect sau khi xử lý
+//	}
 
 	@RequestMapping(value = "/orderManagement/order/updateOrderStatus", method = RequestMethod.POST)
 	public String updateOrderBillStatus(@RequestParam("orderBillId") Integer orderBillId,
@@ -161,16 +135,9 @@ public class AdminOrderController {
 		int kq = this.orderBillService.updateOrderBillStatus(orderBillId, statusOrder);
 		if (kq == 1) {
 			List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
-			/*
-			 * Map<Integer, String> employeeNameMap = new HashMap<>(); for (OrderBillEntity
-			 * orderBill : orderBills) { int employeeID = orderBill.getEmployeeId(); if
-			 * (!employeeNameMap.containsKey(employeeID)) { String employeeName =
-			 * this.accountService.getAccountById(employeeID).getFullName();
-			 * employeeNameMap.put(employeeID, employeeName); } }
-			 */
-
+			
 			model.addAttribute("orderBills", orderBills);
-			// model.addAttribute("employeeNameMap", employeeNameMap);
+			
 		} else {
 			System.out.println("Update thất bại");
 		}
@@ -181,18 +148,20 @@ public class AdminOrderController {
 	@RequestMapping(value = "/orderManagement/deleteOrderBillUnConfirm", method = RequestMethod.GET)
 	public String deleteOrderBillUnConfirm(@RequestParam("orderBillId") Integer orderBillId, ModelMap model) {
 		try {
-			// System.out.println(orderBillId);
+			
 			int result = this.orderBillService.deleteOrderBillUnconfirmedById(orderBillId);
 			if (result == 1) {
 				List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
 				model.addAttribute("orderBills", orderBills);
 				model.addAttribute("notification", "Đã xóa thành công hóa đơn mua hàng");
-				System.out.println("Đã xóa hóa đơn mua hàng thành công");
+				model.addAttribute("status", 200);
+				// System.out.println("Đã xóa hóa đơn mua hàng thành công");
 			}
 			else {
 				List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
 				model.addAttribute("orderBills", orderBills);
 				model.addAttribute("notification", "Chỉ được xóa các orderBill Chưa xác nhận");
+				model.addAttribute("status", 404);
 
 			}
 		} catch (Exception e) {

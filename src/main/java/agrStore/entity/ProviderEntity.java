@@ -33,8 +33,7 @@ public class ProviderEntity {
 	@Column(name = "image")
 	private String image;
 	
-	@OneToMany(mappedBy = "provider", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)
 	private List<ProductEntity> productList;
 
 	public ProviderEntity() {
