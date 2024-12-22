@@ -41,6 +41,7 @@ import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
 import agrStore.serviceImpl.ProvinceServiceImpl;
 import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -137,12 +138,16 @@ public class AdminStaffController {
 			// Lưu phường vừa chọn vào session
 			session.setAttribute("selectedWard", selectedWard);
 		}
+		
+		
+		
 
 		if (id != null) {
 			// Category category = categoryService.getCategoryById(id);
 			System.out.println("==> Edit Staff mode");
 			model.addAttribute("mode", "EDIT");
-
+			staff.setFullName(UltilityImpl.XSSEscape4HTML(staff.getFullName()));
+			staff.setPhoneNumber(UltilityImpl.XSSEscape4HTML(staff.getPhoneNumber()));
 			session.setAttribute("staff", staff);
 			// model.addAttribute("category", category);
 		}

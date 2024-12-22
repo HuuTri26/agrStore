@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import agrStore.entity.ProviderEntity;
 import agrStore.service.ProviderService;
 import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -66,6 +67,9 @@ public class AdminProviderController {
 					System.out.println("==> View provider mode");
 					ProviderEntity provider = providerService.getProviderById(id);
 					model.addAttribute("mode", "VIEW");
+					provider.setProviderName(UltilityImpl.XSSEscape4HTML(provider.getProviderName()));
+					provider.setPhoneNumber(UltilityImpl.XSSEscape4HTML(provider.getPhoneNumber()));
+				
 					model.addAttribute("provider", provider);
 					// model.addAttribute("category", category);
 				}
@@ -77,6 +81,8 @@ public class AdminProviderController {
 					System.out.println("==> Edit provider mode");
 					model.addAttribute("mode", "EDIT");
 					ProviderEntity provider = providerService.getProviderById(id); // Lấy dữ liệu provider theo id
+					provider.setProviderName(UltilityImpl.XSSEscape4HTML(provider.getProviderName()));
+					provider.setPhoneNumber(UltilityImpl.XSSEscape4HTML(provider.getPhoneNumber()));
 					model.addAttribute("provider", provider);
 					// model.addAttribute("category", category);
 				}

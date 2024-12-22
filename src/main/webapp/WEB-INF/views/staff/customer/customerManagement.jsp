@@ -17,12 +17,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 <style>
-.card .card-body {
-	padding: 1rem 0.25rem;
-	!
-	important
-}
-
 .dropdown {
 	position: relative;
 	display: inline-block;
@@ -75,11 +69,6 @@
 	margin-bottom: 4px;
 }
 
-.add-category {
-	float: right;
-	font-size: 10px;
-}
-
 button {
 	outline: none;
 	border: none;
@@ -105,93 +94,104 @@ button {
 							<!-- Card start -->
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Product Management</div>
-									<a href="staff/productManagement/product.htm?action=add">
-										<button type="button" class="btn btn-info add-category">
-											<i class="bi bi-plus-square"></i> Add
-										</button>
-									</a>
+									<div class="card-title">Customer Management</div>
 								</div>
 								<div class="card-body">
+									<!-- <button>Add</button> -->
 									<div class="table-responsive">
 										<table id="basicExample" class="table custom-table">
 											<thead>
 												<tr>
-													<th>Id</th>
+													<th>ID</th>
 													<th>Image</th>
-													<th>Name</th>
-													<th>Category</th>
-													<th>Description</th>
-													<!-- <th>Provider Name</th> -->
-													<th>Price</th>
-													<th>Quantity</th>
-													<th>unit</th>
-													<th>updateAt</th>
+													<th>FullName</th>
+													<th>Gmail</th>
+													<th>Phone Number</th>
+													<th>Address</th>
+													<th>Status</th>
+													<th>Create At</th>
 													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="product" items="${products }">
+												<c:forEach var="customer" items="${customers }">
 													<tr>
-														<td>${product.productId }</td>
+														<td>${customer.accountId }</td>
 														<td><div class="media-box">
-																<img src="<c:url value='/assets/product-images/${product.image}' />" class="media-avatar" />
+
+																<img
+																	src="<c:url value='/assets/user-images/${customer.avatar}' />"
+
+																	class="media-avatar rounded-circle img-fluid"
+																	alt="User Avatar"
+																	style="width: 45px; height: 45px; object-fit: cover;" />
 																<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p>
-														</div> -->
+																<p>ID: #Max00987</p> -->
 															</div></td>
-														<td>${product.productName }</td>
-														<td>${product.category.categoryName }</td>
-														<td>${product.descript }</td>
-														<td><fmt:formatNumber value="${product.price }"
-															pattern="#,###.## VND;VND -#,###.##" type="currency"
-															currencySymbol="VND" /></td>
-														<td>${product.quantity }</td>
-														<td>${product.unit }</td>
-														<td>${product.updateAt }</td>
+														<td>${customer.fullName }</td>
+														<td>${customer.gmail }</td>
+														<td>${customer.phoneNumber }</td>
+														<td>${customer.address.streetName }</td>
+
+														<td><span class="badge min-70"
+															style="background-color: ${customer.status ? 'green' : 'red'}; color: white;">
+																${customer.status ? 'Active' : 'Disable'} </span></td>
+
+														<td>${customer.createAt }</td>
 														<td>
-															<div class="actions">
+															<!-- <div class="actions">
 																<div class="dropdown">
 																	<a href="#" class="viewRow" data-bs-toggle="modal"
 																		data-bs-target="#viewRow"> <i
 																		class="bi bi-list text-green"></i>
 																	</a>
 																	<div class="dropdown-content">
-																		<a
-																			href="staff/productManagement/product.htm?action=view&id=${product.productId }"><i
-																			class="bi bi-eye"></i> </a> <a
-																			href="staff/productManagement/product.htm?action=edit&id=${product.productId }"><i
-																			class="bi bi-pencil"></i> </a> <a
-																			href="staff/categoryActive.htm"><i
+																		<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																		<a href="customerManagement/customerDetail.htm"><i class="bi bi-eye"></i>
+																		</a> <a href="categoryAdd.htm"><i
+																			class="bi bi-plus-circle"></i> </a> <a
+																			href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																		</a> <a href="categoryActive.htm"><i
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
 																</div>
-																<a href="staff/productManagement/deleteProduct.htm?id=${product.productId }" class="deleteRow"> <i
+																<a href="categoryDelete.htm" class="deleteRow"> <i
 																	class="bi bi-trash text-red"></i>
+																</a>
+															</div> -->
+															<div class="actions">
+																<a
+																	href="staff/customerManagement/customer.htm?action=view&id=${customer.accountId}">
+																	<i class="bi bi-eye text-green"></i>
+																</a> <a
+																	href="staff/customerManagement/disableCustomer.htm?id=${customer.accountId }"
+																	class="deleteRow"> <i
+																	class="bi ${customer.status ? 'bi-x-circle  inactive-icon' : 'bi-check-circle active-icon'}"></i>
 																</a>
 															</div>
 														</td>
+
+
 													</tr>
 												</c:forEach>
 
-												<!-- <tr>
+												<%-- <tr>
 													<td>1</td>
 													<td><div class="media-box">
 															<img src="assets/images/user3.png" class="media-avatar" />
-															<div class="media-box-body">
+															<!-- 	<div class="media-box-body">
 																<div class="text-truncate">Karan Kumar</div>
-																<p>ID: #Max00987</p>
-															</div>
+																<p>ID: #Max00987</p> -->
 														</div></td>
-													<td>Táo</td>
-													<td>Trai Cay</td>
-													<td><button class="badge shade-red min-70">Block</button>
+													<td>Hữu Trí</td>
+													<td>huutri@gmail.com</td>
+													<td>090399335
+													<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
+
+													<td><button class="badge shade-green min-70">Active</button>
 													</td>
-													<td>Táo ngon v~</td>
-													<td>300$</td>
-													<td>23</td>
-													<td>kg</td>
+
 													<td>2011/12/06</td>
 													<td>
 														<div class="actions">
@@ -201,11 +201,15 @@ button {
 																	class="bi bi-list text-green"></i>
 																</a>
 																<div class="dropdown-content">
-																	<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
-																	</a> <a href="categoryAdd.htm"><i
-																		class="bi bi-plus-circle"></i> </a> <a
-																		href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																	<a
+																		href="customerManagement/customer.htm?action=view&id=${customer.id}">
+																		<i class="bi bi-eye"></i>
+																	</a> <a
+																		href="customerManagement/customer.htm?action=edit&id=${customer.id}">
+																		<i class="bi bi-pencil"></i>
 																	</a> <a href="categoryActive.htm"><i
+																		class="bi bi-check-circle active-icon"></i> </a> <a
+																		href="categoryActive.htm"><i
 																		class="bi bi-check-circle active-icon"></i> </a>
 																</div>
 															</div>
@@ -214,7 +218,50 @@ button {
 															</a>
 														</div>
 													</td>
-												</tr> -->
+
+
+												</tr>
+												<tr>
+												<td>1</td>
+												<td><div class="media-box">
+														<img src="assets/images/user3.png" class="media-avatar" />
+														<!-- 	<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p> -->
+													</div></td>
+												<td>Hữu Trí</td>
+												<td>huutri@gmail.com</td>
+												<td>090399335
+												<td>Man Thien, Hiep Phu, Quan 9 , TPHCM</td>
+
+												<td><button class="badge shade-red min-70">Block</button>
+												</td>
+
+												<td>2011/12/06</td>
+												<td>
+													<div class="actions">
+														<div class="dropdown">
+															<a href="#" class="viewRow" data-bs-toggle="modal"
+																data-bs-target="#viewRow"> <i
+																class="bi bi-list text-green"></i>
+															</a>
+															<div class="dropdown-content">
+																<a href="categoryDetail.htm"><i class="bi bi-eye"></i>
+																</a> <a href="categoryAdd.htm"><i
+																	class="bi bi-plus-circle"></i> </a> <a
+																	href="categoryEdit.htm"><i class="bi bi-pencil"></i>
+																</a> <a href="categoryActive.htm"><i
+																	class="bi bi-check-circle active-icon"></i> </a>
+															</div>
+														</div>
+														<a href="categoryDelete.htm" class="deleteRow"> <i
+															class="bi bi-trash text-red"></i>
+														</a>
+													</div>
+												</td>
+
+
+												</tr> --%>
 											</tbody>
 										</table>
 									</div>

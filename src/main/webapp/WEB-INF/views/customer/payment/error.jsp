@@ -126,7 +126,7 @@
 	<div class="container">
 		<nav class="biolife-nav">
 			<ul>
-				<li class="nav-item"><a href="#" class="permal-link">Trang
+				<li class="nav-item"><a href="index.htm" class="permal-link">Trang
 						chủ</a></li>
 				<li class="nav-item"><span class="current-page">Error</span></li>
 			</ul>

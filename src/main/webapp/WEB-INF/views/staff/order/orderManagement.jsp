@@ -260,6 +260,7 @@ select.btn-status {
 								<div class="card-header">
 									<div class="card-title">Order Management</div>
 								</div>
+								<h5 class="text-danger small">${notification }</h5>
 								<div class="card-body">
 
 									<div class="table-responsive">
@@ -268,7 +269,7 @@ select.btn-status {
 												<tr>
 													<th>ID</th>
 													<th>CustomerName</th>
-													<th>StaffName</th>
+													<!-- <th>StaffName</th> -->
 
 													<th>Total Quantity</th>
 													<th>Total Price</th>
@@ -282,7 +283,7 @@ select.btn-status {
 													<tr>
 														<td>${orderBill.orderBillId }</td>
 														<td>${orderBill.account.fullName }</td>
-														<td>${employeeNameMap[orderBill.employeeId]}</td>
+														<%-- <td>${employeeNameMap[orderBill.employeeId]}</td> --%>
 														<td>${orderBill.totalQuantity }</td>
 														<td><fmt:formatNumber value="${orderBill.totalPrice}"
 																pattern="#,##0" /></td>
@@ -306,7 +307,9 @@ select.btn-status {
 															</c:choose></td> --%>
 														<td>
 															<!-- Form để cập nhật trạng thái của đơn hàng -->
-															<form action="staff/orderManagement/order/updateOrderStatus.htm" method="post">
+															<form
+																action="staff/orderManagement/order/updateOrderStatus.htm"
+																method="post">
 																<input type="hidden" name="orderBillId"
 																	value="${orderBill.orderBillId}" /> <select
 																	name="statusOrder" onchange="this.form.submit()">
@@ -322,7 +325,9 @@ select.btn-status {
 																	<option value="4"
 																		${orderBill.statusOrder == 4 ? 'selected' : ''}>Hoàn
 																		thành</option>
-																	
+																	<option value="5"
+																		${orderBill.statusOrder == 5 ? 'selected' : ''}>Hủy</option>
+
 																</select>
 																<!-- <button type="submit">Cập nhật</button> -->
 															</form>
@@ -331,24 +336,29 @@ select.btn-status {
 
 														<td>
 															<div class="actions">
-																<div class="dropdown">
+																<%-- <div class="dropdown">
 																	<a href="#" class="viewRow" data-bs-toggle="modal"
 																		data-bs-target="#viewRow"> <i
 																		class="bi bi-list text-green"></i>
 																	</a>
 																	<div class="dropdown-content">
 																		<a
-																			href="staff/orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
+																			href="admin/orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
 																			<i class="bi bi-eye"></i>
 																		</a> <a
-																			href="staff/orderManagement/order.htm?action=edit&id=${orderBill.orderBillId}">
+																			href="admin/orderManagement/order.htm?action=edit&id=${orderBill.orderBillId}">
 																			<i class="bi bi-pencil"></i>
 																		</a> <a href="categoryActive.htm"><i
 																			class="bi bi-check-circle active-icon"></i> </a>
 																	</div>
-																</div>
-																<a href="staff/categoryDelete.htm" class="deleteRow"> <i
-																	class="bi bi-trash text-red"></i>
+																	
+																</div> --%>
+																<a
+																	href="staff/orderManagement/order.htm?action=view&id=${orderBill.orderBillId}">
+																	<i class="bi bi-eye"></i>
+																</a> <a
+																	href="staff/orderManagement/deleteOrderBillUnConfirm.htm?orderBillId=${orderBill.orderBillId}"
+																	class="deleteRow"> <i class="bi bi-trash text-red"></i>
 																</a>
 															</div>
 														</td>
