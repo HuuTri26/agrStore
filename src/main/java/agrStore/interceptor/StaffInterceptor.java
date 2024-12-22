@@ -3,6 +3,8 @@ package agrStore.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -19,36 +21,45 @@ public class StaffInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
+		System.out.println("==> staffInterceptor Check uri: " + uri);
 
-		System.out.println("==> Interceptor check: " + uri);
-		// Không kiểm tra khi truy cập đến các trang không yêu cầu đăng nhập
-
-		// Kiểm tra người dùng đã đăng nhập hay chưa
+		// Check user authentication
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
 
+		// If no user is logged in, redirect to login
 		if (loggedInUser == null) {
-			System.out.println("==> No permission, user intercepted! Using default database.");
-			// Định tuyến mặc định đến DEFAULT_AGENT nếu chưa đăng nhập
-			databaseRoutingService.routingUserWithRole(new RoleEntity("Default"));
-
-			// Chuyển hướng đến trang index
+			System.out.println("==> staffInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
 			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
-			return false; // Dừng request
+			databaseRoutingService.clearDataSourceKey();
+			return false;
 		}
 
-		// Khi người dùng đã đăng nhập, định tuyến database dựa trên role của user
-		if (loggedInUser.getRole() != null) {
-			System.out.println("==> Routing database for role: " + loggedInUser.getRole().getName());
-			databaseRoutingService.routingUserWithRole(loggedInUser.getRole());
-		} else {
-			System.out.println("==> Role not found, using default database!");
-			databaseRoutingService.routingUserWithRole(new RoleEntity("Default"));
+		// Validate user role
+		RoleEntity userRole = loggedInUser.getRole();
+		if (userRole == null) {
+			System.out.println("==> staffInterceptor: Access denied! No role found for user.");
+			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
+			databaseRoutingService.clearDataSourceKey();
+			return false;
 		}
-		System.out.println(loggedInUser.getRole());
-		// Kiểm tra nếu người dùng không thuộc role "Customer" (id = 3)
-		if (loggedInUser.getRole().getId() != 2) {
-			System.out.println("==> No permission, user intercepted! Role not allowed.");
-			response.sendRedirect(request.getContextPath() + "/admin/adminDashboard.htm");
+
+		// Strict staff role check (assuming staff role has ID 1)
+		if (userRole.getId() != 2) {
+			System.out.println("==> staffInterceptor: Access denied! This account don't have a permission.");
+			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
+			databaseRoutingService.clearDataSourceKey();
+			return false;
+		}
+
+		// Route to appropriate database
+		try {
+			databaseRoutingService.clearDataSourceKey();
+			databaseRoutingService.routingUserWithRole(userRole);
+			System.out.println("==> staffInterceptor: Routing to DataSource for role: " + userRole.getName());
+		} catch (Exception e) {
+			System.out.println("staffInterceptor: DataSource routing failed for role:" + userRole.getName());
+			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
+			databaseRoutingService.clearDataSourceKey();
 			return false;
 		}
 

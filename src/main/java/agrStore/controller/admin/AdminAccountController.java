@@ -38,6 +38,7 @@ import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
 import agrStore.service.WardService;
 import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -77,7 +78,7 @@ public class AdminAccountController {
 			@RequestParam(value = "id", required = false) Integer id, Model model ) {
 		// code
 		HttpSession session = request.getSession();
-
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		// Lấy ds các tỉnh
 		List<ProvinceEntity> provinces = provinceService.getListProvinces();
 		model.addAttribute("provinces", provinces);
@@ -118,7 +119,9 @@ public class AdminAccountController {
 			// Lưu phường vừa chọn vào session
 			session.setAttribute("selectedWard", selectedWard);
 		}
-		AccountEntity profile = this.accountService.getAccountById(id);
+		AccountEntity profile = this.accountService.getAccountById(loggedInUser.getAccountId());
+		profile.setFullName(UltilityImpl.XSSEscape4HTML(profile.getFullName()));
+		profile.setPhoneNumber(UltilityImpl.XSSEscape4HTML(profile.getPhoneNumber()));
 		model.addAttribute("profile", profile);
 		return "admin/account/adminProfile";
 	}

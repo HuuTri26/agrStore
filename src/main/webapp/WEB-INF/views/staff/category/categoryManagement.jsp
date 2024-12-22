@@ -115,6 +115,7 @@ button {
 											<thead>
 												<tr>
 													<th>Id</th>
+													<th>Image</th>
 													<th>Name</th>
 													<!-- <th>Status</th> -->
 													<th>Description</th>
@@ -126,6 +127,15 @@ button {
 
 													<tr>
 														<td>${category.categoryId }</td>
+														<td><div class="media-box">
+																<img
+																	src="<c:url value='/assets/category-images/${category.image }' />"
+																	class="media-avatar" />
+																<!-- 	<div class="media-box-body">
+																<div class="text-truncate">Karan Kumar</div>
+																<p>ID: #Max00987</p>
+														</div> -->
+															</div></td>
 														<td>${category.categoryName }</td>
 														<!-- <td><button class="badge shade-green min-70">Active</button>
 														</td> -->

@@ -54,8 +54,7 @@
 														<div class="mb-3">
 															<label for="" class="form-label">Mật khẩu mới</label> <input
 																name="new-password" type="password" class="form-control"
-																id="newPassword">
-															${newPass }
+																id="newPassword"> ${newPass }
 														</div>
 													</div>
 													<div class="col-xxl-4 col-sm-12 col-12">
@@ -73,6 +72,9 @@
 											<div class="col-sm-12 col-12">
 												<hr>
 												<button class="btn btn-info" type="submit">ChangePassword</button>
+												<button type="button" class="btn btn-light">
+													<a href="admin/adminDashboard.htm">Cancel</a>
+												</button>
 											</div>
 										</form:form>
 									</div>

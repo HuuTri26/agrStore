@@ -355,7 +355,7 @@ textarea {
 														<div class="mb-3">
 															<label for="address" class="form-label">StreetName</label>
 															<input type="text" id="streetName" name="streetName"
-																placeholder="Nhập tên đường cụ thể" class="form-control"
+																placeholder="Nhập tên đường cụ thể" value="${loggedInUser.address.streetName }" class="form-control"
 																class="txt-input w-5"> ${streetErr }
 														</div>
 													</div>
@@ -380,6 +380,7 @@ textarea {
 											<div class="col-sm-12 col-12">
 												<hr>
 												<button class="btn btn-info" name="save" type="submit">Save</button>
+													<button type="button" class="btn btn-light"><a href="admin/adminDashboard.htm">Cancel</a></button>
 											</div>
 										</div>
 										<!-- Row end -->

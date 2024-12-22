@@ -184,43 +184,50 @@
 									</c:choose>
 								</div>
 								<div class="card-body">
-									<div class="row gx-3">
-										<form action="staff/product/uploadImg.htm" method="post" enctype="multipart/form-data">
-											<!-- Product Image Section -->
-											<div class="col-sm-6 col-12">
-												<div class="card-border">
-													<div class="card-border-title">Product Images</div>
-													<div class="card-border-body">
-														<c:choose>
-															<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
-																<div id="dropzone" class="dropzone-dark">
-																	<div class="input_file_cate">
-																		<input name="image" type="file" class="dz-button" />
+									<form:form action="staff/productManagement/product.htm"
+										method="post" modelAttribute="product">
+										<div class="row gx-3">
+											<form action="staff/product/uploadImg.htm" method="post"
+												enctype="multipart/form-data">
+												<!-- Product Image Section -->
+												<div class="col-sm-6 col-12">
+													<div class="card-border">
+														<div class="card-border-title">Product Images</div>
+														<div class="card-border-body">
+
+															<c:choose>
+																<c:when test="${mode == 'ADD' || mode == 'EDIT'}">
+																	<div id="dropzone" class="dropzone-dark">
+																		<div class="input_file_cate">
+																			<input name="image" type="file" class="dz-button" />
+																		</div>
+																		<div class="dz-message needsclick button-container">
+
+																			<button type="submit" class="upload-btn">Upload
+
+																				Image</button>
+																		</div>
+																		${imgError}
 																	</div>
-																	<div class="dz-message needsclick button-container">
-
-																		<button type="submit" class="upload-btn">Upload
-
-																			Image</button>
-																	</div>
-																	${imgError}
-																</div>
-															</c:when>
-															<c:when test="${mode == 'VIEW'}">
-																<img
-																	src="<c:url value='/assets/product-images/${product.image }'/>"
-
-																	class="img-fluid change-img-avatar" alt="Product Image">
-															</c:when>
-														</c:choose>
+																</c:when>
+																<c:when test="${mode == 'VIEW'}">
+																	<img
+																		src="<c:url value='/assets/product-images/${product.image }'/>"
+																		class="img-fluid change-img-avatar"
+																		alt="Product Image">
+																</c:when>
+															</c:choose>
+														</div>
 													</div>
 												</div>
-											</div>
+											</form>
 
-										</form>
 
-										<form:form action="staff/productManagement/product.htm"
-											method="post" modelAttribute="product">
+
+
+
+											<%-- <form:form action="admin/productManagement/product.htm"
+											method="post" modelAttribute="product"> --%>
 
 
 											<!-- Product Details Section -->
@@ -236,8 +243,7 @@
 																	<label class="form-label">Product Name <span
 																		class="text-red">*</span></label>
 																	<form:input path="productName" class="form-control"
-																		placeholder="Enter product name"
-																		readonly="${mode == 'VIEW'}" />
+																		placeholder="" readonly="${mode == 'VIEW'}" />
 																	<form:errors path="productName" />
 																</div>
 															</div>
@@ -247,7 +253,7 @@
 																		class="text-red">*</span></label>
 																	<form:select path="category.categoryId"
 																		class="form-control" disabled="${mode == 'VIEW'}">
-																		<form:option value="">-- Select Product Category --</form:option>
+																		<form:option value="${product.category.categoryId}">${product.category.categoryName}</form:option>
 																		<c:forEach var="category" items="${categories}">
 																			<form:option value="${category.categoryId}">${category.categoryName}</form:option>
 																		</c:forEach>
@@ -260,7 +266,8 @@
 																	<label class="form-label">Product Price <span
 																		class="text-red">*</span></label>
 																	<form:input path="price" class="form-control"
-																		type="number" readonly="${mode == 'VIEW'}" />
+																		type="number" min="0" step="1000"
+																		readonly="${mode == 'VIEW'}" />
 																	<form:errors path="price" />
 																</div>
 															</div>
@@ -269,8 +276,7 @@
 																	<label class="form-label">Product Unit <span
 																		class="text-red">*</span></label>
 																	<form:input path="unit" class="form-control"
-																		placeholder="Enter product unit"
-																		readonly="${mode == 'VIEW'}" />
+																		placeholder="" readonly="${mode == 'VIEW'}" />
 																	<form:errors path="unit" />
 																</div>
 															</div>
@@ -288,7 +294,7 @@
 																	<label class="form-label">Quantity <span
 																		class="text-red">*</span></label>
 																	<form:input path="quantity" class="form-control"
-																		placeholder="Enter quantity"
+																		placeholder="" type="number"
 																		readonly="${mode == 'VIEW'}" />
 																</div>
 															</div>
@@ -298,7 +304,7 @@
 																		class="text-red">*</span></label>
 																	<form:select path="provider.id" class="form-control"
 																		disabled="${mode == 'VIEW'}">
-																		<form:option value="">-- Select Provider --</form:option>
+																		<form:option value="${product.provider.id}">${product.provider.providerName}</form:option>
 																		<c:forEach var="provider" items="${providers}">
 																			<form:option value="${provider.id}">${provider.providerName}</form:option>
 																		</c:forEach>
@@ -316,16 +322,16 @@
 															<div class="col-sm-12 col-12">
 																<div class="mb-0">
 																	<label class="form-label">Product Description <span
-																		class="text-red">*</span></label>
+																		class="text-red">*</span>
+																	</label>
 																	<form:textarea path="descript" rows="4"
-																		class="form-control"
-																		placeholder="Enter product description"
+																		class="form-control" placeholder=""
 																		readonly="${mode == 'VIEW'}"></form:textarea>
 																</div>
 															</div>
 															<div class="col-sm-12 col-12">
 																<div class="custom-btn-group flex-end">
-																	<button type="button" class="btn btn-light">Cancel</button>
+																	<button type="button" class="btn btn-light"><a href="staff/productManagement.htm">Cancel</a></button>
 																	<c:choose>
 																		<c:when test="${mode == 'ADD'}">
 																			<button name="${mode}" class="btn btn-success">Add
@@ -342,34 +348,34 @@
 													</div>
 												</div>
 											</div>
-										</form:form>
-
-									</div>
+										</div>
+									</form:form>
 								</div>
 							</div>
-
-
-
-
 						</div>
+
+
+
 
 					</div>
 
-					<!-- Row end -->
+				</div>
 
-				</div>
-				<!-- Content wrapper end -->
-				<!-- App Footer start -->
-				<div class="app-footer">
-					<span>Nhom10</span>
-				</div>
-				<!-- App footer end -->
+				<!-- Row end -->
 
 			</div>
-		</div>
-		<!-- Content wrapper scroll end -->
+			<!-- Content wrapper end -->
+			<!-- App Footer start -->
+			<div class="app-footer">
+				<span>Nhom10</span>
+			</div>
+			<!-- App footer end -->
 
-		<!-- *************
+		</div>
+	</div>
+	<!-- Content wrapper scroll end -->
+
+	<!-- *************
 				************ Main container end *************
 			************* -->
 

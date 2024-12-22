@@ -22,6 +22,7 @@ import agrStore.bean.UploadFile;
 import agrStore.entity.CategoryEntity;
 import agrStore.service.CategoryService;
 import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -65,6 +66,8 @@ public class AdminCategoryController {
 					System.out.println("==> View category mode");
 					CategoryEntity category = categoryService.getCategoryById(id);
 					model.addAttribute("mode", "VIEW");
+					category.setDescript(UltilityImpl.XSSEscape4HTML(category.getDescript()));
+					category.setCategoryName(UltilityImpl.XSSEscape4HTML(category.getCategoryName()));
 					model.addAttribute("category", category);
 				}
 				break;
@@ -74,6 +77,8 @@ public class AdminCategoryController {
 					System.out.println("==> Edit category mode");
 					CategoryEntity category = categoryService.getCategoryById(id);
 					model.addAttribute("mode", "EDIT");
+					category.setDescript(UltilityImpl.XSSEscape4HTML(category.getCategoryName()));
+					category.setCategoryName(UltilityImpl.XSSEscape4HTML(category.getDescript()));
 					model.addAttribute("category", category);
 				}
 				break;

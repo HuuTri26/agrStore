@@ -17,7 +17,7 @@
 	<!-- Đọc các thuộc tính từ file cấu hình -->
 	<context:property-placeholder
 
-		location="file:C:\Users\Windows\OneDrive\Desktop\DeAnChoCa3Mon\agrStore\src\main\webapp\WEB-INF\configs\database.properties" />
+		location="file:C:\Users\HUU TRI\eclipse-workspace\agrStoreManagement\src\main\webapp\WEB-INF\configs\database.properties" />
 
 
 

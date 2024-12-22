@@ -260,7 +260,7 @@
 
 															<div class="col-sm-12 col-12">
 																<div class="custom-btn-group flex-end">
-																	<button type="button" class="btn btn-light">Cancel</button>
+																	<button type="button" class="btn btn-light"><a href="admin/providerManagement.htm">Cancel</a></button>
 																	<c:choose>
 																		<c:when test="${mode == 'ADD'}">
 																			<button type="submit" name="${mode}"

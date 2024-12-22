@@ -137,8 +137,7 @@
 														<%-- <input name="currentAccount"
 															value="${loggedInUser.accountId }" readOnly
 															disabled="disabled" hidden />  --%>
-														<input
-															name="currentAccountName"
+														<input name="currentAccountName"
 															value="${loggedInUser.fullName }" readOnly
 															disabled="disabled" />
 
@@ -275,9 +274,7 @@
 																		value="${importBillDetail.product.productId}" />${importBillDetail.product.productId }</td>
 																	<td><div class="media-box">
 																			<img
-
 																				src="<c:url value='/assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
-
 																				alt="Bootstrap Gallery">
 																		</div></td>
 																	<td>${importBillDetail.product.productName }</td>
@@ -343,12 +340,22 @@
 																Import</button> -->
 														</div>
 													</div>
+													<div class="row mt-3">
+														<div class="col-md-12 text-end">
+															<button type="button" class="btn btn-light">
+																<a href="admin/importBillManagement.htm">Cancel</a>
+															</button>
+														</div>
+													</div>
+
 												</form>
 												<!-- thêm mới -->
 												<form:form id="successImportForm"
 													action="admin/importBillManagement/successImportBill.htm">
-													<button type="submit" class="btn btn-success">CONFIRM IMPORT</button>
+													<button type="submit" class="btn btn-success">CONFIRM
+														IMPORT</button>
 												</form:form>
+
 
 											</div>
 										</div>
