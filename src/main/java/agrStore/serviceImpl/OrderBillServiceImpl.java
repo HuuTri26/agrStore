@@ -106,6 +106,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 	public int deleteOrderBillUnconfirmedById(Integer orderBillId) {
 		// TODO Auto-generated method stub
 		return this.orderBillDAO.deleteOrderBillUnConfirmedById(orderBillId);
+	}
 
 	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId) {
 		return orderBillDAO.getOrderBillsByAccountId(aId);

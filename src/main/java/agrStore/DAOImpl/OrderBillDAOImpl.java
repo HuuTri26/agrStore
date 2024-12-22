@@ -235,6 +235,7 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		} finally {
 			session.close();
 		}
+	}
 
 	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId) {
 		List<OrderBillEntity> orderBills = null;

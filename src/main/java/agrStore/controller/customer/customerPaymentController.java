@@ -77,8 +77,7 @@ public class customerPaymentController {
 					orderBillService.deleteListOrderBill(duplicateOrderBills);
 					System.out.println("==> Successfully deleted duplicate pending orderBills");
 				} catch (Exception e) {
-					System.err.println("==> Error deleting duplicate pending orderBills: " + e.getMessage());
-					// Có thể log lỗi vào hệ thống log chuyên nghiệp
+					System.out.println("==> Error deleting duplicate pending orderBills: " + e.getMessage());
 				}
 			}
 		}
