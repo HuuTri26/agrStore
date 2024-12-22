@@ -58,8 +58,9 @@ public class AccountEntity {
 	@Column(name = "updateAt")
 	private Date updateAt;
 
-	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+//	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+//			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
 	private CartEntity cart;
 
 	@ManyToOne
@@ -70,16 +71,13 @@ public class AccountEntity {
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
 
-	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
 	private List<OrderBillEntity> orderBillList;
 
-	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
 	private List<ImportBillEntity> importBillList;
 
-	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH, CascadeType.REFRESH })
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
 	private List<FeedbackEntity> feedbackList;
 
 	public AccountEntity() {

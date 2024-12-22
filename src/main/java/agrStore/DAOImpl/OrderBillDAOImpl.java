@@ -132,21 +132,14 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	}
 
 	@Override
-
 	public long getTodayRevenue() {
 		// TODO Auto-generated method stub
 		Session session = this.factory.getCurrentSession();
-		/*
-		 * String hql = "SELECT SUM(o.totalPrice) " + "FROM OrderBillEntity o " +
-		 * "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
-		 */
-		/*
-		 * String hql = "SELECT COALESCE(SUM(o.totalPrice), 0) " + // Sử dụng COALESCE
-		 * để thay NULL bằng 0 "FROM OrderBillEntity o " +
-		 * "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
-		 */
+
+//		String hql = "SELECT SUM(o.totalPrice) " + "FROM OrderBillEntity o "
+//				+ "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
 		String hql = "SELECT SUM(o.totalPrice) " + "FROM OrderBillEntity o "
-				+ "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE())";
+				+ "WHERE CONVERT(date, o.orderTime) = CONVERT(date, GETDATE()) " + "AND o.statusOrder = 5";
 		try {
 			Query query = session.createQuery(hql);
 			Double result = (Double) query.uniqueResult();
@@ -192,21 +185,9 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 	}
 
 	@Override
-  
+
 	public int deleteOrderBillUnConfirmedById(Integer orderBillId) {
 		// hàm này ta sẽ set OrderBill status thành 6 -> tức đã xóa
-		// TODO Auto-generated method stub
-//		Session session = this.factory.getCurrentSession();
-//		String hql = "DELETE FROM OrderBillEntity ob WHERE ob.statusOrder = 1 AND ob.orderBillId = :orderBillId";
-//		try {
-//			Query query = session.createQuery(hql);
-//			query.setParameter("orderBillId", orderBillId);
-//			query.executeUpdate();
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
 		// TODO Auto-generated method stub
 		Session session = this.factory.openSession();
 		Transaction transaction = session.beginTransaction();
