@@ -201,5 +201,38 @@ public class OrderBillDAOImpl implements OrderBillDAO {
 		}
 		return orderBills;
 	}
+	@Override
+	public List<OrderBillEntity> getOrderBillsByAccountIdPaged(Integer aId, int page, int pageSize) {
+	    List<OrderBillEntity> orderBills = null;
+	    Session session = this.factory.getCurrentSession();
+	    String hql = "FROM OrderBillEntity o WHERE o.account.accountId = :aId";
+	    try {
+	        Query query = session.createQuery(hql);
+	        query.setParameter("aId", aId);
+	        query.setFirstResult((page - 1) * pageSize); // Bắt đầu từ bản ghi nào
+	        query.setMaxResults(pageSize); // Số lượng bản ghi mỗi trang
+	        orderBills = (List<OrderBillEntity>) query.list();
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.toString() + "\nStacktrace:");
+	        e.printStackTrace();
+	    }
+	    return orderBills;
+	}
+
+	@Override
+	public int countOrdersByAccountId(Integer aId) {
+	    int totalOrders = 0;
+	    Session session = this.factory.getCurrentSession();
+	    String hql = "SELECT COUNT(o) FROM OrderBillEntity o WHERE o.account.accountId = :aId";
+	    try {
+	        Query query = session.createQuery(hql);
+	        query.setParameter("aId", aId);
+	        totalOrders = ((Long) query.uniqueResult()).intValue();
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.toString() + "\nStacktrace:");
+	        e.printStackTrace();
+	    }
+	    return totalOrders;
+	}
 
 }

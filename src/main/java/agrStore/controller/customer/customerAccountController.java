@@ -304,15 +304,46 @@ public class customerAccountController {
 	}
 
 	@RequestMapping("/customerOrderList")
-	public String customerOderList(HttpServletRequest request, ModelMap model) {
-		HttpSession session = request.getSession();
-		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
-		
-		List<OrderBillEntity> orderBills = orderBillService.getOrderBillsByAccountId(loggedInUser.getAccountId());
-		model.addAttribute("orderBills", orderBills);
+	public String customerOrderList(
+	        @RequestParam(value = "page", defaultValue = "1") int page,
+	        @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+	        HttpServletRequest request, 
+	        ModelMap model) {
 
-		return "customer/account/customerOrderList";
+	    // Lấy tài khoản đã đăng nhập từ session
+	    HttpSession session = request.getSession();
+	    AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
+
+	    // Kiểm tra tài khoản người dùng đã đăng nhập chưa
+	    if (loggedInUser == null) {
+	        // Chuyển hướng về trang đăng nhập nếu không có người dùng đăng nhập
+	        return "redirect:/login";  // Or redirect to another login page
+	    }
+
+	    // Đếm tổng số hóa đơn của tài khoản
+	    int totalOrders = orderBillService.countOrdersByAccountId(loggedInUser.getAccountId());
+
+	    // Tính tổng số trang
+	    int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
+
+	    // Đảm bảo số trang hợp lệ
+	    if (page < 1) page = 1;
+	    if (page > totalPages) page = totalPages;
+
+	    // Lấy danh sách hóa đơn theo trang
+	    List<OrderBillEntity> orderBills = orderBillService.getOrderBillsByAccountIdPaged(
+	            loggedInUser.getAccountId(), page, pageSize);
+
+	    // Gửi dữ liệu đến view
+	    model.addAttribute("orderBills", orderBills);
+	  
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("pageSize", pageSize);
+
+	    return "customer/account/customerOrderList";
 	}
+
 
 	@RequestMapping("/customerOrderDetail")
 	public String customerOrderDetail(@RequestParam("oId") Integer oId, HttpServletRequest request, ModelMap model) {

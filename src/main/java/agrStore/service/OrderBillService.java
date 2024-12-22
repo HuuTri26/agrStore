@@ -11,20 +11,20 @@ import agrStore.entity.OrderBillEntity;
 @Service
 @Transactional
 public interface OrderBillService {
-	public void addOrderBill(OrderBillEntity orderBill);
-	public void updateOrderBill(OrderBillEntity orderBill);
-	public void deleteOrderBill(OrderBillEntity orderBill);
-	public void deleteListOrderBill(List<OrderBillEntity> orderBills);
-	public List<OrderBillEntity> getAllOrderBill();
-	public OrderBillEntity getOrderBillById(Integer id);
-	public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus);
-	public long getNumberOrderBillForToday();
+    public void addOrderBill(OrderBillEntity orderBill);
+    public void updateOrderBill(OrderBillEntity orderBill);
+    public void deleteOrderBill(OrderBillEntity orderBill);
+    public void deleteListOrderBill(List<OrderBillEntity> orderBills);
+    public List<OrderBillEntity> getAllOrderBill();
+    public OrderBillEntity getOrderBillById(Integer id);
+    public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus);
+    public long getNumberOrderBillForToday();
+    public long getTodayRevenue();
+    public List<OrderBillEntity> getOrderBillToday();
+    public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId);
+    public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status);
 
-	public long getTodayRevenue();
-	public List<OrderBillEntity> getOrderBillToday();
-	
-	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId);
-	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status);
-
-
+    // Bổ sung mới
+    public List<OrderBillEntity> getOrderBillsByAccountIdPaged(Integer aId, int page, int pageSize);
+    public int countOrdersByAccountId(Integer aId);
 }

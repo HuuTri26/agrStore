@@ -153,49 +153,54 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="dashboard__order-pagination">
-									<nav aria-label="Page navigation pagination--one"
-										class="pagination-wrapper">
-										<ul class="pagination justify-content-center">
-											<li class="page-item pagination-item disabled"><a
-												class="page-link pagination-link" href="#" tabindex="-1">
-													<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-                              <path
-															d="M6.91663 1.16634L1.08329 6.99967L6.91663 12.833"
-															stroke="currentColor" stroke-width="1.5"
-															stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-											</a></li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link active" href="#">1</a></li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link" href="#">2</a></li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link" href="#">3</a></li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link" href="#">4</a></li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link" href="#">5</a></li>
-											<li class="page-item pagination-item">
-												<p class="page-link pagination-link">...</p>
-											</li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link" href="#">21</a></li>
-											<li class="page-item pagination-item"><a
-												class="page-link pagination-link" href="#"> <svg
-														width="8" height="14" viewBox="0 0 8 14" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-                              <path
-															d="M1.08337 1.16634L6.91671 6.99967L1.08337 12.833"
-															stroke="currentColor" stroke-width="1.5"
-															stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-											</a></li>
-										</ul>
-									</nav>
-								</div>
-							</div>
+														<div class="dashboard__order-pagination">
+						    <nav aria-label="Page navigation pagination--one" class="pagination-wrapper">
+						        <ul class="pagination justify-content-center">
+						            <!-- Previous Page Link -->
+						            <c:if test="${currentPage > 1}">
+						                <li class="page-item pagination-item">
+						                    <a class="page-link pagination-link" href="customer/customerOrderList.htm?page=${currentPage - 1}" tabindex="-1">
+						                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+						                            <path d="M6.91663 1.16634L1.08329 6.99967L6.91663 12.833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						                        </svg>
+						                    </a>
+						                </li>
+						            </c:if>
+						
+						            <!-- Page Number Links (Dynamic range based on current page) -->
+						            <c:forEach var="i" begin="1" end="${totalPages}">
+						                <!-- Show pages 1, last page, or pages around the current page -->
+						                <c:if test="${i == 1 || i == totalPages || (i >= currentPage - 1 && i <= currentPage + 1)}">
+						                    <li class="page-item ${i == currentPage ? 'active' : ''}">
+						                        <a class="page-link pagination-link" href="customer/customerOrderList.htm?page=${i}">
+						                            ${i}
+						                        </a>
+						                    </li>
+						                </c:if>
+						
+						                <!-- Show ellipsis for skipped pages -->
+						                <c:if test="${i == 4 && currentPage > 5}">
+						                    <li class="page-item pagination-item disabled">
+						                        <span class="page-link">...</span>
+						                    </li>
+						                </c:if>
+						            </c:forEach>
+						
+						            <!-- Next Page Link -->
+						            <c:if test="${currentPage < totalPages}">
+						                <li class="page-item pagination-item">
+						                    <a class="page-link pagination-link" href="customer/customerOrderList.htm?page=${currentPage + 1}">
+						                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+						                            <path d="M1.08337 1.16634L6.91671 6.99967L1.08337 12.833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						                        </svg>
+						                    </a>
+						                </li>
+						            </c:if>
+						        </ul>
+						    </nav>
+						</div>
+
+
 						</div>
 					</div>
 				</div>

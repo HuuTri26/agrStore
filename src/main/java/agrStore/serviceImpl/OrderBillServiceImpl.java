@@ -17,93 +17,90 @@ import agrStore.service.OrderBillService;
 @Service
 public class OrderBillServiceImpl implements OrderBillService {
 
-	@Autowired
-	private OrderBillDAO orderBillDAO;
+    @Autowired
+    private OrderBillDAO orderBillDAO;
 
-	@Autowired
-	OrderBillDetailDAO orderBillDetailDAO;
+    @Autowired
+    OrderBillDetailDAO orderBillDetailDAO;
 
-	@Override
-	public void addOrderBill(OrderBillEntity orderBill) {
-		orderBillDAO.addOrderBill(orderBill);
+    @Override
+    public void addOrderBill(OrderBillEntity orderBill) {
+        orderBillDAO.addOrderBill(orderBill);
+    }
 
-	}
+    @Override
+    public void updateOrderBill(OrderBillEntity orderBill) {
+        orderBillDAO.updateOrderBill(orderBill);
+    }
 
-	@Override
-	public void updateOrderBill(OrderBillEntity orderBill) {
-		orderBillDAO.updateOrderBill(orderBill);
+    @Override
+    public List<OrderBillEntity> getAllOrderBill() {
+        return this.orderBillDAO.getAllOrderBill();
+    }
 
-	}
+    @Override
+    public OrderBillEntity getOrderBillById(Integer id) {
+        return this.orderBillDAO.getOrderBillById(id);
+    }
 
-	@Override
-	public List<OrderBillEntity> getAllOrderBill() {
-		// TODO Auto-generated method stub
-		List<OrderBillEntity> orderBillEntities = this.orderBillDAO.getAllOrderBill();
-		return orderBillEntities;
-	}
+    @Override
+    public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus) {
+        return this.orderBillDAO.updateOrderStatus(orderBillIdUpdate, newOrderStatus);
+    }
 
-	@Override
-	public OrderBillEntity getOrderBillById(Integer id) {
-		// TODO Auto-generated method stub
-		OrderBillEntity orderBill = this.orderBillDAO.getOrderBillById(id);
-		return orderBill;
-	}
+    @Override
+    public long getNumberOrderBillForToday() {
+        return this.orderBillDAO.getNumberOrderBillForToday();
+    }
 
-	@Override
-	public int updateOrderBillStatus(Integer orderBillIdUpdate, int newOrderStatus) {
-		// TODO Auto-generated method stub
-		return this.orderBillDAO.updateOrderStatus(orderBillIdUpdate, newOrderStatus);
-	}
+    @Override
+    public long getTodayRevenue() {
+        return this.orderBillDAO.getTodayRevenue();
+    }
 
-	@Override
-	public long getNumberOrderBillForToday() {
-		// TODO Auto-generated method stub
-		return this.orderBillDAO.getNumberOrderBillForToday();
-	}
+    @Override
+    public List<OrderBillEntity> getOrderBillToday() {
+        return this.orderBillDAO.getOrderBillForToday();
+    }
 
-	@Override
+    @Override
+    public void deleteOrderBill(OrderBillEntity orderBill) {
+        orderBillDAO.deleteOrderBill(orderBill);
+    }
 
-	public long getTodayRevenue() {
-		// TODO Auto-generated method stub
-		return this.orderBillDAO.getTodayRevenue();
-	}
+    @Override
+    public void deleteListOrderBill(List<OrderBillEntity> orderBills) {
+        System.out.println("==> Delete {0} orderBills".formatted(orderBills.size()));
+        for (OrderBillEntity order : orderBills) {
+            List<OrderBillDetailEntity> details = orderBillDetailDAO.getOrderBillDetailByOderBillId(order.getOrderBillId());
+            System.out.println("==> Delete {0} orderBillDetails".formatted(details.size()));
+            for (OrderBillDetailEntity detail : details) {
+                orderBillDetailDAO.deleteOrderBillDetail(detail);
+                System.out.println("==> Delete orderBillDetail successfully!");
+            }
+            deleteOrderBill(order);
+            System.out.println("==> Delete orderBill successfully!");
+        }
+    }
 
-	@Override
-	public List<OrderBillEntity> getOrderBillToday() {
-		// TODO Auto-generated method stub
-		return this.orderBillDAO.getOrderBillForToday();
-	}
+    @Override
+    public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
+        return orderBillDAO.getPendingOrderBillByAccountId(aId, status);
+    }
 
-	public void deleteOrderBill(OrderBillEntity orderBill) {
-		orderBillDAO.deleteOrderBill(orderBill);
+    @Override
+    public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId) {
+        return orderBillDAO.getOrderBillsByAccountId(aId);
+    }
 
-	}
+    // Bổ sung phương thức phân trang
+    @Override
+    public List<OrderBillEntity> getOrderBillsByAccountIdPaged(Integer aId, int page, int pageSize) {
+        return orderBillDAO.getOrderBillsByAccountIdPaged(aId, page, pageSize);
+    }
 
-	@Override
-	public List<OrderBillEntity> getPendingOrderBillByAccountId(Integer aId, Integer status) {
-		return orderBillDAO.getPendingOrderBillByAccountId(aId, status);
-	}
-
-	@Override
-	public void deleteListOrderBill(List<OrderBillEntity> orderBills) {
-		System.out.println("==> Delete {0} orderBills".formatted(orderBills.size()));
-		for (OrderBillEntity order : orderBills) {
-			List<OrderBillDetailEntity> details = orderBillDetailDAO.getOrderBillDetailByOderBillId(order.getOrderBillId());
-			System.out.println("==> Delete {0} orderBillDetails".formatted(details.size()));
-			for (OrderBillDetailEntity detail : details) {
-				orderBillDetailDAO.deleteOrderBillDetail(detail);
-				System.out.println("==> Delete orderBillDetail successfully!");
-			}
-			deleteOrderBill(order);
-			System.out.println("==> Delete orderBill successfully!");
-		}
-
-
-	}
-
-	@Override
-	public List<OrderBillEntity> getOrderBillsByAccountId(Integer aId) {
-		return orderBillDAO.getOrderBillsByAccountId(aId);
-	}
-
+    @Override
+    public int countOrdersByAccountId(Integer aId) {
+        return orderBillDAO.countOrdersByAccountId(aId);
+    }
 }
