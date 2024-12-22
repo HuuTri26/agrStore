@@ -167,8 +167,10 @@ public class AdminImportBillController {
 		model.addAttribute("products", products);
 
 		// lấy tổng tiên và số lượng hàng hóa của hóa đơn nhập hàng
-		int totalImportPrice = (int) session.getAttribute("totalImportPrice");
-		int totalImportQuantity = (int) session.getAttribute("totalImportQuantity");
+		if (session.getAttribute("totalImportPrice") != null && session.getAttribute("totalImportQuantity") != null) {
+			int totalImportPrice = (int) session.getAttribute("totalImportPrice");
+			int totalImportQuantity = (int) session.getAttribute("totalImportQuantity");
+		}
 
 		List<ImportBillDetailEntity> importBillDetailList = (List<ImportBillDetailEntity>) session
 				.getAttribute("importBillDetailList");
@@ -268,18 +270,30 @@ public class AdminImportBillController {
 		}
 		if (session.getAttribute("totalImportPrice") == null) {
 			model.addAttribute("errors", "Vui lòng chọn sản phẩm");
+			// láy ds provider để hiển thị ra select
+			List<ProviderEntity> providers = this.providerService.getListProvider();
+			model.addAttribute("providers", providers);
 			return "admin/importBill/createImportBill";
 		}
 		if (session.getAttribute("totalImportQuantity") == null) {
 			model.addAttribute("errors", "Vui lòng chọn sản phẩm");
+			// láy ds provider để hiển thị ra select
+			List<ProviderEntity> providers = this.providerService.getListProvider();
+			model.addAttribute("providers", providers);
 			return "admin/importBill/createImportBill";
 		}
 		if (session.getAttribute("quantities") == null) {
 			model.addAttribute("errors", "Vui lòng chọn sản phẩm");
+			// láy ds provider để hiển thị ra select
+			List<ProviderEntity> providers = this.providerService.getListProvider();
+			model.addAttribute("providers", providers);
 			return "admin/importBill/createImportBill";
 		}
 		if (session.getAttribute("importBillDetailList") == null) {
 			model.addAttribute("errors", "Vui lòng chọn sản phẩm");
+			// láy ds provider để hiển thị ra select
+			List<ProviderEntity> providers = this.providerService.getListProvider();
+			model.addAttribute("providers", providers);
 			return "admin/importBill/createImportBill";
 		}
 		int providerId = (int) session.getAttribute("adminSelectedProviderId");
@@ -311,7 +325,6 @@ public class AdminImportBillController {
 		List<ImportBillDetailEntity> importBillDetailList = (List<ImportBillDetailEntity>) session
 				.getAttribute("importBillDetailList");
 
-		
 		ImportBillEntity importBill = new ImportBillEntity(totalImportPrice, totalImportQuantity, formattedDateObject,
 				loggedInUser);
 		int resultAddImportBill = this.importBillService.addImportBill(importBill);
@@ -346,20 +359,5 @@ public class AdminImportBillController {
 
 		return "redirect:/admin/importBillManagement.htm"; // Redirect về trang quản lý importBill
 	}
-
-	/*
-	 * @RequestMapping(value = "/importBillManagement/importBill", method =
-	 * RequestMethod.POST) public String
-	 * processImportBill(@ModelAttribute("importBill") @RequestParam("mode") String
-	 * mode) {
-	 * 
-	 * if ("CREATE".equals(mode)) { // categoryService.addCategory(category);
-	 * 
-	 * } else if ("EDIT".equals(mode)) { //
-	 * categoryService.updateCategory(category); }
-	 * 
-	 * return "redirect:/admin/importBill/importBillManagement.htm"; // Redirect sau
-	 * khi xử lý }
-	 */
 
 }
