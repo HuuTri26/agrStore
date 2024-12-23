@@ -18,7 +18,7 @@
 	<context:property-placeholder
 
 
-		location="file:C:\Users\HUU TRI\eclipse-workspace\agrStoreManagement\src\main\webapp\WEB-INF\configs\database.properties" />
+		location="file:E:\SpringMVCPtit\agrStore\src\main\webapp\WEB-INF\configs\database.properties" />
 
 
 
