@@ -331,7 +331,7 @@
 															</div>
 															<div class="col-sm-12 col-12">
 																<div class="custom-btn-group flex-end">
-																	<button type="button" class="btn btn-light">Cancel</button>
+																		<button type="button" class="btn btn-light"><a href="admin/productManagement.htm">Cancel</a></button>
 																	<c:choose>
 																		<c:when test="${mode == 'ADD'}">
 																			<button name="${mode}" class="btn btn-success">Add

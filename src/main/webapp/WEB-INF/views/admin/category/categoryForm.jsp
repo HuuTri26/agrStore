@@ -266,7 +266,7 @@
 
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
-													<button type="button" class="btn btn-light">Cancel</button>
+													<button type="button" class="btn btn-light"><a href="admin/categoryManagement.htm">Cancel</a></button>
 
 													<!-- Nút submit tương ứng với từng mode -->
 													<c:choose>

@@ -28,6 +28,7 @@ import agrStore.service.CategoryService;
 import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
 import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 
 
 @Controller
@@ -95,6 +96,9 @@ public class AdminProductController {
 					System.out.println("==> View product mode");
 					ProductEntity product = productService.getProductById(id);
 					model.addAttribute("mode", "VIEW");
+					product.setProductName(UltilityImpl.XSSEscape4HTML(product.getProductName()));
+					product.setUnit(UltilityImpl.XSSEscape4HTML(product.getUnit()));
+					product.setDescript(UltilityImpl.XSSEscape4HTML(product.getDescript()));
 					model.addAttribute("product", product);
 					model.addAttribute("pdImg", product.getImage());
 				}
@@ -105,6 +109,9 @@ public class AdminProductController {
 					System.out.println("==> Edit product mode");
 					ProductEntity product = productService.getProductById(id);
 					model.addAttribute("mode", "EDIT");
+					product.setProductName(UltilityImpl.XSSEscape4HTML(product.getProductName()));
+					product.setUnit(UltilityImpl.XSSEscape4HTML(product.getUnit()));
+					product.setDescript(UltilityImpl.XSSEscape4HTML(product.getDescript()));
 					model.addAttribute("product", product);
 				}
 				break;

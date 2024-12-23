@@ -50,39 +50,39 @@
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Dashboard</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'category' ? 'active' : ''}"><a href="staff/categoryManagement.htm">
+				<%-- <li class="sidebar-dropdown ${currentPage == 'category' ? 'active' : ''}"><a href="staff/categoryManagement.htm">
 						<i class="bi bi-collection"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Category</span>
-				</a></li>
+				</a></li> --%>
 				<li class="sidebar-dropdown ${currentPage == 'product' ? 'active' : ''}"><a href="staff/productManagement.htm">
 						<i class="bi bi-box" style="font-size: 1.2rem; margin-right: 8px;"></i>
 						<span class="menu-text">Product</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'importBill' ? 'active' : ''}"><a href="staff/importBillManagement.htm">
+				<%-- <li class="sidebar-dropdown ${currentPage == 'importBill' ? 'active' : ''}"><a href="staff/importBillManagement.htm">
 						<i class="bi bi-file-earmark-text"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Import Bill</span>
-				</a></li>
+				</a></li> --%>
 				<li class="sidebar-dropdown ${currentPage == 'order' ? 'active' : ''}"><a href="staff/orderManagement.htm">
 						<i class="bi bi-bag" style="font-size: 1.2rem; margin-right: 8px;"></i>
 						<span class="menu-text">Orders</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'staff' ? 'active' : ''}" ><a href="staff/staffManagement.htm">
+				<%-- <li class="sidebar-dropdown ${currentPage == 'staff' ? 'active' : ''}" ><a href="staff/staffManagement.htm">
 						<i class="bi bi-people"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Staffs</span>
-				</a></li>
+				</a></li> --%>
 				<li class="sidebar-dropdown ${currentPage == 'customer' ? 'active' : ''}"><a href="staff/customerManagement.htm">
 						<i class="bi bi-person"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Customer</span>
 				</a></li>
-				<li class="sidebar-dropdown ${currentPage == 'provider' ? 'active' : ''}"><a href="staff/providerManagement.htm">
+			<%-- 	<li class="sidebar-dropdown ${currentPage == 'provider' ? 'active' : ''}"><a href="staff/providerManagement.htm">
 						<i class="bi bi-truck"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span
 						class="menu-text">Provider</span>
-				</a></li>
+				</a></li> --%>
 				<li class="sidebar-dropdown ${currentPage == 'feedback' ? 'active' : ''}"><a href="staff/feedbackManagement.htm">
 						<i class="bi bi-chat-dots"
 						style="font-size: 1.2rem; margin-right: 8px;"></i> <span

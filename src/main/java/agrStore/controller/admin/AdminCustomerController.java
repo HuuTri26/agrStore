@@ -24,6 +24,7 @@ import agrStore.entity.DistrictEntity;
 import agrStore.entity.ProvinceEntity;
 import agrStore.entity.WardEntity;
 import agrStore.service.AccountService;
+import agrStore.utility.UltilityImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -73,6 +74,8 @@ public class AdminCustomerController {
 				if (id != null) {
 					// Category category = categoryService.getCategoryById(id);
 					model.addAttribute("mode", "VIEW");
+					customer.setFullName(UltilityImpl.XSSEscape4HTML(customer.getFullName()));
+					customer.setPhoneNumber(UltilityImpl.XSSEscape4HTML(customer.getPhoneNumber()));
 					// model.addAttribute("category", category);
 					model.addAttribute("customer", customer);
 //					model.addAttribute("wardName", xa.getName());

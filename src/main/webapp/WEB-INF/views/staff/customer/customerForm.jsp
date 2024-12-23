@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%@include file="/WEB-INF/views/include/admin/header.jsp"%>
+<%@include file="/WEB-INF/views/include/staff/header.jsp"%>
 <head>
 <!-- Scrollbar CSS -->
 <link rel="stylesheet"
@@ -149,9 +149,9 @@
 </head>
 <body>
 	<div class="page-wrapper">
-		<%@include file="/WEB-INF/views/include/admin/sideBar.jsp"%>
+		<%@include file="/WEB-INF/views/include/staff/sideBar.jsp"%>
 		<div class="main-container">
-			<%@include file="/WEB-INF/views/include/admin/bodyHeader.jsp"%>
+			<%@include file="/WEB-INF/views/include/staff/bodyHeader.jsp"%>
 
 			<!-- Content wrapper scroll start -->
 			<div class="content-wrapper-scroll">
@@ -475,7 +475,7 @@
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
 													<button type="button" class="btn btn-light">
-														<a href="admin/customerManagement.htm">Back</a>
+														<a href="staff/customerManagement.htm">Back</a>
 													</button>
 													<!-- Nút submit tương ứng với từng mode -->
 													<c:choose>
@@ -516,6 +516,6 @@
 
 
 	</div>
-	<%@include file="/WEB-INF/views/include/admin/footer.jsp"%>
+	<%@include file="/WEB-INF/views/include/staff/footer.jsp"%>
 </body>
 </html>

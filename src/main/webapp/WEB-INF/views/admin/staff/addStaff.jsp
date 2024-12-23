@@ -389,13 +389,13 @@
 																</div>
 																${streetErr }
 															</div>
-															<div class="col-sm-12 col-12">
+															<%-- <div class="col-sm-12 col-12">
 																<!-- Form Field Start -->
 																<div class="mb-3">
 																	<label for="address" class="form-label">Address</label>
 																	<textarea rows="5" cols="60" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${loggedInUser.address.ward.district.province.name }</textarea>
 																</div>
-															</div>
+															</div> --%>
 
 
 
@@ -467,7 +467,7 @@
 
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
-													<button type="button" class="btn btn-light">Cancel</button>
+													<button type="button" class="btn btn-light"><a href="admin/staffManagement.htm">Cancel</a></button>
 													<!-- Nút submit tương ứng với từng mode -->
 
 													<button type="submit" class="btn btn-success"

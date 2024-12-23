@@ -53,11 +53,11 @@
 		<div class="header-middle biolife-sticky-object ">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3 col-md-2 col-md-6 col-xs-6">
-						<a href="index-2.html" class="biolife-logo"><img
+					 <div class="col-lg-3 col-md-2 col-md-6 col-xs-6">
+						<%-- <a href="index-2.html" class="biolife-logo"><img
 							src="<c:url value='/assets/assets/images/logo-biolife-1.png'/>"
-							alt="biolife logo" width="135" height="34"></a>
-					</div>
+							alt="biolife logo" width="135" height="34"></a> --%>
+					</div> 
 					<div class="col-lg-6 col-md-7 hidden-sm hidden-xs">
 						<div class="primary-menu">
 							<ul class="menu biolife-menu clone-main-menu clone-primary-menu"
@@ -101,12 +101,12 @@
 									</form>
 								</div>
 							</div>
-							<div class="wishlist-block hidden-sm hidden-xs">
-								<a href="#" class="link-to"> <span class="icon-qty-combine">
-										<i class="icon-heart-bold biolife-icon"></i> <span class="qty">4</span>
-								</span>
-								</a>
-							</div>
+<!-- 							<div class="wishlist-block hidden-sm hidden-xs"> -->
+<!-- 								<a href="#" class="link-to"> <span class="icon-qty-combine"> -->
+<!-- 										<i class="icon-heart-bold biolife-icon"></i> <span class="qty">4</span> -->
+<!-- 								</span> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
 							<div class="minicart-block">
 								<div class="minicart-contain">
 									<a href="customer/customerCart.htm" class="link-to"> <span
@@ -114,7 +114,7 @@
 											class="icon-cart-mini biolife-icon"></i> <span class="qty">8</span>
 									</span> <span class="title">Giỏ hàng -</span> <span class="sub-total">0.00</span>
 									</a>
-									<div class="cart-content">
+								<%-- 	<div class="cart-content">
 										<div class="cart-inner">
 											<ul class="products">
 												<li>
@@ -158,7 +158,7 @@
 													href="#" class="btn">Thanh Toán</a>
 											</p>
 										</div>
-									</div>
+									</div> --%>
 								</div>
 							</div>
 							<div class="mobile-menu-toggle">

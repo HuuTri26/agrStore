@@ -399,7 +399,8 @@
 																	<label class="form-label">Staff streetname
 																		Address <span class="text-red">*</span>
 																	</label>
-																	<textarea rows="5" cols="60" readonly="readonly">${staff.address.streetName }, ${staff.address.ward.name }, ${staff.address.ward.district.name }, ${staff.address.ward.district.province.name }</textarea>
+																	
+																	<textarea rows="5" cols="60" readonly="readonly">${UltilityImpl.XSSEscape4HTML(staff.address.streetName) }, ${UltilityImpl.XSSEscape4HTML(staff.address.ward.name) }, ${UltilityImpl.XSSEscape4HTML(staff.address.ward.district.name) }, ${UltilityImpl.XSSEscape4HTML(staff.address.ward.district.province.name) }</textarea>
 																</div>
 															</div>
 															<div class="col-sm-6 col-12">
@@ -460,7 +461,7 @@
 
 											<div class="col-sm-12 col-12">
 												<div class="custom-btn-group flex-end">
-													<button type="button" class="btn btn-light">Cancel</button>
+												<button type="button" class="btn btn-light"><a href="admin/staffManagement.htm">Cancel</a></button>
 													<!-- Nút submit tương ứng với từng mode -->
 													
 					

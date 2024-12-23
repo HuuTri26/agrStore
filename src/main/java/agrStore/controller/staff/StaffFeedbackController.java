@@ -1,4 +1,4 @@
-package agrStore.controller.admin;
+package agrStore.controller.staff;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ import agrStore.entity.ProductEntity;
 import agrStore.entity.ProviderEntity;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminFeedbackController {
+@RequestMapping("/staff")
+public class StaffFeedbackController {
 	@Autowired
 	FeedbackService feedbackService;
 
@@ -36,7 +36,7 @@ public class AdminFeedbackController {
 			@CookieValue(value = "accountEmail", defaultValue = "", required = false) String userEmail) {
 		// code
 		model.addAttribute("currentPage", "feedback");
-		return "admin/feedback/feedbackManagement";
+		return "staff/feedback/feedbackManagement";
 	}
 
 	@RequestMapping(value = "/feedbackManagement/feedback", method = RequestMethod.GET)
@@ -83,7 +83,7 @@ public class AdminFeedbackController {
 			}
 		}
 
-		return "admin/feedback/feedbackForm"; // Trả về cùng một trang JSP
+		return "staff/feedback/feedbackForm"; // Trả về cùng một trang JSP
 	}
 
 	@RequestMapping(value = "/feedbackManagement/deleteFeedback", method = RequestMethod.GET)
@@ -100,7 +100,7 @@ public class AdminFeedbackController {
 			}
 		}
 
-		return "redirect:/admin/feedbackManagement.htm";
+		return "redirect:/staff/feedbackManagement.htm";
 	}
 
 	@RequestMapping(value = "/feedbackManagement/feedback", method = RequestMethod.POST)
@@ -119,6 +119,6 @@ public class AdminFeedbackController {
 			}
 		}
 
-		return "redirect:/admin/feedback/feedbackManagement.htm"; // Redirect sau khi xử lý
+		return "redirect:/staff/feedback/feedbackManagement.htm"; // Redirect sau khi xử lý
 	}
 }

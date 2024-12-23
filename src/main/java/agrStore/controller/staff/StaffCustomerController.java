@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,10 +19,17 @@ import agrStore.DAO.DistrictDAO;
 import agrStore.DAO.ProvinceDAO;
 import agrStore.DAO.WardDAO;
 import agrStore.entity.AccountEntity;
+import agrStore.entity.CategoryEntity;
+import agrStore.entity.DistrictEntity;
+import agrStore.entity.ProvinceEntity;
+import agrStore.entity.WardEntity;
 import agrStore.service.AccountService;
+import agrStore.utility.UltilityImpl;
+
 @Controller
 @RequestMapping("/staff")
 public class StaffCustomerController {
+
 	@Autowired
 	private AccountService accountService;
 	@Autowired
@@ -38,7 +46,7 @@ public class StaffCustomerController {
 		model.addAttribute("currentPage", "customer");
 		List<AccountEntity> customerList = this.accountService.getAllCustomer();
 		model.addAttribute("customers", customerList);
-		return "admin/customer/customerManagement";
+		return "staff/customer/customerManagement";
 	}
 
 	@RequestMapping(value = "/customerManagement/customer", method = RequestMethod.GET)
@@ -66,6 +74,8 @@ public class StaffCustomerController {
 				if (id != null) {
 					// Category category = categoryService.getCategoryById(id);
 					model.addAttribute("mode", "VIEW");
+					customer.setFullName(UltilityImpl.XSSEscape4HTML(customer.getFullName()));
+					customer.setPhoneNumber(UltilityImpl.XSSEscape4HTML(customer.getPhoneNumber()));
 					// model.addAttribute("category", category);
 					model.addAttribute("customer", customer);
 //					model.addAttribute("wardName", xa.getName());
@@ -85,7 +95,7 @@ public class StaffCustomerController {
 			}
 		}
 
-		return "admin/customer/customerForm"; // Trả về cùng một trang JSP
+		return "staff/customer/customerForm"; // Trả về cùng một trang JSP
 	}
 
 	@RequestMapping(value = "/customerManagement/customer", method = RequestMethod.POST)
@@ -99,13 +109,36 @@ public class StaffCustomerController {
 			// categoryService.updateCategory(category);
 		}
 
-		return "redirect:/admin/customer/customerManagement.htm"; // Redirect sau khi xử lý
+		return "redirect:/staff/customer/customerManagement.htm"; // Redirect sau khi xử lý
 	}
 
 	@RequestMapping(value = "/customerManagement/customer", params = "btnCancel")
 	public String backToCustomerManagement() {
 
-		return "redirect:/admin/customer/customerManagement.htm";
+		return "redirect:/staff/customer/customerManagement.htm";
+	}
+
+	@RequestMapping(value = "/customerManagement/disableCustomer", method = RequestMethod.GET)
+	public String disableCustomer(@RequestParam("id") Integer id) {
+
+		AccountEntity customer = accountService.getAccountById(id);
+
+		try {
+			if(customer.getStatus()  == Boolean.TRUE) {
+			customer.setStatus(Boolean.FALSE);
+			}else {
+				customer.setStatus(Boolean.TRUE);
+				
+			}
+
+			accountService.updateAccount(customer);
+			System.out.println("==> Switch customer status to  successfully!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("==> Switch customer status to  failed!");
+		}
+
+		return "redirect:/staff/customerManagement.htm";
 	}
 
 }

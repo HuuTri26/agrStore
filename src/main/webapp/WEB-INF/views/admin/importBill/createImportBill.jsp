@@ -137,8 +137,7 @@
 														<%-- <input name="currentAccount"
 															value="${loggedInUser.accountId }" readOnly
 															disabled="disabled" hidden />  --%>
-														<input
-															name="currentAccountName"
+														<input name="currentAccountName"
 															value="${loggedInUser.fullName }" readOnly
 															disabled="disabled" />
 
@@ -184,22 +183,7 @@
 																	<td>${product.unit }</td>
 																</tr>
 															</c:forEach>
-															<!-- Dữ liệu mẫu -->
-															<%-- <tr>
-															<td><input type="checkbox" /></td>
-															<td>SP001</td>
-															<td><div class="media-box">
-																	<img
-																		src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																		alt="Bootstrap Gallery">
-																</div></td>
-															<td>Sản phẩm A</td>
-															<td><fmt:formatNumber value="85000"
-																	pattern="#,###.## VND;VND -#,###.##" type="currency"
-																	currencySymbol="VND" /></td>
-															<td>Cái</td>
-														</tr> --%>
-															<!-- Sẽ được fill bằng JavaScript -->
+															
 														</tbody>
 													</table>
 													<%-- <form:form action="importBillManagement/getTempProducts.htm"
@@ -236,38 +220,7 @@
 															</tr>
 														</thead>
 														<tbody id="selectedProducts">
-															<%-- <c:forEach items="${selectedProductList }"
-																var="selectedProduct">
-																<tr>
-																	<td><input type="hidden" name="productId"
-																		value="${selectedProduct.productId}" />${selectedProduct.productId }</td>
-																	<td><div class="media-box">
-																			<img
-																				src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																				alt="Bootstrap Gallery">
-																		</div></td>
-																	<td>${selectedProduct.productName }</td>
-																	<td>${selectedProduct.unit }</td>
-																	<td><fmt:formatNumber
-																			value="${selectedProduct.price }"
-																			pattern="#,###.## VND;VND -#,###.##" type="currency"
-																			currencySymbol="VND" /></td>
-																	<td class="product-quantity" data-title="Import price">
-																		<input type="text" name="importPrice" />
-																	</td>
-																	<td class="product-quantity" data-title="Quantity">
-																		<input type="number" min="1" value="1" name="quantity" />
-																	</td>
-																	<td><fmt:formatNumber value="85000"
-																			pattern="#,###.## VND;VND -#,###.##" type="currency"
-																			currencySymbol="VND" /></td>
-																	<td>
-																		<!-- <button type="button">Delete</button> --> <a
-																		href="importBillManagement/getSelectedProductsAfterDelete.htm?productId=${selectedProduct.productId}"
-																		class="btn btn-danger">Delete</a>
-																	</td>
-																</tr>
-															</c:forEach> --%>
+															
 															<c:forEach items="${importBillDetailList }"
 																var="importBillDetail">
 																<tr>
@@ -275,9 +228,7 @@
 																		value="${importBillDetail.product.productId}" />${importBillDetail.product.productId }</td>
 																	<td><div class="media-box">
 																			<img
-
 																				src="<c:url value='/assets/product-images/${importBillDetail.product.image }" class="media-avatar'/>"
-
 																				alt="Bootstrap Gallery">
 																		</div></td>
 																	<td>${importBillDetail.product.productName }</td>
@@ -298,28 +249,7 @@
 																</tr>
 															</c:forEach>
 
-															<%-- <tr>
-																<td>SP002</td>
-																<td>
-																	<div class="media-box">
-																		<img
-																			src="<c:url value='assets/admin/assets/images/user2.png" class="media-avatar'/>"
-																			alt="Bootstrap Gallery">
-																	</div>
-																</td>
-																<td>Sản phẩm B</td>
-																<td>Cái</td>
-																<td><fmt:formatNumber value="85000"
-																		pattern="#,###.## VND;VND -#,###.##" type="currency"
-																		currencySymbol="VND" /></td>
-																<td class="product-quantity" data-title="Quantity">
-																	<input type="number" min="1" value="1" />
-																</td>
-																<td><fmt:formatNumber value="85000"
-																		pattern="#,###.## VND;VND -#,###.##" type="currency"
-																		currencySymbol="VND" /></td>
-																<td><button type="button">Delete</button></td>
-															</tr> --%>
+															
 														</tbody>
 														<tfoot>
 															<tr>
@@ -343,12 +273,22 @@
 																Import</button> -->
 														</div>
 													</div>
+													<div class="row mt-3">
+														<div class="col-md-12 text-end">
+															<button type="button" class="btn btn-light">
+																<a href="admin/importBillManagement.htm">Cancel</a>
+															</button>
+														</div>
+													</div>
+
 												</form>
 												<!-- thêm mới -->
 												<form:form id="successImportForm"
 													action="admin/importBillManagement/successImportBill.htm">
-													<button type="submit" class="btn btn-success">CONFIRM IMPORT</button>
+													<button type="submit" class="btn btn-success">CONFIRM
+														IMPORT</button>
 												</form:form>
+
 
 											</div>
 										</div>

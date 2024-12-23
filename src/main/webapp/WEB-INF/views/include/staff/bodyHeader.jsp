@@ -22,10 +22,10 @@
 			<!-- Header actions start -->
 			<li class="dropdown"><a href="#" id="userSettings"
 				class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-					<span class="user-name d-none d-md-block">Toan</span> <span
+					<span class="user-name d-none d-md-block">${loggedInUser.fullName }</span> <span
 					class="avatar"> <img
-						src="<c:url value='/assets/assets/images/user3.png'/>"
-						alt="Free Admin Templates"> <span class="status busy"></span>
+						src="<c:url value='/assets/user-images/${loggedInUser.avatar }'/>"
+						alt=""> <span class="status busy"></span>
 				</span>
 			</a>
 				<div class="dropdown-menu dropdown-menu-end"
