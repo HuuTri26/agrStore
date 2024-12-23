@@ -18,7 +18,7 @@
 	<context:property-placeholder
 
 
-		location="file:C:\Users\HUU TRI\eclipse-workspace\agrStoreManagement\src\main\webapp\WEB-INF\configs\database.properties" />
+		location="file:${DB_PATH}/database.properties" />
 
 
 
@@ -27,7 +27,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN4;integratedSecurity=false;trustServerCertificate=true;"
+		p:url="jdbc:sqlserver://localhost:1433;Database=DB_WEBNONGSAN;integratedSecurity=false;trustServerCertificate=true;"
 		p:username="ADMIN_AGENT" p:password="Re$adRa5tOF2Edr51As@">
 	</bean>
 
