@@ -67,7 +67,7 @@ public class AccountEntity {
 	@JoinColumn(name = "roleId")
 	private RoleEntity role;
 
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST})
+	@ManyToOne()
 	@JoinColumn(name = "addressId")
 	private AddressEntity address;
 

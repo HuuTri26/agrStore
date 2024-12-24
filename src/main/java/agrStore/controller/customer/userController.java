@@ -1,8 +1,11 @@
 package agrStore.controller.customer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -79,88 +82,75 @@ public class userController {
 		System.out.println("==> Begin login session");
 		return "customer/login/userLogin";
 	}
+	 private static final int MAX_FAILED_ATTEMPTS = 5;
+	    private static final long LOCK_TIME = 1 * 60 * 1000; // 10 phút (ms)
+	    private Map<String, List<Long>> failedAttemptsByIP = new ConcurrentHashMap<>();
 
-	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-	public String userLogin(ModelMap model, HttpServletRequest request,
-			@ModelAttribute("account") AccountEntity account, BindingResult errors, HttpSession session)
-			throws IOException {
-		// Bỏ comment tất cả đoạn này để chạy đc reCaptcha
+	    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+	    public String userLogin(ModelMap model, HttpServletRequest request,
+	                            @ModelAttribute("account") AccountEntity account,
+	                            BindingResult errors, HttpSession session) throws IOException {
 
-		// Lấy phản hồi của Google reCaptcha
-//		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+	        // Lấy IP của người dùng
+	        String ipAddress = request.getRemoteAddr();
 
-		// Lấy các mã captcha khi tạo ra cái ảnh
-//		String captcha = session.getAttribute("captchaSecurity").toString();
+	        // Lấy danh sách thời gian thất bại của IP này
+	        List<Long> failedAttempts = failedAttemptsByIP.getOrDefault(ipAddress, new ArrayList<>());
+	        long currentTime = System.currentTimeMillis();
 
-		// Lấy captcha do người dùng nhập
-//		String captchaInput = request.getParameter("captcha-input");
+	        // Loại bỏ các lần thất bại đã quá 10 phút
+	        failedAttempts.removeIf(attemptTime -> (currentTime - attemptTime) > LOCK_TIME);
 
-//		System.out.println("==> Captcha code use for this sesion: "+ captcha);
+	        // Cập nhật danh sách sau khi loại bỏ
+	        failedAttemptsByIP.put(ipAddress, failedAttempts);
 
-		// Xác minh ReCaptcha của Google
-//		Boolean isVerify = RecaptchaVerification.verify(gRecaptchaResponse);
+	        // Kiểm tra nếu IP bị khóa
+	        if (failedAttempts.size() >= MAX_FAILED_ATTEMPTS) {
+	            model.addAttribute("error", "IP của bạn đã bị khóa tạm thời do nhập sai mật khẩu quá nhiều lần. Vui lòng thử lại sau 10 phút.");
+	            return "customer/login/userLogin";
+	        }
 
-		// Xác minh Captcha bằng hình ảnh
-//		Boolean isMatch = captcha != null && captcha.equals(captchaInput);
+	        // Kiểm tra dữ liệu nhập từ người dùng
+	        if (account.getGmail().isEmpty()) {
+	            errors.rejectValue("gmail", "account", "Xin vui lòng nhập username(gmail) của bạn!");
+	            return "customer/login/userLogin";
+	        } else if (account.getPassword().isEmpty()) {
+	            errors.rejectValue("password", "account", "Xin vui lòng nhập password!");
+	            return "customer/login/userLogin";
+	        }
 
-//		if (!isVerify || !isMatch) {
-//	        // Nếu reCAPTCHA hoặc ảnh CAPTCHA không đúng
-//	        if (!isVerify) {
-//	            System.out.println("Error: Google ReCaptcha verification failed!");
-//	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
-//	        }
-//	        if (!isMatch) {
-//	            System.out.println("Error: Wrong image captcha code!");
-//	            model.addAttribute("reCaptcha", "Vui lòng nhập đúng ReCaptcha!");
-//	        }
-//	        return "customer/login/userLogin";
-//	    }
+	        // Kiểm tra username và password
+	        Boolean isValid = Boolean.TRUE;
+	        AccountEntity account_t = accountService.getAccountByGmail(account.getGmail());
+	        if (account_t == null || !account_t.getPassword().equals(accountUltility.getHashPassword(account.getPassword()))) {
+	            // Thêm thời gian thất bại vào danh sách
+	            failedAttempts.add(currentTime);
+	            failedAttemptsByIP.put(ipAddress, failedAttempts);
 
-		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
-		if (account.getGmail().isEmpty()) {
-			errors.rejectValue("gmail", "account", "Xin vui lòng nhập username(gmail) của bạn!");
-			System.out.println("Error: Username field empty!");
-			return "customer/login/userLogin";
-		} else if (account.getPassword().isEmpty()) {
-			errors.rejectValue("password", "account", "Xin vui lòng nhập password!");
-			System.out.println("Error: Password field empty!");
-			return "customer/login/userLogin";
-		}
+	            errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
+	            isValid = Boolean.FALSE;
+	        } else if (!account_t.getStatus()) {
+	            errors.rejectValue("gmail", "account", "Tài khoản của bạn đã bị khóa!");
+	            isValid = Boolean.FALSE;
+	        }
 
-		// Kiểm tra username, password, và trạng thái tài khoản
-		Boolean isValid = Boolean.TRUE;
-		AccountEntity account_t = accountService.getAccountByGmail(account.getGmail());
-		if (account_t == null) {
-			errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: This user's account doesn't exist!");
-		} else if (!account_t.getPassword().equals(accountUltility.getHashPassword(account.getPassword()))) {
-			errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Wrong password!");
-		} else if (!account_t.getStatus()) {
-			errors.rejectValue("gmail", "account", "Tài khoản của bạn đã bị khóa!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: This user's account is out of order!");
-		}
+	        if (isValid) {
+	            // Đăng nhập thành công, reset thất bại cho IP
+	            failedAttemptsByIP.remove(ipAddress);
+	            session.setAttribute("loggedInUser", account_t);
 
-		if (isValid) {
-			System.out.println("==> Login successfully! End login session");
-			session.setAttribute("loggedInUser", account_t);
-
-			if (account_t.getRole().getId() == 1) {
-				return "admin/adminDashboard";
-			} else if (account_t.getRole().getId() == 2) {
-				return "staff/staffDashboard";
-			} else {
-				return "redirect:/index.htm";
-			}
-
-		} else {
-			System.out.println("==> Login failed!");
-			return "customer/login/userLogin";
-		}
-	}
+	            if (account_t.getRole().getId() == 1) {
+	                return "admin/adminDashboard";
+	            } else if (account_t.getRole().getId() == 2) {
+	                return "staff/staffDashboard";
+	            } else {
+	                return "redirect:/index.htm";
+	            }
+	        } else {
+	            return "customer/login/userLogin";
+	        }
+	    }
+	
 
 	@RequestMapping("/forgotPass")
 	public String showforgotPassForm(Model model) {

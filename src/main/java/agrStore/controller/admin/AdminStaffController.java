@@ -152,100 +152,109 @@ public class AdminStaffController {
 	}
 
 	//
-	@RequestMapping(value = "/staffManagement/staff",params = "edit-staff", method = RequestMethod.POST)
+	@RequestMapping(value = "/staffManagement/staff", params = "edit-staff", method = RequestMethod.POST)
 	public String editProfile(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
 
-		HttpSession session = request.getSession();
+	    // Lấy session hiện tại
+	    HttpSession session = request.getSession();
 
-		Boolean isValid = Boolean.TRUE;
+	    // Biến kiểm tra tính hợp lệ của dữ liệu
+	    Boolean isValid = Boolean.TRUE;
 
-		// Lấy các trường mà người dùng đc phép sửa
-		String fullName = request.getParameter("fullName");
-		String phoneNumber = request.getParameter("phoneNumber");
-		String streetName = accountUltility.standardizeStreetName(request.getParameter("streetName"));
+	    // Lấy các trường thông tin mà người dùng nhập vào từ form
+	    String fullName = request.getParameter("fullName"); // Họ và tên
+	    String phoneNumber = request.getParameter("phoneNumber"); // Số điện thoại
+	    String streetName = accountUltility.standardizeStreetName(request.getParameter("streetName")); // Tên đường (chuẩn hóa)
 
-		// Lấy các dữ liệu từ session
-		AccountEntity staff = (AccountEntity) session.getAttribute("staff");
-		WardEntity selectedWard = (WardEntity) session.getAttribute("selectedWard");
+	    // Lấy các đối tượng từ session
+	    AccountEntity staff = (AccountEntity) session.getAttribute("staff"); // Nhân viên đang chỉnh sửa
+	    WardEntity selectedWard = (WardEntity) session.getAttribute("selectedWard"); // Phường được chọn
 
-		// Lưu address cũ
-		AddressEntity oldAddr = staff.getAddress();
+	    // Lưu địa chỉ cũ của nhân viên để kiểm tra sau
+	    AddressEntity oldAddr = staff.getAddress();
 
-		if (fullName.isEmpty()) {
-			model.addAttribute("nameErr", "Vui lòng nhập họ và tên!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Name field empty!");
-		} else if (phoneNumber.isEmpty()) {
-			model.addAttribute("phoneErr", "Vui lòng nhập số điện thoại của bạn!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Phone number field empty!");
-		} else if (!accountUltility.isValidPhoneNumber(phoneNumber)) {
-			model.addAttribute("phoneErr", "Số điện thoại bạn nhập không hợp lệ, vui lòng nhập lại!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Phone number invalid!");
-		} else if (!streetName.isEmpty() && !accountUltility.isValidStreetName(streetName)) {
-			model.addAttribute("streetErr", "Tên đường không hợp lệ, vui lòng nhập lại!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Street name invalid!");
-		}
+	    // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+	    if (fullName.isEmpty()) {
+	        // Họ và tên bị để trống
+	        model.addAttribute("nameErr", "Vui lòng nhập họ và tên!");
+	        isValid = Boolean.FALSE;
+	        System.out.println("Error: Name field empty!");
+	    } else if (phoneNumber.isEmpty()) {
+	        // Số điện thoại bị để trống
+	        model.addAttribute("phoneErr", "Vui lòng nhập số điện thoại của bạn!");
+	        isValid = Boolean.FALSE;
+	        System.out.println("Error: Phone number field empty!");
+	    } else if (!accountUltility.isValidPhoneNumber(phoneNumber)) {
+	        // Số điện thoại không hợp lệ
+	        model.addAttribute("phoneErr", "Số điện thoại bạn nhập không hợp lệ, vui lòng nhập lại!");
+	        isValid = Boolean.FALSE;
+	        System.out.println("Error: Phone number invalid!");
+	    } else if (!streetName.isEmpty() && !accountUltility.isValidStreetName(streetName)) {
+	        // Tên đường không hợp lệ (nếu được nhập)
+	        model.addAttribute("streetErr", "Tên đường không hợp lệ, vui lòng nhập lại!");
+	        isValid = Boolean.FALSE;
+	        System.out.println("Error: Street name invalid!");
+	    }
 
-		if (selectedWard != null && !streetName.isEmpty()) {
-			System.out.println("==> Found new ward, begin update new address!");
-			// Kiểm tra địa chỉ có tồn tại trong CSDL?
-			AddressEntity existingAddr = addressService.getAddressByStreetAndWard(streetName, selectedWard.getId());
-			try {
-				if (existingAddr != null) { // Nếu address có tồn tại trong CSDL
-					System.out.println("==> Found existing address, set existing address to user's account!");
-					staff.setAddress(existingAddr);
-				} else { // Nếu address ko tồn tại trong CSDL
-					System.out.println("==> Address not found, create new address for user's address!");
-					// Tạo 1 address mà người dùng vừa nhập
-					AddressEntity inputAddr = new AddressEntity();
-					inputAddr.setStreetName(streetName);
-					inputAddr.setWard(selectedWard);
-					addressService.addAddress(inputAddr);
-					staff.setAddress(inputAddr);
-				}
-			} catch (Exception e) {
-				System.out.println("Error: User's address update failed!");
-			}
-		} else {
-			System.out.println("==> Ward or street name not found, skipping address update!");
-		}
+	    // Kiểm tra và cập nhật địa chỉ mới nếu người dùng chọn phường và nhập tên đường
+	    if (selectedWard != null && !streetName.isEmpty()) {
+	        System.out.println("==> Found new ward, begin update new address!");
+	        // Kiểm tra xem địa chỉ có tồn tại trong cơ sở dữ liệu không
+	        AddressEntity existingAddr = addressService.getAddressByStreetAndWard(streetName, selectedWard.getId());
+	        try {
+	            if (existingAddr != null) {
+	                // Nếu địa chỉ tồn tại, gán địa chỉ này cho nhân viên
+	                System.out.println("==> Found existing address, set existing address to user's account!");
+	                staff.setAddress(existingAddr);
+	            } else {
+	                // Nếu địa chỉ chưa tồn tại, tạo địa chỉ mới và thêm vào cơ sở dữ liệu
+	                System.out.println("==> Address not found, create new address for user's address!");
+	                AddressEntity inputAddr = new AddressEntity();
+	                inputAddr.setStreetName(streetName);
+	                inputAddr.setWard(selectedWard);
+	                addressService.addAddress(inputAddr);
+	                staff.setAddress(inputAddr);
+	            }
+	        } catch (Exception e) {
+	            System.out.println("Error: User's address update failed!");
+	        }
+	    } else {
+	        System.out.println("==> Ward or street name not found, skipping address update!");
+	    }
 
-		if (isValid) {
+	    // Nếu dữ liệu hợp lệ, tiến hành cập nhật thông tin nhân viên
+	    if (isValid) {
+	        try {
+	            // Cập nhật thông tin nhân viên
+	            staff.setFullName(accountUltility.standardizeName(fullName)); // Họ tên (chuẩn hóa)
+	            staff.setPhoneNumber(phoneNumber); // Số điện thoại
+	            staff.setUpdateAt(new Date()); // Ngày cập nhật
+	            accountService.updateAccount(staff); // Lưu thông tin vào cơ sở dữ liệu
+	            System.out.println("==> Staff's account updated successfully!");
 
-			try {
-				staff.setFullName(accountUltility.standardizeName(fullName));
-				staff.setPhoneNumber(phoneNumber);
-				staff.setUpdateAt(new Date());
-				accountService.updateAccount(staff);
-				System.out.println("==> Staff's account updated successfully!");
+	            // Kiểm tra nếu địa chỉ cũ không còn được tham chiếu bởi tài khoản nào thì xóa
+	            if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
+	                addressService.deleteAddress(oldAddr);
+	                System.out.println("==> Old address deleted!");
+	            }
 
-				// Nếu 0 có account nào tham chiếu tới address cũ xóa address này
-				if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
-					addressService.deleteAddress(oldAddr);
-					System.out.println("==> Old address deleted!");
-				}
+	            // Điều hướng về trang dashboard nếu thành công
+	            return "redirect:/admin/adminDashboard.htm";
+	        } catch (Exception e) {
+	            System.out.println("Error: User's account updated failed!");
+	        } finally {
+	            // Giải phóng các thuộc tính trong session sau khi xử lý xong
+	            sessionStatus.setComplete();
+	            session.removeAttribute("selectedProvince");
+	            session.removeAttribute("selectedDistrict");
+	            session.removeAttribute("selectedWard");
+	            session.removeAttribute("staff");
+	            System.out.println("==> Clear model attributes");
+	        }
+	    }
 
-				return "redirect:/admin/adminDashboard.htm";
-			} catch (Exception e) {
-				System.out.println("Error: User's account updated failed!");
-
-			} finally {
-				// Giải phóng dữ liệu của model attributes
-				sessionStatus.setComplete();
-				session.removeAttribute("selectedProvince");
-				session.removeAttribute("selectedDistrict");
-				session.removeAttribute("selectedWard");
-				session.removeAttribute("staff");
-
-				System.out.println("==> Clear model attributes");
-
-			}
-		}
-
-		return "admin/staff/staffForm";
+	    // Trường hợp có lỗi, quay lại form chỉnh sửa với thông báo lỗi
+	    return "admin/staff/staffForm";
 	}
 
 	@RequestMapping("/staffManagement/addStaff")
@@ -401,7 +410,7 @@ public class AdminStaffController {
 				}
 			}
 
-			// Tạo account mới với role là customer
+			// Tạo account mới với role là staff
 			System.out.println("==> Create new user's account");
 			RoleEntity staffRole = roleService.getRoleById(2);
 			if (staffRole != null) {
