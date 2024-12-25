@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import agrStore.bean.UploadFile;
+import agrStore.entity.AccountEntity;
 import agrStore.entity.CategoryEntity;
 import agrStore.entity.ProductEntity;
 import agrStore.entity.ProviderEntity;
 import agrStore.service.CategoryService;
 import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 
 @Controller
@@ -114,7 +116,8 @@ public class StaffProductController {
 	@RequestMapping(value = "/productManagement/product", params = "ADD", method = RequestMethod.POST)
 	public String addProduct(HttpServletRequest request, Model model, @ModelAttribute("product") ProductEntity product,
 			BindingResult errors) {
-
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		Boolean isValid = Boolean.TRUE;
 
 		if (product.getProductName() == null || ultility.standardizeName(product.getProductName()).isEmpty()) {
@@ -158,10 +161,12 @@ public class StaffProductController {
 
 				productService.addProduct(newProduct);
 				System.out.println("==> New product add successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", newProduct);
 				return "redirect:/staff/productManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New product add failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 				model.addAttribute("mode", "ADD");
 				return "staff/product/productForm";
 			}
@@ -169,8 +174,9 @@ public class StaffProductController {
 	}
 
 	@RequestMapping(value = "/productManagement/product", params = "EDIT", method = RequestMethod.POST)
-	public String editProduct(Model model, @ModelAttribute("product") ProductEntity product, BindingResult errors) {
-
+	public String editProduct(Model model, @ModelAttribute("product") ProductEntity product, BindingResult errors,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		Boolean isValid = Boolean.TRUE;
 
 		// Kiểm tra tính hợp lệ của các trường
@@ -213,10 +219,12 @@ public class StaffProductController {
 
 				productService.updateProduct(product);
 				System.out.println("==> Product updated successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", product);
 				return "redirect:/staff/productManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: Product update failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 				model.addAttribute("mode", "EDIT");
 				return "staff/product/productForm";
 			}
@@ -225,16 +233,19 @@ public class StaffProductController {
 	}
 
 	@RequestMapping(value = "/productManagement/deleteProduct", method = RequestMethod.GET)
-	public String deleteProduct(@RequestParam("id") Integer id) {
-
+	public String deleteProduct(@RequestParam("id") Integer id,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		ProductEntity product = productService.getProductById(id);
 
 		try {
 			product.setStatus(Boolean.FALSE);
 			productService.updateProduct(product);
 			System.out.println("==> Set product status to 'False' successfully!");
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", product);
 		} catch (Exception e) {
 			System.out.println("Error: Set product status to 'False' failed!");
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 			e.printStackTrace();
 		}
 

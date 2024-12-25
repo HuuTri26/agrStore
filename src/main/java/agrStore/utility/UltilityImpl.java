@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -25,6 +26,9 @@ import agrStore.entity.CartItemEntity;
 
 @Service
 public class UltilityImpl implements Ultility {
+	
+	 private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
+	  private static final int PASSWORD_LENGTH = 12; // Độ dài mật khẩu
 
 	private static final String ALGORITHM = "AES";
 
@@ -236,6 +240,17 @@ public class UltilityImpl implements Ultility {
 		// Trả về true nếu tất cả các điều kiện đều đạt
 		return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
 	}
+	
+	public String generateRandomPassword() {
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder(PASSWORD_LENGTH);
+
+        for (int i = 0; i < PASSWORD_LENGTH; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            password.append(CHARACTERS.charAt(index));
+        }
+        return password.toString();
+    }
 	
 	
 

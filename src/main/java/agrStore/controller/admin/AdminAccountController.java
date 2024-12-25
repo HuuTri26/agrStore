@@ -37,6 +37,7 @@ import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
 import agrStore.service.WardService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 import agrStore.utility.UltilityImpl;
 
@@ -180,8 +181,11 @@ public class AdminAccountController {
 					addressService.addAddress(inputAddr);
 					loggedInUser.setAddress(inputAddr);
 				}
+				
+		
 			} catch (Exception e) {
 				System.out.println("Error: User's address update failed!");
+			
 			}
 		} else {
 			System.out.println("==> Ward or street name not found, skipping address update!");
@@ -195,7 +199,7 @@ public class AdminAccountController {
 				loggedInUser.setUpdateAt(new Date());
 				accountService.updateAccount(loggedInUser);
 				System.out.println("==> User's account updated successfully!");
-
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", loggedInUser);
 				// Nếu 0 có account nào tham chiếu tới address cũ xóa address này
 				if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
 					addressService.deleteAddress(oldAddr);
@@ -204,6 +208,7 @@ public class AdminAccountController {
 
 				return "redirect:/admin/adminDashboard.htm";
 			} catch (Exception e) {
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 				System.out.println("Error: User's account updated failed!");
 				
 			} finally {
@@ -246,8 +251,8 @@ public class AdminAccountController {
 		if (changePass.getPassword().isEmpty()) {
 			errors.rejectValue("password", "changePass", "Vui lòng nhập mật khẩu hiện tại!");
 			isValidPass = Boolean.FALSE;
-		} else if (newPass.isEmpty()) {
-			model.addAttribute("newPass","Vui lòng nhập mật khẩu mới");
+		} else if (newPass.isEmpty() || !accountUltility.isPasswordValid(newPass)) {
+			model.addAttribute("newPass","Mật khẩu trống hoặc không đủ mạnh.Vui lòng nhập mật khẩu mới");
 			isValidPass = Boolean.FALSE;
 		} else if (reEnterNewPass.isEmpty()) {
 			model.addAttribute("reNewPass","Vui lòng nhập lại mật khẩu mới");
@@ -268,8 +273,10 @@ public class AdminAccountController {
 				loggedInUser.setPassword(accountUltility.getHashPassword(newPass));
 				accountService.updateAccount(loggedInUser);
 				System.out.println("==> Admin account password updated successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", loggedInUser);
 			} catch (Exception e) {
 				System.out.println("Error: Admin account password updated unsuccessfully!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 			}
 		} else {
 			System.out.println("Error: Admin account password updated unsuccessfully!");

@@ -59,7 +59,7 @@
 										class="requite">*</span>
 									</label>
 									<form:input path="gmail" id="fid-name" name="name"
-										placeHolder="example123@gmail.com" class="txt-input" />
+										placeHolder="example123@gmail.com" type="email" class="txt-input" />
 									<form:errors path="gmail" />
 								</p>
 								

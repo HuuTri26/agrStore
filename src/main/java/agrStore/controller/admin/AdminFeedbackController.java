@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import agrStore.service.FeedbackService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.UltilityImpl;
+import agrStore.entity.AccountEntity;
 import agrStore.entity.FeedbackEntity;
 import agrStore.entity.ProductEntity;
 import agrStore.entity.ProviderEntity;
@@ -87,15 +89,18 @@ public class AdminFeedbackController {
 	}
 
 	@RequestMapping(value = "/feedbackManagement/deleteFeedback", method = RequestMethod.GET)
-	public String deleteFeedback(@RequestParam("id") Integer id) {
-
+	public String deleteFeedback(@RequestParam("id") Integer id,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		FeedbackEntity feedback = feedbackService.getFeedbackById(id);
 		if (feedback != null) {
 			try {
 				feedbackService.deleteFeedback(feedback);
 				System.out.println("==> Delete feedback successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", feedback);
 			} catch (Exception e) {
 				System.out.println("Error: Delete feedback failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", e);
 				e.printStackTrace();
 			}
 		}

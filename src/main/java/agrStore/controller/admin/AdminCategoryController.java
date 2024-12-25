@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import agrStore.bean.UploadFile;
+import agrStore.entity.AccountEntity;
 import agrStore.entity.CategoryEntity;
 import agrStore.service.CategoryService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 import agrStore.utility.UltilityImpl;
 
@@ -52,7 +54,7 @@ public class AdminCategoryController {
 	@RequestMapping(value = "/categoryManagement/category", method = RequestMethod.GET)
 	public String handleCategory(@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "id", required = false) Integer id, Model model) {
-
+		
 		if (action != null) {
 			switch (action) {
 			case "add":
@@ -91,7 +93,8 @@ public class AdminCategoryController {
 	@RequestMapping(value = "/categoryManagement/category", params = "ADD", method = RequestMethod.POST)
 	public String addCategory(HttpServletRequest request, Model model,
 			@ModelAttribute("category") CategoryEntity category, BindingResult errors) {
-
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		Boolean isValid = Boolean.TRUE;
 
 		if (category.getCategoryName() == null || ultility.standardizeName(category.getCategoryName()).isEmpty()) {
@@ -112,10 +115,12 @@ public class AdminCategoryController {
 
 				categoryService.addCategory(category);
 				System.out.println("==> New category add successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", category);
 				return "redirect:/admin/categoryManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New category add failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 				model.addAttribute("mode", "ADD");
 				return "admin/category/categoryForm";
 			}
@@ -125,7 +130,8 @@ public class AdminCategoryController {
 	@RequestMapping(value = "/categoryManagement/category", params = "EDIT", method = RequestMethod.POST)
 	public String editCategory(HttpServletRequest request, Model model,
 			@ModelAttribute("category") CategoryEntity category, BindingResult errors) {
-
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		Boolean isValid = Boolean.TRUE;
 
 		if (category.getCategoryName() == null || ultility.standardizeName(category.getCategoryName()).isEmpty()) {
@@ -144,10 +150,13 @@ public class AdminCategoryController {
 				category.setDescript(ultility.standardize(category.getDescript()));
 
 				categoryService.updateCategory(category);
+				System.out.println("Error: New category update success!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", category);
 				return "redirect:/admin/categoryManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New category update failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 				model.addAttribute("mode", "EDIT");
 				return "admin/category/categoryForm";
 			}
@@ -155,17 +164,20 @@ public class AdminCategoryController {
 	}
 
 	@RequestMapping(value = "/categoryManagement/deleteCategory", method = RequestMethod.GET)
-	public String deleteCategory(@RequestParam("id") Integer id) {
-
+	public String deleteCategory(@RequestParam("id") Integer id,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		CategoryEntity category = categoryService.getCategoryById(id);
 
 		try {
 			category.setStatus(Boolean.FALSE);
 
 			categoryService.updateCategory(category);
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", category);
 			System.out.println("==> Set category status to 'False' successfully!");
 		} catch (Exception e) {
 			e.printStackTrace();
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 			System.out.println("==> Set category status to 'False' failed!");
 		}
 

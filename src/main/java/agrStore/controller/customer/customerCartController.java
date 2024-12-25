@@ -16,6 +16,7 @@ import agrStore.entity.CartItemEntity;
 import agrStore.entity.ProductEntity;
 import agrStore.service.CartItemService;
 import agrStore.service.ProductService;
+import agrStore.utility.ServerLogger;
 
 @Controller
 @RequestMapping("/customer")
@@ -105,9 +106,11 @@ public class customerCartController {
 			}
 
 			System.out.println("==> Product added to cart successfully!");
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", existingCartItem);
 			return "redirect:/index.htm";
 
 		} catch (Exception e) {
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 			System.out.println("Error: product add to cart failed!");
 
 			return "redirect:/index.htm";
@@ -118,12 +121,15 @@ public class customerCartController {
 	@RequestMapping(value = "/customerCart", params = "delete", method = RequestMethod.GET)
 	public String removeSelectedItemFromCart(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		List<CartItemEntity> selectedCartItems = (List<CartItemEntity>) session.getAttribute("selectedCartItems");
 		try {
 			cartItemService.deleteCartItem(selectedCartItems);
 
 			System.out.println("==> Delete all cart item successfully!");
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", selectedCartItems);
 		} catch (Exception e) {
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", e);
 			e.printStackTrace();
 			System.out.println("Error: Delete all cart item failed!");
 		}
@@ -134,6 +140,7 @@ public class customerCartController {
 	@RequestMapping(value = "/customerCart", params = "update", method = RequestMethod.GET)
 	public String updateItemCartQuanity(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		List<CartItemEntity> cartItems = (List<CartItemEntity>) session.getAttribute("cartItems");
 		
 		
@@ -147,11 +154,13 @@ public class customerCartController {
 					
 					if(quantity > 0 && quantity <= product.getQuantity()) {
 						cartItemService.updateCartItem(cartItem);
+						ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", cartItems);
 					}else {
 						System.out.println("Error: Insufficient product quantity in stock!");
 					}
 					
 				} catch (NumberFormatException e) {
+					ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 					System.out.println("Error: Invalid quantity for cartItemId: " + cartItem.getCartItemId());
 				}
 			}

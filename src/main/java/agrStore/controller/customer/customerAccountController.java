@@ -270,8 +270,8 @@ public class customerAccountController {
 		if (changePass.getPassword().isEmpty()) {
 			errors.rejectValue("password", "changePass", "Vui lòng nhập mật khẩu hiện tại!");
 			isValidPass = Boolean.FALSE;
-		} else if (newPass.isEmpty()) {
-			model.addAttribute("newPass","Vui lòng nhập mật khẩu mới");
+		} else if (newPass.isEmpty() || accountUltility.isPasswordValid(newPass)) {
+			model.addAttribute("newPass","Mật khẩu trống hoặc không đủ mạnh.Vui lòng nhập mật khẩu mới");
 			isValidPass = Boolean.FALSE;
 		} else if (reEnterNewPass.isEmpty()) {
 			model.addAttribute("reNewPass","Vui lòng nhập lại mật khẩu mới");

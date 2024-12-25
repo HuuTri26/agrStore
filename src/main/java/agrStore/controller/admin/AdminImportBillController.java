@@ -32,6 +32,7 @@ import agrStore.service.ImportBillDetailService;
 import agrStore.service.ImportBillService;
 import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
+import agrStore.utility.ServerLogger;
 
 @Controller
 @RequestMapping("/admin")
@@ -332,6 +333,7 @@ public class AdminImportBillController {
 			System.out.println("Thêm importBill thất bại");
 		} else {
 			System.out.println("Thêm importBill thành công");
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", importBill);
 		}
 
 		for (ImportBillDetailEntity importBillDetailEntity : importBillDetailList) {

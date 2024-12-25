@@ -37,6 +37,7 @@ import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
 import agrStore.service.WardService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 import agrStore.utility.UltilityImpl;
 
@@ -195,7 +196,7 @@ public class StaffAccountController {
 				loggedInUser.setUpdateAt(new Date());
 				accountService.updateAccount(loggedInUser);
 				System.out.println("==> User's account updated successfully!");
-
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", loggedInUser);
 				// Nếu 0 có account nào tham chiếu tới address cũ xóa address này
 				if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
 					addressService.deleteAddress(oldAddr);
@@ -204,6 +205,7 @@ public class StaffAccountController {
 
 				return "redirect:/staff/staffDashboard.htm";
 			} catch (Exception e) {
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 				System.out.println("Error: User's account updated failed!");
 				
 			} finally {
