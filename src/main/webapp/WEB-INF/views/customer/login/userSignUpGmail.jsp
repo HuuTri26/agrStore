@@ -58,7 +58,7 @@
 										tài khoản của bạn:<span class="requite">*</span>
 									</label>
 									<form:input path="gmail" id="fid-name" name="name"
-										placeHolder="expamle@gmail.com" class="txt-input" />
+										placeHolder="expamle@gmail.com"  type="email" class="txt-input" />
 									<form:errors path="gmail" />
 								</p>
 

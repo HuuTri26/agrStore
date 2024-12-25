@@ -40,6 +40,7 @@ import agrStore.service.DistrictService;
 import agrStore.service.ProvinceService;
 import agrStore.service.RoleService;
 import agrStore.serviceImpl.ProvinceServiceImpl;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 import agrStore.utility.UltilityImpl;
 
@@ -161,7 +162,8 @@ public class AdminStaffController {
 	public String editProfile(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
 
 		HttpSession session = request.getSession();
-
+		
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		Boolean isValid = Boolean.TRUE;
 
 		// Lấy các trường mà người dùng đc phép sửa
@@ -226,6 +228,7 @@ public class AdminStaffController {
 				staff.setUpdateAt(new Date());
 				accountService.updateAccount(staff);
 				System.out.println("==> Staff's account updated successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", staff);
 
 				// Nếu 0 có account nào tham chiếu tới address cũ xóa address này
 				if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
@@ -236,6 +239,7 @@ public class AdminStaffController {
 				return "redirect:/admin/adminDashboard.htm";
 			} catch (Exception e) {
 				System.out.println("Error: User's account updated failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 
 			} finally {
 				// Giải phóng dữ liệu của model attributes
@@ -326,6 +330,7 @@ public class AdminStaffController {
 	public String addStaff(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
 		AccountEntity account = new AccountEntity();
 		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 
 		// Lấy các dữ liệu được trong session
 		WardEntity selectedWard = (WardEntity) session.getAttribute("selectedWard");
@@ -412,7 +417,7 @@ public class AdminStaffController {
 			if (staffRole != null) {
 				try {
 					account.setGmail(gmail);
-					account.setPassword(accountUltility.getHashPassword("123"));
+					account.setPassword(accountUltility.getHashPassword(accountUltility.generateRandomPassword()));
 					account.setFullName(accountUltility.standardizeName(fullName));
 					account.setPhoneNumber(phoneNumber);
 					account.setStatus(Boolean.TRUE);
@@ -423,10 +428,13 @@ public class AdminStaffController {
 					accountService.addAccount(account);
 
 					System.out.println("==> Staff's account created successfully!");
+					ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", account);
 
 					return "redirect:/admin/staffManagement.htm";
 				} catch (Exception e) {
+					ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 					System.out.println("Error: Staff's account created failed!");
+					
 				} finally {
 
 					// Giải phóng dữ liệu của session
@@ -454,8 +462,9 @@ public class AdminStaffController {
 	}
 
 	@RequestMapping(value = "/staffManagement/disableStaff", method = RequestMethod.GET)
-	public String disableStaff(@RequestParam("id") Integer id) {
-
+	public String disableStaff(@RequestParam("id") Integer id,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		AccountEntity staff = accountService.getAccountById(id);
 
 		try {
@@ -468,7 +477,9 @@ public class AdminStaffController {
 
 			accountService.updateAccount(staff);
 			System.out.println("==> Switch staff status to  successfully!");
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", staff);
 		} catch (Exception e) {
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 			e.printStackTrace();
 			System.out.println("==> Switch staff status to  failed!");
 		}

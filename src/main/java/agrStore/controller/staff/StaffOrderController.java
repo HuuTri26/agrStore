@@ -25,6 +25,7 @@ import agrStore.entity.OrderBillEntity;
 import agrStore.service.AccountService;
 import agrStore.service.OrderBillDetailService;
 import agrStore.service.OrderBillService;
+import agrStore.utility.ServerLogger;
 
 @Controller
 @RequestMapping("/staff")
@@ -155,7 +156,9 @@ public class StaffOrderController {
 
 	@RequestMapping(value = "/orderManagement/order/updateOrderStatus", method = RequestMethod.POST)
 	public String updateOrderBillStatus(@RequestParam("orderBillId") Integer orderBillId,
-			@RequestParam("statusOrder") int statusOrder, ModelMap model) {
+			@RequestParam("statusOrder") int statusOrder, ModelMap model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		System.out.println(orderBillId);
 		System.out.println(statusOrder);
 		int kq = this.orderBillService.updateOrderBillStatus(orderBillId, statusOrder);
@@ -170,6 +173,7 @@ public class StaffOrderController {
 			 */
 
 			model.addAttribute("orderBills", orderBills);
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", orderBills);
 			// model.addAttribute("employeeNameMap", employeeNameMap);
 		} else {
 			System.out.println("Update thất bại");
@@ -179,7 +183,9 @@ public class StaffOrderController {
 	}
 
 	@RequestMapping(value = "/orderManagement/deleteOrderBillUnConfirm", method = RequestMethod.GET)
-	public String deleteOrderBillUnConfirm(@RequestParam("orderBillId") Integer orderBillId, ModelMap model) {
+	public String deleteOrderBillUnConfirm(@RequestParam("orderBillId") Integer orderBillId, ModelMap model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		try {
 			// System.out.println(orderBillId);
 			int result = this.orderBillService.deleteOrderBillUnconfirmedById(orderBillId);
@@ -188,6 +194,7 @@ public class StaffOrderController {
 				model.addAttribute("orderBills", orderBills);
 				model.addAttribute("notification", "Đã xóa thành công hóa đơn mua hàng");
 				System.out.println("Đã xóa hóa đơn mua hàng thành công");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", orderBills);
 			}
 			else {
 				List<OrderBillEntity> orderBills = this.orderBillService.getAllOrderBill();
@@ -198,6 +205,7 @@ public class StaffOrderController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", e);
 		}
 		return "staff/order/orderManagement";
 	}

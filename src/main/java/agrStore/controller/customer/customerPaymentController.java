@@ -30,6 +30,7 @@ import agrStore.service.CartItemService;
 import agrStore.service.OrderBillDetailService;
 import agrStore.service.OrderBillService;
 import agrStore.service.ProductService;
+import agrStore.utility.ServerLogger;
 
 @Controller
 @RequestMapping("/customer")
@@ -75,8 +76,10 @@ public class customerPaymentController {
 				try {
 					// Xóa các OrderBill trùng lặp
 					orderBillService.deleteListOrderBill(duplicateOrderBills);
+					ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", duplicateOrderBills);
 					System.out.println("==> Successfully deleted duplicate pending orderBills");
 				} catch (Exception e) {
+					ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", e);
 					System.out.println("==> Error deleting duplicate pending orderBills: " + e.getMessage());
 				}
 			}
@@ -138,7 +141,7 @@ public class customerPaymentController {
 			System.out.println("==> Create new orderBill!");
 			orderBillService.addOrderBill(orderBill);
 			System.out.println("==> OrderBill created successfully!");
-
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", orderBill);
 			// Tạo OrderBillDetails
 			System.out.println(
 					"==> Create {0} new orderBillDetails for the orderBill!".formatted(selectedCartItems.size()));
@@ -164,6 +167,7 @@ public class customerPaymentController {
 			return "redirect:" + approvalLink;
 
 		} catch (PayPalRESTException e) {
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 			e.printStackTrace();
 			return "redirect:/customer/paymentError.htm";
 		}

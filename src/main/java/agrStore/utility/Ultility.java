@@ -25,4 +25,6 @@ public interface Ultility {
 	
 	
 	public Boolean isPasswordValid(String password);
+	
+	public String generateRandomPassword();
 }

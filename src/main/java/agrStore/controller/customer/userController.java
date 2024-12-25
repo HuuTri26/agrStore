@@ -335,8 +335,8 @@ public class userController {
 		String newPass = request.getParameter("new-pass");
 		String reEnterPass = request.getParameter("re-enter-new-pass");
 
-		if (newPass.isEmpty()) {
-			model.addAttribute("message1", "Vui lòng nhập mật khẩu mới!");
+		if (newPass.isEmpty() || !accountUltility.isPasswordValid(newPass)) {
+			model.addAttribute("message1", "Mật khẩu trống hoặc không đủ mạnh .Vui lòng nhập mật khẩu mới!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: New password field empty!");
 		} else if (reEnterPass.isEmpty()) {
@@ -581,7 +581,7 @@ public class userController {
 		Boolean isValid = Boolean.TRUE;
 
 		if (password.isEmpty() || !accountUltility.isPasswordValid(password)) {
-			model.addAttribute("passErr", "Vui lòng nhập mật khẩu!");
+			model.addAttribute("passErr", "Mật khẩu trống hoặc không đủ mạnh.Vui lòng nhập mật khẩu!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Password field empty or not valid !");
 		} else if (reEnterPassword.isEmpty()) {

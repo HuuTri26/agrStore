@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import agrStore.entity.AccountEntity;
 import agrStore.entity.ProviderEntity;
 import agrStore.service.ProviderService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 import agrStore.utility.UltilityImpl;
 
@@ -104,6 +106,9 @@ public class AdminProviderController {
 	@RequestMapping(value = "/providerManagement/provider", params = "ADD", method = RequestMethod.POST)
 	public String addProvider(HttpServletRequest request, Model model, @ModelAttribute("provider") ProviderEntity provider,
 			BindingResult errors) {
+		
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 
 		Boolean isValid = Boolean.TRUE;
 
@@ -130,10 +135,13 @@ public class AdminProviderController {
 
 				providerService.addProvider(newProvider);
 				System.out.println("==> New provider add successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", newProvider);
+				
 				return "redirect:/admin/providerManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New provider add failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 				model.addAttribute("mode", "ADD");
 				return "admin/provider/providerForm";
 			}
@@ -143,7 +151,8 @@ public class AdminProviderController {
 	@RequestMapping(value = "/providerManagement/provider", params = "EDIT", method = RequestMethod.POST)
 	public String editProvider(HttpServletRequest request, Model model, @ModelAttribute("provider") ProviderEntity provider,
 			BindingResult errors) {
-
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		Boolean isValid = Boolean.TRUE;
 
 		if (provider.getProviderName() == null || ultility.standardizeName(provider.getProviderName()).isEmpty()) {
@@ -164,13 +173,14 @@ public class AdminProviderController {
 			try {
 				provider.setProviderName(ultility.standardizeName(provider.getProviderName()));
 				provider.setPhoneNumber(provider.getPhoneNumber());
-
 				providerService.updateProvider(provider);
 				System.out.println("==>  provider update successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", provider);
 				return "redirect:/admin/providerManagement.htm";
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error: New provider add failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 				model.addAttribute("mode", "EDIT");
 				return "admin/provider/providerForm";
 			}
@@ -178,16 +188,19 @@ public class AdminProviderController {
 	}
 	
 	@RequestMapping(value = "/providerManagement/deleteProvider", method = RequestMethod.GET)
-	public String deleteProvider(@RequestParam("id") Integer id) {
-		
+	public String deleteProvider(@RequestParam("id") Integer id,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 		ProviderEntity provider = providerService.getProviderById(id);
 		
 			try {
 				provider.setStatus(Boolean.FALSE);
 				providerService.updateProvider(provider);
 				System.out.println("==> Set provider status to 'False' successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", provider);
 			}catch (Exception e) {
 				System.out.println("Error: Set provider status to 'False' failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 				e.printStackTrace();
 			}
 		
