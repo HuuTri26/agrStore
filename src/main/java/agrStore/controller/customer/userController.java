@@ -537,6 +537,7 @@ public class userController {
 		return "customer/login/userSignUp";
 	}
 
+
 	@RequestMapping(value = "/userSignUp", params = "sign-up", method = RequestMethod.POST)
 	public String userSignUp(HttpServletRequest request, Model model, SessionStatus sessionStatus) {
 		HttpSession session = request.getSession();
@@ -553,19 +554,24 @@ public class userController {
 		String streetName = request.getParameter("streetName");
 
 		Boolean isValid = Boolean.TRUE;
-
+		System.out.println("Password to check: " + password);
 		if (password.isEmpty()) {
-			model.addAttribute("passErr", "Vui lòng nhập mật khẩu!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Password field empty!");
+		    model.addAttribute("passErr", "Vui lòng nhập mật khẩu!");
+		    isValid = Boolean.FALSE;
+		    System.out.println("Error: Password field empty!");
+		} else if (!password.matches("^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*[0-9])(?=.*[a-z]).{8,}$")) {
+		    model.addAttribute("passErr", "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số, một ký tự đặc biệt, và dài ít nhất 8 ký tự!");
+		    isValid = Boolean.FALSE;
+		    System.out.println("Error: Password does not meet the security requirements!");
 		} else if (reEnterPassword.isEmpty()) {
-			model.addAttribute("rePassErr", "Vui lòng nhập lại mật khẩu!");
-			isValid = Boolean.FALSE;
-			System.out.println("Error: Re enter password empty!");
+		    model.addAttribute("rePassErr", "Vui lòng nhập lại mật khẩu!");
+		    isValid = Boolean.FALSE;
+		    System.out.println("Error: Re-enter password empty!");
 		} else if (!password.equals(reEnterPassword)) {
-			model.addAttribute("rePassErr", "Mật khẩu không khớp, vui lòng nhập lại!");
-			isValid = Boolean.FALSE;
-		} else if (fullName.isEmpty()) {
+		    model.addAttribute("rePassErr", "Mật khẩu không khớp, vui lòng nhập lại!");
+		    isValid = Boolean.FALSE;
+		} 
+		else if (fullName.isEmpty()) {
 			model.addAttribute("nameErr", "Vui lòng nhập họ và tên!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Name field empty!");
@@ -662,6 +668,7 @@ public class userController {
 
 		return "customer/login/userSignUp";
 	}
+
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, SessionStatus sessionStatus, HttpSession session) {

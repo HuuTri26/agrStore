@@ -17,7 +17,7 @@
 	<!-- Đọc các thuộc tính từ file cấu hình -->
 	<context:property-placeholder
 
-		location="file:E:\SpringMVCPtit\agrStore\src\main\webapp\WEB-INF\configs\database.properties" />
+		location="file:C:\Users\Tan\git\agrStore\src\main\webapp\WEB-INF\configs\database.properties" />
 
 
 
