@@ -73,5 +73,10 @@ public class WardEntity {
 	public void setAddresses(List<AddressEntity> addresses) {
 		this.addresses = addresses;
 	}
+
+	@Override
+	public String toString() {
+		return "WardEntity [id=" + id + ", name=" + name + "]";
+	}
 	
 }

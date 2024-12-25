@@ -37,6 +37,7 @@ import agrStore.service.OrderBillDetailService;
 import agrStore.service.OrderBillService;
 import agrStore.service.ProvinceService;
 import agrStore.service.WardService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 
 @Controller
@@ -202,6 +203,7 @@ public class customerAccountController {
 					inputAddr.setStreetName(streetName);
 					inputAddr.setWard(selectedWard);
 					addressService.addAddress(inputAddr);
+					ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", inputAddr);
 					loggedInUser.setAddress(inputAddr);
 				}
 			} catch (Exception e) {
@@ -218,17 +220,17 @@ public class customerAccountController {
 				loggedInUser.setPhoneNumber(phoneNumber);
 
 				accountService.updateAccount(loggedInUser);
-				System.out.println("==> User's account updated successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", loggedInUser);
 
 				// Nếu 0 có account nào tham chiếu tới address cũ xóa address này
 				if (accountService.countAccontByAddressId(oldAddr.getId()) == 0L) {
 					addressService.deleteAddress(oldAddr);
-					System.out.println("==> Old address deleted!");
+					ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "DELETE", oldAddr);
 				}
 
 				return "redirect:/index.htm";
 			} catch (Exception e) {
-				System.out.println("Error: User's account updated failed!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 			} finally {
 				// Giải phóng dữ liệu của model attributes
 				sessionStatus.setComplete();
@@ -265,8 +267,6 @@ public class customerAccountController {
 		String newPass = request.getParameter("new-password");
 		String reEnterNewPass = request.getParameter("re-enter-new-password");
 
-		System.out.println(loggedInUser.getRole().getName());
-
 		if (changePass.getPassword().isEmpty()) {
 			errors.rejectValue("password", "changePass", "Vui lòng nhập mật khẩu hiện tại!");
 			isValidPass = Boolean.FALSE;
@@ -291,12 +291,11 @@ public class customerAccountController {
 			try {
 				loggedInUser.setPassword(accountUltility.getHashPassword(newPass));
 				accountService.updateAccount(loggedInUser);
-				System.out.println("==> Customer account password updated successfully!");
+				ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", loggedInUser);
 			} catch (Exception e) {
-				System.out.println("Error: Customer account password updated unsuccessfully!");
+				ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 			}
 		} else {
-			System.out.println("Error: Customer account password updated unsuccessfully!");
 			 return "customer/account/customerChangePassword";
 		}
 

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import agrStore.entity.AccountEntity;
 import agrStore.entity.RoleEntity;
 import agrStore.service.DatabaseRoutingService;
+import agrStore.utility.ServerLogger;
 
 public class UserInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
@@ -28,7 +29,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		String uri = request.getRequestURI();
-		System.out.println("==> UserInterceptor: Check uri: " + uri);
+		ServerLogger.logger.info("UserInterceptor check uri: "+ uri);
 
 		if (PUBLIC_URIS.stream().anyMatch(uri::contains)) {
 			return true;
@@ -37,7 +38,8 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 		// Check user authentication
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
 		if (loggedInUser == null) {
-			System.out.println("==> UserInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
+//			System.out.println("==> UserInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
+			ServerLogger.logger.warn("UserInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 			databaseRoutingService.clearDataSourceKey();
 			return false;
@@ -46,7 +48,8 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 		// Routing based on user's role
 		RoleEntity userRole = loggedInUser.getRole();
 		if (userRole == null) {
-			System.out.println("==> UserInterceptor: Access denied! No role found for user.");
+//			System.out.println("==> UserInterceptor: Access denied! No role found for user.");
+			ServerLogger.logger.warn("UserInterceptor: Access denied! No role found for user.");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 			databaseRoutingService.clearDataSourceKey();
 			return false;
@@ -55,9 +58,9 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 		// Route to appropriate database based on user's role
 		try {
 			databaseRoutingService.routingUserWithRole(userRole);
-			System.out.println("==> UserInterceptor: Routing to DataSource for role: " + userRole.getName());
+			ServerLogger.logger.info("UserInterceptor: Routing to DataSource for role: " + userRole.getName());
 		} catch (Exception e) {
-			System.out.println("==> UserInterceptor: DataSource routing failed for role:" + userRole.getName());
+			ServerLogger.logger.warn("UserInterceptor: DataSource routing failed for role:" + userRole.getName());
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 			databaseRoutingService.clearDataSourceKey();

@@ -90,7 +90,12 @@ public class ImportBillDetailEntity {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ImportBillDetailEntity [importBillDetailId=" + importBillDetailId + ", quantity=" + quantity
+				+ ", price=" + price + "]";
+	}
 	
 
 }

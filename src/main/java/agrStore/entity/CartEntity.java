@@ -80,4 +80,9 @@ public class CartEntity {
 		this.cartItemList = cartItemList;
 	}
 
+	@Override
+	public String toString() {
+		return "CartEntity [cartId=" + cartId + ", totalQuantity=" + totalQuantity + "]";
+	}
+	
 }

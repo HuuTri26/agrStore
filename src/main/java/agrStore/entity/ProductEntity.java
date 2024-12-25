@@ -218,4 +218,12 @@ public class ProductEntity {
 		this.importBillDetailList = importBillDetailList;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductEntity [productId=" + productId + ", productName=" + productName + ", price=" + price
+				+ ", quantity=" + quantity + ", descript=" + descript + ", image=" + image + ", unit=" + unit
+				+ ", status=" + status + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
+	}
+	
+	
 }

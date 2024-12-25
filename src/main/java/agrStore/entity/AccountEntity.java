@@ -220,4 +220,11 @@ public class AccountEntity {
 		this.feedbackList = feedbackList;
 	}
 
+	@Override
+	public String toString() {
+		return "AccountEntity [accountId=" + accountId + ", status=" + status + ", avatar=" + avatar + ", gmail="
+				+ gmail + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", password=" + password
+				+ ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
+	}
+
 }

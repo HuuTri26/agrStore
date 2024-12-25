@@ -98,6 +98,11 @@ public class OrderBillDetailEntity {
 	public void setFeedbackList(List<FeedbackEntity> feedbackList) {
 		this.feedbackList = feedbackList;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "OrderBillDetailEntity [orderBillDetailId=" + orderBillDetailId + ", quantity=" + quantity + ", price="
+				+ price + "]";
+	}
 	
 }
