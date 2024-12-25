@@ -29,8 +29,13 @@ import agrStore.entity.ProvinceEntity;
 import agrStore.entity.RoleEntity;
 import agrStore.entity.WardEntity;
 import agrStore.recaptcha.RecaptchaVerification;
+
 import agrStore.utility.ServerLogger;
+
+import agrStore.utility.LogginAttempManager;
+
 import agrStore.utility.Ultility;
+import agrStore.utility.UltilityImpl;
 import agrStore.service.AccountService;
 import agrStore.service.AddressService;
 import agrStore.service.CartService;
@@ -73,6 +78,9 @@ public class userController {
 
 	@Autowired
 	DatabaseRoutingService databaseRoutingService;
+	
+	@Autowired
+	LogginAttempManager logginAttempManager;
 
 	@RequestMapping("/userLogin")
 	public String showUserLoginForm(Model model) {
@@ -116,6 +124,13 @@ public class userController {
 //	        }
 //	        return "customer/login/userLogin";
 //	    }
+		
+		 // Check if account is currently locked
+	    if (logginAttempManager.isAccountLocked(account.getGmail())) {
+	        errors.rejectValue("gmail", "account", 
+	            "Tài khoản của bạn đã bị khóa. Vui lòng thử lại sau 5 phút!");
+	        return "customer/login/userLogin";
+	    }
 
 		// Kiểm tra xem field dữ liệu nhập từ view có trống ko?
 		if (account.getGmail().isEmpty()) {
@@ -132,10 +147,13 @@ public class userController {
 		Boolean isValid = Boolean.TRUE;
 		AccountEntity account_t = accountService.getAccountByGmail(account.getGmail());
 		if (account_t == null) {
+			logginAttempManager.incrementLoginAttempts(account.getGmail());
 			errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: This user's account doesn't exist!");
 		} else if (!account_t.getPassword().equals(accountUltility.getHashPassword(account.getPassword()))) {
+			logginAttempManager.incrementLoginAttempts(account.getGmail());
+	        logginAttempManager.checkAndLockAccount(account.getGmail(), account_t);
 			errors.rejectValue("password", "account", "Mật khẩu của bạn sai hoặc username không đúng!");
 			isValid = Boolean.FALSE;
 			System.out.println("Error: Wrong password!");
@@ -146,7 +164,13 @@ public class userController {
 		}
 
 		if (isValid) {
+
 			ServerLogger.logger.info("Account: " + account_t.getGmail() + " has been loggedIn!");
+
+			 // Reset login attempts on successful login
+	        logginAttempManager.resetLoginAttempts(account.getGmail());
+			System.out.println("==> Login successfully! End login session");
+
 			session.setAttribute("loggedInUser", account_t);
 
 			if (account_t.getRole().getId() == 1) {
@@ -556,10 +580,10 @@ public class userController {
 
 		Boolean isValid = Boolean.TRUE;
 
-		if (password.isEmpty()) {
+		if (password.isEmpty() || !accountUltility.isPasswordValid(password)) {
 			model.addAttribute("passErr", "Vui lòng nhập mật khẩu!");
 			isValid = Boolean.FALSE;
-			System.out.println("Error: Password field empty!");
+			System.out.println("Error: Password field empty or not valid !");
 		} else if (reEnterPassword.isEmpty()) {
 			model.addAttribute("rePassErr", "Vui lòng nhập lại mật khẩu!");
 			isValid = Boolean.FALSE;

@@ -23,4 +23,6 @@ public interface Ultility {
 	
 	public String XSSSanitizeHTML(String input);
 	
+	
+	public Boolean isPasswordValid(String password);
 }

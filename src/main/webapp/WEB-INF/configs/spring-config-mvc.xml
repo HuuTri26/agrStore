@@ -43,18 +43,24 @@
 	<!-- Cấu hình Upload File -->
 	<bean id="user" class="agrStore.bean.UploadFile">
 		<property name="basePath"
+
 			value="${RESOURCES_PATH}\user-images\" />
+
 	</bean>
 
 	<bean id="product" class="agrStore.bean.UploadFile">
 		<property name="basePath"
+
 			value="${RESOURCES_PATH}\product-images\" />
+
 	</bean>
 
 
 	<bean id="category" class="agrStore.bean.UploadFile">
 		<property name="basePath"
+
 			value="${RESOURCES_PATH}\category-images\" />
+
 	</bean>
 
 
