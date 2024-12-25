@@ -176,8 +176,8 @@ public class UltilityImpl implements Ultility {
 		try (FileInputStream fis = keyStoreFile.exists() ? new FileInputStream(keyStoreFile) : null) {
 			keyStore.load(fis, keyStorePwd);
 		}
-		
-		//Tạo Entry bảo vệ bằng password
+
+		// Tạo Entry bảo vệ bằng password
 
 	}
 
@@ -193,17 +193,17 @@ public class UltilityImpl implements Ultility {
 
 	@Override
 	public String XSSSanitizeHTML(String input) {
-		PolicyFactory policy =  Sanitizers.FORMATTING.and(Sanitizers.LINKS);
+		PolicyFactory policy = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
 		return policy.sanitize(input);
 	}
-	
+
 	public static String XSSEscape4HTML(String input) {
-	    return input == null ? null : Encode.forHtml(input);
+		return input == null ? null : Encode.forHtml(input);
 	}
 
 	public static String XSSEscape4JS(String input) {
 		return input == null ? null : Encode.forJavaScript(input);
-		
+
 	}
 
 	public static String XSSEscape4Url(String input) {
@@ -211,11 +211,32 @@ public class UltilityImpl implements Ultility {
 	}
 
 	public static String XSSEscape4CSS(String input) {
-		return input == null ? null :Encode.forCssString(input);
+		return input == null ? null : Encode.forCssString(input);
 	}
 
 	public static String XSSEscape4XML(String input) {
 		return input == null ? null : Encode.forXml(input);
 	}
+
+	public Boolean isPasswordValid(String password) {
+		// Kiểm tra độ dài tối thiểu 12 ký tự
+		if (password == null || password.length() < 12) {
+			return false;
+		}
+
+		// Kiểm tra chữ hoa
+		boolean hasUpperCase = Pattern.compile("[A-Z]").matcher(password).find();
+		// Kiểm tra chữ thường
+		boolean hasLowerCase = Pattern.compile("[a-z]").matcher(password).find();
+		// Kiểm tra số
+		boolean hasNumber = Pattern.compile("\\d").matcher(password).find();
+		// Kiểm tra ký tự đặc biệt
+		boolean hasSpecialChar = Pattern.compile("[@#%.]").matcher(password).find();
+
+		// Trả về true nếu tất cả các điều kiện đều đạt
+		return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+	}
+	
+	
 
 }
