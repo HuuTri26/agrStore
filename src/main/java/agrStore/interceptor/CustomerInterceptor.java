@@ -12,6 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import agrStore.entity.AccountEntity;
 import agrStore.entity.RoleEntity;
 import agrStore.service.DatabaseRoutingService;
+import agrStore.utility.ServerLogger;
 
 public class CustomerInterceptor extends HandlerInterceptorAdapter {
 
@@ -23,14 +24,14 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
-		System.out.println("==> CustomerInterceptor Check uri: " + uri);
+		ServerLogger.logger.info("CustomerInterceptor check uri: " + uri);
 
 		// Check user authentication
 		AccountEntity loggedInUser = (AccountEntity) request.getSession().getAttribute("loggedInUser");
 
 		// If no user is logged in, redirect to login
 		if (loggedInUser == null) {
-			System.out.println("==> CustomerInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
+			ServerLogger.logger.warn("CustomerInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.");
 			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
 			databaseRoutingService.clearDataSourceKey();
 			return false;
@@ -39,7 +40,8 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 		// Validate user role
 		RoleEntity userRole = loggedInUser.getRole();
 		if (userRole == null) {
-			System.out.println("==> CustomerInterceptor: Access denied! No role found for user.");
+//			System.out.println("==> CustomerInterceptor: Access denied! No role found for user.");
+			ServerLogger.logger.warn("CustomerInterceptor: Access denied! No role found for user.");
 			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
 			databaseRoutingService.clearDataSourceKey();
 			return false;
@@ -47,7 +49,8 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 
 		// Strict admin role check (assuming admin role has ID 1)
 		if (userRole.getId() != 3) {
-			System.out.println("==> CustomerInterceptor: Access denied! This account don't have a permission.");
+			ServerLogger.logger.warn("CustomerInterceptor: Access denied! This account don't have a permission..");
+//			System.out.println("==> CustomerInterceptor: Access denied! This account don't have a permission.");
 			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
 			databaseRoutingService.clearDataSourceKey();
 			return false;
@@ -57,9 +60,11 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 		try {
 			databaseRoutingService.clearDataSourceKey();
 			databaseRoutingService.routingUserWithRole(userRole);
-			System.out.println("==> CustomerInterceptor:  Routing to DataSource for role: " + userRole.getName());
+//			System.out.println("==> CustomerInterceptor:  Routing to DataSource for role: " + userRole.getName());
+			ServerLogger.logger.info("CustomerInterceptor:  Routing to DataSource for role: " + userRole.getName());
 		} catch (Exception e) {
-			System.out.println("==> CustomerInterceptor: DataSource routing failed for role: " + userRole.getName());
+//			System.out.println("==> CustomerInterceptor: DataSource routing failed for role: " + userRole.getName());
+			ServerLogger.logger.info("CustomerInterceptor:  DataSource routing failed for role: " + userRole.getName());
 			response.sendRedirect(request.getContextPath() + "/user/userLogin.htm");
 			databaseRoutingService.clearDataSourceKey();
 			return false;

@@ -102,6 +102,10 @@ public class CartItemEntity {
 	    return Objects.hash(cartItemId);
 	}
 
-
+	@Override
+	public String toString() {
+		return "CartItemEntity [cartItemId=" + cartItemId + ", quantity=" + quantity + ", isSelected=" + isSelected
+				+ "]";
+	}
 
 }

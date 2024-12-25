@@ -96,6 +96,11 @@ public class ProviderEntity {
 	public void setProductList(List<ProductEntity> productList) {
 		this.productList = productList;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ProviderEntity [id=" + id + ", providerName=" + providerName + ", phoneNumber=" + phoneNumber
+				+ ", status=" + status + ", image=" + image + "]";
+	}
 	
 }

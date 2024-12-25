@@ -58,5 +58,11 @@ public class ProvinceEntity {
 	public void setDistricts(List<DistrictEntity> districts) {
 		this.districts = districts;
 	}
+
+	@Override
+	public String toString() {
+		return "ProvinceEntity [id=" + id + ", name=" + name + "]";
+	}
+	
 	
 }

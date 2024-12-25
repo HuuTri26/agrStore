@@ -69,6 +69,11 @@ public class RoleEntity {
 	public void setAccounts(List<AccountEntity> accounts) {
 		this.accounts = accounts;
 	}
+
+	@Override
+	public String toString() {
+		return "RoleEntity [id=" + id + ", name=" + name + "]";
+	}
 	
 	
 }

@@ -74,4 +74,8 @@ public class AddressEntity {
 		this.account = account;
 	}
 
+	@Override
+	public String toString() {
+		return "AddressEntity [id=" + id + ", streetName=" + streetName + "]";
+	}
 }

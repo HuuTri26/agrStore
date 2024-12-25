@@ -96,6 +96,11 @@ public class CategoryEntity {
 	public void setProductList(List<ProductEntity> productList) {
 		this.productList = productList;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CategoryEntity [categoryId=" + categoryId + ", categoryName=" + categoryName + ", status=" + status
+				+ ", image=" + image + ", descript=" + descript + "]";
+	}
 	
 }

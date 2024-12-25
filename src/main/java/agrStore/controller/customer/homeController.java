@@ -28,12 +28,12 @@ import agrStore.service.FeedbackService;
 import agrStore.service.OrderBillDetailService;
 import agrStore.service.ProductService;
 import agrStore.service.ProviderService;
+import agrStore.utility.ServerLogger;
 import agrStore.utility.Ultility;
 import agrStore.utility.UltilityImpl;
 
 @Controller
 public class homeController {
-
 	@Autowired
 	ProductService productService;
 
@@ -201,7 +201,6 @@ public class homeController {
 		HttpSession session = request.getSession();
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
 
-		System.out.println("==> Add new feedback for this product!");
 		try {
 			OrderBillDetailEntity orderBillDt = orderBillDetailService.getOrderBillDetailById(orderBillDtId);
 			feedback.setOrderBillDetail(orderBillDt);
@@ -210,11 +209,10 @@ public class homeController {
 			feedback.setStar(star);
 
 			feedbackService.addFeedBack(feedback);
-			System.out.println("==> Feedback created successfully!");
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", feedback);
 
 		} catch (Exception e) {
-			System.out.println("Error: Feedback created failed!");
-			e.printStackTrace();
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "ADD", e);
 		}
 
 		return "redirect:/productDetail.htm?productId=" + feedback.getOrderBillDetail().getProduct().getProductId();
@@ -225,21 +223,18 @@ public class homeController {
 			@RequestParam("star") Integer star, @RequestParam("orderBillDtId") Integer orderBillDtId) {
 		HttpSession session = request.getSession();
 		AccountEntity loggedInUser = (AccountEntity) session.getAttribute("loggedInUser");
-		System.out.println(orderBillDtId);
-		System.out.println("==> Update feedback for this product!");
 		try {
 			OrderBillDetailEntity orderBillDt = orderBillDetailService.getOrderBillDetailById(orderBillDtId);
 			feedback.setOrderBillDetail(orderBillDt);
 			feedback.setAccount(loggedInUser);
 			feedback.setCreateAt(feedback.getCreateAt());
 			feedback.setStar(star);
-
+			
 			feedbackService.updateFeedBack(feedback);
-			System.out.println("==> Feedback updated successfully!");
-
+			ServerLogger.writeActionLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", feedback);
+			
 		} catch (Exception e) {
-			System.out.println("Error: Feedback updated failed!");
-			e.printStackTrace();
+			ServerLogger.writeErrorLog(loggedInUser.getGmail(), loggedInUser.getRole().getName(), "UPDATE", e);
 		}
 
 		return "redirect:/productDetail.htm?productId=" + feedback.getOrderBillDetail().getProduct().getProductId();

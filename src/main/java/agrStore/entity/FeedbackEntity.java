@@ -114,7 +114,7 @@ public class FeedbackEntity {
 	@Override
 	public String toString() {
 		return "FeedbackEntity [feedbackId=" + feedbackId + ", comment=" + comment + ", star=" + star + ", createAt="
-				+ createAt + ", account=" + account + ", orderBillDetail=" + orderBillDetail + "]";
+				+ createAt + "]";
 	}
 	
 }

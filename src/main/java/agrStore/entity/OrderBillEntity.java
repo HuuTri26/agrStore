@@ -163,4 +163,10 @@ public class OrderBillEntity {
         return Status.getDescriptionByCode(this.statusOrder);
     }
 
+	@Override
+	public String toString() {
+		return "OrderBillEntity [orderBillId=" + orderBillId + ", statusOrder=" + statusOrder + ", orderTime="
+				+ orderTime + ", totalQuantity=" + totalQuantity + ", totalPrice=" + totalPrice + "]";
+	}
+	
 }

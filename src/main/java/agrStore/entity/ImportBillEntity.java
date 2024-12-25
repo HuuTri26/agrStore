@@ -113,7 +113,12 @@ public class ImportBillEntity {
 	public void setImportBillDetailList(List<ImportBillDetailEntity> importBillDetailList) {
 		this.importBillDetailList = importBillDetailList;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ImportBillEntity [importBillId=" + importBillId + ", totalPrice=" + totalPrice + ", totalQuantity="
+				+ totalQuantity + ", createAt=" + createAt + "]";
+	}
 	
 
 }
