@@ -71,7 +71,7 @@ public class customerCartController {
 
 			ProductEntity product = productService.getProductById(pId);
 			if (product == null) {
-				session.setAttribute("errorMessage", "Product not found.");
+				System.out.println("Error: Product not found!");
 				return "redirect:/index.htm";
 			}
 
@@ -108,10 +108,8 @@ public class customerCartController {
 			return "redirect:/index.htm";
 
 		} catch (Exception e) {
-			// Log the actual exception for debugging
-			System.err.println("Error: product add to cart failed!");
+			System.out.println("Error: product add to cart failed!");
 
-			session.setAttribute("errorMessage", "An error occurred while adding the product to cart.");
 			return "redirect:/index.htm";
 		}
 

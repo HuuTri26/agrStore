@@ -101,39 +101,39 @@ public class homeController {
 	}
 
 	private void prepareFeedbackModel(ModelMap model, Integer productId, AccountEntity loggedInUser) {
-		// Default mode set
+		// Khởi tạo các giá trị mặc định khi vào trang productDetail
 		model.addAttribute("feedback", new FeedbackEntity());
 		model.addAttribute("btnMode", "add");
 		model.addAttribute("star", 0);
 
-		// If user doesn't exist, return early
+		// Nếu user chưa đăng nhập thì ko làm gì hết
 		if (loggedInUser == null) {
 			return;
 		}
 
-		// Try to find orderBillDetails by product and account
+		// Thử tìm các orderBillDts của product này do user này tạo ra
 		List<OrderBillDetailEntity> orderBillDts = orderBillDetailService
 				.getOrderBillDetailByProductIdAndAccountId(productId, loggedInUser.getAccountId());
 
-		// If no orderBillDetails found, return
+		// Nếu như ko có bất kỳ orderBillDts thì nào khớp ko làm hết 
 		if (orderBillDts == null || orderBillDts.isEmpty()) {
 			return;
 		}
 
-		// Get the most recent OrderBillDetailEntity
+		// Nếu có tồm tại thì lấy cái orderBillDt mới nhất (orderTime)
 		OrderBillDetailEntity newestOrderBillDt = orderBillDts.stream()
 				.max(Comparator.comparing(oDt -> oDt.getOrderBill().getOrderTime())).orElse(null);
 
-		// If no newest order bill detail found, return
+		// Nếu ko tồn tại cái nào mới nhất thì ko làm gì hết
 		if (newestOrderBillDt == null) {
 			return;
 		}
 
-		// Try to find feedback by orderBillDetail
+		// Cố tìm feedback ứng với orderBillDetail mới nhất vừa tìm đc
 		FeedbackEntity existingFeedback = feedbackService
 				.getFeedbackByOrderBillDetailId(newestOrderBillDt.getOrderBillDetailId());
 
-		// If existing feedback found, update model for update mode
+		// Nếu tìm thấy, thì tiến hành đổ feedback này ra ngoài view và chuyển sang mode 'update'
 		if (existingFeedback != null) {
 			//Escape comment để chống XSS
 			existingFeedback.setComment(UltilityImpl.XSSEscape4HTML(existingFeedback.getComment()));
@@ -143,7 +143,8 @@ public class homeController {
 			model.addAttribute("btnMode", "update");
 			model.addAttribute("star", existingFeedback.getStar());
 		} else {
-			// If no existing feedback, add orderBillDetail ID for new feedback
+			// Nếu không tìm thấy thì tiến hành tạo 1 feedback mới cho orderBillDt trên, giữ
+			// nguyên chế độ khởi tạo mặc định là 'add'
 			model.addAttribute("orderBillDtId", newestOrderBillDt.getOrderBillDetailId());
 		}
 	}
@@ -167,7 +168,7 @@ public class homeController {
 			Integer totalStar = 0;
 			for (int i = 1; i <= 5; i++) {
 				Long star_i = feedbackService.countFeedbackByStar(feedbacks, i);
-				Integer percent_i = (int) ((star_i * 100.0) / feedbackCount);
+				Integer percent_i = (int) ((star_i * 100.0) / feedbackCount); //progress bar ứng với từng sao
 				totalStar += (int) (star_i * i);
 				model.addAttribute("star_" + i, star_i);
 				model.addAttribute("percent_" + i, percent_i);
@@ -175,7 +176,7 @@ public class homeController {
 
 			Double avgStar = (totalStar * 1.0) / feedbackCount;
 			model.addAttribute("avgStar", avgStar);
-			model.addAttribute("avgPercent", (int) ((avgStar / 5.0) * 100));
+			model.addAttribute("avgPercent", (int) ((avgStar / 5.0) * 100)); //progress bar của số sao trung bình
 			
 		} else {
 			model.addAttribute("avgStar", 0.0);
@@ -230,7 +231,6 @@ public class homeController {
 			OrderBillDetailEntity orderBillDt = orderBillDetailService.getOrderBillDetailById(orderBillDtId);
 			feedback.setOrderBillDetail(orderBillDt);
 			feedback.setAccount(loggedInUser);
-			feedback.setOrderBillDetail(orderBillDt);
 			feedback.setCreateAt(feedback.getCreateAt());
 			feedback.setStar(star);
 
