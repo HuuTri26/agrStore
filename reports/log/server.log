@@ -1,0 +1,554 @@
+2024-12-25 19:28:38 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:${DB_PATH}/database.properties]
+2024-12-25 19:28:38 ERROR DispatcherServlet:492 - Context initialization failed
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: ${DB_PATH}\database.properties (The system cannot find the path specified)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:609)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:658)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:624)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:672)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:543)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:484)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1106)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1063)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:960)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4641)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4948)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:794)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:248)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:925)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:735)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:476)
+Caused by: java.io.FileNotFoundException: ${DB_PATH}\database.properties (The system cannot find the path specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:86)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:189)
+	at org.springframework.core.io.UrlResource.getInputStream(UrlResource.java:168)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:143)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 42 more
+2024-12-25 19:29:08 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:${DB_PATH}/database.properties]
+2024-12-25 19:29:08 ERROR DispatcherServlet:492 - Context initialization failed
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: ${DB_PATH}\database.properties (The system cannot find the path specified)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:609)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:658)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:624)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:672)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:543)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:484)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1106)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1063)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:747)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:116)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:670)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: ${DB_PATH}\database.properties (The system cannot find the path specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:86)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:189)
+	at org.springframework.core.io.UrlResource.getInputStream(UrlResource.java:168)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:143)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 31 more
+2024-12-25 19:32:27 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:${DB_PATH}/database.properties]
+2024-12-25 19:32:27 ERROR DispatcherServlet:492 - Context initialization failed
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: ${DB_PATH}\database.properties (The system cannot find the path specified)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:609)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:658)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:624)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:672)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:543)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:484)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1106)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1063)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:960)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4641)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4948)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:794)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1332)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1322)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:866)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:248)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:925)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:735)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:476)
+Caused by: java.io.FileNotFoundException: ${DB_PATH}\database.properties (The system cannot find the path specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:86)
+	at java.base/sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:189)
+	at org.springframework.core.io.UrlResource.getInputStream(UrlResource.java:168)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:143)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 42 more
+2024-12-25 19:36:40 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 19:36:41 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 19:36:43 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@75f3c0c9] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 19:36:43 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 19:37:31 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:37:36 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:37:36 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 19:37:39 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:37:39 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 19:37:42 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:37:42 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 19:37:45 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:37:45 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 19:37:47 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:37:47 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 19:37:50 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:42:17 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:42:23 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:42:59 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 19:42:59 INFO  ServerLogger:168 - Account: tribui2017@gmail.com has been loggedIn!
+2024-12-25 19:43:41 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminDashboard.htm
+2024-12-25 19:43:41 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:43:43 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement.htm
+2024-12-25 19:43:43 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:43:46 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement/category.htm
+2024-12-25 19:43:46 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:43:51 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement/category.htm
+2024-12-25 19:43:51 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:43:51 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement.htm
+2024-12-25 19:43:51 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:44:02 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/productManagement.htm
+2024-12-25 19:44:02 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:44:04 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/staffManagement.htm
+2024-12-25 19:44:05 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:44:08 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/productManagement.htm
+2024-12-25 19:44:08 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 19:49:58 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 19:49:59 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 19:50:01 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@72f558fe] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 19:50:02 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 19:52:47 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 19:52:47 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 19:52:50 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@4e315566] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 19:52:50 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 19:57:01 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 19:57:02 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 19:57:04 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@c9c3d0b] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 19:57:04 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:00:38 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:00:38 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:00:40 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@41a05931] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:00:41 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:01:59 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:01:59 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:02:01 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@615f0a46] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:02:02 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:10:57 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:10:57 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:11:00 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@5eae342] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:11:01 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:12:06 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:12:06 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:12:09 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@58d7c45f] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:12:10 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:12:25 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:12:26 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:12:28 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@73b8819e] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:12:29 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:12:44 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:12:45 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:12:47 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@354cc2a1] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:12:48 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:14:00 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:14:00 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:14:02 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@627b5e5b] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:14:02 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:14:07 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:14:14 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:14:18 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:14:31 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:14:41 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:14:45 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:14:46 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:14:52 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:14:52 INFO  ServerLogger:168 - Account: tribui2017@gmail.com has been loggedIn!
+2024-12-25 20:15:02 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminChangePassword.htm
+2024-12-25 20:15:02 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 20:15:12 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminChangePassword.htm
+2024-12-25 20:15:12 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 20:15:28 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminChangePassword.htm
+2024-12-25 20:15:28 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 20:15:32 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminDashboard.htm
+2024-12-25 20:15:32 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 20:15:34 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement.htm
+2024-12-25 20:15:34 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 20:20:09 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/logout.htm
+2024-12-25 20:20:09 INFO  ServerLogger:61 - UserInterceptor: Routing to DataSource for role: Admin
+2024-12-25 20:20:09 INFO  ServerLogger:695 - Account: nulllog out
+2024-12-25 20:20:12 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:20:18 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:20:34 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:21:07 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:21:16 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:21:28 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:22:24 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:22:24 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:22:26 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@d3df8f5] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:22:27 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:22:29 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:22:32 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:22:37 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:24:01 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:24:01 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:24:04 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@b6058f6] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:24:05 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:24:14 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:24:17 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:24:24 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:24:26 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement.htm
+2024-12-25 20:24:26 WARN  ServerLogger:32 - AdminInterceptor: Access denied! Unauthorized access attempt. Redirecting to login.
+2024-12-25 20:24:28 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:24:31 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:28:09 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:28:10 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:28:12 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@fc82028] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:28:13 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:28:14 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:28:19 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:28:23 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:28:40 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userSignUpGmail.htm
+2024-12-25 20:28:40 INFO  ServerLogger:441 - OTP sign up account have been sent to gmail: huhnjdc@gmail.com
+2024-12-25 20:28:54 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:28:56 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:28:58 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:28:58 INFO  ServerLogger:266 - OTP forgot password have been sent to gmail: tribui2017@gmail.com
+2024-12-25 20:29:03 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:29:06 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:29:16 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:29:19 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:30:48 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:30:48 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:30:51 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@6a94489f] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:30:51 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:31:07 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:31:13 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/forgotPass.htm
+2024-12-25 20:31:18 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 20:42:48 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:42:49 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:42:51 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@df98bff] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:42:52 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:48:55 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:48:56 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:48:59 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@44fb58a4] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:49:00 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:49:16 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:49:17 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:49:19 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@74279cff] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:49:19 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:50:03 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:50:04 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:50:07 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@32b30a63] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:50:07 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:54:30 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:54:30 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:54:33 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@2c2eb0e4] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:54:33 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:55:27 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:55:27 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:55:30 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@25a6c84c] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:55:31 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:56:00 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:56:01 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:56:03 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@655b64db] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:56:04 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 20:58:37 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 20:58:37 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 20:58:39 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@6a5e95d3] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 20:58:40 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:03:01 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:03:02 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:03:05 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@a4955fe] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:03:05 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:03:32 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:03:33 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:03:35 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@e892d5c] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:03:35 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:07:45 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:07:45 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:07:47 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@4d38455c] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:07:48 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:08:52 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:08:53 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:08:55 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@66a4ffd8] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:08:56 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:12:41 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:12:42 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:12:44 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@22427497] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:12:45 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:13:24 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:13:25 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:13:27 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@6f5ff7b1] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:13:27 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:14:08 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:14:08 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:14:10 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@3731a9f6] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:14:11 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:16:06 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:16:06 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:16:09 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@4b52affd] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:16:09 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:17:52 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:17:52 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:17:55 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@49ff64a7] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:17:56 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:22:08 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:22:09 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:22:11 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@2da34e3c] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:22:12 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:25:35 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:25:36 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:25:39 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@cc93504] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:25:39 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:28:12 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:28:12 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:28:15 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@20e3c67d] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:28:15 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:32:03 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:32:03 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:32:06 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@76c0e375] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:32:07 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:37:03 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:37:03 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:37:09 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@5e45dc0a] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:37:11 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 21:51:17 WARN  HikariPool:804 - HikariPool-28 - Thread starvation or clock leap detected (housekeeper delta=14m10s916ms736µs200ns).
+2024-12-25 21:56:29 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 21:56:29 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 21:56:36 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@3fb728a7] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 21:56:38 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:00:51 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:00:51 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:00:58 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@414e1c74] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:00:59 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:07:48 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:07:49 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:07:55 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@e087d52] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:07:57 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:12:43 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:12:43 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:12:49 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@4857d9ad] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:12:50 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:13:14 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:13:15 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:13:20 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@6589fedd] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:13:22 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:14:21 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:14:22 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:14:28 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@428dd64c] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:14:29 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:16:16 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:16:17 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:16:22 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@61bc11d8] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:16:23 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:19:27 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:19:27 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:19:33 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@59551da] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:19:35 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:21:51 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:21:52 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:21:57 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@7fbceb92] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:21:59 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:25:33 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:25:34 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:25:40 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@7c028eab] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:25:41 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:26:22 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:26:22 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:26:30 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@378c1c46] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:26:32 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:28:18 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:28:19 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:28:25 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@571db304] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:28:26 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:30:50 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:30:51 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:30:57 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@594fc4ce] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:30:59 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:31:28 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:31:28 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:31:35 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@4f7474ee] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:31:36 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:33:56 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:33:57 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:34:02 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@501f4f43] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:34:04 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:34:47 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:34:48 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:34:53 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@690fb0a4] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:34:54 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:36:51 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:36:52 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:36:57 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@52acb095] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:36:58 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:38:27 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:38:27 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:38:33 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@7ca06509] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:38:35 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:39:15 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:39:16 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:39:21 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@109004c8] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:39:23 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:40:03 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:40:04 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:40:09 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@7e040385] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:40:11 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:40:37 INFO  PropertySourcesPlaceholderConfigurer:172 - Loading properties file from URL [file:C:/Users/HUU TRI/eclipse-workspace/agrStoreManagement/src/main/webapp/WEB-INF/configs/database.properties]
+2024-12-25 22:40:37 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+2024-12-25 22:40:40 INFO  HibernateTransactionManager:341 - Using DataSource [agrStore.database.router.DynamicConnectionRouter@12568b11] of Hibernate SessionFactory for HibernateTransactionManager
+2024-12-25 22:40:41 INFO  SimpleUrlHandlerMapping:315 - Mapped URL path [/assets/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2024-12-25 22:40:47 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 22:40:59 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 22:40:59 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 22:41:19 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 22:41:20 INFO  ServerLogger:168 - Account: tribui2017@gmail.com has been loggedIn!
+2024-12-25 22:42:07 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement.htm
+2024-12-25 22:42:07 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 22:42:09 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement/category.htm
+2024-12-25 22:42:10 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 22:42:13 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement/category.htm
+2024-12-25 22:42:14 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 22:42:14 INFO  ServerLogger:37 - User: tribui2017@gmail.com with role 'Admin' performed action 'ADD' on entity 'CategoryEntity [categoryId=22, categoryName=Vê, status=true, image=, descript=fefe]' successfully!
+2024-12-25 22:42:14 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/categoryManagement.htm
+2024-12-25 22:42:14 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:12:14 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/logout.htm
+2024-12-25 23:12:14 INFO  ServerLogger:61 - UserInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:12:14 INFO  ServerLogger:695 - Account: nulllog out
+2024-12-25 23:12:18 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:18:00 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:18:04 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:18:11 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:18:12 INFO  ServerLogger:168 - Account: tribui2017@gmail.com has been loggedIn!
+2024-12-25 23:18:14 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminChangePassword.htm
+2024-12-25 23:18:14 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:18:29 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminChangePassword.htm
+2024-12-25 23:18:29 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:20:03 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminChangePassword.htm
+2024-12-25 23:20:03 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:20:04 INFO  ServerLogger:37 - User: tribui2017@gmail.com with role 'Admin' performed action 'UPDATE' on entity 'AccountEntity [accountId=1, status=true, avatar=null, gmail=tribui2017@gmail.com, fullName=Admin Userrrrrr, phoneNumber=0123456789, password=a30f31494cf607d1a04889ef6835577b248c7526a0f98b56c7028aa8d7e68bf9, createAt=2024-10-15, updateAt=2024-12-25]' successfully!
+2024-12-25 23:20:08 INFO  ServerLogger:25 - AdminInterceptor check uri: /agrStoreManagement/admin/adminDashboard.htm
+2024-12-25 23:20:08 INFO  ServerLogger:62 - AdminInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:38:53 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/logout.htm
+2024-12-25 23:38:53 INFO  ServerLogger:61 - UserInterceptor: Routing to DataSource for role: Admin
+2024-12-25 23:38:53 INFO  ServerLogger:695 - Account: nulllog out
+2024-12-25 23:38:56 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:39:03 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:39:03 INFO  ServerLogger:168 - Account: hannguyenlvm@gmail.com has been loggedIn!
+2024-12-25 23:39:27 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/logout.htm
+2024-12-25 23:39:27 INFO  ServerLogger:61 - UserInterceptor: Routing to DataSource for role: Customer
+2024-12-25 23:39:27 INFO  ServerLogger:695 - Account: nulllog out
+2024-12-25 23:39:29 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:39:37 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:39:37 WARN  ServerLogger:185 - Account: dinhquoctoan200103@gmail.com failed to login!
+2024-12-25 23:39:43 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:39:43 INFO  ServerLogger:168 - Account: dinhquoctoan200103@gmail.com has been loggedIn!
+2024-12-25 23:44:16 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/logout.htm
+2024-12-25 23:44:16 INFO  ServerLogger:61 - UserInterceptor: Routing to DataSource for role: Employee
+2024-12-25 23:44:16 INFO  ServerLogger:695 - Account: nulllog out
+2024-12-25 23:44:19 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:44:25 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:44:25 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 23:44:28 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:44:28 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 23:44:32 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:44:32 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 23:44:35 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:44:35 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 23:44:38 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-25 23:44:38 WARN  ServerLogger:185 - Account: tribui2017@gmail.com failed to login!
+2024-12-25 23:44:42 INFO  ServerLogger:32 - UserInterceptor check uri: /agrStoreManagement/user/userLogin.htm
+2024-12-26 01:10:12 WARN  HikariPool:804 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m30s846ms111µs).
+2024-12-26 01:10:12 WARN  HikariPool:804 - HikariPool-3 - Thread starvation or clock leap detected (housekeeper delta=31m42s996ms602µs400ns).
+2024-12-26 06:49:38 WARN  HikariPool:804 - HikariPool-2 - Thread starvation or clock leap detected (housekeeper delta=6h11m1s982ms568µs).
+2024-12-26 06:49:39 WARN  HikariPool:804 - HikariPool-4 - Thread starvation or clock leap detected (housekeeper delta=6h10m53s546ms840µs).
+2024-12-26 06:49:58 WARN  HikariPool:804 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h39m49s308ms65µs200ns).
+2024-12-26 06:49:58 WARN  HikariPool:804 - HikariPool-3 - Thread starvation or clock leap detected (housekeeper delta=5h39m49s542ms649µs400ns).

@@ -71,46 +71,6 @@ The project is built following the MVC (Model-View-Controller) pattern with a mu
 - Form protection with reCAPTCHA
 - Password encryption
 
-## Project Structure
-
-agrStore/
-├── src/
-│ └── main/
-│ ├── java/
-│ │ └── agrStore/
-│ │ ├── DAO/ # Data Access Objects interfaces
-│ │ ├── DAOImpl/ # DAO implementations
-│ │ ├── bean/ # Java beans
-│ │ ├── controller/ # Controllers for different user roles
-│ │ │ ├── admin/ # Admin controllers
-│ │ │ ├── customer/ # Customer controllers
-│ │ │ └── staff/ # Staff controllers
-│ │ ├── database/ # Database configurations
-│ │ ├── entity/ # Entity classes
-│ │ ├── interceptor/ # Request interceptors
-│ │ ├── paypal/ # PayPal integration
-│ │ ├── recaptcha/ # reCAPTCHA integration
-│ │ ├── service/ # Service interfaces
-│ │ ├── serviceImpl/ # Service implementations
-│ │ └── utility/ # Utility classes
-│ └── webapp/
-│ ├── WEB-INF/
-│ │ ├── configs/ # Spring configurations
-│ │ ├── lib/ # Libraries
-│ │ ├── views/ # JSP views
-│ │ │ ├── admin/ # Admin views
-│ │ │ ├── customer/ # Customer views
-│ │ │ ├── include/ # Shared components
-│ │ │ └── staff/ # Staff views
-│ │ └── web.xml # Web application configuration
-│ └── assets/ # Static resources
-│ ├── admin/ # Admin resources
-│ ├── cart/ # Cart resources
-│ ├── category-images/ # Category images
-│ ├── landing/ # Landing page resources
-│ ├── logos/ # Logo images
-│ ├── provider-images/ # Provider images
-│ └── user-images/ # User profile images
 
 ## System Requirements
 
